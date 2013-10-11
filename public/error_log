@@ -1,0 +1,39 @@
+[12-Sep-2013 04:10:57 UTC] CSRF state token does not match one provided.
+[12-Sep-2013 14:24:05 UTC] PHP Parse error:  syntax error, unexpected '->' (T_OBJECT_OPERATOR) in /home1/shashan2/laravel-facebook-loging/app/routes.php on line 78
+[12-Sep-2013 14:25:09 UTC] CSRF state token does not match one provided.
+[12-Sep-2013 14:26:15 UTC] CSRF state token does not match one provided.
+[12-Sep-2013 14:32:37 UTC] CSRF state token does not match one provided.
+[12-Sep-2013 14:57:05 UTC] CSRF state token does not match one provided.
+[12-Sep-2013 15:04:19 UTC] CSRF state token does not match one provided.
+[12-Sep-2013 15:19:05 UTC] PHP Fatal error:  Call to a member function delete() on a non-object in /home1/shashan2/laravel-facebook-loging/app/models/User.php on line 59
+[12-Sep-2013 15:19:36 UTC] PHP Fatal error:  Call to a member function delete() on a non-object in /home1/shashan2/laravel-facebook-loging/app/models/User.php on line 59
+[12-Sep-2013 15:20:10 UTC] PHP Fatal error:  Call to undefined method Illuminate\Database\Eloquent\Collection::delete() in /home1/shashan2/laravel-facebook-loging/app/models/User.php on line 59
+[12-Sep-2013 15:21:05 UTC] PHP Parse error:  syntax error, unexpected '$profile' (T_VARIABLE) in /home1/shashan2/laravel-facebook-loging/app/models/User.php on line 60
+[12-Sep-2013 15:21:25 UTC] PHP Fatal error:  Call to undefined method Illuminate\Database\Eloquent\Collection::delete() in /home1/shashan2/laravel-facebook-loging/app/models/User.php on line 60
+[13-Sep-2013 02:10:00 UTC] PHP Parse error:  syntax error, unexpected 'get' (T_STRING), expecting variable (T_VARIABLE) or '$' in /home1/shashan2/laravel-facebook-loging/app/routes.php on line 75
+[13-Sep-2013 02:10:56 UTC] PHP Parse error:  syntax error, unexpected 'get' (T_STRING), expecting variable (T_VARIABLE) or '$' in /home1/shashan2/laravel-facebook-loging/app/routes.php on line 75
+[13-Sep-2013 02:27:10 UTC] PHP Parse error:  syntax error, unexpected '}' in /home1/shashan2/laravel-facebook-loging/app/routes.php on line 96
+[13-Sep-2013 03:58:43 UTC] PHP Parse error:  syntax error, unexpected ''hub_challenge'' (T_CONSTANT_ENCAPSED_STRING), expecting identifier (T_STRING) or variable (T_VARIABLE) or '{' or '$' in /home1/shashan2/laravel-facebook-loging/app/routes.php on line 117
+[13-Sep-2013 04:00:11 UTC] PHP Parse error:  syntax error, unexpected ''hub_challenge'' (T_CONSTANT_ENCAPSED_STRING), expecting identifier (T_STRING) or variable (T_VARIABLE) or '{' or '$' in /home1/shashan2/laravel-facebook-loging/app/routes.php on line 117
+[13-Sep-2013 04:06:11 UTC] PHP Parse error:  syntax error, unexpected ''hub_challenge'' (T_CONSTANT_ENCAPSED_STRING), expecting identifier (T_STRING) or variable (T_VARIABLE) or '{' or '$' in /home1/shashan2/laravel-facebook-loging/app/routes.php on line 118
+[13-Sep-2013 04:06:47 UTC] PHP Parse error:  syntax error, unexpected end of file in /home1/shashan2/laravel-facebook-loging/app/routes.php on line 120
+[13-Sep-2013 04:07:38 UTC] PHP Parse error:  syntax error, unexpected end of file in /home1/shashan2/laravel-facebook-loging/app/routes.php on line 121
+[13-Sep-2013 04:26:14 UTC] PHP Fatal error:  Call to protected method Illuminate\Http\Request::retrieveItem() from context 'Illuminate\Support\Facades\Facade' in /home1/shashan2/laravel-facebook-loging/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php on line 177
+[13-Sep-2013 04:26:44 UTC] PHP Fatal error:  Call to protected method Illuminate\Http\Request::retrieveItem() from context 'Illuminate\Support\Facades\Facade' in /home1/shashan2/laravel-facebook-loging/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php on line 177
+[13-Sep-2013 04:36:22 UTC] PHP Parse error:  syntax error, unexpected ';' in /home1/shashan2/laravel-facebook-loging/app/routes.php on line 118
+[13-Sep-2013 04:36:36 UTC] PHP Parse error:  syntax error, unexpected ';' in /home1/shashan2/laravel-facebook-loging/app/routes.php on line 118
+[13-Sep-2013 04:38:36 UTC] PHP Parse error:  syntax error, unexpected ')', expecting ',' or ';' in /home1/shashan2/laravel-facebook-loging/app/routes.php on line 119
+[13-Sep-2013 04:38:46 UTC] PHP Parse error:  syntax error, unexpected ')', expecting ',' or ';' in /home1/shashan2/laravel-facebook-loging/app/routes.php on line 119
+[13-Sep-2013 04:38:51 UTC] PHP Parse error:  syntax error, unexpected ')', expecting ',' or ';' in /home1/shashan2/laravel-facebook-loging/app/routes.php on line 119
+[13-Sep-2013 05:20:36 UTC] PHP Parse error:  syntax error, unexpected end of file in /home1/shashan2/laravel-facebook-loging/app/routes.php on line 133
+[13-Sep-2013 05:20:51 UTC] PHP Parse error:  syntax error, unexpected end of file in /home1/shashan2/laravel-facebook-loging/app/storage/views/9767d5ff8f8a59e04dcda64170a89efa on line 20
+[13-Sep-2013 05:22:57 UTC] PHP Parse error:  syntax error, unexpected '=' in /home1/shashan2/laravel-facebook-loging/app/routes.php on line 132
+[13-Sep-2013 05:23:28 UTC] PHP Parse error:  syntax error, unexpected '=' in /home1/shashan2/laravel-facebook-loging/app/routes.php on line 132
+[13-Sep-2013 05:23:44 UTC] PHP Parse error:  syntax error, unexpected end of file in /home1/shashan2/laravel-facebook-loging/app/storage/views/9767d5ff8f8a59e04dcda64170a89efa on line 20
+[13-Sep-2013 05:42:37 UTC] PHP Fatal error:  Cannot use object of type stdClass as array in /home1/shashan2/laravel-facebook-loging/app/routes.php on line 128
+[13-Sep-2013 05:42:39 UTC] PHP Fatal error:  Cannot use object of type stdClass as array in /home1/shashan2/laravel-facebook-loging/app/routes.php on line 128
+[15-Sep-2013 05:22:39 UTC] PHP Fatal error:  Call to undefined method Illuminate\Routing\UrlGenerator::root() in /home1/shashan2/laravel-facebook-loging/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php on line 174
+[15-Sep-2013 05:23:18 UTC] PHP Fatal error:  Call to undefined method Illuminate\Routing\UrlGenerator::root() in /home1/shashan2/laravel-facebook-loging/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php on line 174
+[27-Sep-2013 14:20:10 UTC] PHP Parse error:  syntax error, unexpected ':' in /home1/shashan2/laravel-facebook-loging/app/controllers/FacebooksController.php on line 14
+[27-Sep-2013 14:20:54 UTC] PHP Parse error:  syntax error, unexpected ':' in /home1/shashan2/laravel-facebook-loging/app/controllers/FacebooksController.php on line 14
+[30-Sep-2013 14:47:35 UTC] PHP Fatal error:  Class 'facebook\php-sdk\FacebooksServiceProvider' not found in /home1/shashan2/laravel-facebook-loging/vendor/laravel/framework/src/Illuminate/Foundation/ProviderRepository.php on line 123
