@@ -16,12 +16,12 @@ class TwitterController extends \BaseController {
 	{
 		$twitter = new Twitter();
 		$c = Config::get('twitter.twitter');
-		$twitter->oAuth($c['consumer_key'], $c['consumer_secret'], $c['oauth_token'], $c['oauth_token_secret']);
+		$oauth = $twitter->oAuth($c['consumer_key'], $c['consumer_secret']); //$c['oauth_token'], $c['oauth_token_secret']);
 		
 
-		$token = $twitter->getRequestToken($c['callback']);
-		$twitter->getAuthorizeUrl($token);
-		$twitter->getAccessToken();
+		$requestToken = $oauth->getRequestToken();//($c['callback']);
+		$url = $oauth->getAuthorizeUrl($requestToken);
+		/*$oauth->getAccessToken();
 
 		try {
 			$statuses = $twitter->call('statuses/home_timeline');
@@ -30,7 +30,8 @@ class TwitterController extends \BaseController {
 			}
 		} catch (Exception $e) {
 			return $e;
-		}
+		}*/
+		var_dump($url);
 	}
 
 }
