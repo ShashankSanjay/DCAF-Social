@@ -7,7 +7,8 @@
 		"laravel/framework": "4.0.*",
 		"league/oauth2-client": "dev-master",
 		"makotokw/twient": "dev-master",
-		"tumblr/tumblr": "dev-master"		
+		"tumblr/tumblr": "dev-master",
+		"philo/laravel-twitter": "dev-master"		
 	},
 	"autoload": {
 		"classmap": [

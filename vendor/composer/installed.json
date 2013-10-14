@@ -2132,5 +2132,93 @@
             "sdk",
             "tumblr"
         ]
+    },
+    {
+        "name": "tijsverkoyen/twitteroauth",
+        "version": "dev-master",
+        "version_normalized": "9999999-dev",
+        "target-dir": "TijsVerkoyen/Twitter",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/tijsverkoyen/TwitterOAuth.git",
+            "reference": "b1e4c3d7362af2b6814f3045ca5151b54c869790"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/tijsverkoyen/TwitterOAuth/zipball/b1e4c3d7362af2b6814f3045ca5151b54c869790",
+            "reference": "b1e4c3d7362af2b6814f3045ca5151b54c869790",
+            "shasum": ""
+        },
+        "require": {
+            "ext-curl": "*",
+            "php": ">=5.2.0"
+        },
+        "time": "2013-07-11 06:03:57",
+        "type": "library",
+        "installation-source": "dist",
+        "autoload": {
+            "psr-0": {
+                "TijsVerkoyen\\Twitter": ""
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "BSD"
+        ],
+        "authors": [
+            {
+                "name": "Tijs Verkoyen",
+                "email": "php-twitter@verkoyen.eu",
+                "role": "Developer"
+            }
+        ],
+        "description": "PHP Twitter is a (wrapper)class to communicate with Twitter.",
+        "homepage": "https://github.com/tijsverkoyen/TwitterOAuth"
+    },
+    {
+        "name": "philo/laravel-twitter",
+        "version": "dev-master",
+        "version_normalized": "9999999-dev",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/PhiloNL/Laravel-Twitter.git",
+            "reference": "fdbf1adb19dd5231dcca56ce44ff5e59e2b16ead"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/PhiloNL/Laravel-Twitter/zipball/fdbf1adb19dd5231dcca56ce44ff5e59e2b16ead",
+            "reference": "fdbf1adb19dd5231dcca56ce44ff5e59e2b16ead",
+            "shasum": ""
+        },
+        "require": {
+            "illuminate/support": "4.0.x",
+            "php": ">=5.3.0",
+            "tijsverkoyen/twitteroauth": "master"
+        },
+        "time": "2013-06-16 17:04:41",
+        "type": "library",
+        "installation-source": "dist",
+        "autoload": {
+            "psr-0": {
+                "Philo\\Twitter": "src/"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "BSD"
+        ],
+        "authors": [
+            {
+                "name": "Philo Hermans",
+                "email": "me@philohermans.com"
+            }
+        ],
+        "description": "A simple Laravel 4 service provider for including the TwitterOAuth library.",
+        "homepage": "https://github.com/PhiloNL/Laravel-Twitter",
+        "keywords": [
+            "laravel",
+            "laravel-4",
+            "twitter"
+        ]
     }
 ]

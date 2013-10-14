@@ -113,6 +113,7 @@ return array(
 		'Illuminate\Validation\ValidationServiceProvider',
 		'Illuminate\View\ViewServiceProvider',
 		'Illuminate\Workbench\WorkbenchServiceProvider',
+		'Philo\Twitter\TwitterServiceProvider',
 
 	),
 
@@ -180,7 +181,7 @@ return array(
 		'View'            => 'Illuminate\Support\Facades\View',
 		'Facebook'        => 'League\OAuth2\Client\Provider\Facebook',
 		'Google'          => 'League\OAuth2\Client\Provider\Google',
-		'Twitter'         => 'Twient\Twitter',
+		'Twitter'         => 'Philo\Twitter\Facades\Twitter',
 		'Tumblr'		  => 'Tumblr\API\Client'
 
 	),
