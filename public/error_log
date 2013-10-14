@@ -37,3 +37,4 @@
 [27-Sep-2013 14:20:10 UTC] PHP Parse error:  syntax error, unexpected ':' in /home1/shashan2/laravel-facebook-loging/app/controllers/FacebooksController.php on line 14
 [27-Sep-2013 14:20:54 UTC] PHP Parse error:  syntax error, unexpected ':' in /home1/shashan2/laravel-facebook-loging/app/controllers/FacebooksController.php on line 14
 [30-Sep-2013 14:47:35 UTC] PHP Fatal error:  Class 'facebook\php-sdk\FacebooksServiceProvider' not found in /home1/shashan2/laravel-facebook-loging/vendor/laravel/framework/src/Illuminate/Foundation/ProviderRepository.php on line 123
+[14-Oct-2013 03:03:06 UTC] PHP Parse error:  syntax error, unexpected '*' in /home1/shashan2/socialapp/app/routes.php on line 52
