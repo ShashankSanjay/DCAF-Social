@@ -14,7 +14,7 @@ class TumblrController extends \BaseController {
 
 	public function login()
 	{
-		
+				
 		if (Input::has('oauth_token'))
 		{
 		    	//Return from redirect
@@ -25,6 +25,8 @@ class TumblrController extends \BaseController {
 			$token_secret = Input::get('oauth_token_secret');
 
 			// Request access token
+			var_dump($token);
+
 			$client->setToken($token, $token_secret);
 			//echo "<pre>";
 			//print_r($accessToken);	
@@ -40,18 +42,23 @@ class TumblrController extends \BaseController {
 			$req = $client->getRequestHandler()->request('POST', 'oauth/request_token', array (
 			  'oauth_callback' => $c['callbackUrl'] ));
 			$client->getRequestHandler()->setBaseUrl('http://api.tumblr.com/');
+			$result = $req->body->__toString();
+			$url = $req->headers;
+			print_r($url);
+			//header('Location: ' . $url);
+			//Redirect::to($req);
 			exit;
 		}
 		try{
 		    // Setup OAuth token and secret
 		    $userInfo = $client->getUserInfo();
 
-		    echo "<pre>";
 		    print_r($userInfo);
 
 		}  catch(Exception $e) {
 		    // Error
 		    echo $e->getMessage();
+		}
 	}
 
 }
