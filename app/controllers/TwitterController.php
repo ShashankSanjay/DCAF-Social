@@ -35,7 +35,7 @@ class TwitterController extends \BaseController {
 			$tokens = Twitter::oAuthRequestToken();
 			// Redirect to twitter
 			Twitter::oAuthAuthorize(array_get($tokens, 'oauth_token'));
-		    	exit;
+		    exit;
 		}
 		try{
 		    // Setup OAuth token and secret

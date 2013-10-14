@@ -3062,7 +3062,7 @@ class Twitter
             $parameters['oauth_callback'] = (string) $callbackURL;
         }
         /**/
-        $parameters['oauth_callback'] = this->getCallbackUrl();
+        $parameters['oauth_callback'] = $this->getCallbackUrl();
 
         // make the call
         $response = $this->doOAuthCall('request_token', $parameters);
