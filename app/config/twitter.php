@@ -4,10 +4,11 @@
 
 return array (
 	'twitter' => array(
-		'consumer_key' => '',
-		'consumer_secret' => '',
-		'oauth_token' => '489525820-2hXltBWM3NUH9S4HinlnVtdVPPMJRgFz8zDlbUKY',
-		'oauth_token_secret' => 'avLzFD4zUggX0YiuppFJMSsx5Wh0qq8f5KQj9xyjSYU',
+		'consumer_key' => '9jfGLlgHIyKEmdvTABzpAQ',
+		'consumer_secret' => 'IWHeoUIYXPurlDSOW5lCOCwxLtUBiDPd5hSLU970',
+		'oauth_token' => '489525820-8R3wkIJWRhArr6zYYRRiHJ9RP4Hn6OOvGnzr5DOz',
+		'oauth_token_secret' => 'nqVJ1sO9b5wb2gW2glZGoppfqwOBWbIRJhhaFwilZQ',
+		'callback' => URL::to('login/twitter'),
 		)
 	);
 
