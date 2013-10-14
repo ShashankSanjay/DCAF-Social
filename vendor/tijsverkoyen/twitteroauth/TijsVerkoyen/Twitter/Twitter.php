@@ -81,10 +81,11 @@ class Twitter
      * @param string $consumerKey    The consumer key to use.
      * @param string $consumerSecret The consumer secret to use.
      */
-    public function __construct($consumerKey, $consumerSecret)
+    public function __construct($consumerKey, $consumerSecret, $callbackUrl)
     {
         $this->setConsumerKey($consumerKey);
         $this->setConsumerSecret($consumerSecret);
+        $this->setCallbackUrl($callbackUrl);
     }
 
     /**
@@ -558,6 +559,16 @@ class Twitter
     }
 
     /**
+     * Get the callback url
+     *
+     * @return string
+     */
+    protected function getCallbackUrl()
+    {
+        return $this->callbackUrl;
+    }
+
+    /**
      * Get the oAuth-token
      *
      * @return string
@@ -616,6 +627,16 @@ class Twitter
     protected function setConsumerSecret($secret)
     {
         $this->consumerSecret = (string) $secret;
+    }
+
+    /**
+     * Set the callback url
+     *
+     * @param string $callbackUrl The consumer callbackUrl to use.
+     */
+    protected function setcallbackUrl($callbackUrl)
+    {
+        $this->callbackUrl = (string) $callbackUrl;
     }
 
     /**
@@ -3036,10 +3057,12 @@ class Twitter
         // init var
         $parameters = null;
 
-        // set callback
+        /** / set callback
         if ($callbackURL != null) {
             $parameters['oauth_callback'] = (string) $callbackURL;
         }
+        /**/
+        $parameters['oauth_callback'] = getCallbackUrl();
 
         // make the call
         $response = $this->doOAuthCall('request_token', $parameters);

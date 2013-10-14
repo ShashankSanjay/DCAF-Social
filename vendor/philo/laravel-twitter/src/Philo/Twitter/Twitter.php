@@ -15,6 +15,7 @@ class Twitter extends \TijsVerkoyen\Twitter\Twitter{
 		$c = Config::get('twitter.twitter');
 	    $this->setConsumerKey($c['consumer_key']);
 	    $this->setConsumerSecret($c['consumer_secret']);
+	    $this->setCallbackUrl($c['callbackUrl']);
 	}
 
 }
