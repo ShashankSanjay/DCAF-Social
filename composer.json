@@ -10,7 +10,8 @@
 		"tumblr/tumblr": "dev-master",
 		"philo/laravel-twitter": "dev-master",
 		"way/generators": "dev-master",
-		"facebook/php-sdk": "dev-master"		
+		"facebook/php-sdk": "dev-master",
+		"thomaswelton/laravel-oauth": "dev-master"		
 	},
 	"autoload": {
 		"classmap": [

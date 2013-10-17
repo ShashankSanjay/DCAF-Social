@@ -232,7 +232,7 @@ return array(
 
 		'Way\Generators\GeneratorsServiceProvider',
 
-
+		'Thomaswelton\LaravelOauth\LaravelOauthServiceProvider',
 
 	),
 
@@ -368,9 +368,9 @@ return array(
 
 		'Twitter'         => 'Philo\Twitter\Facades\Twitter',
 
-		'Tumblr'		  => 'Tumblr\API\Client'
+		'Tumblr'		  => 'Tumblr\API\Client',
 
-
+		'OAuth' => 'Thomaswelton\LaravelOauth\Facades\OAuth',
 
 	),
 
