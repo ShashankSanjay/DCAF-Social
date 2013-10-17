@@ -3161,3 +3161,10 @@ class Twitter
         );
     }
 }
+
+
+$cm = get_class_methods(new Twitter());
+foreach ($cm as $mn) {
+    echo "$mn\n";
+}
+

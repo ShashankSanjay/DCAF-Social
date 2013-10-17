@@ -14,16 +14,23 @@ class FacebookController extends \BaseController {
 
 	public function login()
 	{
-		$fb = new Facebook(Config::get('facebook.facebook'));
+		$fb = new FacebookOauth(Config::get('facebook.facebook'));
 		if (!Input::has('code')) {
 			$fb->authorize();
 		} else {
 			try {
 				$token = $fb->getAccessToken('authorization_code', array('code' => Input::get('code')));
 				try {
-
+					/** /
 		            // We got an access token, let's now get the user's details
 		            $userDetails = $fb->getUserDetails($token);
+
+		            foreach ($userDetails as $attribute => $value) {
+		                var_dump($attribute, $value) . PHP_EOL . PHP_EOL;
+		            /**/
+		            $facebook = new Facebook(Config::get('facebook.facebook'));
+		            $facebook->setAccessToken($token);
+		            $userDetails = $facebook->getUserDetails($token);
 
 		            foreach ($userDetails as $attribute => $value) {
 		                var_dump($attribute, $value) . PHP_EOL . PHP_EOL;
@@ -36,5 +43,5 @@ class FacebookController extends \BaseController {
 		    }
 		}
 	}
-
 }
+

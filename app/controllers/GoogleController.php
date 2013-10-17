@@ -9,7 +9,7 @@ class GoogleController extends \BaseController {
 	 */
 	public function login()
 	{
-		$google = new Google(Config::get('google.google'));
+		$google = new GoogleOauth(Config::get('google.google'));
 		if (!Input::has('code')) {
 			$google->authorize();
 		} else {

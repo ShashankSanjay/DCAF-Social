@@ -8,7 +8,9 @@
 		"league/oauth2-client": "dev-master",
 		"makotokw/twient": "dev-master",
 		"tumblr/tumblr": "dev-master",
-		"philo/laravel-twitter": "dev-master"		
+		"philo/laravel-twitter": "dev-master",
+		"way/generators": "dev-master",
+		"facebook/php-sdk": "dev-master"		
 	},
 	"autoload": {
 		"classmap": [

@@ -7,6 +7,8 @@ $baseDir = dirname($vendorDir);
 
 return array(
     'Whoops' => array($vendorDir . '/filp/whoops/src'),
+    'Way\\Tests' => array($vendorDir . '/way/laravel-test-helpers/src'),
+    'Way\\Generators' => array($vendorDir . '/way/generators/src'),
     'Twient' => array($vendorDir . '/makotokw/twient/src'),
     'Tumblr\\API' => array($vendorDir . '/tumblr/tumblr/lib'),
     'TijsVerkoyen\\Twitter' => array($vendorDir . '/tijsverkoyen/twitteroauth'),
@@ -29,6 +31,7 @@ return array(
     'Patchwork' => array($vendorDir . '/patchwork/utf8/class'),
     'PHPParser' => array($vendorDir . '/nikic/php-parser/lib'),
     'Normalizer' => array($vendorDir . '/patchwork/utf8/class'),
+    'Mustache' => array($vendorDir . '/mustache/mustache/src'),
     'Monolog' => array($vendorDir . '/monolog/monolog/src'),
     'League\\OAuth2\\Client' => array($vendorDir . '/league/oauth2-client/src'),
     'Jeremeamia\\SuperClosure' => array($vendorDir . '/jeremeamia/SuperClosure/src'),

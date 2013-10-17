@@ -114,6 +114,7 @@ return array(
 		'Illuminate\View\ViewServiceProvider',
 		'Illuminate\Workbench\WorkbenchServiceProvider',
 		'Philo\Twitter\TwitterServiceProvider',
+		'Way\Generators\GeneratorsServiceProvider',
 
 	),
 
@@ -179,8 +180,9 @@ return array(
 		'URL'             => 'Illuminate\Support\Facades\URL',
 		'Validator'       => 'Illuminate\Support\Facades\Validator',
 		'View'            => 'Illuminate\Support\Facades\View',
-		'Facebook'        => 'League\OAuth2\Client\Provider\Facebook',
-		'Google'          => 'League\OAuth2\Client\Provider\Google',
+		'FacebookOauth'   => 'League\OAuth2\Client\Provider\Facebook',
+		'Facebook'		  => 'facebook\php-sdk\src\facebook',
+		'GoogleOauth'     => 'League\OAuth2\Client\Provider\Google',
 		'Twitter'         => 'Philo\Twitter\Facades\Twitter',
 		'Tumblr'		  => 'Tumblr\API\Client'
 
