@@ -21,7 +21,6 @@ return array(
     'MigrationOauthInstagram' => $vendorDir . '/thomaswelton/laravel-oauth/src/migrations/2013_09_01_024008_migration_oauth_instagram.php',
     'MigrationOauthTwitter' => $vendorDir . '/thomaswelton/laravel-oauth/src/migrations/2013_09_01_024008_migration_oauth_twitter.php',
     'SessionHandlerInterface' => $vendorDir . '/symfony/http-foundation/Symfony/Component/HttpFoundation/Resources/stubs/SessionHandlerInterface.php',
-    'SocialNetwork' => $baseDir . '/app/models/SocialNetwork.php',
     'TestCase' => $baseDir . '/app/tests/TestCase.php',
     'Thomaswelton\\LaravelOauth\\Exception' => $vendorDir . '/thomaswelton/laravel-oauth/src/Thomaswelton/LaravelOauth/Exceptions.php',
     'Thomaswelton\\LaravelOauth\\InvalidArgumentException' => $vendorDir . '/thomaswelton/laravel-oauth/src/Thomaswelton/LaravelOauth/Exceptions.php',

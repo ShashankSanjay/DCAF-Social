@@ -61,11 +61,12 @@ class TumblrController extends \BaseController {
 		}
 	}*/
 
-	if (Input::has('oauth_token')) {
-		print_r(Input::all());
+		if (Input::has('oauth_token')) {
+			print_r(Input::all());
+		}
+		else {
+			$url = OAuth::login('tumblr');//->redirect('http://shashanksanjay.com/socialapp/login/tumblr');
+			return Redirect::to($url);
+		}
 	}
-	else {
-		OAuth::login('tumblr')->redirect('http://shashanksanjay.com/socialapp/login/tumblr');
-	}
-
 }

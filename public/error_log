@@ -51,3 +51,7 @@
 [17-Oct-2013 16:38:46 UTC] PHP Fatal error:  Cannot use object of type League\OAuth2\Client\Token\AccessToken as array in /home1/shashan2/socialapp/app/controllers/FacebookController.php on line 59
 [17-Oct-2013 16:38:54 UTC] CSRF state token does not match one provided.
 [17-Oct-2013 16:39:23 UTC] CSRF state token does not match one provided.
+[17-Oct-2013 19:46:39 UTC] PHP Fatal error:  Class 'Thomaswelton\LaravelOauth\LaravelOauthServiceProvider' not found in /home1/shashan2/socialapp/vendor/laravel/framework/src/Illuminate/Foundation/ProviderRepository.php on line 123
+[17-Oct-2013 19:49:47 UTC] PHP Parse error:  syntax error, unexpected end of file, expecting function (T_FUNCTION) in /home1/shashan2/socialapp/app/controllers/TumblrController.php on line 72
+[27-Oct-2013 18:59:29 UTC] PHP Parse error:  syntax error, unexpected end of file, expecting function (T_FUNCTION) in /home1/shashan2/socialapp/app/controllers/TumblrController.php on line 72
+[27-Oct-2013 19:01:42 UTC] PHP Parse error:  syntax error, unexpected end of file, expecting function (T_FUNCTION) in /home1/shashan2/socialapp/app/controllers/TumblrController.php on line 73
