@@ -123,9 +123,9 @@ return array(
     |
     */
     'facebook' => array(
-        'key' => '',
-        'secret' => '',
-        'scope' => ''
+        'key' => '494865777271597',
+        'secret' => '55ad9a3e7e53fd0fd7727de6e6787da6',
+        'scope' => 'email, read-stream'
     ),
 
     /*
@@ -141,9 +141,9 @@ return array(
     |
     */
     'twitter' => array(
-        'key' => '',
-        'secret' => '',
-        'scope' => ''
+        'key' => '9jfGLlgHIyKEmdvTABzpAQ',
+        'secret' => 'IWHeoUIYXPurlDSOW5lCOCwxLtUBiDPd5hSLU970',
+        'scope' => 'email'
     ),
 
     /*
@@ -160,8 +160,8 @@ return array(
     |
     */
     'google' => array(
-        'key' => '',
-        'secret' => '',
+        'key' => '955814469005.apps.googleusercontent.com',
+        'secret' => 'OF0G2xJHv_3DRlYAsa-wWN5j',
         'scope' => 'openid email'
     ),
 
@@ -341,9 +341,9 @@ return array(
     |
     */
     'tumblr' => array(
-        'key' => '',
-        'secret' => '',
-        'scope' => ''
+        'key' => '4BvIHqAFaPRGM6U917p82AC8xMUmndXEuBEbmEFDgcrWs9NIez',
+        'secret' => 'TxEQCjM9ZWTVEX5XvHDGpkKIIAr1yJqCAe1sm6xz1y1S0kK3fN',
+        'scope' => 'email'
     ),
 
 );

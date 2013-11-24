@@ -55,7 +55,7 @@ return array(
 		'mysql' => array(
 			'driver'    => 'mysql',
 			'host'      => 'localhost',
-			'database'  => 'DCAF-Social',
+			'database'  => 'shashan2_DCAF-Social',
 			'username'  => 'shashan2_DCAF',
 			'password'  => 'DatabaseBean',
 			'charset'   => 'utf8',
