@@ -55,9 +55,9 @@ return array(
 		'mysql' => array(
 			'driver'    => 'mysql',
 			'host'      => 'localhost',
-			'database'  => 'shashan2_DCAF-Social',
+			'database'  => 'DCAF-Social',
 			'username'  => 'shashan2_DCAF',
-			'password'  => 'Curriefish!23',
+			'password'  => 'DatabaseBean',
 			'charset'   => 'utf8',
 			'collation' => 'utf8_unicode_ci',
 			'prefix'    => '',

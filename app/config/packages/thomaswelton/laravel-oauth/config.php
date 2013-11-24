@@ -341,8 +341,8 @@ return array(
     |
     */
     'tumblr' => array(
-        'key' => '4BvIHqAFaPRGM6U917p82AC8xMUmndXEuBEbmEFDgcrWs9NIez',
-        'secret' => 'TxEQCjM9ZWTVEX5XvHDGpkKIIAr1yJqCAe1sm6xz1y1S0kK3fN',
+        'key' => '',
+        'secret' => '',
         'scope' => ''
     ),
 
