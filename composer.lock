@@ -3,7 +3,7 @@
         "This file locks the dependencies of your project to a known state",
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "c8fc585ecb395a3def03601bb40a5a55",
+    "hash": "8fd4570016efd69fd47a09917c65975b",
     "packages": [
         {
             "name": "classpreloader/classpreloader",
@@ -1988,20 +1988,20 @@
         },
         {
             "name": "thomaswelton/laravel-oauth",
-            "version": "0.0.1",
+            "version": "dev-master",
             "source": {
                 "type": "git",
                 "url": "https://github.com/thomaswelton/laravel-oauth.git",
-                "reference": "83b543a03c395e6b6a4c030c2514a3902c3c7817"
+                "reference": "b31b690b11a192e8311bb472c2d30c2537606795"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/thomaswelton/laravel-oauth/zipball/83b543a03c395e6b6a4c030c2514a3902c3c7817",
-                "reference": "83b543a03c395e6b6a4c030c2514a3902c3c7817",
+                "url": "https://api.github.com/repos/thomaswelton/laravel-oauth/zipball/b31b690b11a192e8311bb472c2d30c2537606795",
+                "reference": "b31b690b11a192e8311bb472c2d30c2537606795",
                 "shasum": ""
             },
             "require": {
-                "illuminate/support": "4.0.x",
+                "illuminate/support": "4.x",
                 "jwage/purl": "0.0.2",
                 "lusitanian/oauth": "~0.2",
                 "nesbot/carbon": "*",
@@ -2049,7 +2049,7 @@
                 "twitter",
                 "windows live"
             ],
-            "time": "2013-10-27 18:13:23"
+            "time": "2013-11-14 11:16:27"
         }
     ],
     "packages-dev": [
@@ -2059,9 +2059,9 @@
 
     ],
     "minimum-stability": "dev",
-    "stability-flags": [
-
-    ],
+    "stability-flags": {
+        "thomaswelton/laravel-oauth": 20
+    },
     "platform": [
 
     ],

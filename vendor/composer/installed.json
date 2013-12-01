@@ -2002,73 +2002,6 @@
         ]
     },
     {
-        "name": "thomaswelton/laravel-oauth",
-        "version": "0.0.1",
-        "version_normalized": "0.0.1.0",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/thomaswelton/laravel-oauth.git",
-            "reference": "83b543a03c395e6b6a4c030c2514a3902c3c7817"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/thomaswelton/laravel-oauth/zipball/83b543a03c395e6b6a4c030c2514a3902c3c7817",
-            "reference": "83b543a03c395e6b6a4c030c2514a3902c3c7817",
-            "shasum": ""
-        },
-        "require": {
-            "illuminate/support": "4.0.x",
-            "jwage/purl": "0.0.2",
-            "lusitanian/oauth": "~0.2",
-            "nesbot/carbon": "*",
-            "php": ">=5.3.0"
-        },
-        "time": "2013-10-27 18:13:23",
-        "type": "library",
-        "installation-source": "dist",
-        "autoload": {
-            "classmap": [
-                "src/migrations",
-                "src/controllers",
-                "src/Thomaswelton/LaravelOauth/Exceptions.php"
-            ],
-            "psr-0": {
-                "Thomaswelton\\LaravelOauth": "src/"
-            }
-        },
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-            "MIT"
-        ],
-        "authors": [
-            {
-                "name": "Thomas Welton",
-                "email": "thomaswelton@me.com",
-                "homepage": "https://github.com/thomaswelton",
-                "role": "Developer"
-            }
-        ],
-        "description": "Laravel package for the simplification and integration of many of your users most wanted login providers. Installation is a breeze. Never worry about OAuth again.",
-        "homepage": "http://laravel-oauth.herokuapp.com/",
-        "keywords": [
-            "facebook",
-            "foursquare",
-            "github",
-            "google",
-            "instagram",
-            "laravel",
-            "linkedin",
-            "microsoft",
-            "oauth",
-            "oauth1",
-            "oauth2",
-            "soundcloud",
-            "tumblr",
-            "twitter",
-            "windows live"
-        ]
-    },
-    {
         "name": "symfony/filesystem",
         "version": "dev-master",
         "version_normalized": "9999999-dev",
@@ -2116,5 +2049,72 @@
         ],
         "description": "Symfony Filesystem Component",
         "homepage": "http://symfony.com"
+    },
+    {
+        "name": "thomaswelton/laravel-oauth",
+        "version": "dev-master",
+        "version_normalized": "9999999-dev",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/thomaswelton/laravel-oauth.git",
+            "reference": "b31b690b11a192e8311bb472c2d30c2537606795"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/thomaswelton/laravel-oauth/zipball/b31b690b11a192e8311bb472c2d30c2537606795",
+            "reference": "b31b690b11a192e8311bb472c2d30c2537606795",
+            "shasum": ""
+        },
+        "require": {
+            "illuminate/support": "4.x",
+            "jwage/purl": "0.0.2",
+            "lusitanian/oauth": "~0.2",
+            "nesbot/carbon": "*",
+            "php": ">=5.3.0"
+        },
+        "time": "2013-11-14 11:16:27",
+        "type": "library",
+        "installation-source": "dist",
+        "autoload": {
+            "classmap": [
+                "src/migrations",
+                "src/controllers",
+                "src/Thomaswelton/LaravelOauth/Exceptions.php"
+            ],
+            "psr-0": {
+                "Thomaswelton\\LaravelOauth": "src/"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Thomas Welton",
+                "email": "thomaswelton@me.com",
+                "homepage": "https://github.com/thomaswelton",
+                "role": "Developer"
+            }
+        ],
+        "description": "Laravel package for the simplification and integration of many of your users most wanted login providers. Installation is a breeze. Never worry about OAuth again.",
+        "homepage": "http://laravel-oauth.herokuapp.com/",
+        "keywords": [
+            "facebook",
+            "foursquare",
+            "github",
+            "google",
+            "instagram",
+            "laravel",
+            "linkedin",
+            "microsoft",
+            "oauth",
+            "oauth1",
+            "oauth2",
+            "soundcloud",
+            "tumblr",
+            "twitter",
+            "windows live"
+        ]
     }
 ]

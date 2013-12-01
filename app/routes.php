@@ -16,8 +16,8 @@ Route::get('/', function()
 	return View::make('hello');
 });
 
-Route::get('/login', function()
+Route::get('/logino', function()
 {
-	$user = OAuth::user('google')->getUser();
-	print_r($user);
+	$token = OAuth::token('tumblr');
+	print_r($token);
 });
