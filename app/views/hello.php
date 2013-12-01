@@ -53,9 +53,12 @@
 			/**
 			 * Fix generated service authorization URLs
 			 * 
+			 * see http://ch2.php.net/language.oop5.typehinting
+			 * for workaround to use "string" typehinting
+			 * 
 			 * @param	string	$url	service redirect URL
 			 */
-			function fix_url_base(string $url) {
+			function fix_url_base($url) {
 				global $base_url;
 
 				$url_parts = parse_url($url);
