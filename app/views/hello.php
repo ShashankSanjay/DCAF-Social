@@ -60,7 +60,8 @@
 			 */
 			function fix_url_base($url) {
 				global $base_url;
-
+				$base_url = "http://shashanksanjay.com/socialapp/";
+				
 				$url_parts = parse_url($url);
 				$path      = isset($url_parts['path']) ? $url_parts['path'] : '';
 				$query     = isset($url_parts['query']) ? '?' . $url_parts['query'] : '';
