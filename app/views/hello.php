@@ -68,8 +68,8 @@
 			
             // $twitter_url = fix_url_base(OAuth::authorize('facebook')->redirect($base_url));
         ?>
-        <a href="<?php echo fix_url_base(OAuth::authorize('facebook')->redirect($base_url)); ?>">Login with facebook<br></a>
-        <a href="<?php echo fix_url_base(OAuth::authorize('twitter')->redirect($base_url)); ?>">Login with twitter<br></a>
+        <a href="<?php echo fix_url_base(OAuth::authorize('facebook')->redirect($base_url)->url->getUrl()); ?>">Login with facebook<br></a>
+        <a href="<?php echo fix_url_base(OAuth::authorize('twitter')->redirect($base_url)->url->getUrl()); ?>">Login with twitter<br></a>
         <a href="<?php echo OAuth::authorize('google')->redirect($base_url); ?>">Login with google<br></a>
         <a href="<?php echo OAuth::authorize('tumblr')->redirect($base_url.'login'); ?>">Login with tumblr<br></a>
         <a href="<?php echo OAuth::login('twitter')->redirect($base_url.'logino'); ?>">Link with <?php echo Str::studly('twitter'); ?></a>
