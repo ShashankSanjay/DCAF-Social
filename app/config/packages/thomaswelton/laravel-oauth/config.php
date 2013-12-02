@@ -125,7 +125,7 @@ return array(
     'facebook' => array(
         'key' => '494865777271597',
         'secret' => '55ad9a3e7e53fd0fd7727de6e6787da6',
-        'scope' => 'email, read-stream'
+        'scope' => 'email, read_stream, manage_pages, publish_actions'
     ),
 
     /*

@@ -18,8 +18,97 @@ Route::get('/', function ()
 
 Route::get('/logino', function ()
 {
-	$token = OAuth::token('tumblr');
+	
+	echo '<pre>';
+	
+	//$token = OAuth::token('tumblr');
+	$token = Session::get('lusitanian_oauth_token');
+	
+	print("here are all the networks you have logged into!\n \n");
+	
+	/**foreach ($token as $key => $toke) {
+		print_r($toke);
+		print("\n");
+	}**/
+
 	print_r($token);
+
+	print("\n"."If you want to sign into additional networks, click here: ");
+	echo '<a href="http://shashanksanjay.com/socialapp">Home Page</a>';
+	
+	print("\nTo clear this data, click here: ");
+	echo '<a href="http://shashanksanjay.com/socialapp/delete">Delete</a>';
+	//$session = Session::get('Twitter');
+	//print_r($session);
+	
+	echo  '</pre>';
+
+	/* *
+	echo '<pre>';
+	$facebook = OAuth::consumer('facebook');
+	$response = $facebook->request('/me/accounts');
+	$yo = json_decode($response);
+	print_r($yo);
+
+	echo '</pre>';**/
+});
+
+Route::get('/loginoo', function ()
+{
+	echo '<pre>';
+	$facebook = OAuth::consumer('facebook');
+	$response = $facebook->request('/me/accounts');
+	$yo = json_decode($response, true);
+	//print_r($yo);
+	$data = $yo['data'];
+	foreach ($data as $page) {
+		
+		print("\nYou manage the " . $page['name'] . " page" . "\n with access token: " . $page['access_token']."\n");
+			
+	}
+
+
+	echo '</pre>';
+});
+
+Route::get('/loginooo', function ()
+{
+	echo '<pre>';
+	$facebook = OAuth::consumer('facebook');
+	$response = $facebook->request('/me/accounts');
+	$yo = json_decode($response, true);
+	//print_r($yo);
+	$data = $yo['data'];
+	$scope = "posts";
+	print("This page shows all posts for all pages\n");
+	foreach ($data as $page) {
+		try {
+			$r = $facebook->request("/".$page['id']."?fields=" . $scope);			
+		} catch (FacebookApiException $e) {
+			var_dump($e);
+		}
+		$d = json_decode($r, true);
+		if (isset($d['posts'])) {
+			$data = $d['posts']['data'];
+			print("\nPosts for page: " . $page['name'] . "\n");
+			foreach ($data as $post) {
+				print_r($post);
+				print("\n");
+			}
+		}
+		//print_r($d);
+		
+	}
+
+
+	echo '</pre>';
+});
+
+Route::get('/delete', function() 
+{
+	Session::flush();
+
+	return Redirect::to('/');
 });
 
 /**

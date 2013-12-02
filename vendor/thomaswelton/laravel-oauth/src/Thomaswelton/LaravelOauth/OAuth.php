@@ -4,11 +4,14 @@ use \Config;
 use \Input;
 use \Str;
 use \URL;
+use \Auth;
 use \Session;
 
+use Carbon\Carbon;
 use OAuth\ServiceFactory;
 use OAuth\Common\Consumer\Credentials;
 use OAuth\Common\Http\Exception\TokenResponseException;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class OAuth extends ServiceFactory
 {
@@ -18,18 +21,61 @@ class OAuth extends ServiceFactory
      * @param  string        $redirect url to redirect to after login
      * @return OAuthLoginUrl
      */
-    public function authorize($provider)
+    public function getAuthorizeUrl($provider)
     {
         return new OAuthLoginUrl($provider);
     }
 
-    public function login($provider)
+    public function getLoginUrl($provider)
     {
-        return $this->authorize($provider)->login();
+        return $this->getAuthorizeUrl($provider)->login();
     }
 
-    public function associate($provider){
-        return $this->authorize($provider)->associate();
+    public function getLinkUrl($provider){
+        return $this->getAuthorizeUrl($provider)->link();
+    }
+
+    public function link($provider, $user = null)
+    {
+        $uid = $this->user($provider)->getUID();
+
+        if(is_null($user)){
+            if (Auth::check()){
+                $user = Auth::user();
+            }else{
+                throw new NotLoggedInException("NOT_LOGGED_IN", 1);
+            }
+        }
+
+        $model = $this->getEloquentModel($provider);
+
+        try{
+            $record = $model->where('user_id', '=', $user->id)->firstOrFail();
+        }catch(ModelNotFoundException $e){
+            $record = $model;
+        }
+
+        $token = $this->token($provider);
+
+        $record->user_id = $user->id;
+        $record->oauth_uid = $uid;
+        $record->access_token = $token->getAccessToken();
+        $record->expire_time = $token->getEndOfLife();
+
+        $record->save();
+    }
+
+    public function login($provider){
+        $uid = $this->user($provider)->getUID();
+
+        $model = $this->getEloquentModel($provider);
+
+        try{
+            $user = $model->where('oauth_uid', '=', $uid)->firstOrFail();
+            Auth::loginUsingId($user->user_id);
+        }catch(ModelNotFoundException $e){
+            return false;
+        }
     }
 
     /**
@@ -52,6 +98,21 @@ class OAuth extends ServiceFactory
         return $service->getStorage()->hasAccessToken($serviceName);
     }
 
+    public function hasExpired($provider)
+    {
+        $token_eol = OAuth::token($provider)->getEndOfLife();
+
+        if($token_eol < 0){
+            // Non expiring tokens
+            return false;
+        }
+
+        $carbon_eol = Carbon::createFromTimestamp($token_eol);
+        $carbon_now = Carbon::now();
+
+        return ($carbon_eol->lt($carbon_now));
+    }
+
     public function user($provider)
     {
         $service = $this->getServiceFactory($provider);
@@ -61,6 +122,16 @@ class OAuth extends ServiceFactory
         $service = $this->getServiceFactory($provider);
 
         return new $className($service);
+    }
+
+    public function consumer($provider){
+        return $this->getServiceFactory($provider);
+    }
+
+    public function getEloquentModel($provider){
+        $providerClass = ucfirst($provider);
+        $modelName = "Thomaswelton\\LaravelOauth\\Eloquent\\".$providerClass;
+        return new $modelName();
     }
 
     public function getAuthorizationUri($service, $scope, array $state = array())
@@ -97,6 +168,9 @@ class OAuth extends ServiceFactory
         $scopes 	 = (!is_null($scope)) ? array_map("trim", explode(',', $scope)) : array_values( $this->getScopes($service) );
 
         $storage 	 = $this->getStorage();
+        
+        $httpClient = new \OAuth\Common\Http\Client\CurlClient();
+        $this->setHttpClient($httpClient);
 
         if ($this->isOAuth2($service)) {
             return $this->createService($service, $credentials, $storage, $scopes);
