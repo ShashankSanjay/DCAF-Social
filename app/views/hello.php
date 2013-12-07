@@ -78,12 +78,17 @@
         <br>
         Check the pages here 
         <br>
-        <a href="<?php echo fix_url_base(OAuth::getAuthorizeUrl('facebook')->redirect($base_url.'/loginoo')->url->getUrl()); ?>">Facebook<br></a>
+        <a href="<?php echo fix_url_base(OAuth::getAuthorizeUrl('facebook')->redirect($base_url.'/fballpages')->url->getUrl()); ?>">Facebook<br></a>
         <br>
         <br>
         Check out posts for all user admin pages
         <br>
-        <a href="<?php echo fix_url_base(OAuth::getAuthorizeUrl('facebook')->redirect($base_url.'/loginooo')->url->getUrl()); ?>">Facebook<br></a>
+        <a href="<?php echo fix_url_base(OAuth::getAuthorizeUrl('facebook')->redirect($base_url.'/fballpagesallposts')->url->getUrl()); ?>">Facebook<br></a>
+        <br>
+        <br>
+        Check out all tweets
+        <br>
+        <a href="<?php echo fix_url_base(OAuth::getAuthorizeUrl('twitter')->redirect($base_url.'/twtweets')->url->getUrl()); ?>">Twitter<br></a>
 
     </div>
 </body>

@@ -53,7 +53,7 @@ Route::get('/logino', function ()
 	echo '</pre>';**/
 });
 
-Route::get('/loginoo', function ()
+Route::get('/fballpages', function ()
 {
 	echo '<pre>';
 	$facebook = OAuth::consumer('facebook');
@@ -71,7 +71,7 @@ Route::get('/loginoo', function ()
 	echo '</pre>';
 });
 
-Route::get('/loginooo', function ()
+Route::get('/fballpagesallposts', function ()
 {
 	echo '<pre>';
 	$facebook = OAuth::consumer('facebook');
@@ -110,6 +110,21 @@ Route::get('/delete', function()
 
 	return Redirect::to('/');
 });
+
+
+/**
+*	Twitter stuff
+**/
+Route::get('/twtweets', function()
+{
+	echo '<pre>';
+	$twitter = OAuth::consumer('twitter');
+	$response = $twitter->request('/statuses/user_timeline');
+	$yo = json_decode($response, true);
+	print_r($yo);
+	echo '</pre>';
+});
+
 
 /**
  * Pull data from DB and get aggregates
