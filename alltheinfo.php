@@ -28,9 +28,23 @@ if (isset(OAuth::facebook))
 
 if (isset(OAuth::twitter))
 {
-	$calls = 'x, x, x, x'
+	//make array of all params to call
+	$calls = array(
+		'/statuses/mentions_timeline.json',
+		'/statuses/retweets_of_me',
+		'/followers/ids.json',
+		);
+
 	$twitter = OAuth::consumer('twitter');
-	$response = $twitter->request('/me/accounts');
+	foreach ($calls as $call)
+	{	
+		//make calls
+		$response = json_decode($twitter->request($call));
+	}
+
+	//parse or organize response data
+
+	//store in DB
 }
 
 if (isset(OAuth::google))
