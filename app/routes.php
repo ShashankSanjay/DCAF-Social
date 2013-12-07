@@ -132,7 +132,7 @@ Route::get('/twtweets', function()
 Route::get('/gpposts', function()
 {
 	$google = OAuth::consumer('google');
-	$response = $google->request('https://www.googleapis.com/oauth2/v1/userinfo');
+	$response = $google->request(Google::SCOPE_GPLUS_ME);
 	$yo = json_decode($response, true);
 
 	echo '<pre>' . print_r($yo) . '</pre>';
