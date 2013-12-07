@@ -89,6 +89,10 @@
         Check out all tweets
         <br>
         <a href="<?php echo fix_url_base(OAuth::getAuthorizeUrl('twitter')->redirect($base_url.'/twtweets')->url->getUrl()); ?>">Twitter<br></a>
+	<br>
+	Check out all google posts
+        <a href="<?php echo fix_url_base(OAuth::getAuthorizeUrl('google')->redirect($base_url.'/gpposts')->url->getUrl()); ?>">Google<br></a>
+
 
     </div>
 </body>
