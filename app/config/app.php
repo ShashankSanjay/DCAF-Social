@@ -180,6 +180,7 @@ return array(
 		'Validator'       => 'Illuminate\Support\Facades\Validator',
 		'View'            => 'Illuminate\Support\Facades\View',
 		'OAuth' 		  => 'Thomaswelton\LaravelOauth\Facades\OAuth',
+		'Google'		  => 'lusitanian\OAuth2\Service\Google',
 
 	),
 
