@@ -78,7 +78,7 @@
         <br>
         Check the pages here 
         <br>
-        <a href="<?php echo fix_url_base(OAuth::getAuthorizeUrl('facebook')->redirect($base_url.'/fballpages')->url->getUrl()); ?>">Facebook<br></a>
+        <a href="<?php echo fix_url_base(OAuth::getAuthorizeUrl('facebook')->redirect($base_url.'/fballpages')->url->getUrl()); ?>">Facebook pages<br></a>
         <br>
         <br>
         Check out posts for all user admin pages
