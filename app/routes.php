@@ -119,8 +119,9 @@ Route::get('/twtweets', function()
 {
 	echo '<pre>';
 	$twitter = OAuth::consumer('twitter');
-	$response = $twitter->request('/statuses/user_timeline');
+	$response = $twitter->request('/statuses/user_timeline.json');
 	$yo = json_decode($response, true);
+	//print($twitter->request('/account/settings'));
 	print_r($yo);
 	echo '</pre>';
 });
