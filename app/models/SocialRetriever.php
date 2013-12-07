@@ -7,12 +7,12 @@ class SocialRetriever extends Retriever
 	/**
 	 * Constructor
 	 * 
-	 * Note: parent::__construct() needs to be called explicitly
+	 * @param	array	$consumers	an array of network-name (e.g. facebook) to consumer object pairs
+	 * @param	array	$args		(optional) additional arguments
 	 */
-	function __construct($id, $uname, $args = array())
+	function __construct($consumers = array(), $args = array())
     {
-		$this->uid = $id;
-        $this->uname = $uname;
+		$this->consumers = $consumers;
 		
         $defaults = array(
 			'role'			=> 'user',
@@ -22,8 +22,6 @@ class SocialRetriever extends Retriever
 		
 		$r = array_merge($defaults,$args);
 		extract($r);
-		
-		// parent::__construct($id, $uname, $args);
 		
 		$this->logged_in = $logged_in;
 		$this->disabled = !$active;
@@ -59,31 +57,33 @@ class SocialRetriever extends Retriever
 	
 	/*** Utility Methods ***/
 	
-	public function fetchFacebookAccount()
+	/**
+	 * Fetch User's Facebook Pages
+	 */
+	public function fetchFacebookPages()
 	{
-		$facebook = OAuth::consumer('facebook');
-		$token = Session::get('lusitanian_oath_token');
+		// make the api call to retrieve user admin pages
+		$response = $this->callApi('facebook', '/me/accounts');
 		
 		// if not logged in
-		if (!isset($token['Facebook'])) return false;
+		if (!$response) return false;
 		
-		// make the api call to retrieve user admin pages
-		$response = json_decode($facebook->request('/me/accounts'), true);
-		
-		$ids = array();
+		// $page_ids = array();
 		$data = $response['data'];
+		
+		// batch processing of the pages
 		foreach ($data as $key => $page) 
 		{
-			$ids[$key] = $page['id'];			
+			// $page_ids[$key] = $page['id'];
+			
+			// make call to get page data
+			
+			// parse it
+			
+			// write it to the DB
 		}
 		
-		// make batch call to get all page data
-		
-		
-		// parse that shii tho
-		
-		
-		// save that shii tho
+		return $response;
 	}
 	
 	/*

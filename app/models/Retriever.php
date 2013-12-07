@@ -1,14 +1,15 @@
 <?php
 /**
- * abstract class for fetching data from a provider
+ * abstract base class for fetching data from a provider
  */
 abstract class Retriever implements ArrayAccess
 {
-    protected $uid;
-    protected $uname;
+	protected $consumers;
 	protected $logged_in;
 	protected $disabled;
 	protected $role;
+	
+	/* Methods for implementing ArrayAccess */
 	
 	function __get($n) { return $this->$n; }
 	function __set($n,$v) { $this->$n = $v; }
@@ -16,6 +17,8 @@ abstract class Retriever implements ArrayAccess
 	function offsetSet($n,$v) { $this->$n = $v; }
 	function offsetExists($n) { return isset($this->$n); }
 	function offsetUnset($n) { unset($this->$n); }
+	
+	/***** Instance Methods *****/
 	
 	/*** Setters ***/
 	
@@ -42,6 +45,12 @@ abstract class Retriever implements ArrayAccess
 	public function getRole()
 	{
 		return $this->role;
+	}
+	
+	protected function callApi($provider, $path)
+	{
+		// make the api call to retrieve user admin pages
+		return json_decode($consumers[$provider]->request($path), true);
 	}
 }
 ?>
