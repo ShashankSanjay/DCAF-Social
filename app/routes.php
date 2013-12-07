@@ -126,6 +126,18 @@ Route::get('/twtweets', function()
 	echo '</pre>';
 });
 
+/**
+*	Google stuff
+*/
+Route::get('/gpposts', function()
+{
+	$google = OAuth::consumer('google');
+	$response = $google->request('https://www.googleapis.com/oauth2/v1/userinfo');
+	$yo = json_decode($response, true);
+
+	echo '<pre>' . print_r($yo) . '</pre>';
+});
+
 
 /**
  * Pull data from DB and get aggregates
