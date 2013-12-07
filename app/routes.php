@@ -61,6 +61,7 @@ Route::get('/fballpages', function ()
 	$yo = json_decode($response, true);
 	//print_r($yo);
 	$data = $yo['data'];
+	echo '$facebook->request("/me/accounts")';
 	foreach ($data as $page) {
 		
 		print("\nYou manage the " . $page['name'] . " page" . "\n with access token: " . $page['access_token']."\n");
@@ -80,7 +81,7 @@ Route::get('/fballpagesallposts', function ()
 	//print_r($yo);
 	$data = $yo['data'];
 	$scope = "posts";
-	print("This page shows all posts for all pages\n");
+
 	foreach ($data as $page) {
 		try {
 			$r = $facebook->request("/".$page['id']."?fields=" . $scope);			
