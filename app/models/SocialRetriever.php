@@ -117,5 +117,22 @@ class SocialRetriever extends Retriever
 		$response = $tumblr->request('/me/accounts');
 	}
 	*/
+
+	//heyo pseudo: model of relations between fb and twitter
+	public function ab()
+	{
+		page or twitter account
+			likes or followers
+
+		posts or tweets
+			likes or favorites
+			comments or replies
+				likes or favorites
+						retweets
+						replies
+			shares or retweets
+
+	}
+
 }
 ?>

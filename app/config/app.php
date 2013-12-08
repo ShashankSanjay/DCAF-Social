@@ -180,7 +180,10 @@ return array(
 		'Validator'       => 'Illuminate\Support\Facades\Validator',
 		'View'            => 'Illuminate\Support\Facades\View',
 		'OAuth' 		  => 'Thomaswelton\LaravelOauth\Facades\OAuth',
+		'Facebook'		  => 'OAuth\OAuth2\Service\Facebook',
+		'Twtter'		  => 'OAuth\OAuth2\Service\Twtter',
 		'Google'		  => 'OAuth\OAuth2\Service\Google',
+		'Tumblr'		  => 'OAuth\OAuth1\Service\Tumblr',
 
 	),
 
