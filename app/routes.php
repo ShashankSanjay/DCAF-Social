@@ -73,25 +73,47 @@ Route::get('/fballpages', function ()
 	
 	//FacebookRetriever::batchCall(array($data[0]['id']), $data[0]['access_token']);
 
-	$ch = curl_init('https://graph.facebook.com/');
+	$ch = curl_init();
+	$base_url = 'https://graph.facebook.com/';
 	$pageIDs = array($data[0]['id']);
 	foreach ($pageIDs as $key => $page)
 	{
 				
 		// set the url, number of POST vars, POST data
-		// curl_setopt($ch, CURLOPT_URL, $url);
+		curl_setopt($ch, CURLOPT_URL, $base_url);
 		// curl_setopt($ch, CURLOPT_FILE, $fp);
 		// curl_setopt($ch, CURLOPT_HEADER, 0);
-		curl_setopt($ch, CURLOPT_POST, 2);
-		curl_setopt($ch, CURLOPT_POSTFIELDS, 'access_token=' . $data[0]['access_token'] . '&batch=[{"method":"GET", "relative_url":"/' . $data[0]['id'] . '?fields=id,access_token,likes,admins,albums,conversations,events,feed,insights,links,locations,posts,questions,statuses,tagged,videos"}]');
 		
-		$result = json_decode(curl_exec($ch));
+		$requestFields = array(
+			'batch' => '[{"method":"GET", "relative_url":"' . $data[0]['id'] . '?fields=id,access_token,likes,admins,albums,conversations,events,feed,insights,links,locations,posts,questions,statuses,tagged,videos"}]',
+			'access_token' => $data[0]['access_token'],
+			);
+
+		$requestBody = http_build_query($requestFields);
+		curl_setopt($ch, CURLOPT_URL, $base_url);
+		curl_setopt($ch, CURLOPT_POST, TRUE);
+		curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
+		curl_setopt($ch, CURLOPT_POSTFIELDS, $requestBody);
+
+		$r = curl_exec($ch);
+
+		$result = json_decode($r, true);
 		echo '<pre>';
-		print_r($result);
+		//var_dump($result);
+		//print_r($result[0]['body']);
+
+		$e = json_decode($result[0]['body'], true);
+		print_r($e);
+		$a = $e['feed']['data'][0]['actions'][1]['link'];
+		//var_dump($a);
+		
 		echo '</pre>';
 	}
+
+	/**/
+
 	curl_close($ch);
-	
+
 });
 
 Route::get('/fballpagesallposts', function ()
