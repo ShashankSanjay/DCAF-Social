@@ -259,3 +259,10 @@ Route::get('/dem', function ()
 	
 	return $data;
 });
+
+/*
+*	Route for facebook to push realtime updates to
+*/
+Route::get('fbcallback', 'FacebookController@realtime');
+
+?>

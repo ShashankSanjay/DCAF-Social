@@ -30,21 +30,36 @@ class FacebookRetriever
 		 * Also, in between each $batches value, make sure to put in a comma
 		 */
 		
-		$ch = curl_init('https://graph.facebook.com/');
+		$ch = curl_init();
 		
 		foreach ($pageIDs as $key => $page)
 		{
-			$fp = fopen('', 'w');
-			
 			// set the url, number of POST vars, POST data
-			// curl_setopt($ch, CURLOPT_URL, $url);
+			curl_setopt($ch, CURLOPT_URL, $base_url);
 			// curl_setopt($ch, CURLOPT_FILE, $fp);
 			// curl_setopt($ch, CURLOPT_HEADER, 0);
-			curl_setopt($ch, CURLOPT_POST, 2);
-			curl_setopt($ch, CURLOPT_POSTFIELDS, '/?access_token=' . $access_token . '&batch=[{"method":"GET", "relative_url":"me/' . $page . '?fields=id,access_token,likes,admins,albums,conversations,events,feed,insights,links,locations,posts,questions,statuses,tagged,videos"}]');
 			
-			$result = curl_exec($ch);
-			echo '<pre>' . $result . '</pre>';
+			$requestFields = array(
+				'batch' => '[{"method":"GET", "relative_url":"' . $data[0]['id'] . '?fields=id,access_token,likes,admins,albums,conversations,events,feed,insights,links,locations,posts,questions,statuses,tagged,videos"}]',
+				'access_token' => $data[0]['access_token'],
+				);
+
+			$requestBody = http_build_query($requestFields);
+			curl_setopt($ch, CURLOPT_URL, $base_url);
+			curl_setopt($ch, CURLOPT_POST, TRUE);
+			curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
+			curl_setopt($ch, CURLOPT_POSTFIELDS, $requestBody);
+
+			$r = curl_exec($ch);
+
+			$result = json_decode($r, true);
+			echo '<pre>';
+			//var_dump($result);
+			//print_r($result[0]['body']);
+
+			$e = json_decode($result[0]['body'], true);
+			print_r($e);
+			echo '</pre>';
 		}
 		curl_close($ch);
 		fclose($fp);
