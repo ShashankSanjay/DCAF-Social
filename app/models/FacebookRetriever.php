@@ -4,13 +4,14 @@
  */
 class FacebookRetriever
 {
-	public function getPageID($consumer) 
+	public static function getPageID($consumer) 
 	{
 		$response = $consumer->request('/me/accounts');
 		return json_decode($response);
 	}
 	
-	public function getPages($consumer, $pageIDs)
+	/*
+	public static function getPages($consumer, $pageIDs)
 	{
 		//
 		$batches = array();
@@ -20,8 +21,9 @@ class FacebookRetriever
 		}
 		return $batches;
 	}
+	*/
 
-	public function batchCall($pageIDs, $access_token)
+	public static function batchCall($pageIDs, $access_token)
 	{
 		/**
 		 * write in the curl functionality per this spec: https://developers.facebook.com/docs/graph-api/making-multiple-requests/#simple
@@ -48,7 +50,7 @@ class FacebookRetriever
 		fclose($fp);
 	}
 
-	public function getUserInfo($consumer, $users)
+	public static function getUserInfo($consumer, $users)
 	{
 		//
 		$batches = array();
