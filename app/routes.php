@@ -55,21 +55,24 @@ Route::get('/logino', function ()
 
 Route::get('/fballpages', function ()
 {
+	/*
 	echo '<pre>';
+	*/
 	$facebook = OAuth::consumer('facebook');
 	$response = $facebook->request('/me/accounts');
 	$yo = json_decode($response, true);
 	//print_r($yo);
 	$data = $yo['data'];
+	/*
 	echo '$facebook->request("/me/accounts")';
 	foreach ($data as $page) {
-		
 		print("\nYou manage the " . $page['name'] . " page" . "\n with access token: " . $page['access_token']."\n");
-			
 	}
-
-
-	echo '</pre>';
+	echo '</pre>';	
+	*/
+	
+	FacebookRetriever::batchCall(array($data[0]['id']), $data[0]['access_token']);
+	
 });
 
 Route::get('/fballpagesallposts', function ()
