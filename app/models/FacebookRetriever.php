@@ -2,7 +2,7 @@
 /**
  * abstract base class for fetching data from a provider
  */
-class FacebookRetrieve
+class FacebookRetriever
 {
 	public function getPageID($consumer) 
 	{

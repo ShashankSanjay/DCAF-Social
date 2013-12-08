@@ -80,7 +80,7 @@ Route::get('/fballpagesallposts', function ()
 	$yo = json_decode($response, true);
 	//print_r($yo);
 	$data = $yo['data'];
-	$scope = "posts";
+	$scope = "posts.fields(likes)";
 
 	foreach ($data as $page) {
 		try {
