@@ -27,6 +27,8 @@ class OAuthLoginUrl
         if (!is_null($redirect)) {
             $this->url->query->set('redirect', $redirect);
         }
+
+        $this->url->query->set('_token', csrf_token());
     }
 
     private function setPath($pathPart)
@@ -60,10 +62,10 @@ class OAuthLoginUrl
         return $this;
     }
 
-    public function associate($associate = true)
+    public function link($link = true)
     {
-        if ($associate) {
-            $this->url->query->set('associate', true);
+        if ($link) {
+            $this->url->query->set('link', true);
         }
 
         return $this;

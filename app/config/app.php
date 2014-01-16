@@ -26,7 +26,7 @@ return array(
 	|
 	*/
 
-	'url' => 'http://shashanksanjay.com/socialapp',
+	'url' => 'http://localhost',
 
 	/*
 	|--------------------------------------------------------------------------
@@ -60,12 +60,12 @@ return array(
 	|--------------------------------------------------------------------------
 	|
 	| This key is used by the Illuminate encrypter service and should be set
-	| to a random, 32 character string, otherwise these encrypted strings
-	| will not be safe. Please do this before deploying an application!
+	| to a random, long string, otherwise these encrypted values will not
+	| be safe. Make sure to change it before deploying any application!
 	|
 	*/
 
-	'key' => '1G9j1L2iJ8Flu7zQkxvs6aVz2Fv8ddeb',
+	'key' => 'YourSecretKey!!!',
 
 	/*
 	|--------------------------------------------------------------------------
@@ -78,8 +78,8 @@ return array(
 	|
 	*/
 
-	'providers' => array(
-
+    'providers' => array(
+        /* Laravel Base Providers */
 		'Illuminate\Foundation\Providers\ArtisanServiceProvider',
 		'Illuminate\Auth\AuthServiceProvider',
 		'Illuminate\Cache\CacheServiceProvider',
@@ -113,36 +113,50 @@ return array(
 		'Illuminate\Validation\ValidationServiceProvider',
 		'Illuminate\View\ViewServiceProvider',
 		'Illuminate\Workbench\WorkbenchServiceProvider',
-		'Thomaswelton\LaravelOauth\LaravelOauthServiceProvider',
+		'Illuminate\Remote\RemoteServiceProvider',
+		
+        /* Additional Providers */
+        'Zizaco\Confide\ConfideServiceProvider', // Confide Provider
+        'Zizaco\Entrust\EntrustServiceProvider', // Entrust Provider for roles
+        'Basset\BassetServiceProvider', // Better Asset Management
+        'Robbo\Presenter\PresenterServiceProvider', // Presenter
+        'Bllim\Datatables\DatatablesServiceProvider', // Datatables
 
-	),
+        /* Uncomment for use in development */
+        'Way\Generators\GeneratorsServiceProvider', // Generators
+        'Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider', // IDE Helpers
 
-	/*
-	|--------------------------------------------------------------------------
-	| Service Provider Manifest
-	|--------------------------------------------------------------------------
-	|
-	| The service provider manifest is used by Laravel to lazy load service
-	| providers which are not needed for each request, as well to keep a
-	| list of all of the services. Here, you may set its storage spot.
-	|
-	*/
+        /* DCAF Stuff */
+        'Thomaswelton\LaravelOauth\LaravelOauthServiceProvider',
 
-	'manifest' => storage_path().'/meta',
+    ),
 
-	/*
-	|--------------------------------------------------------------------------
-	| Class Aliases
-	|--------------------------------------------------------------------------
-	|
-	| This array of class aliases will be registered when this application
-	| is started. However, feel free to register as many as you wish as
-	| the aliases are "lazy" loaded so they don't hinder performance.
-	|
-	*/
+    /*
+    |--------------------------------------------------------------------------
+    | Service Provider Manifest
+    |--------------------------------------------------------------------------
+    |
+    | The service provider manifest is used by Laravel to lazy load service
+    | providers which are not needed for each request, as well to keep a
+    | list of all of the services. Here, you may set its storage spot.
+    |
+    */
 
-	'aliases' => array(
+    'manifest' => storage_path() . '/meta',
 
+    /*
+    |--------------------------------------------------------------------------
+    | Class Aliases
+    |--------------------------------------------------------------------------
+    |
+    | This array of class aliases will be registered when this application
+    | is started. However, feel free to register as many as you wish as
+    | the aliases are "lazy" loaded so they don't hinder performance.
+    |
+    */
+
+    'aliases' => array(
+        /* Laravel Base Aliases */
 		'App'             => 'Illuminate\Support\Facades\App',
 		'Artisan'         => 'Illuminate\Support\Facades\Artisan',
 		'Auth'            => 'Illuminate\Support\Facades\Auth',
@@ -150,7 +164,7 @@ return array(
 		'Cache'           => 'Illuminate\Support\Facades\Cache',
 		'ClassLoader'     => 'Illuminate\Support\ClassLoader',
 		'Config'          => 'Illuminate\Support\Facades\Config',
-		'Controller'      => 'Illuminate\Routing\Controllers\Controller',
+		'Controller'      => 'Illuminate\Routing\Controller',
 		'Cookie'          => 'Illuminate\Support\Facades\Cookie',
 		'Crypt'           => 'Illuminate\Support\Facades\Crypt',
 		'DB'              => 'Illuminate\Support\Facades\DB',
@@ -175,16 +189,27 @@ return array(
 		'Schema'          => 'Illuminate\Support\Facades\Schema',
 		'Seeder'          => 'Illuminate\Database\Seeder',
 		'Session'         => 'Illuminate\Support\Facades\Session',
+		'SSH'             => 'Illuminate\Support\Facades\SSH',
 		'Str'             => 'Illuminate\Support\Str',
 		'URL'             => 'Illuminate\Support\Facades\URL',
 		'Validator'       => 'Illuminate\Support\Facades\Validator',
 		'View'            => 'Illuminate\Support\Facades\View',
-		'OAuth' 		  => 'Thomaswelton\LaravelOauth\Facades\OAuth',
-		'Facebook'		  => 'OAuth\OAuth2\Service\Facebook',
-		'Twtter'		  => 'OAuth\OAuth2\Service\Twtter',
-		'Google'		  => 'OAuth\OAuth2\Service\Google',
-		'Tumblr'		  => 'OAuth\OAuth1\Service\Tumblr',
 
-	),
+        /* Additional Aliases */
+        'Confide'         => 'Zizaco\Confide\ConfideFacade', // Confide Alias
+        'Entrust'         => 'Zizaco\Entrust\EntrustFacade', // Entrust Alias
+        'Presenter'       => 'Robbo\Presenter\Presenter', // Presenter
+        'Presentable'     => 'Robbo\Presenter\PresentableInterface', // Presenter
+        'Basset'          => 'Basset\Facade', // Better Asset Management
+        'String'          => 'Andrew13\Helpers\String', // String
+        'Carbon'          => 'Carbon\Carbon', // Carbon
+        'Datatables'      => 'Bllim\Datatables\Datatables', // DataTables
+
+        /* DCAF Stuff */
+        'OAuth'			=> 'Thomaswelton\LaravelOauth\Facades\OAuth' //Oauth
+
+    ),
+
+    'available_language' => array('en', 'pt', 'es'),
 
 );

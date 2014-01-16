@@ -32,7 +32,7 @@ class Application extends Container implements HttpKernelInterface, ResponsePrep
 	 *
 	 * @var string
 	 */
-	const VERSION = '4.0.8';
+	const VERSION = '4.0.10';
 
 	/**
 	 * Indicates if the application has "booted".
@@ -100,13 +100,49 @@ class Application extends Container implements HttpKernelInterface, ResponsePrep
 	{
 		$this['request'] = $this->createRequest($request);
 
-		// The exception handler class takes care of determining which of the bound
-		// exception handler Closures should be called for a given exception and
-		// gets the response from them. We'll bind it here to allow overrides.
+		$this->registerBaseServiceProviders();
+	}
+
+	/**
+	 * Register all of the base service providers.
+	 *
+	 * @return void
+	 */
+	protected function registerBaseServiceProviders()
+	{
+		foreach (array('Exception', 'Routing', 'Event') as $name)
+		{
+			$this->{"register{$name}Provider"}();
+		}
+	}
+
+	/**
+	 * Register the exception service provider.
+	 *
+	 * @return void
+	 */
+	protected function registerExceptionProvider()
+	{
 		$this->register(new ExceptionServiceProvider($this));
+	}
 
+	/**
+	 * Register the routing service provider.
+	 *
+	 * @return void
+	 */
+	protected function registerRoutingProvider()
+	{
 		$this->register(new RoutingServiceProvider($this));
+	}
 
+	/**
+	 * Register the event service provider.
+	 *
+	 * @return void
+	 */
+	protected function registerEventProvider()
+	{
 		$this->register(new EventServiceProvider($this));
 	}
 
@@ -196,13 +232,21 @@ class Application extends Container implements HttpKernelInterface, ResponsePrep
 	}
 
 	/**
-	 * Get the current application environment.
+	 * Get or check the current application environment.
 	 *
+	 * @param  dynamic
 	 * @return string
 	 */
 	public function environment()
 	{
-		return $this['env'];
+		if (count(func_get_args()) > 0)
+		{
+			return in_array($this['env'], func_get_args());
+		}
+		else
+		{
+			return $this['env'];
+		}
 	}
 
 	/**
@@ -321,7 +365,7 @@ class Application extends Container implements HttpKernelInterface, ResponsePrep
 	 *
 	 * @param  \Illuminate\Support\ServiceProvider|string  $provider
 	 * @param  array  $options
-	 * @return void
+	 * @return \Illuminate\Support\ServiceProvider
 	 */
 	public function register($provider, $options = array())
 	{
@@ -346,6 +390,8 @@ class Application extends Container implements HttpKernelInterface, ResponsePrep
 		$this->serviceProviders[] = $provider;
 
 		$this->loadedProviders[get_class($provider)] = true;
+
+		return $provider;
 	}
 
 	/**
@@ -526,7 +572,7 @@ class Application extends Container implements HttpKernelInterface, ResponsePrep
 
 			if ( ! is_null($response)) return $this->prepareResponse($response, $request);
 		}
-		
+
 		return $this['router']->dispatch($this->prepareRequest($request));
 	}
 

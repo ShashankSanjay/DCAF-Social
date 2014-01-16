@@ -19,7 +19,12 @@
 
 namespace Doctrine\DBAL\Driver\PDOOracle;
 
-use Doctrine\DBAL\Platforms;
+use Doctrine\DBAL\Connection;
+use Doctrine\DBAL\DBALException;
+use Doctrine\DBAL\Driver\ExceptionConverterDriver;
+use Doctrine\DBAL\Driver\PDOConnection;
+use Doctrine\DBAL\Platforms\OraclePlatform;
+use Doctrine\DBAL\Schema\OracleSchemaManager;
 
 /**
  * PDO Oracle driver.
@@ -29,19 +34,23 @@ use Doctrine\DBAL\Platforms;
  * which leads us to the recommendation to use the "oci8" driver to connect
  * to Oracle instead.
  */
-class Driver implements \Doctrine\DBAL\Driver
+class Driver implements \Doctrine\DBAL\Driver, ExceptionConverterDriver
 {
     /**
      * {@inheritdoc}
      */
     public function connect(array $params, $username = null, $password = null, array $driverOptions = array())
     {
-        return new \Doctrine\DBAL\Driver\PDOConnection(
-            $this->_constructPdoDsn($params),
-            $username,
-            $password,
-            $driverOptions
-        );
+        try {
+            return new PDOConnection(
+                $this->_constructPdoDsn($params),
+                $username,
+                $password,
+                $driverOptions
+            );
+        } catch (\PDOException $e) {
+            throw DBALException::driverException($this, $e);
+        }
     }
 
     /**
@@ -53,10 +62,11 @@ class Driver implements \Doctrine\DBAL\Driver
      */
     private function _constructPdoDsn(array $params)
     {
-        $dsn = 'oci:';
+        $dsn = 'oci:dbname=';
+
         if (isset($params['host']) && $params['host'] != '') {
-            $dsn .= 'dbname=(DESCRIPTION=(ADDRESS_LIST=(ADDRESS=(PROTOCOL=TCP)' .
-                   '(HOST=' . $params['host'] . ')';
+            $dsn .= '(DESCRIPTION=(ADDRESS_LIST=(ADDRESS=(PROTOCOL=TCP)' .
+                '(HOST=' . $params['host'] . ')';
 
             if (isset($params['port'])) {
                 $dsn .= '(PORT=' . $params['port'] . ')';
@@ -64,13 +74,26 @@ class Driver implements \Doctrine\DBAL\Driver
                 $dsn .= '(PORT=1521)';
             }
 
-            if (isset($params['service']) && $params['service'] == true) {
-                $dsn .= '))(CONNECT_DATA=(SERVICE_NAME=' . $params['dbname'] . ')))';
-            } else {
-                $dsn .= '))(CONNECT_DATA=(SID=' . $params['dbname'] . ')))';
+            $serviceName = $params['dbname'];
+
+            if ( ! empty($params['servicename'])) {
+                $serviceName = $params['servicename'];
             }
+
+            $service = 'SID=' . $serviceName;
+            $pooled  = '';
+
+            if (isset($params['service']) && $params['service'] == true) {
+                $service = 'SERVICE_NAME=' . $serviceName;
+            }
+
+            if (isset($params['pooled']) && $params['pooled'] == true) {
+                $pooled = '(SERVER=POOLED)';
+            }
+
+            $dsn .= '))(CONNECT_DATA=(' . $service . ')' . $pooled . '))';
         } else {
-            $dsn .= 'dbname=' . $params['dbname'];
+            $dsn .= $params['dbname'];
         }
 
         if (isset($params['charset'])) {
@@ -85,15 +108,15 @@ class Driver implements \Doctrine\DBAL\Driver
      */
     public function getDatabasePlatform()
     {
-        return new \Doctrine\DBAL\Platforms\OraclePlatform();
+        return new OraclePlatform();
     }
 
     /**
      * {@inheritdoc}
      */
-    public function getSchemaManager(\Doctrine\DBAL\Connection $conn)
+    public function getSchemaManager(Connection $conn)
     {
-        return new \Doctrine\DBAL\Schema\OracleSchemaManager($conn);
+        return new OracleSchemaManager($conn);
     }
 
     /**
@@ -107,10 +130,58 @@ class Driver implements \Doctrine\DBAL\Driver
     /**
      * {@inheritdoc}
      */
-    public function getDatabase(\Doctrine\DBAL\Connection $conn)
+    public function getDatabase(Connection $conn)
     {
         $params = $conn->getParams();
 
         return $params['user'];
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function convertExceptionCode(\Exception $exception)
+    {
+        $errorCode = $exception->getCode();
+
+        // Use driver-specific error code instead of SQLSTATE for PDO exceptions if available.
+        if ($exception instanceof \PDOException && null !== $exception->errorInfo[1]) {
+            $errorCode = $exception->errorInfo[1];
+        }
+
+        switch ($errorCode) {
+            case '1':
+            case '2299':
+            case '38911':
+                return DBALException::ERROR_DUPLICATE_KEY;
+
+            case '904':
+                return DBALException::ERROR_BAD_FIELD_NAME;
+
+            case '918':
+            case '960':
+                return DBALException::ERROR_NON_UNIQUE_FIELD_NAME;
+
+            case '923':
+                return DBALException::ERROR_SYNTAX;
+
+            case '942':
+                return DBALException::ERROR_UNKNOWN_TABLE;
+
+            case '955':
+                return DBALException::ERROR_TABLE_ALREADY_EXISTS;
+
+            case '1017':
+            case '12545':
+                return DBALException::ERROR_ACCESS_DENIED;
+
+            case '1400':
+                return DBALException::ERROR_NOT_NULL;
+
+            case '2292':
+                return DBALException::ERROR_FOREIGN_KEY_CONSTRAINT;
+        }
+
+        return 0;
     }
 }

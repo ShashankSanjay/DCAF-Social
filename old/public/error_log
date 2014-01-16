@@ -1,57 +1,50 @@
-[12-Sep-2013 04:10:57 UTC] CSRF state token does not match one provided.
-[12-Sep-2013 14:24:05 UTC] PHP Parse error:  syntax error, unexpected '->' (T_OBJECT_OPERATOR) in /home1/shashan2/laravel-facebook-loging/app/routes.php on line 78
-[12-Sep-2013 14:25:09 UTC] CSRF state token does not match one provided.
-[12-Sep-2013 14:26:15 UTC] CSRF state token does not match one provided.
-[12-Sep-2013 14:32:37 UTC] CSRF state token does not match one provided.
-[12-Sep-2013 14:57:05 UTC] CSRF state token does not match one provided.
-[12-Sep-2013 15:04:19 UTC] CSRF state token does not match one provided.
-[12-Sep-2013 15:19:05 UTC] PHP Fatal error:  Call to a member function delete() on a non-object in /home1/shashan2/laravel-facebook-loging/app/models/User.php on line 59
-[12-Sep-2013 15:19:36 UTC] PHP Fatal error:  Call to a member function delete() on a non-object in /home1/shashan2/laravel-facebook-loging/app/models/User.php on line 59
-[12-Sep-2013 15:20:10 UTC] PHP Fatal error:  Call to undefined method Illuminate\Database\Eloquent\Collection::delete() in /home1/shashan2/laravel-facebook-loging/app/models/User.php on line 59
-[12-Sep-2013 15:21:05 UTC] PHP Parse error:  syntax error, unexpected '$profile' (T_VARIABLE) in /home1/shashan2/laravel-facebook-loging/app/models/User.php on line 60
-[12-Sep-2013 15:21:25 UTC] PHP Fatal error:  Call to undefined method Illuminate\Database\Eloquent\Collection::delete() in /home1/shashan2/laravel-facebook-loging/app/models/User.php on line 60
-[13-Sep-2013 02:10:00 UTC] PHP Parse error:  syntax error, unexpected 'get' (T_STRING), expecting variable (T_VARIABLE) or '$' in /home1/shashan2/laravel-facebook-loging/app/routes.php on line 75
-[13-Sep-2013 02:10:56 UTC] PHP Parse error:  syntax error, unexpected 'get' (T_STRING), expecting variable (T_VARIABLE) or '$' in /home1/shashan2/laravel-facebook-loging/app/routes.php on line 75
-[13-Sep-2013 02:27:10 UTC] PHP Parse error:  syntax error, unexpected '}' in /home1/shashan2/laravel-facebook-loging/app/routes.php on line 96
-[13-Sep-2013 03:58:43 UTC] PHP Parse error:  syntax error, unexpected ''hub_challenge'' (T_CONSTANT_ENCAPSED_STRING), expecting identifier (T_STRING) or variable (T_VARIABLE) or '{' or '$' in /home1/shashan2/laravel-facebook-loging/app/routes.php on line 117
-[13-Sep-2013 04:00:11 UTC] PHP Parse error:  syntax error, unexpected ''hub_challenge'' (T_CONSTANT_ENCAPSED_STRING), expecting identifier (T_STRING) or variable (T_VARIABLE) or '{' or '$' in /home1/shashan2/laravel-facebook-loging/app/routes.php on line 117
-[13-Sep-2013 04:06:11 UTC] PHP Parse error:  syntax error, unexpected ''hub_challenge'' (T_CONSTANT_ENCAPSED_STRING), expecting identifier (T_STRING) or variable (T_VARIABLE) or '{' or '$' in /home1/shashan2/laravel-facebook-loging/app/routes.php on line 118
-[13-Sep-2013 04:06:47 UTC] PHP Parse error:  syntax error, unexpected end of file in /home1/shashan2/laravel-facebook-loging/app/routes.php on line 120
-[13-Sep-2013 04:07:38 UTC] PHP Parse error:  syntax error, unexpected end of file in /home1/shashan2/laravel-facebook-loging/app/routes.php on line 121
-[13-Sep-2013 04:26:14 UTC] PHP Fatal error:  Call to protected method Illuminate\Http\Request::retrieveItem() from context 'Illuminate\Support\Facades\Facade' in /home1/shashan2/laravel-facebook-loging/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php on line 177
-[13-Sep-2013 04:26:44 UTC] PHP Fatal error:  Call to protected method Illuminate\Http\Request::retrieveItem() from context 'Illuminate\Support\Facades\Facade' in /home1/shashan2/laravel-facebook-loging/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php on line 177
-[13-Sep-2013 04:36:22 UTC] PHP Parse error:  syntax error, unexpected ';' in /home1/shashan2/laravel-facebook-loging/app/routes.php on line 118
-[13-Sep-2013 04:36:36 UTC] PHP Parse error:  syntax error, unexpected ';' in /home1/shashan2/laravel-facebook-loging/app/routes.php on line 118
-[13-Sep-2013 04:38:36 UTC] PHP Parse error:  syntax error, unexpected ')', expecting ',' or ';' in /home1/shashan2/laravel-facebook-loging/app/routes.php on line 119
-[13-Sep-2013 04:38:46 UTC] PHP Parse error:  syntax error, unexpected ')', expecting ',' or ';' in /home1/shashan2/laravel-facebook-loging/app/routes.php on line 119
-[13-Sep-2013 04:38:51 UTC] PHP Parse error:  syntax error, unexpected ')', expecting ',' or ';' in /home1/shashan2/laravel-facebook-loging/app/routes.php on line 119
-[13-Sep-2013 05:20:36 UTC] PHP Parse error:  syntax error, unexpected end of file in /home1/shashan2/laravel-facebook-loging/app/routes.php on line 133
-[13-Sep-2013 05:20:51 UTC] PHP Parse error:  syntax error, unexpected end of file in /home1/shashan2/laravel-facebook-loging/app/storage/views/9767d5ff8f8a59e04dcda64170a89efa on line 20
-[13-Sep-2013 05:22:57 UTC] PHP Parse error:  syntax error, unexpected '=' in /home1/shashan2/laravel-facebook-loging/app/routes.php on line 132
-[13-Sep-2013 05:23:28 UTC] PHP Parse error:  syntax error, unexpected '=' in /home1/shashan2/laravel-facebook-loging/app/routes.php on line 132
-[13-Sep-2013 05:23:44 UTC] PHP Parse error:  syntax error, unexpected end of file in /home1/shashan2/laravel-facebook-loging/app/storage/views/9767d5ff8f8a59e04dcda64170a89efa on line 20
-[13-Sep-2013 05:42:37 UTC] PHP Fatal error:  Cannot use object of type stdClass as array in /home1/shashan2/laravel-facebook-loging/app/routes.php on line 128
-[13-Sep-2013 05:42:39 UTC] PHP Fatal error:  Cannot use object of type stdClass as array in /home1/shashan2/laravel-facebook-loging/app/routes.php on line 128
-[15-Sep-2013 05:22:39 UTC] PHP Fatal error:  Call to undefined method Illuminate\Routing\UrlGenerator::root() in /home1/shashan2/laravel-facebook-loging/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php on line 174
-[15-Sep-2013 05:23:18 UTC] PHP Fatal error:  Call to undefined method Illuminate\Routing\UrlGenerator::root() in /home1/shashan2/laravel-facebook-loging/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php on line 174
-[27-Sep-2013 14:20:10 UTC] PHP Parse error:  syntax error, unexpected ':' in /home1/shashan2/laravel-facebook-loging/app/controllers/FacebooksController.php on line 14
-[27-Sep-2013 14:20:54 UTC] PHP Parse error:  syntax error, unexpected ':' in /home1/shashan2/laravel-facebook-loging/app/controllers/FacebooksController.php on line 14
-[30-Sep-2013 14:47:35 UTC] PHP Fatal error:  Class 'facebook\php-sdk\FacebooksServiceProvider' not found in /home1/shashan2/laravel-facebook-loging/vendor/laravel/framework/src/Illuminate/Foundation/ProviderRepository.php on line 123
-[14-Oct-2013 03:03:06 UTC] PHP Parse error:  syntax error, unexpected '*' in /home1/shashan2/socialapp/app/routes.php on line 52
-[14-Oct-2013 03:25:16 UTC] PHP Fatal error:  Call to undefined function TijsVerkoyen\Twitter\getCallbackUrl() in /home1/shashan2/socialapp/vendor/tijsverkoyen/twitteroauth/TijsVerkoyen/Twitter/Twitter.php on line 3065
-[14-Oct-2013 03:27:21 UTC] PHP Parse error:  syntax error, unexpected '->' (T_OBJECT_OPERATOR) in /home1/shashan2/socialapp/vendor/tijsverkoyen/twitteroauth/TijsVerkoyen/Twitter/Twitter.php on line 3065
-[14-Oct-2013 04:19:41 UTC] PHP Parse error:  syntax error, unexpected end of file, expecting function (T_FUNCTION) in /home1/shashan2/socialapp/app/controllers/TumblrController.php on line 57
-[14-Oct-2013 04:27:43 UTC] PHP Parse error:  syntax error, unexpected '}' in /home1/shashan2/socialapp/app/controllers/TumblrController.php on line 49
-[14-Oct-2013 04:44:19 UTC] PHP Fatal error:  Call to a member function __toString() on a non-object in /home1/shashan2/socialapp/app/controllers/TumblrController.php on line 46
-[17-Oct-2013 03:39:02 UTC] PHP Fatal error:  Class 'Way\Generators\GeneratorsServiceProvider' not found in /home1/shashan2/socialapp/vendor/laravel/framework/src/Illuminate/Foundation/ProviderRepository.php on line 123
-[17-Oct-2013 16:17:49 UTC] PHP Fatal error:  Call to undefined method Facebook::getUserDetails() in /home1/shashan2/socialapp/app/controllers/FacebookController.php on line 61
-[17-Oct-2013 16:22:07 UTC] PHP Fatal error:  Call to protected method BaseFacebook::getUserFromAccessToken() from context 'FacebookController' in /home1/shashan2/socialapp/app/controllers/FacebookController.php on line 61
-[17-Oct-2013 16:37:19 UTC] CSRF state token does not match one provided.
-[17-Oct-2013 16:38:24 UTC] PHP Fatal error:  Cannot use object of type League\OAuth2\Client\Token\AccessToken as array in /home1/shashan2/socialapp/app/controllers/FacebookController.php on line 59
-[17-Oct-2013 16:38:46 UTC] PHP Fatal error:  Cannot use object of type League\OAuth2\Client\Token\AccessToken as array in /home1/shashan2/socialapp/app/controllers/FacebookController.php on line 59
-[17-Oct-2013 16:38:54 UTC] CSRF state token does not match one provided.
-[17-Oct-2013 16:39:23 UTC] CSRF state token does not match one provided.
-[17-Oct-2013 19:46:39 UTC] PHP Fatal error:  Class 'Thomaswelton\LaravelOauth\LaravelOauthServiceProvider' not found in /home1/shashan2/socialapp/vendor/laravel/framework/src/Illuminate/Foundation/ProviderRepository.php on line 123
-[17-Oct-2013 19:49:47 UTC] PHP Parse error:  syntax error, unexpected end of file, expecting function (T_FUNCTION) in /home1/shashan2/socialapp/app/controllers/TumblrController.php on line 72
-[27-Oct-2013 18:59:29 UTC] PHP Parse error:  syntax error, unexpected end of file, expecting function (T_FUNCTION) in /home1/shashan2/socialapp/app/controllers/TumblrController.php on line 72
-[27-Oct-2013 19:01:42 UTC] PHP Parse error:  syntax error, unexpected end of file, expecting function (T_FUNCTION) in /home1/shashan2/socialapp/app/controllers/TumblrController.php on line 73
+[01-Dec-2013 19:40:34 UTC] PHP Fatal error:  Cannot use object of type Thomaswelton\LaravelOauth\OAuthLoginUrl as array in /home1/shashan2/socialapp/app/views/hello.php on line 54
+[01-Dec-2013 20:31:58 UTC] PHP Parse error:  syntax error, unexpected ''female'' (T_CONSTANT_ENCAPSED_STRING), expecting ')' in /home1/shashan2/socialapp/app/routes.php on line 41
+[01-Dec-2013 20:32:12 UTC] PHP Parse error:  syntax error, unexpected ''female'' (T_CONSTANT_ENCAPSED_STRING), expecting ')' in /home1/shashan2/socialapp/app/routes.php on line 41
+[01-Dec-2013 20:53:02 UTC] PHP Parse error:  syntax error, unexpected ''female'' (T_CONSTANT_ENCAPSED_STRING), expecting ')' in /home1/shashan2/socialapp/app/routes.php on line 41
+[01-Dec-2013 20:53:03 UTC] PHP Parse error:  syntax error, unexpected ''female'' (T_CONSTANT_ENCAPSED_STRING), expecting ')' in /home1/shashan2/socialapp/app/routes.php on line 41
+[01-Dec-2013 21:07:23 UTC] PHP Parse error:  syntax error, unexpected '(string)' (string) (T_STRING_CAST), expecting '&' or variable (T_VARIABLE) in /home1/shashan2/socialapp/app/views/hello.php on line 58
+[01-Dec-2013 23:46:32 UTC] PHP Parse error:  syntax error, unexpected '/' in /home1/shashan2/socialapp/app/routes.php on line 23
+[02-Dec-2013 01:10:00 UTC] PHP Fatal error:  Call to undefined method Thomaswelton\LaravelOauth\OAuth::consumer() in /home1/shashan2/socialapp/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php on line 206
+[02-Dec-2013 01:12:02 UTC] PHP Fatal error:  Call to undefined method Thomaswelton\LaravelOauth\OAuth::consumer() in /home1/shashan2/socialapp/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php on line 206
+[02-Dec-2013 01:12:46 UTC] PHP Fatal error:  Call to undefined method Thomaswelton\LaravelOauth\OAuth::consumer() in /home1/shashan2/socialapp/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php on line 206
+[02-Dec-2013 01:12:49 UTC] PHP Fatal error:  Call to undefined method Thomaswelton\LaravelOauth\OAuth::consumer() in /home1/shashan2/socialapp/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php on line 206
+[02-Dec-2013 01:12:56 UTC] PHP Fatal error:  Call to undefined method Thomaswelton\LaravelOauth\OAuth::consumer() in /home1/shashan2/socialapp/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php on line 206
+[02-Dec-2013 01:17:48 UTC] PHP Fatal error:  Call to undefined method Thomaswelton\LaravelOauth\OAuth::consumer() in /home1/shashan2/socialapp/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php on line 206
+[02-Dec-2013 01:21:09 UTC] PHP Fatal error:  Call to undefined method Thomaswelton\LaravelOauth\OAuth::consumer() in /home1/shashan2/socialapp/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php on line 206
+[02-Dec-2013 01:21:15 UTC] PHP Fatal error:  Call to undefined method Thomaswelton\LaravelOauth\OAuth::consumer() in /home1/shashan2/socialapp/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php on line 206
+[02-Dec-2013 01:21:27 UTC] PHP Fatal error:  Call to undefined method Thomaswelton\LaravelOauth\OAuth::consumer() in /home1/shashan2/socialapp/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php on line 206
+[02-Dec-2013 01:28:13 UTC] PHP Fatal error:  Class 'Thomaswelton\LaravelOauth\LaravelOauthServiceProvider' not found in /home1/shashan2/socialapp/vendor/laravel/framework/src/Illuminate/Foundation/ProviderRepository.php on line 123
+[02-Dec-2013 01:35:33 UTC] PHP Fatal error:  Call to undefined method Thomaswelton\LaravelOauth\OAuth::consumer() in /home1/shashan2/socialapp/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php on line 206
+[02-Dec-2013 01:38:23 UTC] PHP Parse error:  syntax error, unexpected ')' in /home1/shashan2/socialapp/app/routes.php on line 55
+[02-Dec-2013 01:48:31 UTC] PHP Fatal error:  Call to undefined method Thomaswelton\LaravelOauth\OAuth::authorize() in /home1/shashan2/socialapp/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php on line 206
+[02-Dec-2013 02:12:57 UTC] PHP Fatal error:  Call to a member function redirect() on a non-object in /home1/shashan2/socialapp/app/views/hello.php on line 79
+[02-Dec-2013 02:21:45 UTC] PHP Fatal error:  Cannot use object of type stdClass as array in /home1/shashan2/socialapp/app/routes.php on line 62
+[02-Dec-2013 02:23:09 UTC] PHP Fatal error:  Cannot use object of type stdClass as array in /home1/shashan2/socialapp/app/routes.php on line 61
+[02-Dec-2013 02:23:17 UTC] PHP Fatal error:  Cannot use object of type stdClass as array in /home1/shashan2/socialapp/app/routes.php on line 61
+[02-Dec-2013 02:24:34 UTC] PHP Fatal error:  Cannot use object of type stdClass as array in /home1/shashan2/socialapp/app/routes.php on line 61
+[02-Dec-2013 02:24:35 UTC] PHP Fatal error:  Cannot use object of type stdClass as array in /home1/shashan2/socialapp/app/routes.php on line 61
+[02-Dec-2013 02:24:37 UTC] PHP Fatal error:  Cannot use object of type stdClass as array in /home1/shashan2/socialapp/app/routes.php on line 61
+[02-Dec-2013 02:24:39 UTC] PHP Fatal error:  Cannot use object of type stdClass as array in /home1/shashan2/socialapp/app/routes.php on line 61
+[02-Dec-2013 02:24:41 UTC] PHP Fatal error:  Cannot use object of type stdClass as array in /home1/shashan2/socialapp/app/routes.php on line 61
+[02-Dec-2013 02:24:48 UTC] PHP Fatal error:  Cannot use object of type stdClass as array in /home1/shashan2/socialapp/app/routes.php on line 61
+[02-Dec-2013 02:24:50 UTC] PHP Fatal error:  Cannot use object of type stdClass as array in /home1/shashan2/socialapp/app/routes.php on line 61
+[02-Dec-2013 02:24:51 UTC] PHP Fatal error:  Cannot use object of type stdClass as array in /home1/shashan2/socialapp/app/routes.php on line 61
+[02-Dec-2013 02:25:38 UTC] PHP Fatal error:  Cannot use object of type stdClass as array in /home1/shashan2/socialapp/app/routes.php on line 61
+[02-Dec-2013 02:25:45 UTC] PHP Fatal error:  Cannot use object of type stdClass as array in /home1/shashan2/socialapp/app/routes.php on line 61
+[02-Dec-2013 02:25:50 UTC] PHP Fatal error:  Cannot use object of type stdClass as array in /home1/shashan2/socialapp/app/routes.php on line 61
+[02-Dec-2013 02:57:58 UTC] PHP Fatal error:  Cannot use object of type stdClass as array in /home1/shashan2/socialapp/app/routes.php on line 64
+[02-Dec-2013 03:06:55 UTC] PHP Fatal error:  Cannot use object of type stdClass as array in /home1/shashan2/socialapp/app/routes.php on line 64
+[02-Dec-2013 03:08:04 UTC] PHP Fatal error:  Cannot use object of type stdClass as array in /home1/shashan2/socialapp/app/routes.php on line 64
+[02-Dec-2013 03:18:28 UTC] PHP Parse error:  syntax error, unexpected '" page"' (T_CONSTANT_ENCAPSED_STRING) in /home1/shashan2/socialapp/app/routes.php on line 64
+[02-Dec-2013 03:34:39 UTC] PHP Fatal error:  Cannot use object of type stdClass as array in /home1/shashan2/socialapp/app/routes.php on line 87
+[07-Dec-2013 17:01:17 UTC] PHP Parse error:  syntax error, unexpected ';' in /home1/shashan2/socialapp/app/routes.php on line 124
+[08-Dec-2013 03:25:47 UTC] PHP Fatal error:  Can't use function return value in write context in /home1/shashan2/socialapp/app/models/FacebookRetriever.php on line 59
+[08-Dec-2013 03:26:03 UTC] PHP Fatal error:  Can't use function return value in write context in /home1/shashan2/socialapp/app/models/FacebookRetriever.php on line 59
+[08-Dec-2013 03:26:13 UTC] PHP Fatal error:  Can't use function return value in write context in /home1/shashan2/socialapp/app/models/FacebookRetriever.php on line 59
+[08-Dec-2013 03:26:19 UTC] PHP Fatal error:  Can't use function return value in write context in /home1/shashan2/socialapp/app/models/FacebookRetriever.php on line 59
+[08-Dec-2013 03:31:10 UTC] PHP Fatal error:  Can't use function return value in write context in /home1/shashan2/socialapp/app/models/FacebookRetriever.php on line 58
+[08-Dec-2013 03:31:22 UTC] PHP Fatal error:  Can't use function return value in write context in /home1/shashan2/socialapp/app/models/FacebookRetriever.php on line 58
+[08-Dec-2013 03:35:05 UTC] PHP Fatal error:  Can't use function return value in write context in /home1/shashan2/socialapp/app/models/FacebookRetriever.php on line 58
+[08-Dec-2013 03:42:36 UTC] PHP Parse error:  syntax error, unexpected '=' in /home1/shashan2/socialapp/app/routes.php on line 86
+[08-Dec-2013 03:46:19 UTC] PHP Parse error:  syntax error, unexpected ';' in /home1/shashan2/socialapp/app/routes.php on line 89

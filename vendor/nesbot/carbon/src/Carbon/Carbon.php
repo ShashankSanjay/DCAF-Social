@@ -534,9 +534,6 @@ class Carbon extends DateTime
             break;
 
          case 'timezone':
-            $this->setTimezone($value);
-            break;
-
          case 'tz':
             $this->setTimezone($value);
             break;
@@ -783,6 +780,11 @@ class Carbon extends DateTime
     * @return boolean true if there is a keyword, otherwise false
     */
    public static function hasRelativeKeywords($time) {
+      // skip common format with a '-' in it
+      if (preg_match('/[0-9]{4}-[0-9]{1,2}-[0-9]{1,2}/', $time) === 1) {
+         return false;
+      }
+
       foreach(self::$relativeKeywords as $keyword) {
          if (stripos($time, $keyword) !== false) {
             return true;
@@ -1102,6 +1104,34 @@ class Carbon extends DateTime
       } else {
          return $this->gt($dt1) && $this->lt($dt2);
       }
+   }
+
+   /**
+    * Get the minimum instance between a given instance (default now) and the current instance.
+    *
+    * @param  Carbon $dt
+    *
+    * @return Carbon
+    */
+   public function min(Carbon $dt = null)
+   {
+      $dt = ($dt === null) ? static::now($this->tz) : $dt;
+
+      return $this->lt($dt) ? $this : $dt;
+   }
+
+   /**
+    * Get the maximum instance between a given instance (default now) and the current instance.
+    *
+    * @param  Carbon $dt
+    *
+    * @return Carbon
+    */
+   public function max(Carbon $dt = null)
+   {
+      $dt = ($dt === null) ? static::now($this->tz) : $dt;
+
+      return $this->gt($dt) ? $this : $dt;
    }
 
    /**
@@ -1672,7 +1702,7 @@ class Carbon extends DateTime
       $isNow = $other === null;
 
       if ($isNow) {
-         $other = self::now();
+         $other = static::now($this->tz);
       }
 
       $isFuture = $this->gt($other);
@@ -1766,6 +1796,67 @@ class Carbon extends DateTime
       return $this->day($this->daysInMonth)->endOfDay();
    }
 
+	/**
+	 * Resets the date to the first day of the year and the time to 00:00:00
+	 *
+	 * @return Carbon
+	 */
+   public function startOfYear()
+   {
+	   return $this->month(1)->startOfMonth();
+	}
+
+	/**
+	 * Resets the date to end of the year and time to 23:59:59
+	 *
+	 * @return Carbon
+	 */
+	public function endOfYear()
+	{
+		return $this->month(self::MONTHS_PER_YEAR)->endOfMonth();
+	}
+
+	/**
+	 * Resets the date to the first day of the decade and the time to 00:00:00
+	 *
+	 * @return Carbon
+	 */
+	public function startOfDecade()
+	{
+		return $this->startOfYear()->year($this->year - $this->year % 10);
+	}
+
+	/**
+	 * Resets the date to end of the decade and time to 23:59:59
+	 *
+	 * @return Carbon
+	 */
+	public function endOfDecade()
+	{
+		return $this->endOfYear()->year($this->year - $this->year % 10 + 9);
+	}
+
+
+	/**
+	 * Resets the date to the first day of the century and the time to 00:00:00
+	 *
+	 * @return Carbon
+	 */
+	public function startOfCentury()
+	{
+		return $this->startOfYear()->year($this->year - $this->year % 100);
+	}
+
+	/**
+	 * Resets the date to end of the century and time to 23:59:59
+	 *
+	 * @return Carbon
+	 */
+	public function endOfCentury()
+	{
+		return $this->endOfYear()->year($this->year - $this->year % 100 + 99);
+	}
+
    /**
     * Resets the date to the first day of the ISO-8601 week (Monday) and the time to 00:00:00
     *
@@ -1773,7 +1864,9 @@ class Carbon extends DateTime
     */
     public function startOfWeek()
     {
-        return $this->setISODate($this->year, $this->weekOfYear, 1)->startOfDay();
+        if ($this->dayOfWeek != self::MONDAY) $this->previous(self::MONDAY);
+
+        return $this->startOfDay();
     }
 
     /**
@@ -1783,7 +1876,9 @@ class Carbon extends DateTime
      */
     public function endOfWeek()
     {
-        return $this->setISODate($this->year, $this->weekOfYear, 7)->endOfDay();
+        if ($this->dayOfWeek != self::SUNDAY) $this->next(self::SUNDAY);
+
+        return $this->endOfDay();
     }
 
    /**
@@ -1986,7 +2081,7 @@ class Carbon extends DateTime
    */
    public function lastOfYear($dayOfWeek = null)
    {
-      $this->month(12);
+      $this->month(self::MONTHS_PER_YEAR);
 
       return $this->lastOfMonth($dayOfWeek);
    }
@@ -2014,5 +2109,19 @@ class Carbon extends DateTime
       }
 
       return $this->modify($dt);
+   }
+
+   /**
+   * Modify the current instance to the average of a given instance (default now) and the current instance.
+   *
+   * @param  Carbon  $dt
+   *
+   * @return Carbon
+   */
+   public function average(Carbon $dt = null)
+   {
+      $dt = ($dt === null) ? static::now($this->tz) : $dt;
+
+      return $this->addSeconds(intval($this->diffInSeconds($dt, false) / 2));
    }
 }

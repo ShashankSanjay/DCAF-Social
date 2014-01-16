@@ -3,6 +3,7 @@
 use \Config;
 use \URL;
 use \Auth;
+use \Route;
 
 use Illuminate\Support\MessageBag;
 use Illuminate\Support\Facades\App;
@@ -15,6 +16,13 @@ use Illuminate\Database\Eloquent\ModelNotFoundException;
 class OAuthController extends Controller
 {
     public function __construct(){
+        $action = Route::currentRouteAction();
+        $method = explode('@', $action)[1];
+
+        if($method == 'authorize' || $method == 'destroy'){
+            $this->beforeFilter('csrf');
+        }
+
         $this->oauth = App::make('oauth');
     }
 
@@ -28,36 +36,14 @@ class OAuthController extends Controller
             $token = $this->oauth->requestAccessToken($provider);
 
             if (property_exists($state, 'login')) {
-                $uid = $this->oauth->user($provider)->getUID();
-
-                $modelName = "Thomaswelton\\LaravelOauth\\Eloquent\\".ucfirst($provider);
-                $model = new $modelName();
-
-                $user = $model->where('oauth_uid', '=', $uid)->firstOrFail();
-                Auth::loginUsingId($user->user_id);
+                // Login user based on provider token
+                $this->oauth->login($provider);
             }
 
-            if (property_exists($state, 'associate')) {
+            if (property_exists($state, 'link')) {
                 if (Auth::check()){
-                    $uid = $this->oauth->user($provider)->getUID();
-
-                    $providerClass = ucfirst($provider);
-
-                    $user = Auth::user();
-
-                    // Check for an existing relation
-                    if(is_object($user->$providerClass)){
-                        $model = $user->$providerClass;
-                    }else{
-                        $modelName = "Thomaswelton\\LaravelOauth\\Eloquent\\".$providerClass;
-                        $model = new $modelName();
-                    }
-
-                    $model->oauth_uid = $uid;
-                    $model->access_token = $token->getAccessToken();
-                    $model->expire_time = $token->getEndOfLife();
-
-                    $user->$provider()->save($model);
+                    //Link logged in user to provider
+                    $this->oauth->link($provider);
                 }else{
                     throw new NotLoggedInException("NOT_LOGGED_IN", 1);
                 }
@@ -97,7 +83,7 @@ class OAuthController extends Controller
         $state = array(
             'redirect' => Input::get('redirect'),
             'login' => Input::get('login'),
-            'associate' => Input::get('associate')
+            'link' => Input::get('link')
         );
 
         $authUrl = $this->oauth->getAuthorizationUri($provider, $scope, $state);
@@ -111,7 +97,13 @@ class OAuthController extends Controller
 
         if (Auth::check()){
             $user = Auth::user();
-            $user->$provider()->delete();
+
+            $model = $this->oauth->getEloquentModel($provider);
+
+            $relation = $model->where('user_id', '=', $user->id)->first();
+            if($relation){
+                $relation->delete();
+            }
         }else{
             $errors = new MessageBag(
                 array("oauth_error" => 'User unlink failed. User not logged in')

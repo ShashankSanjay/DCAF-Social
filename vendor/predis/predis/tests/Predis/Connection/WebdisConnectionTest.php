@@ -12,7 +12,6 @@
 namespace Predis\Connection;
 
 use PredisTestCase;
-use Predis\Profile\ServerProfile;
 
 /**
  * @group ext-curl
@@ -137,6 +136,7 @@ class WebdisConnectionTest extends PredisTestCase
     }
 
     /**
+     * @medium
      * @group disconnected
      * @group slow
      * @expectedException Predis\Connection\ConnectionException
@@ -169,7 +169,8 @@ class WebdisConnectionTest extends PredisTestCase
     /**
      * Returns a new instance of a connection instance.
      *
-     * @param array $parameters Additional connection parameters.
+     * @param  mixed            $profile    Redis profile.
+     * @param  array            $parameters Additional connection parameters.
      * @return WebdisConnection
      */
     protected function getConnection(&$profile = null, Array $parameters = array())

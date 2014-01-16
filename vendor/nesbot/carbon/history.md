@@ -1,3 +1,16 @@
+1.8.0 / 2014-01-06
+==================
+* Added .gitattributes file to to ignore some files on export (thanks @lucasmichot)
+* Removed unnecessary __set tz/timezone switch
+* Added min() / max() (thanks @lucasmichot)
+* Fixed startOfWeek() / endOfWeek() when crossing year boundary.
+* Fixed bug in detecting relative keywords in ctor parameter when using a test now
+
+1.7.0 / 2013-12-04
+==================
+* Added startOfYear() / endOfYear() (thanks @semalead)
+* Added average() (thanks @semalead)
+
 1.6.0 / 2013-11-23
 ==================
 * Fixed "Cannot access property ::$toStringFormat" when extending Carbon and type juggling to a string occurs
