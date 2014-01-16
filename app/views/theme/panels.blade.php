@@ -18,34 +18,34 @@
 		<link href='http://fonts.googleapis.com/css?family=Share+Tech' rel='stylesheet' type='text/css'>
 		
 		<!-- Bootstrap core CSS -->
-		<link href="{{{ asset('assets/bootstrap/css/bootstrap.min-50686.css'); }}}" rel="stylesheet">
+		{{ HTML::style('bootstrap/css/bootstrap.min-50686.css'); }}
 
 		<!-- Font Awesome CSS -->
-		<link href="{{{ asset('assets/fonts/font-awesome/css/font-awesome.min-45579.css'); }}}" rel="stylesheet">
+		{{ HTML::style('fonts/font-awesome/css/font-awesome.min-45579.css'); }}
 
 		<!-- Icomoon CSS -->
-		<link href="{{{ asset('assets/fonts/icomoon/style.css'); }}}" rel="stylesheet">
+		{{ HTML::style('fonts/icomoon/style.css'); }}
 
 		<!-- Animate CSS -->
-		<link href="{{{ asset('assets/css/libs/animate.min.css'); }}}" rel="stylesheet">
+		{{ HTML::style('css/libs/animate.min.css'); }}
 
 		<!-- Bootstrap Switch -->
-		<link href="{{{ asset('assets/css/libs/bootstrap-switch.css'); }}}" rel="stylesheet">
+		{{ HTML::style('css/libs/bootstrap-switch.css'); }}
 
 		<!-- Bootstrap Select -->
-		<link href="{{{ asset('assets/css/libs/bootstrap-select.min.css'); }}}" rel="stylesheet">
+		{{ HTML::style('css/libs/bootstrap-select.min.css'); }}
 
 		<!-- Bootstrap WYSIHTML5 -->
-		<link href="{{{ asset('assets/css/libs/bootstrap-wysihtml5.css'); }}}" rel="stylesheet">
+		{{ HTML::style('css/libs/bootstrap-wysihtml5.css'); }}
 
 		<!-- jQuery Fullcalendar -->
-		<link href="{{{ asset('assets/css/libs/fullcalendar.css'); }}}" rel="stylesheet">
+		{{ HTML::style('css/libs/fullcalendar.css'); }}
 
 		<!-- jVectorMap -->
-		<link href="{{{ asset('assets/css/libs/jquery-jvectormap-1.2.2.css'); }}}" rel="stylesheet">
+		{{ HTML::style('css/libs/jquery-jvectormap-1.2.2.css'); }}
 
 		<!-- Prism -->
-		<link href="{{{ asset('assets/css/libs/prism.css'); }}}" rel="stylesheet">
+		{{ HTML::style('css/libs/prism.css'); }}
 
 		<!-- Custom styles for this template -->
 		<link href="{{{ asset('assets/css/styler/style.css'); }}}" rel="stylesheet" type="text/css">
@@ -906,65 +906,65 @@
 		</footer>
 
 		<!-- jQuery -->
-		<script src="{{{ asset('assets/js/libs/jquery-1.10.2.min.js'); }}}"></script>
+		{{ HTML::script('js/libs/jquery-1.10.2.min.js'); }}
 
 		<!-- jQuery UI -->
-		<script src="{{{ asset('assets/js/libs/jquery-ui.min.js'); }}}"></script>
+		{{ HTML::script('js/libs/jquery-ui.min.js'); }}
 
 		<!-- Bootstrap core JavaScript -->
-		<script src="{{{ asset('assets/bootstrap/js/bootstrap.min.js?v=3.0.2'); }}}"></script>
+		{{ HTML::script('bootstrap/js/bootstrap.min.js?v=3.0.2'); }}
 
 		<!-- jQuery Transit -->
-		<script src="{{{ asset('assets/js/libs/jquery.transit.min.js?v=0.9.9'); }}}"></script>
+		{{ HTML::script('js/libs/jquery.transit.min.js?v=0.9.9'); }}
 
 		<!-- Bootstrap Switch -->
-		<script src="{{{ asset('assets/js/libs/bootstrap-switch.js'); }}}"></script>
+		{{ HTML::script('js/libs/bootstrap-switch.js'); }}
 
 		<!-- Bootstrap Select -->
-		<script src="{{{ asset('assets/js/libs/bootstrap-select.min.js'); }}}"></script>
+		{{ HTML::script('js/libs/bootstrap-select.min.js'); }}
 
 		<!-- Bootstrap File -->
-		<script src="{{{ asset('assets/js/libs/bootstrap-filestyle.js'); }}}"></script>
+		{{ HTML::script('js/libs/bootstrap-filestyle.js'); }}
 
-		<script src="{{{ asset('assets/js/libs/wysihtml5-0.3.0.min.js'); }}}"></script>
+		{{ HTML::script('js/libs/wysihtml5-0.3.0.min.js'); }}
 
 		<!-- Bootstrap WYSIHTML5 -->
-		<script src="{{{ asset('assets/js/libs/bootstrap-wysihtml5.js'); }}}"></script>
+		{{ HTML::script('js/libs/bootstrap-wysihtml5.js'); }}
 
 		<!-- jQuery FullCalendar -->
-		<script src="{{{ asset('assets/js/libs/fullcalendar.min.js'); }}}"></script>
-		<script src="{{{ asset('assets/js/libs/gcal.js'); }}}"></script>
+		{{ HTML::script('js/libs/fullcalendar.min.js'); }}
+		{{ HTML::script('js/libs/gcal.js'); }}
 
 		<!-- Prism -->
-		<script src="{{{ asset('assets/js/libs/prism.js'); }}}"></script>
+		{{ HTML::script('js/libs/prism.js'); }}
 
 		<!-- jVectorMap -->
-		<script src="{{{ asset('assets/js/libs/jquery-jvectormap-1.2.2.min.js'); }}}"></script>
-		<script src="{{{ asset('assets/js/libs/jquery-jvectormap-world-mill-en.js'); }}}"></script>
+		{{ HTML::script('js/libs/jquery-jvectormap-1.2.2.min.js'); }}
+		{{ HTML::script('js/libs/jquery-jvectormap-world-mill-en.js'); }}
 
 		<!-- Flot -->
-		<script src="{{{ asset('assets/js/libs/jquery.flot.min.js'); }}}"></script>
-		<script src="{{{ asset('assets/js/libs/jquery.flot.time.min.js'); }}}"></script>
-		<script src="{{{ asset('assets/js/libs/jquery.flot.pie.min.js'); }}}"></script>
-		<script src="{{{ asset('assets/js/libs/jquery.flot.resize.min.js'); }}}"></script>
-		<script src="{{{ asset('assets/js/libs/jquery.flot.stack.min.js'); }}}"></script>
-		<script src="{{{ asset('assets/js/libs/jquery.flot.tooltip.min.js'); }}}"></script>
+		{{ HTML::script('js/libs/jquery.flot.min.js'); }}
+		{{ HTML::script('js/libs/jquery.flot.time.min.js'); }}
+		{{ HTML::script('js/libs/jquery.flot.pie.min.js'); }}
+		{{ HTML::script('js/libs/jquery.flot.resize.min.js'); }}
+		{{ HTML::script('js/libs/jquery.flot.stack.min.js'); }}
+		{{ HTML::script('js/libs/jquery.flot.tooltip.min.js'); }}
 
 		<!-- Sparkline -->
-		<script src="{{{ asset('assets/js/libs/jquery.sparkline.min.js'); }}}"></script>
+		{{ HTML::script('js/libs/jquery.sparkline.min.js'); }}
 
 		<!-- Prism -->
-		<script src="{{{ asset('assets/js/libs/jquery.sparkline.min.js'); }}}"></script>
+		{{ HTML::script('js/libs/jquery.sparkline.min.js'); }}
 
 		<!-- jQuery EqualHeights -->
-		<script src="{{{ asset('assets/js/libs/jquery.equalheights.min.js'); }}}"></script>
+		{{ HTML::script('js/libs/jquery.equalheights.min.js'); }}
 
 		<!-- jQuery Nicescroll -->
-		<script src="{{{ asset('assets/js/libs/jquery.nicescroll.min.js'); }}}"></script>
+		{{ HTML::script('js/libs/jquery.nicescroll.min.js'); }}
 
 		<!-- Theme script -->
-		<script src="{{{ asset('assets/js/styler/script.js'); }}}"></script>
-		<script src="{{{ asset('assets/js/styler/sample_graphs.js'); }}}"></script>
+		{{ HTML::script('js/styler/script.js'); }}
+		{{ HTML::script('js/styler/sample_graphs.js'); }}
 	</body>
 </html>
 <!-- Localized -->
