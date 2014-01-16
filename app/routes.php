@@ -108,4 +108,9 @@ Route::get('{postSlug}', 'BlogController@getView');
 Route::post('{postSlug}', 'BlogController@postView');
 
 # Index Page - Last route, no matches
-Route::get('/', array('before' => 'auth','uses' => 'BlogController@getIndex'));
+//Route::get('/', array('before' => 'auth','uses' => 'BlogController@getIndex'));
+Route::get('/', function()
+{
+	//
+	return View::make('theme/default');
+});
