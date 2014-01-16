@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta name="description" content="">
+		<meta name="author" content="BootstrapStyler">
+		<link rel="shortcut icon" href="img/favicon.png">
+
+		<title>
+			Dashboard - BoardSkin v2
+		</title>
+
+		<!-- Bootstrap core CSS -->
+		<link href="bootstrap/css/bootstrap.css" rel="stylesheet">
+
+		<!-- Font-awesome -->
+		<link href="fonts/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+
+		<!-- Fullcalendar -->
+		<link href="css/libs/fullcalendar.css" rel="stylesheet">
+		<link href="css/libs/fullcalendar.print.css" rel="stylesheet" media="print">
+
+		<!-- Bootstrap Switch -->
+		<link href="css/libs/bootstrap-switch.css" rel="stylesheet">
+
+		<!-- Bootstrap Select -->
+		<link href="css/libs/bootstrap-select.min.css" rel="stylesheet">
+
+		<!-- jQuery SIDR -->
+		<link href="css/libs/jquery.sidr.dark.css" rel="stylesheet">
+
+		<link href='http://fonts.googleapis.com/css?family=Ubuntu:300,400,500' rel='stylesheet' type='text/css'>
+		<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700' rel='stylesheet' type='text/css'>
+
+		<!-- Docs CSS, no need to use this in real application -->
+		<link href="css/docs/docs.css" rel="stylesheet">
+
+		<!-- Custom styles for this template -->
+		<link href="css/styler/style.css" rel="stylesheet">
+
+		<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+		<!--[if lt IE 9]>
+			<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+			<script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+		<![endif]-->
+	</head>
+
+	<body>
+<!-- Static navbar -->
+<div id="mainnav" class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+	<div class="container">
+		<div class="navbar-header">
+			<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+				<span class="sr-only">Toggle navigation</span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+			</button>
+
+			<a class="navbar-toggle" id="sidebar-left-toggle" href="#sidebar-left">
+				<i class="fa fa-cogs"></i>
+			</a>
+
+			<a class="navbar-brand" href="index.html"><img src="img/logo-2.png"></a>
+			
+		</div>
+		<div class="navbar-collapse collapse">
+			
+			<ul class="nav navbar-nav navbar-right">
+				<li class="dropdown">
+					<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+						<img src="img/samples/avatar-9.jpg" class="user-avatar"> 
+						Jason Lee <b class="caret"></b>
+					</a>
+					<ul class="dropdown-menu">
+						<li class="dropdown-header">Profile Management</li>
+						<li><a href="profile.html">Profile page</a></li>
+						<li><a href="#">Another action</a></li>
+						<li><a href="#">Something else here</a></li>
+						<li class="divider"></li>
+						<li><a href="#">Sign out</a></li>
+					</ul>
+				</li>
+			</ul>
+
+			<ul class="nav navbar-nav navbar-right">
+				<li class="dropdown">
+					<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+						<i class="fa fa-copy"></i>
+						Other Pages <b class="caret"></b>
+					</a>
+					<ul class="dropdown-menu">
+						<li><a href="ui.html">UI Elements</a></li>
+						<li><a href="signin.html">Sign In</a></li>
+						<li><a href="error404.html">Error 404</a></li>
+					</ul>
+				</li>
+			</ul>
+
+			<form class="navbar-form navbar-right form-search hidden-sm hidden-xs" role="search">
+				<div class="form-group">
+					<input type="text" class="form-control" placeholder="Search">
+				</div>
+				<button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
+			</form>
+		</div><!--/.nav-collapse -->
+	</div><!--/.container -->
+</div>
+<aside id="sidebar-left" class="section menu">
+	<ul class="nav list-unstyled">
+		<li class="active">
+			<a href="index.html">
+				<i class="fa fa-dashboard"></i>
+				<span>Dashboard</span>
+			</a>
+		</li>
+		<li >
+			<a href="forms.html">
+				<i class="fa fa-edit"></i>
+				<span>Forms</span>
+			</a>
+		</li>
+		<li >
+			<a href="calendar.html">
+				<i class="fa fa-calendar"></i>
+				<span>Calendar</span>
+			</a>
+		</li>
+		<li >
+			<a href="icons.html">
+				<i class="fa fa-heart"></i>
+				<span>Icons</span>
+			</a>
+		</li>
+		<li >
+			<a href="tables.html">
+				<i class="fa fa-table"></i>
+				<span>Tables</span>
+			</a>
+		</li>
+		<li >
+			<a href="charts.html">
+				<i class="fa fa-bar-chart-o"></i>
+				<span>Charts</span>
+			</a>
+		</li>
+		<li >
+			<a href="typography.html">
+				<i class="fa fa-font"></i>
+				<span>Typography</span>
+			</a>
+		</li>
+	</ul>
+</aside>
+
+<section id="main" class="section main">
+
+	<div class="page-header">
+		<h1>Dashboard</h1>
+	</div>
+
+	<div class="shortcut-group section-content">
+		<div class="header aligncenter">
+			<h2>Shortcuts</h2>
+		</div>
+		<ul class="quick-menu list-unstyled">
+			<li class="blue primary">
+				<a href="#">
+					<i class="fa fa-tasks"></i>
+					<span>Tasks</span>
+				</a>
+			</li>
+			<li class="red danger">
+				<a href="#">
+					<i class="fa fa-group"></i>
+					<span>Groups</span>
+				</a>
+			</li>
+			<li class="inverse">
+				<a href="#">
+					<i class="fa fa-bar-chart-o"></i>
+					<span>Graphs</span>
+				</a>
+			</li>
+			<li class="green success">
+				<a href="#">
+					<i class="fa fa-sitemap"></i>
+					<span>Sitemap</span>
+				</a>
+			</li>
+			<li class="yellow warning">
+				<a href="#">
+					<i class="fa fa-shopping-cart"></i>
+					<span>Shopping</span>
+				</a>
+			</li>
+			<li class="lite-blue info">
+				<a href="#">
+					<i class="fa fa-calendar"></i>
+					<span>Events</span>
+				</a>
+			</li>
+		</ul>
+	</div>
+
+	<div class="statistics section-content">
+		<div class="header aligncenter">
+			<h2>Statistics</h2>
+			<p>Tonx mlkshk placeat, forage actually twee cillum banjo duis consequat elit wes anderson ex. Swag nisi pop-up before they sold out selfies, 8-bit letterpress cillum bespoke authentic butcher retro.</p>
+		</div>
+		<div class="container">
+			<div class="row aligncenter">
+				<div class="col-lg-3 col-md-3 col-sm-6 col-xs-6 small-chart charts">
+					<span class="inlinebar green"></span>
+					<h1>-$1,458</h1>
+					<h4>Startup Cash</h4>
+				</div>
+				<div class="col-lg-3 col-md-3 col-sm-6 col-xs-6 small-chart charts">
+					<span class="inlinestackbar blue"></span>
+					<h1>+951</h1>
+					<h4>Geeks vs Nerds</h4>
+				</div>
+				<div class="col-lg-3 col-md-3 col-sm-6 col-xs-6 small-chart charts">
+					<span class="inlinepie red"></span>
+					<h1>+24</h1>
+					<h4>Code Type</h4>
+				</div>
+
+				<div class="col-lg-3 col-md-3 col-sm-6 col-xs-6 small-chart charts">
+					<span class="inlineline green"></span>
+					<h1>+3,550</h1>
+					<h4>Click Rate</h4>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-lg-12">
+					<div id="flot-line-filled" class="graph-area charts"></div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="section-content">
+		<div class="header aligncenter">
+			<h2>Carousel &amp; Widgets</h2>
+			<p>Tonx mlkshk placeat, forage actually twee cillum banjo duis consequat elit wes anderson ex. Swag nisi pop-up before they sold out selfies, 8-bit letterpress cillum bespoke authentic butcher retro.</p>
+		</div>
+		<div class="container gap-bottom">
+			<div class="row">
+				<div class="col-lg-12">
+					<div id="myCarousel" class="carousel carousel-custom slide">
+						<div class="carousel-inner">
+						  <div class="item active">
+							<h2 class="light">Consectetur twee american apparel assumenda</h2>
+							<p>
+								Bushwick est placeat DIY. Kogi magna voluptate, meh do bespoke quis flannel cosby sweater culpa placeat farm-to-table Austin helvetica. Dreamcatcher reprehenderit ugh odio mumblecore. Voluptate fixie master cleanse, adipisicing selfies hoodie before they sold out meh put a bird on it deserunt plaid dolor letterpress velit. Dolore esse dolor, enim banksy nesciunt neutra eiusmod deserunt. Austin selfies nihil blue bottle helvetica. Squid flannel selfies photo booth, locavore art party meh veniam ut irure DIY ethical readymade ullamco sed.
+							</p>
+						  </div>
+						  <div class="item">
+							<h2 class="light">Locavore art party meh veniam ut irure</h2>
+							<p>
+								Bushwick est placeat DIY. Kogi magna voluptate, meh do bespoke quis flannel cosby sweater culpa placeat farm-to-table Austin helvetica. Dreamcatcher reprehenderit ugh odio mumblecore. Voluptate fixie master cleanse, adipisicing selfies hoodie before they sold out meh put a bird on it deserunt plaid dolor letterpress velit. Dolore esse dolor, enim banksy nesciunt neutra eiusmod deserunt. Austin selfies nihil blue bottle helvetica. Squid flannel selfies photo booth, locavore art party meh veniam ut irure DIY ethical readymade ullamco sed.
+							</p>
+						  </div>
+						</div>
+						<a class="left carousel-control" href="#myCarousel" data-slide="prev"><i class="fa fa-arrow-circle-left"></i></a>
+						<a class="right carousel-control" href="#myCarousel" data-slide="next"><i class="fa fa-arrow-circle-right"></i></a>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="container">
+			<div class="row">
+				<div class="statistic-list-icon col-lg-4 col-md-4">
+					<div class="panel panel-default">
+						<div class="panel-heading">
+							<h3 class="panel-title">Icon Statistics</h3>
+						</div>
+						<div class="panel-body">
+							<ul class="listing list-unstyled">
+								<li>
+								  <label class="label-warning"><i class="fa fa-video-camera"></i></label>
+								  <h4>375</h4>
+								  <p class="sub">Videos</p>
+								</li>
+								<li>
+								  <label class="label-danger"><i class="fa fa-comment"></i></label>
+								  <h4>103</h4>
+								  <p class="sub">Comments</p>
+								</li>
+								<li>
+								  <label class="label-success"><i class="fa fa-camera-retro"></i></label>
+								  <h4>92</h4>
+								  <p class="sub">Photos</p>
+								</li>
+								<li>
+								  <label class="label-info"><i class="fa fa-bell"></i></label>
+								  <h4>865</h4>
+								  <p class="sub">Events</p>
+								</li>
+								<li>
+								  <label class="label-default"><i class="fa fa-pencil"></i></label>
+								  <h4>65</h4>
+								  <p class="sub">Blogs</p>
+								</li>
+							 </ul>
+						</div>
+					</div>
+				</div>
+				<div class="statistic-list-chart col-lg-4 col-md-4">
+					<div class="panel panel-default">
+						<div class="panel-heading">
+							<h3 class="panel-title">Inline Bar Statistics</h3>
+						</div>
+						<div class="panel-body">
+							<ul class="listing list-unstyled">
+								<li>
+									<span class="inlinebar">1,3,4,5,3,5,2</span>
+									<h4>65</h4>
+									<p class="sub">Signups</p>
+								</li>
+								<li>
+									<span class="inlinebar">1,4,4,7,5,9,10</span> 
+									<h4>34</h4> 
+									<p class="sub">Comments</p>
+								</li>
+								<li>
+									<span class="inlinebar">1,3,4,5,3,5,2</span>
+									<h4>99</h4>
+									<p class="sub">Photos</p>
+								</li>
+								<li>
+									<span class="inlinebar">1,3,4,5,3,5,2</span>
+									<h4>60</h4>
+									<p class="sub">Videos</p>
+								</li>
+								<li>
+									<span class="inlinebar">1,3,4,5,3,5,2</span>
+									<h4>40</h4>
+									<p class="sub">Events</p>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+
+				<div class="statistic-list-chart col-lg-4 col-md-4">
+					<div class="panel panel-default">
+						<div class="panel-heading">
+							<h3 class="panel-title">Inline Line Statistics</h3>
+						</div>
+						<div class="panel-body">
+							<ul class="listing list-unstyled">
+								<li>
+									<span class="inlineline">1,3,4,5,3,5,2</span>
+									<h4>65</h4>
+									<p class="sub">Signups</p>
+								</li>
+								<li>
+									<span class="inlineline">1,4,4,7,5,9,10</span> 
+									<h4>34</h4> 
+									<p class="sub">Comments</p>
+								</li>
+								<li>
+									<span class="inlineline">1,3,4,5,3,5,2</span>
+									<h4>99</h4>
+									<p class="sub">Photos</p>
+								</li>
+								<li>
+									<span class="inlineline">1,3,4,5,3,5,2</span>
+									<h4>60</h4>
+									<p class="sub">Videos</p>
+								</li>
+								<li>
+									<span class="inlineline">1,3,4,5,3,5,2</span>
+									<h4>40</h4>
+									<p class="sub">Events</p>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+</section>
+
+<aside id="sidebar-right">
+	<div class="panel panel-default">
+		<header class="panel-heading">
+			<h3 class="panel-title">Online Users</h3>
+		</header>
+		<article class="panel-body">
+			<ul class="list-unstyled user-list">
+				<li><a href="#"><img src="img/samples/avatar-2.jpg"></a></li>
+				<li><a href="#"><img src="img/samples/avatar-3.jpg"></a></li>
+				<li><a href="#"><img src="img/samples/avatar-4.jpg"></a></li>
+				<li><a href="#"><img src="img/samples/avatar-5.jpg"></a></li>
+				<li><a href="#"><img src="img/samples/avatar-6.jpg"></a></li>
+				<li><a href="#"><img src="img/samples/avatar-7.jpg"></a></li>
+				<li><a href="#"><img src="img/samples/avatar-8.jpg"></a></li>
+				<li><a href="#"><img src="img/samples/avatar-9.jpg"></a></li>
+				<li><a href="#"><img src="img/samples/avatar-10.jpg"></a></li>
+				<li><a href="#"><img src="img/samples/avatar-2.jpg"></a></li>
+				<li><a href="#"><img src="img/samples/avatar-3.jpg"></a></li>
+				<li><a href="#"><img src="img/samples/avatar-4.jpg"></a></li>
+			</ul>
+		</article>
+	</div>
+	<div class="panel panel-danger">
+		<header class="panel-heading">
+			<h3 class="panel-title">Notes</h3>
+		</header>
+		<article class="panel-body">
+			Ad artisan accusamus mixtape aliquip, bushwick try-hard deep v scenester biodiesel jean shorts keffiyeh. Bespoke qui master cleanse anim tousled minim.
+		</article>
+	</div>
+	<div class="panel panel-info">
+		<header class="panel-heading">
+			<h3 class="panel-title">Projects</h3>
+		</header>
+		<article class="panel-body">
+			<ul class="list-unstyled list">
+				<li>
+					<i class="fa fa-folder"></i> 
+					<span class="font-bold">Metroboard</span>
+					<span class="pull-right label label-success">completed</span>
+				</li>
+				<li>
+					<i class="fa fa-folder"></i> 
+					<span class="font-bold">Boardskin</span>
+					<span class="pull-right label label-danger">7 tasks</span>
+				</li>
+				<li>
+					<i class="fa fa-folder"></i> 
+					<span class="font-bold">Landingskin</span>
+					<span class="pull-right label label-danger">1 task</span>
+				</li>
+				<li>
+					<i class="fa fa-folder"></i> 
+					<span class="font-bold">Plain</span>
+					<span class="pull-right label label-danger">3 tasks</span>
+				</li>
+				<li>
+					<i class="fa fa-folder"></i> 
+					<span class="font-bold">Website</span>
+					<span class="pull-right label label-warning">Pending</span>
+				</li>
+				<li>
+					<i class="fa fa-folder"></i> 
+					<span class="font-bold">Snippets</span>
+					<span class="pull-right label label-warning">4 tasks</span>
+				</li>
+				<li>
+					<i class="fa fa-folder"></i> 
+					<span class="font-bold">Styler</span>
+					<span class="pull-right label label-default">unknown</span>
+				</li>
+			</ul>
+		</article>
+	</div>
+</aside>
+		<script src="js/libs/jquery.min.js"></script>
+		<script src="js/libs/jquery-ui.min.js"></script>
+		<script src="bootstrap/js/bootstrap.min.js"></script>
+		<script src="js/libs/jquery.equalheights.min.js"></script>
+
+		<!-- FullCalendar -->
+		<script src="js/libs/fullcalendar.min.js"></script>
+
+		<!-- Flot -->
+		<script src="js/libs/jquery.flot.min.js"></script>
+		<script src="js/libs/jquery.flot.pie.min.js"></script>
+		<script src="js/libs/jquery.flot.resize.min.js"></script>
+		<script src="js/libs/jquery.flot.stack.min.js"></script>
+		<script src="js/libs/jquery.sparkline.min.js"></script>
+
+		<!-- Bootstrap Switch -->
+		<script src="js/libs/bootstrap-switch.js"></script>
+
+		<!-- Bootstrap Select -->
+		<script src="js/libs/bootstrap-select.min.js"></script>
+
+		<!-- Bootstrap File -->
+		<script src="js/libs/bootstrap-filestyle.js"></script>
+
+		<!-- jQuery SIDR -->
+		<script src="js/libs/jquery.sidr.min.js"></script>
+
+		<!-- Theme Script -->
+		<script src="js/styler/script.js"></script>
+	</body>
+</html>

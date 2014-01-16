@@ -1,0 +1,985 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta name="description" content="">
+		<meta name="author" content="BootstrapStyler">
+		<link rel="shortcut icon" href="img/favicon.png">
+
+		<title>
+			Forms - BoardSkin v2
+		</title>
+
+		<!-- Bootstrap core CSS -->
+		<link href="bootstrap/css/bootstrap.css" rel="stylesheet">
+
+		<!-- Font-awesome -->
+		<link href="fonts/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+
+		<!-- Fullcalendar -->
+		<link href="css/libs/fullcalendar.css" rel="stylesheet">
+		<link href="css/libs/fullcalendar.print.css" rel="stylesheet" media="print">
+
+		<!-- Bootstrap Switch -->
+		<link href="css/libs/bootstrap-switch.css" rel="stylesheet">
+
+		<!-- Bootstrap Select -->
+		<link href="css/libs/bootstrap-select.min.css" rel="stylesheet">
+
+		<!-- jQuery SIDR -->
+		<link href="css/libs/jquery.sidr.dark.css" rel="stylesheet">
+
+		<link href='http://fonts.googleapis.com/css?family=Ubuntu:300,400,500' rel='stylesheet' type='text/css'>
+		<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700' rel='stylesheet' type='text/css'>
+
+		<!-- Docs CSS, no need to use this in real application -->
+		<link href="css/docs/docs.css" rel="stylesheet">
+
+		<!-- Custom styles for this template -->
+		<link href="css/styler/style.css" rel="stylesheet">
+
+		<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+		<!--[if lt IE 9]>
+			<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+			<script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+		<![endif]-->
+	</head>
+
+	<body>
+<!-- Static navbar -->
+<div id="mainnav" class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+	<div class="container">
+		<div class="navbar-header">
+			<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+				<span class="sr-only">Toggle navigation</span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+			</button>
+
+			<a class="navbar-toggle" id="sidebar-left-toggle" href="#sidebar-left">
+				<i class="fa fa-cogs"></i>
+			</a>
+
+			<a class="navbar-brand" href="index.html"><img src="img/logo-2.png"></a>
+			
+		</div>
+		<div class="navbar-collapse collapse">
+			
+			<ul class="nav navbar-nav navbar-right">
+				<li class="dropdown">
+					<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+						<img src="img/samples/avatar-9.jpg" class="user-avatar"> 
+						Jason Lee <b class="caret"></b>
+					</a>
+					<ul class="dropdown-menu">
+						<li class="dropdown-header">Profile Management</li>
+						<li><a href="profile.html">Profile page</a></li>
+						<li><a href="#">Another action</a></li>
+						<li><a href="#">Something else here</a></li>
+						<li class="divider"></li>
+						<li><a href="#">Sign out</a></li>
+					</ul>
+				</li>
+			</ul>
+
+			<ul class="nav navbar-nav navbar-right">
+				<li class="dropdown">
+					<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+						<i class="fa fa-copy"></i>
+						Other Pages <b class="caret"></b>
+					</a>
+					<ul class="dropdown-menu">
+						<li><a href="ui.html">UI Elements</a></li>
+						<li><a href="signin.html">Sign In</a></li>
+						<li><a href="error404.html">Error 404</a></li>
+					</ul>
+				</li>
+			</ul>
+
+			<form class="navbar-form navbar-right form-search hidden-sm hidden-xs" role="search">
+				<div class="form-group">
+					<input type="text" class="form-control" placeholder="Search">
+				</div>
+				<button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
+			</form>
+		</div><!--/.nav-collapse -->
+	</div><!--/.container -->
+</div>
+<aside id="sidebar-left" class="section menu">
+	<ul class="nav list-unstyled">
+		<li >
+			<a href="index.html">
+				<i class="fa fa-dashboard"></i>
+				<span>Dashboard</span>
+			</a>
+		</li>
+		<li class="active">
+			<a href="forms.html">
+				<i class="fa fa-edit"></i>
+				<span>Forms</span>
+			</a>
+		</li>
+		<li >
+			<a href="calendar.html">
+				<i class="fa fa-calendar"></i>
+				<span>Calendar</span>
+			</a>
+		</li>
+		<li >
+			<a href="icons.html">
+				<i class="fa fa-heart"></i>
+				<span>Icons</span>
+			</a>
+		</li>
+		<li >
+			<a href="tables.html">
+				<i class="fa fa-table"></i>
+				<span>Tables</span>
+			</a>
+		</li>
+		<li >
+			<a href="charts.html">
+				<i class="fa fa-bar-chart-o"></i>
+				<span>Charts</span>
+			</a>
+		</li>
+		<li >
+			<a href="typography.html">
+				<i class="fa fa-font"></i>
+				<span>Typography</span>
+			</a>
+		</li>
+	</ul>
+</aside>
+
+<section id="main" class="section main">
+
+	<div class="page-header">
+		<h1>Forms</h1>
+	</div>
+
+	<div class="section-content">
+
+		<div class="container">
+
+			<div class="row row-demo">
+				<div class="col-lg-6 col-md-6">
+					<div class="panel panel-default">
+						<div class="panel-heading">
+							<h3 class="panel-title">Vertical Form</h3>
+						</div>
+						<div class="panel-body">
+							
+							<div class="preview">
+								<form role="form">
+									<div class="form-group">
+										<label for="exampleInputEmail1">Email address</label>
+										<input type="email" class="form-control" id="exampleInputEmail1" placeholder="Enter email">
+									</div>
+									<div class="form-group">
+										<label for="exampleInputPassword1">Password</label>
+										<input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+									</div>
+									<div class="form-group">
+										<label for="exampleInputFile">File input</label>
+										<input type="file" id="exampleInputFile">
+										<p class="help-block">Example block-level help text here.</p>
+									</div>
+									<div class="checkbox">
+										<label>
+											<input type="checkbox"> Check me out
+										</label>
+									</div>
+									<button type="submit" class="btn btn-primary">Submit</button>
+								</form>
+							</div>
+
+						</div>
+					</div><!-- /.panel -->
+				</div>
+
+				<div class="col-lg-6 col-md-6">
+					<div class="panel panel-default">
+						<div class="panel-heading">
+							<h3 class="panel-title">Horizontal Form</h3>
+						</div>
+						<div class="panel-body">
+							<div class="preview">
+								<form class="form-horizontal" role="form">
+									<div class="form-group">
+										<label for="inputEmail3" class="col-sm-3 control-label">Firstname</label>
+										<div class="col-sm-9">
+											<input type="email" class="form-control" id="inputEmail3" placeholder="Firstname">
+										</div>
+									</div>
+									<div class="form-group">
+										<label for="inputPassword3" class="col-sm-3 control-label">Lastname</label>
+										<div class="col-sm-9">
+											<input type="text" class="form-control" id="inputPassword3" placeholder="Lastname">
+										</div>
+									</div>
+									<div class="form-group">
+										<label for="inputEmail3" class="col-sm-3 control-label">Email</label>
+										<div class="col-sm-9">
+											<input type="email" class="form-control" id="inputPassword3" placeholder="Email address">
+										</div>
+									</div>
+									<div class="form-group">
+										<label for="inputTelephone3" class="col-sm-3 control-label">Telephone</label>
+										<div class="col-sm-4">
+											<input type="tel" class="form-control" id="inputTelephone3" placeholder="Telephone">
+										</div>
+									</div>
+									<div class="form-group">
+										<label for="exampleInputFile" class="col-sm-3 control-label">File input</label>
+										<div class="col-sm-9">
+											<input type="file" id="exampleInputFile">
+										</div>
+									</div>
+									<div class="form-group">
+										<div class="col-sm-offset-3 col-sm-9">
+											<button type="submit" class="btn btn-success">Sign in</button>
+										</div>
+									</div>
+								</form>
+							</div>
+						</div>
+					</div><!-- /.panel -->
+				</div>
+			</div><!-- /.row -->
+		</div><!-- /.container -->
+	</div><!-- /.section-content -->
+
+	<div class="section-content">
+
+		<div class="container">
+
+			<div class="row row-demo">
+
+				<div class="col-lg-12 col-md-12">
+					<div class="panel panel-default">
+						<div class="panel-heading">
+							<h3 class="panel-title">Inline Form</h3>
+						</div>
+						<div class="panel-body">
+							<div class="preview">
+								<form class="form-inline" role="form">
+									<div class="form-group">
+										<label class="sr-only" for="exampleInputFirstname2">Firstname</label>
+										<input type="email" class="form-control" id="exampleInputFirstname2" placeholder="Enter firstname">
+									</div>
+									<div class="form-group">
+										<label class="sr-only" for="exampleInputLastname2">Lastname</label>
+										<input type="email" class="form-control" id="exampleInputLastname2" placeholder="Enter lastname">
+									</div>
+									<div class="form-group">
+										<label class="sr-only" for="exampleInputEmail2">Email address</label>
+										<input type="email" class="form-control" id="exampleInputEmail2" placeholder="Enter email">
+									</div>
+									<div class="form-group">
+										<label class="sr-only" for="exampleInputPassword2">Password</label>
+										<input type="password" class="form-control" id="exampleInputPassword2" placeholder="Password">
+									</div>
+									<div class="form-group">
+										<div class="checkbox">
+											<label>
+												<input type="checkbox"> Remember me
+											</label>
+										</div>
+									</div>
+									<button type="submit" class="btn btn-primary">Sign in</button>
+									<button type="submit" class="btn btn-warning">Register</button>
+								</form>
+							</div>
+						</div>
+					</div><!-- /.panel -->
+				</div>
+			</div><!-- /.row -->
+		</div><!-- /.container -->
+	</div><!-- /.section-content -->
+
+	<div class="section-content">
+
+		<div class="container">
+			<div class="row row-demo">
+				<div class="col-lg-12 col-md-12">
+					<div class="panel panel-default">
+						<div class="panel-heading">
+							<h3 class="panel-title">Other Form Elements</h3>
+						</div>
+						<div class="panel-body">
+							<div class="preview">
+								<form class="form-horizontal" role="form">
+									<div class="form-group">
+										<label for="text" class="col-sm-2 control-label">Text</label>
+										<div class="col-sm-10">
+											<input type="email" class="form-control" id="text" placeholder="Text">
+										</div>
+									</div>
+
+									<div class="form-group">
+										<label for="textarea" class="col-sm-2 control-label">Textarea</label>
+										<div class="col-sm-10">
+											<textarea class="form-control" id="textarea" placeholder="Textarea"></textarea>
+										</div>
+									</div>
+									<div class="form-group">
+										<label for="password" class="col-sm-2 control-label">Password</label>
+										<div class="col-sm-4">
+											<input type="password" class="form-control" id="password" placeholder="Password">
+										</div>
+									</div>
+									<div class="form-group">
+										<label for="email" class="col-sm-2 control-label">Email</label>
+										<div class="col-sm-10">
+											<input type="email" class="form-control" id="email" placeholder="Email">
+										</div>
+									</div>
+									<div class="form-group">
+										<label for="email" class="col-sm-2 control-label">Select</label>
+										<div class="col-sm-10">
+											<select>
+												<optgroup label="Option Group">
+													<option>Maverick</option>
+													<option>Mountain Lion</option>
+													<option>Lion</option>
+												</optgroup>
+											</select>
+										</div>
+									</div>
+									<div class="form-group">
+										<label class="col-sm-2 control-label">Checbox stacked</label>
+										<div class="col-sm-10">
+											<div class="checkbox">
+												<label>
+													<input type="checkbox"> Checkbox 1
+												</label>
+											</div>
+											<div class="checkbox">
+												<label>
+													<input type="checkbox"> Checkbox 2
+												</label>
+											</div>
+											<div class="checkbox">
+												<label>
+													<input type="checkbox"> Checkbox 2
+												</label>
+											</div>
+										</div>
+									</div>
+									<div class="form-group">
+										<label class="col-sm-2 control-label">Checbox inline</label>
+										<div class="col-sm-10">
+											<div class="checkbox-inline">
+												<label>
+													<input type="checkbox"> Checkbox 1
+												</label>
+											</div>
+											<div class="checkbox-inline">
+												<label>
+													<input type="checkbox"> Checkbox 2
+												</label>
+											</div>
+											<div class="checkbox-inline">
+												<label>
+													<input type="checkbox"> Checkbox 2
+												</label>
+											</div>
+										</div>
+									</div>
+
+
+									<div class="form-group">
+										<label class="col-sm-2 control-label">Radio button stacked</label>
+										<div class="col-sm-10">
+											<div class="radio">
+												<label>
+													<input type="radio" name="radio-sample-1"> Radio button 1
+												</label>
+											</div>
+											<div class="radio">
+												<label>
+													<input type="radio" name="radio-sample-1"> Radio button 2
+												</label>
+											</div>
+											<div class="radio">
+												<label>
+													<input type="radio" name="radio-sample-1"> Radio button 2
+												</label>
+											</div>
+										</div>
+									</div>
+
+									<div class="form-group">
+										<label class="col-sm-2 control-label">Switch</label>
+										<div class="col-sm-2">
+											<div id="label-switch" class="make-switch" data-on-label="Yes" data-off-label="No" data-animated="false">
+											    <input type="checkbox" checked>
+											</div>
+										</div>
+
+										<div class="col-sm-2">
+											<div id="label-switch" class="make-switch" data-on-label="On" data-off-label="Off" data-animated="false" data-on="warning" data-off="danger">
+											    <input type="checkbox" checked>
+											</div>
+										</div>
+									</div>
+
+									<div class="form-group">
+										<label class="col-sm-2 control-label">Radio button inline</label>
+										<div class="col-sm-10">
+											<div class="radio-inline">
+												<label>
+													<input type="radio" name="radio-sample-2"> Radio button 1
+												</label>
+											</div>
+											<div class="radio-inline">
+												<label>
+													<input type="radio" name="radio-sample-2"> Radio button 2
+												</label>
+											</div>
+											<div class="radio-inline">
+												<label>
+													<input type="radio" name="radio-sample-2"> Radio button 2
+												</label>
+											</div>
+										</div>
+									</div>
+								</form>
+							</div>
+							
+						</div>
+					</div><!-- /.panel -->
+				</div>
+			</div><!-- /.row -->
+		</div><!-- /.container -->
+	</div><!-- /.section-content -->
+
+	<div class="section-content">
+		<div class="container">
+
+			<div class="row row-demo">
+				<div class="col-lg-12">
+					<div class="panel panel-default">
+						<div class="panel-heading">
+							<h3 class="panel-title">Input group</h3>
+						</div>
+						<div class="panel-body">
+							<div class="preview">
+								<form class="form-horizontal" role="form">
+									<div class="form-group">
+										<label class="col-sm-2 control-label">Prepend</label>
+										<div class="col-sm-10">
+											<div class="input-group">
+												<span class="input-group-addon">@</span>
+												<input type="text" class="form-control" placeholder="Username">
+											</div>
+										</div>
+									</div>
+
+									<div class="form-group">
+										<label class="col-sm-2 control-label">Append</label>
+										<div class="col-sm-10">
+											<div class="input-group">
+												<input type="text" class="form-control">
+												<span class="input-group-addon">.00</span>
+											</div>
+										</div>
+									</div>
+
+									<div class="form-group">
+										<label class="col-sm-2 control-label">Prepend and Append</label>
+										<div class="col-sm-10">
+											<div class="input-group">
+												<span class="input-group-addon">$</span>
+												<input type="text" class="form-control">
+												<span class="input-group-addon">.00</span>
+											</div>
+										</div>
+									</div>
+								</form>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div><!-- /.row -->
+		</div><!-- /.container -->
+	</div><!-- /.section-content -->
+
+	<div class="section-content">
+		<div class="container">
+
+			<div class="row row-demo">
+				<div class="col-lg-6 col-md-6">
+					<div class="panel panel-default">
+						<div class="panel-heading">
+							<h3 class="panel-title">Button Large</h3>
+						</div>
+						<div class="panel-body">
+							<div class="preview">
+								<div class="row row-demo">
+									<div class="col-lg-4"><button class="btn btn-default btn-lg btn-block">Default</button></div>
+									<div class="col-lg-4"><button class="btn btn-primary btn-lg btn-block">Primary</button></div>
+									<div class="col-lg-4"><button class="btn btn-success btn-lg btn-block">Success</button></div>
+								</div>
+								<div class="row row-demo">
+									<div class="col-lg-4"><button class="btn btn-info btn-lg btn-block">Info</button></div>
+									<div class="col-lg-4"><button class="btn btn-warning btn-lg btn-block">Warning</button></div>
+									<div class="col-lg-4"><button class="btn btn-danger btn-lg btn-block">Danger</button></div>
+								</div>
+								<div class="row row-demo">
+									<div class="col-lg-4"><button class="btn btn-inverse btn-lg btn-block">Inverse</button></div>
+									<div class="col-lg-4"><button class="btn btn-link btn-lg btn-block">Link</button></div>
+									<div class="col-lg-4"><button class="btn btn-disabled btn-lg btn-block" disabled>Disabled</button></div>
+								</div>
+							</div>
+						</div>
+					</div><!-- /.panel -->
+				</div>
+
+				<div class="col-lg-6 col-md-6">
+					<div class="panel panel-default">
+						<div class="panel-heading">
+							<h3 class="panel-title">Button Default</h3>
+						</div>
+						<div class="panel-body">
+							<div class="preview">
+								<div class="row row-demo">
+									<div class="col-lg-4"><button class="btn btn-default btn-block">Default</button></div>
+									<div class="col-lg-4"><button class="btn btn-primary btn-block">Primary</button></div>
+									<div class="col-lg-4"><button class="btn btn-success btn-block">Success</button></div>
+								</div>
+								<div class="row row-demo">
+									<div class="col-lg-4"><button class="btn btn-info btn-block">Info</button></div>
+									<div class="col-lg-4"><button class="btn btn-warning btn-block">Warning</button></div>
+									<div class="col-lg-4"><button class="btn btn-danger btn-block">Danger</button></div>
+								</div>
+								<div class="row row-demo">
+									<div class="col-lg-4"><button class="btn btn-inverse btn-block">Inverse</button></div>
+									<div class="col-lg-4"><button class="btn btn-link btn-block">Link</button></div>
+									<div class="col-lg-4"><button class="btn btn-disabled btn-block" disabled>Disabled</button></div>
+								</div>
+							</div>
+							
+						</div>
+					</div><!-- /.panel -->
+				</div>
+			</div><!-- /.row -->
+		</div><!-- /.container -->
+	</div><!-- /.section-content -->
+
+	<div class="section-content">
+		<div class="container">
+			<div class="row row-demo">
+				<div class="col-lg-6 col-md-6">
+					<div class="panel panel-default">
+						<div class="panel-heading">
+							<h3 class="panel-title">Button Small</h3>
+						</div>
+						<div class="panel-body">
+							<div class="preview">
+								<div class="row row-demo">
+									<div class="col-lg-4"><button class="btn btn-default btn-sm btn-block">Default</button></div>
+									<div class="col-lg-4"><button class="btn btn-primary btn-sm btn-block">Primary</button></div>
+									<div class="col-lg-4"><button class="btn btn-success btn-sm btn-block">Success</button></div>
+								</div>
+								<div class="row row-demo">
+									<div class="col-lg-4"><button class="btn btn-info btn-sm btn-block">Info</button></div>
+									<div class="col-lg-4"><button class="btn btn-warning btn-sm btn-block">Warning</button></div>
+									<div class="col-lg-4"><button class="btn btn-danger btn-sm btn-block">Danger</button></div>
+								</div>
+								<div class="row row-demo">
+									<div class="col-lg-4"><button class="btn btn-inverse btn-sm btn-block">Inverse</button></div>
+									<div class="col-lg-4"><button class="btn btn-link btn-sm btn-block">Link</button></div>
+									<div class="col-lg-4"><button class="btn btn-disabled btn-sm btn-block" disabled>Disabled</button></div>
+								</div>
+							</div>
+						</div>
+					</div><!-- /.panel -->
+				</div>
+
+				<div class="col-lg-6 col-md-6">
+					<div class="panel panel-default">
+						<div class="panel-heading">
+							<h3 class="panel-title">Button X-Small</h3>
+						</div>
+						<div class="panel-body">
+							<div class="preview">
+								<div class="row row-demo">
+									<div class="col-lg-4"><button class="btn btn-default btn-xs btn-block">Default</button></div>
+									<div class="col-lg-4"><button class="btn btn-primary btn-xs btn-block">Primary</button></div>
+									<div class="col-lg-4"><button class="btn btn-success btn-xs btn-block">Success</button></div>
+								</div>
+								<div class="row row-demo">
+									<div class="col-lg-4"><button class="btn btn-info btn-xs btn-block">Info</button></div>
+									<div class="col-lg-4"><button class="btn btn-warning btn-xs btn-block">Warning</button></div>
+									<div class="col-lg-4"><button class="btn btn-danger btn-xs btn-block">Danger</button></div>
+								</div>
+								<div class="row row-demo">
+									<div class="col-lg-4"><button class="btn btn-inverse btn-xs btn-block">Inverse</button></div>
+									<div class="col-lg-4"><button class="btn btn-link btn-xs btn-block">Link</button></div>
+									<div class="col-lg-4"><button class="btn btn-disabled btn-xs btn-block" disabled>Disabled</button></div>
+								</div>
+							</div>
+						</div>
+					</div><!-- /.panel -->
+				</div>
+			</div><!-- /.row -->
+		</div><!-- /.container -->
+	</div><!-- /.section-content -->
+
+	<div class="section-content">
+		<div class="container">
+
+			<div class="row row-demo">
+				<div class="col-lg-12 col-md-12">
+					<div class="panel panel-default">
+						<div class="panel-heading">
+							<h3 class="panel-title">Button group</h3>
+						</div>
+						<div class="panel-body">
+							<div class="preview">
+								<div class="row row-demo">
+									<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+										<div class="btn-group pull-left">
+											<button type="button" class="btn btn-primary">Home</button>
+											<button type="button" class="btn btn-primary">About</button>
+											<button type="button" class="btn btn-primary">Services</button>
+										</div>
+
+										<div class="btn-group pull-right">
+											<button type="button" class="btn btn-default">Default</button>
+											<button type="button" class="btn btn-primary">Primary</button>
+											<button type="button" class="btn btn-success">Success</button>
+											<button type="button" class="btn btn-info">Info</button>
+											<button type="button" class="btn btn-warning">Warning</button>
+											<button type="button" class="btn btn-danger">Danger</button>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div><!-- /.panel -->
+				</div>
+			</div><!-- /.row -->
+		</div><!-- /.container -->
+	</div><!-- /.section-content -->
+
+	<div class="section-content">
+		<div class="container">
+
+			<div class="row row-demo">
+				<div class="col-lg-12 col-md-12">
+					<div class="panel panel-default">
+						<div class="panel-heading">
+							<h3 class="panel-title">Toolbar</h3>
+						</div>
+						<div class="panel-body">
+							<div class="preview">
+								<div class="row row-demo">
+									<div class="col-lg-12">
+										<div class="btn-toolbar" role="toolbar">
+											<div class="btn-group">
+												<button type="button" class="btn btn-default btn-sm">
+													<i class="fa fa-bold"></i>
+												</button>
+
+												<button type="button" class="btn btn-default btn-sm">
+													<i class="fa fa-italic"></i>
+												</button>
+
+												<button type="button" class="btn btn-default btn-sm">
+													<i class="fa fa-underline"></i>
+												</button>
+											</div>
+
+											<div class="btn-group">
+												<button type="button" class="btn btn-default btn-sm">
+													<i class="fa fa-align-left"></i>
+												</button>
+
+												<button type="button" class="btn btn-default btn-sm">
+													<i class="fa fa-align-center"></i>
+												</button>
+
+												<button type="button" class="btn btn-default btn-sm">
+													<i class="fa fa-align-right"></i>
+												</button>
+
+												<button type="button" class="btn btn-default btn-sm">
+													<i class="fa fa-align-justify"></i>
+												</button>
+											</div>
+
+											<div class="btn-group">
+												<button type="button" class="btn btn-default btn-sm">
+													<i class="fa fa-copy"></i>
+												</button>
+
+												<button type="button" class="btn btn-default btn-sm">
+													<i class="fa fa-cut"></i>
+												</button>
+
+												<button type="button" class="btn btn-default btn-sm">
+													<i class="fa fa-paste"></i>
+												</button>
+											</div>
+
+											<div class="btn-group">
+												<button type="button" class="btn btn-default btn-sm">
+													<i class="fa fa-list-ul"></i>
+												</button>
+
+												<button type="button" class="btn btn-default btn-sm">
+													<i class="fa fa-list-ol"></i>
+												</button>
+
+												<button type="button" class="btn btn-default btn-sm">
+													<i class="fa fa-indent"></i>
+												</button>
+
+												<button type="button" class="btn btn-default btn-sm">
+													<i class="fa fa-outdent"></i>
+												</button>
+											</div>
+										</div>
+
+									</div>
+								</div>
+							</div>
+							
+						</div>
+					</div><!-- /.panel -->
+				</div>
+			</div><!-- /.row -->
+		</div><!-- /.container -->
+	</div><!-- /.section-content -->
+
+	<div class="section-content">
+
+		<div class="container">
+
+			<div class="row row-demo">
+				<div class="col-lg-12 col-md-12">
+					<div class="panel panel-default">
+						<div class="panel-heading">
+							<h3 class="panel-title">Button Group Large</h3>
+
+						</div>
+						<div class="panel-body">
+							<div class="preview">
+								<div class="row row-demo">
+									<div class="col-lg-5 col-md-12 col-sm-12 col-xs-12">
+										<div class="btn-group btn-group-lg">
+											<button type="button" class="btn btn-primary">Home</button>
+											<button type="button" class="btn btn-primary">About</button>
+											<button type="button" class="btn btn-primary">Services</button>
+											<button type="button" class="btn btn-primary">Contact</button>
+										</div>
+									</div>
+
+									<div class="col-lg-7 col-md-12 col-sm-12 col-xs-12">
+										<div class="btn-group btn-group-lg pull-right">
+											<button type="button" class="btn btn-default">Default</button>
+											<button type="button" class="btn btn-primary">Primary</button>
+											<button type="button" class="btn btn-success">Success</button>
+											<button type="button" class="btn btn-info">Info</button>
+											<button type="button" class="btn btn-warning">Warning</button>
+											<button type="button" class="btn btn-danger">Danger</button>
+										</div>
+									</div>
+								</div>
+							</div>
+							
+						</div>
+					</div><!-- /.panel -->
+				</div>
+			</div><!-- /.row -->
+		</div><!-- /.container -->
+	</div><!-- /.section-content -->
+
+	<div class="section-content">
+
+		<div class="container">
+			<div class="row row-demo">
+				<div class="col-lg-12 col-md-12">
+					<div class="panel panel-default">
+						<div class="panel-heading">
+							<h3 class="panel-title">Nesting</h3>
+							<div class="panel-utility pull-right code-preview">
+								<!-- Nav tabs -->
+								<ul class="nav nav-pills">
+									<li class="active"><a href="#preview">Preview</a></li>
+									<li><a href="#code">Code</a></li>
+								</ul>
+							</div>
+						</div>
+						<div class="panel-body">
+							<div class="preview">
+								<div class="row row-demo">
+									<div class="col-lg-5 col-md-12 col-sm-12 col-xs-12">
+										<div class="btn-group">
+											<button type="button" class="btn btn-primary">Home</button>
+											<button type="button" class="btn btn-primary">About</button>
+											<div class="btn-group">
+												<button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown">
+													Dropdown
+													<span class="caret"></span>
+												</button>
+												<ul class="dropdown-menu">
+													<li><a href="#">Dropdown link</a></li>
+													<li><a href="#">Dropdown link</a></li>
+												</ul>
+											</div>
+										</div>
+									</div>
+
+									<div class="col-lg-7 col-md-12 col-sm-12 col-xs-12">
+										<div class="btn-group pull-right">
+											<button type="button" class="btn btn-primary">Home</button>
+											<button type="button" class="btn btn-primary">About</button>
+											<div class="btn-group">
+												<button type="button" class="btn btn-warning dropdown-toggle" data-toggle="dropdown">
+													Dropdown
+													<span class="caret"></span>
+												</button>
+												<ul class="dropdown-menu">
+													<li><a href="#">Dropdown link</a></li>
+													<li><a href="#">Dropdown link</a></li>
+												</ul>
+											</div>
+											<div class="btn-group">
+												<button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown">
+													Dropdown
+													<span class="caret"></span>
+												</button>
+												<ul class="dropdown-menu">
+													<li><a href="#">Dropdown link</a></li>
+													<li><a href="#">Dropdown link</a></li>
+												</ul>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							
+						</div>
+					</div><!-- /.panel -->
+				</div>
+			</div><!-- /.row -->
+
+
+			
+		</div><!-- /.container -->
+	</div><!-- /.section-content -->
+</section>
+
+<aside id="sidebar-right">
+	<div class="panel panel-default">
+		<header class="panel-heading">
+			<h3 class="panel-title">Online Users</h3>
+		</header>
+		<article class="panel-body">
+			<ul class="list-unstyled user-list">
+				<li><a href="#"><img src="img/samples/avatar-2.jpg"></a></li>
+				<li><a href="#"><img src="img/samples/avatar-3.jpg"></a></li>
+				<li><a href="#"><img src="img/samples/avatar-4.jpg"></a></li>
+				<li><a href="#"><img src="img/samples/avatar-5.jpg"></a></li>
+				<li><a href="#"><img src="img/samples/avatar-6.jpg"></a></li>
+				<li><a href="#"><img src="img/samples/avatar-7.jpg"></a></li>
+				<li><a href="#"><img src="img/samples/avatar-8.jpg"></a></li>
+				<li><a href="#"><img src="img/samples/avatar-9.jpg"></a></li>
+				<li><a href="#"><img src="img/samples/avatar-10.jpg"></a></li>
+				<li><a href="#"><img src="img/samples/avatar-2.jpg"></a></li>
+				<li><a href="#"><img src="img/samples/avatar-3.jpg"></a></li>
+				<li><a href="#"><img src="img/samples/avatar-4.jpg"></a></li>
+			</ul>
+		</article>
+	</div>
+	<div class="panel panel-danger">
+		<header class="panel-heading">
+			<h3 class="panel-title">Notes</h3>
+		</header>
+		<article class="panel-body">
+			Ad artisan accusamus mixtape aliquip, bushwick try-hard deep v scenester biodiesel jean shorts keffiyeh. Bespoke qui master cleanse anim tousled minim.
+		</article>
+	</div>
+	<div class="panel panel-info">
+		<header class="panel-heading">
+			<h3 class="panel-title">Projects</h3>
+		</header>
+		<article class="panel-body">
+			<ul class="list-unstyled list">
+				<li>
+					<i class="fa fa-folder"></i> 
+					<span class="font-bold">Metroboard</span>
+					<span class="pull-right label label-success">completed</span>
+				</li>
+				<li>
+					<i class="fa fa-folder"></i> 
+					<span class="font-bold">Boardskin</span>
+					<span class="pull-right label label-danger">7 tasks</span>
+				</li>
+				<li>
+					<i class="fa fa-folder"></i> 
+					<span class="font-bold">Landingskin</span>
+					<span class="pull-right label label-danger">1 task</span>
+				</li>
+				<li>
+					<i class="fa fa-folder"></i> 
+					<span class="font-bold">Plain</span>
+					<span class="pull-right label label-danger">3 tasks</span>
+				</li>
+				<li>
+					<i class="fa fa-folder"></i> 
+					<span class="font-bold">Website</span>
+					<span class="pull-right label label-warning">Pending</span>
+				</li>
+				<li>
+					<i class="fa fa-folder"></i> 
+					<span class="font-bold">Snippets</span>
+					<span class="pull-right label label-warning">4 tasks</span>
+				</li>
+				<li>
+					<i class="fa fa-folder"></i> 
+					<span class="font-bold">Styler</span>
+					<span class="pull-right label label-default">unknown</span>
+				</li>
+			</ul>
+		</article>
+	</div>
+</aside>
+		<script src="js/libs/jquery.min.js"></script>
+		<script src="js/libs/jquery-ui.min.js"></script>
+		<script src="bootstrap/js/bootstrap.min.js"></script>
+		<script src="js/libs/jquery.equalheights.min.js"></script>
+
+		<!-- FullCalendar -->
+		<script src="js/libs/fullcalendar.min.js"></script>
+
+		<!-- Flot -->
+		<script src="js/libs/jquery.flot.min.js"></script>
+		<script src="js/libs/jquery.flot.pie.min.js"></script>
+		<script src="js/libs/jquery.flot.resize.min.js"></script>
+		<script src="js/libs/jquery.flot.stack.min.js"></script>
+		<script src="js/libs/jquery.sparkline.min.js"></script>
+
+		<!-- Bootstrap Switch -->
+		<script src="js/libs/bootstrap-switch.js"></script>
+
+		<!-- Bootstrap Select -->
+		<script src="js/libs/bootstrap-select.min.js"></script>
+
+		<!-- Bootstrap File -->
+		<script src="js/libs/bootstrap-filestyle.js"></script>
+
+		<!-- jQuery SIDR -->
+		<script src="js/libs/jquery.sidr.min.js"></script>
+
+		<!-- Theme Script -->
+		<script src="js/styler/script.js"></script>
+	</body>
+</html>
