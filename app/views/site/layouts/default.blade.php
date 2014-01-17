@@ -9,9 +9,9 @@
 			Laravel 4 Sample Site
 			@show
 		</title>
-		<meta name="keywords" content="your, awesome, keywords, here" />
-		<meta name="author" content="Jon Doe" />
-		<meta name="description" content="Lorem ipsum dolor sit amet, nihil fabulas et sea, nam posse menandri scripserit no, mei." />
+		<meta name="keywords" content="social, analytics, social analytics, facebook, twitter, google plus" />
+		<meta name="author" content="DCAF-Social" />
+		<meta name="description" content="THis is a social network analytics platform" />
 
 		<!-- Mobile Specific Metas
 		================================================== -->
