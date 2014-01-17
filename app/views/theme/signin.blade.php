@@ -74,16 +74,17 @@
 			<div class="container">
 				<div class="row">
 					<div class="col-lg-4 col-md-6 col-lg-offset-4 col-md-offset-3">
-						<form class="form-signin" role="form">
-							
-							<input type="text" class="form-control input-lg" placeholder="Email address" required autofocus>
-							<input type="password" class="form-control input-lg" placeholder="Password" required>
-							<label class="checkbox">
-								<input type="checkbox" value="remember-me"> Remember me
-							</label>
+						<form class="form-signin" role="form" method="POST" action="{{ URL::to('user/login') }}" accept-charset="UTF-8">
+							<input type="hidden" name="_token" value="{{ csrf_token() }}">
+    						<fieldset>	
+								<input type="text" class="form-control input-lg" placeholder="{{ Lang::get('confide::confide.username_e_mail') }}" type="text" name="email" id="email" value="{{ Input::old('email') }}" required autofocus>
+								<input type="password" class="form-control input-lg" placeholder="{{ Lang::get('confide::confide.password') }}" type="password" name="password" id="password" required>
+								<label class="checkbox">
+									<input type="checkbox" value="remember-me"> Remember me
+								</label>
 
-							<button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
-
+								<button class="btn btn-lg btn-primary btn-block" type="submit">{{ Lang::get('confide::confide.login.submit') }}</button>
+							</fieldset>
 						</form>
 					</div>
 				</div>

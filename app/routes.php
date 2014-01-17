@@ -112,5 +112,5 @@ Route::post('{postSlug}', 'BlogController@postView');
 Route::get('/', function()
 {
 	//
-	return View::make('theme/dashboard');
+	return View::make('theme/signin');
 });

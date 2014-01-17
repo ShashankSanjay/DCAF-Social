@@ -74,18 +74,33 @@
 			<div class="container">
 				<div class="row">
 					<div class="col-lg-4 col-md-6 col-lg-offset-4 col-md-offset-3">
-						<form class="form-signin" role="form">
-							
-							<input type="text" class="form-control input-lg" placeholder="Email address" required autofocus>
-							<input type="text" class="form-control input-lg" placeholder="First name" required>
-							<input type="text" class="form-control input-lg" placeholder="Last name" required>
-							<input type="password" class="form-control input-lg" placeholder="Password" required>
-							<input type="password" class="form-control input-lg" placeholder="Repeat password" required>
-							<label class="checkbox">
-								<input type="checkbox" value="agree-toc"> Agree with <a href="#">Terms and Conditions</a>
-							</label>
+						<form class="form-signin" role="form" method="POST" action="{{{ (Confide::checkAction('UserController@store')) ?: URL::to('user')  }}}" accept-charset="UTF-8">
+						    <input type="hidden" name="_token" value="{{{ Session::getToken() }}}">
+						    <fieldset>
 
-							<button class="btn btn-lg btn-primary btn-block" type="submit">Sign Up</button>
+								<input type="text" class="form-control input-lg" placeholder="{{{ Lang::get('confide::confide.e_mail') }}}" type="text" name="email" id="email" value="{{{ Input::old('email') }}}" required autofocus>
+								<input type="text" class="form-control input-lg" placeholder="{{{ Lang::get('confide::confide.username') }}}" type="text" name="username" id="username" value="{{{ Input::old('username') }}}" required>
+								<input type="password" class="form-control input-lg" placeholder="{{{ Lang::get('confide::confide.password') }}}" type="password" name="password" id="password" required>
+								<input type="password" placeholder="{{{ Lang::get('confide::confide.password_confirmation') }}}" type="password" name="password_confirmation" id="password_confirmation" class="form-control input-lg" required>
+								<label class="checkbox">
+									<input type="checkbox" value="agree-toc"> Agree with <a href="#">Terms and Conditions</a>
+								</label>
+
+								@if ( Session::get('error') )
+						            <div class="alert alert-error alert-danger">
+						                @if ( is_array(Session::get('error')) )
+						                    {{ head(Session::get('error')) }}
+						                @endif
+						            </div>
+						        @endif
+
+						        @if ( Session::get('notice') )
+						            <div class="alert">{{ Session::get('notice') }}</div>
+						        @endif
+
+								<button class="btn btn-lg btn-primary btn-block" type="submit">{{{ Lang::get('confide::confide.signup.submit') }}}</button>
+
+						    </fieldset>
 
 						</form>
 					</div>

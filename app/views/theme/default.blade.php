@@ -123,7 +123,7 @@
 
 		<nav class="side-nav">
 			<ul class="nav nav-pills nav-stacked">
-				<li class="active">
+				<li {{ (Request::is('/') ? ' class="active"' : '') }}>
 					<a href="index">
 						<i class="fa fa-dashboard"></i>
 						Dashboard
@@ -307,8 +307,16 @@
 						<i class="fa fa-users"></i> Settings <b class="caret"></b>
 					</a>
 					<ul class="dropdown-menu">
-						<li><a href="#"><i class="fa fa-wrench"></i> Site Settings</a></li>
-						<li><a href="#"><i class="fa fa-cogs"></i> Server Settings</a></li>
+						@if (Auth::check())
+                        @if (Auth::user()->hasRole('admin'))
+                        <li><a href="{{{ URL::to('admin') }}}">Admin Panel</a></li>
+                        @endif
+                        <li><a href="{{{ URL::to('user') }}}">Logged in as {{{ Auth::user()->username }}}</a></li>
+                        <li><a href="{{{ URL::to('user/logout') }}}">Logout</a></li>
+                        @else
+                        <li {{ (Request::is('user/login') ? ' class="active"' : '') }}><a href="{{{ URL::to('user/login') }}}">Login</a></li>
+                        <li {{ (Request::is('user/register') ? ' class="active"' : '') }}><a href="{{{ URL::to('user/create') }}}">{{{ Lang::get('site.sign_up') }}}</a></li>
+                        @endif
 					</ul>
 				</li>
 			</ul>
