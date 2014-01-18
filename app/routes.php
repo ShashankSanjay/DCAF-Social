@@ -74,6 +74,21 @@ Route::group(array('prefix' => 'admin', 'before' => 'auth'), function()
 
 
 /** ------------------------------------------
+ *  User Routes
+ *  ------------------------------------------
+ */
+
+Route::group(array('before' => 'auth'), function()
+{
+    Route::get('messages', 'UserDashboardController@getMessages');
+
+    Route::get('profile', 'UserDashboardController@getProfile');
+
+    Route::get('/', 'UserDashboardController@index');
+});
+
+
+/** ------------------------------------------
  *  Frontend Routes
  *  ------------------------------------------
  */
@@ -87,6 +102,8 @@ Route::post('user/{user}/edit', 'UserController@postEdit');
 
 //:: User Account Routes ::
 Route::post('user/login', 'UserController@postLogin');
+
+Route::get('user/profile', 'UserController@getProfile');
 
 # User RESTful Routes (Login, Logout, Register, etc)
 Route::controller('user', 'UserController');
@@ -108,9 +125,10 @@ Route::get('{postSlug}', 'BlogController@getView');
 Route::post('{postSlug}', 'BlogController@postView');
 
 # Index Page - Last route, no matches
-//Route::get('/', array('before' => 'auth','uses' => 'BlogController@getIndex'));
-Route::get('/', function()
+Route::get('/', array('before' => 'auth','uses' => 'UserController@getIndex'));
+
+
+App::missing(function($exception)
 {
-	//
-	return View::make('theme/signin');
+    return Response::view('theme.404', array(), 404);
 });

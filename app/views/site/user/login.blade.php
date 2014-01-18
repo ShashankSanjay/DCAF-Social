@@ -96,9 +96,9 @@
 				<div class="row">
 					<div class="col-lg-4 col-md-6 col-lg-offset-4 col-md-offset-3">
 						<ul class="list-inline align-center">
-							<li><a href="#">Forgot username?</a></li>
-							<li><a href="#">Forgot password?</a></li>
-							<li><a href="signup">Create account</a></li>
+							
+							<li><a href="forgot">Forgot password?</a></li>
+							<li><a href="create">Create account</a></li>
 						</ul>
 
 						<hr>

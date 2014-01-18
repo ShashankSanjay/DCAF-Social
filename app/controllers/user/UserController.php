@@ -29,7 +29,7 @@ class UserController extends BaseController {
         if($redirect){return $redirect;}
 
         // Show the page
-        return View::make('site/user/index', compact('user'));
+        return View::make('site/user/dashboard', compact('user'));
     }
 
     /**
@@ -305,7 +305,7 @@ class UserController extends BaseController {
      * @param $username
      * @return mixed
      */
-    public function getProfile($username)
+    public function getProfile($username = 'user')
     {
         $userModel = new User;
         $user = $userModel->getUserByUsername($username);
