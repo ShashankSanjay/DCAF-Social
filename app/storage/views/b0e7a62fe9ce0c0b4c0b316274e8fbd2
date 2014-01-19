@@ -1,0 +1,28 @@
+ 
+<?php /* Web site Title */ ?>
+<?php $__env->startSection('title'); ?>
+DCAF
+<?php $__env->stopSection(); ?>
+
+<?php /* Outline */ ?>
+<?php $__env->startSection('outline'); ?>
+	<footer id="footer">
+			<div class="row">
+				<div class="col-xs-6">
+					<ul class="list-inline">
+						<li>&copy; <a href="#">Admin</a></li>
+					</ul>
+				</div>
+				<div class="col-xs-6">
+					<ul class="list-inline social-network">
+						<li><a href="#"><i class="fa fa-facebook-square"></i></a></li>
+						<li><a href="#"><i class="fa fa-twitter-square"></i></a></li>
+						<li><a href="#"><i class="fa fa-linkedin-square"></i></a></li>
+						<li><a href="#"><i class="fa fa-github-square"></i></a></li>
+					</ul>
+				</div>
+			</div>
+		</footer>
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('site.layouts.default', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

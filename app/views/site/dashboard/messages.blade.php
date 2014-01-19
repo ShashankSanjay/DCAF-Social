@@ -1,5 +1,10 @@
-@extends('site.layouts.default')
- 
+@extends('site.outlines.dashboard')
+
+{{-- Web site Title --}}
+@section('title')
+Messages
+@stop
+
 {{-- Content --}}
 @section('content')
 

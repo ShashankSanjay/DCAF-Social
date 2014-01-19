@@ -29,7 +29,7 @@ class UserController extends BaseController {
         if($redirect){return $redirect;}
 
         // Show the page
-        return View::make('site/user/dashboard', compact('user'));
+        return View::make('site/dashboard/home', compact('user'));
     }
 
     /**
@@ -142,7 +142,7 @@ class UserController extends BaseController {
      */
     public function getCreate()
     {
-        return View::make('site/user/create');
+        return View::make('site/nonboard/create');
     }
 
 
@@ -157,7 +157,7 @@ class UserController extends BaseController {
             return Redirect::to('/');
         }
 
-        return View::make('site/user/login');
+        return View::make('site/nonboard/login');
     }
 
     /**
@@ -179,6 +179,7 @@ class UserController extends BaseController {
         // Check that the user is confirmed.
         if ( Confide::logAttempt( $input, true ) )
         {
+            View::share('name', 'Steve');
             $r = Session::get('loginRedirect');
             if (!empty($r))
             {
@@ -229,7 +230,7 @@ class UserController extends BaseController {
      */
     public function getForgot()
     {
-        return View::make('site/user/forgot');
+        return View::make('site/nonboard/forgot');
     }
 
     /**
@@ -300,32 +301,7 @@ class UserController extends BaseController {
         return Redirect::to('/');
     }
 
-    /**
-     * Get user's profile
-     * @param $username
-     * @return mixed
-     */
-    public function getProfile($username = 'user')
-    {
-        $userModel = new User;
-        $user = $userModel->getUserByUsername($username);
-
-        // Check if the user exists
-        if (is_null($user))
-        {
-            return App::abort(404);
-        }
-
-        return View::make('site/user/profile', compact('user'));
-    }
-
-    public function getSettings()
-    {
-        list($user,$redirect) = User::checkAuthAndRedirect('user/settings');
-        if($redirect){return $redirect;}
-
-        return View::make('site/user/profile', compact('user'));
-    }
+    
 
     /**
      * Process a dumb redirect.

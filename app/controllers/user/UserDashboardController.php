@@ -9,8 +9,9 @@ class UserDashboardController extends BaseController {
 	 */
 	public function index()
 	{
-        return View::make('site/user/dashboard');
+        return View::make('site.dashboard.home');
 	}
+
 
 	/**
 	 * Show the form for creating a new resource.
@@ -79,34 +80,16 @@ class UserDashboardController extends BaseController {
 	public function getMessages()
 	{
 		//
-		return View::make('site.user.messages');
+		return View::make('site.dashboard.messages');
 	}
 
-	/**
-     * Get user's profile
-     * @param $username
-     * @return mixed
-     */
-    public function getProfile($username = 'user')
-    {
-        $userModel = new User;
-        $user = $userModel->getUserByUsername($username);
-
-        // Check if the user exists
-        if (is_null($user))
-        {
-            return App::abort(404);
-        }
-
-        return View::make('site/user/profile', compact('user'));
-    }
 
     public function getSettings()
     {
-        list($user,$redirect) = User::checkAuthAndRedirect('user/settings');
+        list($user,$redirect) = User::checkAuthAndRedirect('dashboard/settings');
         if($redirect){return $redirect;}
 
-        return View::make('site/user/profile', compact('user'));
+        return View::make('site/dashboard/settings', compact('user'));
     }
 
 }

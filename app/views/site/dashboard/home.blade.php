@@ -1,4 +1,4 @@
-@extends('site.layouts.default')
+@extends('site.outlines.dashboard')
  
 {{-- Content --}}
 @section('content')

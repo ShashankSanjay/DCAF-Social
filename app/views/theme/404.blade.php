@@ -1,4 +1,4 @@
-@extends('site.layouts.default')
+@extends('site.dashboard.home')
  
 {{-- Content --}}
 @section('content')
@@ -11,7 +11,7 @@
 				<p class="description">Looks like something went completely wrong!</p>
 				<p class="description">Don't worry, it can happen to anyone - and it just happened to you.</p>
 
-				<a href="index" class="btn btn-danger btn-block btn-lg">&laquo; Retun to Dashboard</a>
+				<a href="{{ URL::to('/')}}" class="btn btn-danger btn-block btn-lg">&laquo; Retun to Dashboard</a>
 			</div><!-- /.row -->
 
 		</div>

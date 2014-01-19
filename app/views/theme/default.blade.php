@@ -6,7 +6,7 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<meta name="keywords" content="social, analytics, social analytics, facebook, twitter, google plus" />
 		<meta name="author" content="DCAF-Social" />
-		<meta name="description" content="THis is a social network analytics platform" />
+		<meta name="description" content="This is a social network analytics platform" />
 
 		<title>
 			@section('title')
@@ -14,52 +14,49 @@
 			@show
 		</title>
 
-		<!-- Fonts -->
-		<link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,900,200italic,300italic,400italic,600italic,700italic,900italic">
-		<link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Roboto:400,100,100italic,300,300italic,400italic,500,500italic,700,700italic">
-		<link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic,700italic">
-		<link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Roboto+Slab:400,700,300,100">
-		<link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Noto+Sans:400,700,400italic,700italic">
-		<link href='http://fonts.googleapis.com/css?family=Share+Tech' rel='stylesheet' type='text/css'>
-		
-		<!-- Bootstrap core CSS -->
-		{{ HTML::style('bootstrap/css/bootstrap.min-50686.css') }}
-
-		<!-- Font Awesome CSS -->
-		{{ HTML::style('fonts/font-awesome/css/font-awesome.min-45579.css') }}
-
-		<!-- Icomoon CSS -->
-		{{ HTML::style('fonts/icomoon/style.css') }}
-
-		<!-- Animate CSS -->
-		{{ HTML::style('css/libs/animate.min.css') }}
-
-		<!-- Bootstrap Switch -->
-		{{ HTML::style('css/libs/bootstrap-switch.css') }}
-
-		<!-- Bootstrap Select -->
-		{{ HTML::style('css/libs/bootstrap-select.min.css') }}
-
-		<!-- Bootstrap WYSIHTML5 -->
-		{{ HTML::style('css/libs/bootstrap-wysihtml5.css') }}
-
-		<!-- jQuery Fullcalendar -->
-		{{ HTML::style('css/libs/fullcalendar.css') }}
-
-		<!-- jVectorMap -->
-		{{ HTML::style('css/libs/jquery-jvectormap-1.2.2.css') }}
-
-		<!-- Prism -->
-		{{ HTML::style('css/libs/prism.css') }}
-
-		<!-- Custom styles for this template -->
-		{{ HTML::style('css/styler/style.css') }}
-		{{ HTML::style('css/demo.css') }}
-
-		<style>
 		@section('styles')
+			<!-- Fonts -->
+			<link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,900,200italic,300italic,400italic,600italic,700italic,900italic">
+			<link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Roboto:400,100,100italic,300,300italic,400italic,500,500italic,700,700italic">
+			<link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic,700italic">
+			<link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Roboto+Slab:400,700,300,100">
+			<link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Noto+Sans:400,700,400italic,700italic">
+			<link href='http://fonts.googleapis.com/css?family=Share+Tech' rel='stylesheet' type='text/css'>
+			
+			<!-- Bootstrap core CSS -->
+			{{ HTML::style('bootstrap/css/bootstrap.min-50686.css') }}
+
+			<!-- Font Awesome CSS -->
+			{{ HTML::style('fonts/font-awesome/css/font-awesome.min-45579.css') }}
+
+			<!-- Icomoon CSS -->
+			{{ HTML::style('fonts/icomoon/style.css') }}
+
+			<!-- Animate CSS -->
+			{{ HTML::style('css/libs/animate.min.css') }}
+
+			<!-- Bootstrap Switch -->
+			{{ HTML::style('css/libs/bootstrap-switch.css') }}
+
+			<!-- Bootstrap Select -->
+			{{ HTML::style('css/libs/bootstrap-select.min.css') }}
+
+			<!-- Bootstrap WYSIHTML5 -->
+			{{ HTML::style('css/libs/bootstrap-wysihtml5.css') }}
+
+			<!-- jQuery Fullcalendar -->
+			{{ HTML::style('css/libs/fullcalendar.css') }}
+
+			<!-- jVectorMap -->
+			{{ HTML::style('css/libs/jquery-jvectormap-1.2.2.css') }}
+
+			<!-- Prism -->
+			{{ HTML::style('css/libs/prism.css') }}
+
+			<!-- Custom styles for this template -->
+			{{ HTML::style('css/styler/style.css') }}
+			{{ HTML::style('css/demo.css') }}
 		@show
-		</style>
 
 		<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
 		<!--[if lt IE 9]>
@@ -70,6 +67,7 @@
 
 	<body>
 		<div id="wrapper">
+@section('sidebar')
 <div id="sidebar">
 	<div class="inner">
 
@@ -264,6 +262,8 @@
 		</div>
 	</div>
 </div>
+@show
+@section('topnav')
 <div id="middle">
 
 	<header id="header">
@@ -324,7 +324,7 @@
 	</nav>
 
 </header><!-- /#header -->
-
+@show
 	<!-- Content -->
 		@yield('content')
 	<!-- ./ content -->

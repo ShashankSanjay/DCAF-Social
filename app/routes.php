@@ -82,7 +82,7 @@ Route::group(array('before' => 'auth'), function()
 {
     Route::get('messages', 'UserDashboardController@getMessages');
 
-    Route::get('profile', 'UserDashboardController@getProfile');
+    Route::get('settings', 'UserDashboardController@getSettings');
 
     Route::get('/', 'UserDashboardController@index');
 });
@@ -125,7 +125,7 @@ Route::get('{postSlug}', 'BlogController@getView');
 Route::post('{postSlug}', 'BlogController@postView');
 
 # Index Page - Last route, no matches
-Route::get('/', array('before' => 'auth','uses' => 'UserController@getIndex'));
+Route::get('/', array('before' => 'auth','uses' => 'UserDashboardController@index'));
 
 
 App::missing(function($exception)
