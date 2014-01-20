@@ -1,11 +1,16 @@
 @extends('site.outlines.dashboard')
 
+{{-- Web site Title --}}
+@section('title')
+Example Board
+@stop
+
 {{-- Content --}}
 @section('content')
   <div id="content">
 		<div class="container">
-			<h1>Welcome to DCAF</h1>
-			<!--<div class="row">
+
+			<div class="row">
 				<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
 					<div class="stat-block stat-primary">
 						<div class="icon">
@@ -54,7 +59,7 @@
 						</div>              
 					</div>
 				</div>
-			</div--><!-- /.row -->
+			</div><!-- /.row -->
 
 		</div><!-- /.container -->
 
@@ -67,11 +72,11 @@
 
 					<div class="panel panel-outline">
 						<div class="panel-heading">
-							<h3 class="panel-title"><i class="fa fa-cogs"></i> Connect Your Social Media Accounts!</h3>
+							<h3 class="panel-title"><i class="fa fa-cogs"></i> Resource Usage</h3>
 						</div><!-- /.panel-heading -->
 						<div class="panel-body">
 							<div class="row">
-								<!--div class="col-sm-3">
+								<div class="col-sm-3">
 									<div class="sparkline-chart" id="sparkline-graph2">25,27,18,29,23,9,6,5,12,15,5,29,10,28,20,21,16,7,5,7</div>
 									<div class="align-center">Server Load</div>
 								</div>
@@ -86,13 +91,7 @@
 								<div class="col-sm-3">
 									<div class="sparkline-chart" id="sparkline-graph5">28,14,12,9,24,19,8,14,28,7,10,21,7,5,20,29,15,9,11,28</div>
 									<div class="align-center">Bandwidth</div>
-								</div-->
-								<ul class="nav nav-pills nav-justified">
-									<li><a href="#" class="social-network brand-facebook"><i class="fa fa-facebook-square"></i> Facebook</a></li>
-									<li><a href="#" class="social-network brand-gplus"><i class="fa fa-google-plus-square"></i> Google+</a></li>
-									<li><a href="#" class="social-network brand-twitter"><i class="fa fa-twitter-square"></i> Twitter</a></li>
-									<li><a href="#" class="social-network brand-github"><i class="fa fa-github-square"></i> Github</a></li>
-								</ul>
+								</div>
 							</div>
 						</div><!-- /.panel-body -->
 					</div><!-- /.panel-outline -->

@@ -84,6 +84,22 @@ Route::group(array('before' => 'auth'), function()
 
     Route::get('settings', 'UserDashboardController@getSettings');
 
+    Route::get('charts', function()
+    {
+        return View::make('theme.charts');
+    });
+
+    Route::get('panels', function()
+    {
+        return View::make('theme.panels');
+    });
+
+    Route::get('exampleBoard', function()
+    {
+        //
+        return View::make('site.dashboard.exampleboard');
+    });
+
     Route::get('/', 'UserDashboardController@index');
 });
 
@@ -104,6 +120,11 @@ Route::post('user/{user}/edit', 'UserController@postEdit');
 Route::post('user/login', 'UserController@postLogin');
 
 Route::get('user/profile', 'UserController@getProfile');
+
+Route::get('user/confirmation', 'UserController@getConfirmation');
+
+//after user clicks confirm link on email, redirected here. Then proceed to register DCAF with each network. THen go to dashboard
+Route::get('user/registernetworks', 'UserController@registerNetworks');
 
 # User RESTful Routes (Login, Logout, Register, etc)
 Route::controller('user', 'UserController');

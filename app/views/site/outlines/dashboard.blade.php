@@ -35,7 +35,7 @@ Dashboard
 						</ul>
 					</nav>
 					
-					<nav class="navbar navbar-inverse user-notification">
+					<!--nav class="navbar navbar-inverse user-notification">
 						<div class="">
 							<ul class="nav navbar-nav">
 								
@@ -53,7 +53,7 @@ Dashboard
 								</li>
 							</ul>
 						</div>
-					</nav>
+					</nav-->
 
 					<nav class="side-nav">
 						<ul class="nav nav-pills nav-stacked">
@@ -94,9 +94,9 @@ Dashboard
 							</li>
 
 							<li >
-								<a href="calendar">
+								<a href="exampleBoard">
 									<i class="fa fa-calendar"></i>
-									Calendar
+									ExampleBoard
 								</a>
 							</li>
 
@@ -147,13 +147,30 @@ Dashboard
 									<i class="icon-copy"></i>
 									Pages <b class="caret"></b>
 								</a>
-								<ul class="panel-collapse collapse " id="pages">
+								<ul class="panel-collapse collapse {{ (Request::is('404') ? 'in' : '') }}" id="pages">
 									<li ><a href="signup"><i class="fa fa-arrow-right"></i> Sign up</a></li>
 									<li ><a href="signin"><i class="fa fa-arrow-right"></i> Sign in</a></li>
 									<li ><a href="profile"><i class="fa fa-arrow-right"></i> Profile</a></li>
 									<li {{ (Request::is('404') ? ' class="active"' : '') }}><a href="404"><i class="fa fa-arrow-right"></i> Error 404</a></li>
 								</ul>
 							</li>
+						</ul>
+						<style>
+							#sidebar .inner nav.side-nav ul.nav.cbox {
+								display: table;
+								width: 100%;
+							}
+							#sidebar .inner nav.side-nav ul.nav.cbox>li {
+								display: table-cell;
+							}
+							#sidebar .inner nav.side-nav ul.nav.cbox>li>a {
+								text-align: center;
+							}
+							
+						</style>
+						<ul class="nav nav-pills nav-stacked cbox">
+							<li><a href="#">AYO</a></li>
+							<li><a href="#">AYO</a></li>
 						</ul>
 					</nav>
 
@@ -261,7 +278,7 @@ Dashboard
 
 				<!-- Content -->
 					@yield('content')
-					@show
+					
 				<!-- ./ content -->
 			</div>	
 			<footer>

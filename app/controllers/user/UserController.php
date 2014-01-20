@@ -68,7 +68,7 @@ class UserController extends BaseController {
         if ( $this->user->id )
         {
             // Redirect with success message, You may replace "Lang::get(..." for your custom message.
-            return Redirect::to('user/login')
+            return Redirect::to('user/confirmation')
                 ->with( 'notice', Lang::get('user/user.user_account_created') );
         }
         else
@@ -179,7 +179,6 @@ class UserController extends BaseController {
         // Check that the user is confirmed.
         if ( Confide::logAttempt( $input, true ) )
         {
-            View::share('name', 'Steve');
             $r = Session::get('loginRedirect');
             if (!empty($r))
             {
@@ -214,7 +213,7 @@ class UserController extends BaseController {
     {
         if ( Confide::confirm( $code ) )
         {
-            return Redirect::to('user/login')
+            return Redirect::to('user/registernetworks')
                 ->with( 'notice', Lang::get('confide::confide.alerts.confirmation') );
         }
         else
@@ -320,5 +319,22 @@ class UserController extends BaseController {
             $redirect .= (empty($url3)? '' : '/' . $url3);
         }
         return $redirect;
+    }
+
+    public function getConfirmation()
+    {
+        //
+        return View::make('site.nonboard.confirmation');
+    }
+
+    public function registerNetworks()
+    {
+        //use data to show which networks are registered and which are not
+        $data = array();
+
+        $user = Auth::user();
+        
+        
+        return View::make('site.nonboard.registernetworks')->with($data);
     }
 }

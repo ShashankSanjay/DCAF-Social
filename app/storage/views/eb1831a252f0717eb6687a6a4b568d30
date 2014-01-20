@@ -23,38 +23,38 @@
 		<link href='http://fonts.googleapis.com/css?family=Share+Tech' rel='stylesheet' type='text/css'>
 		
 		<!-- Bootstrap core CSS -->
-		<?php echo HTML::style('bootstrap/css/bootstrap.min-50686.css'); ?>
+		<?php echo HTML::style('assets/bootstrap/css/bootstrap.min-50686.css'); ?>
 
 		<!-- Font Awesome CSS -->
-		<?php echo HTML::style('fonts/font-awesome/css/font-awesome.min-45579.css'); ?>
+		<?php echo HTML::style('assets/fonts/font-awesome/css/font-awesome.min-45579.css'); ?>
 
 		<!-- Icomoon CSS -->
-		<?php echo HTML::style('fonts/icomoon/style.css'); ?>
+		<?php echo HTML::style('assets/fonts/icomoon/style.css'); ?>
 
 		<!-- Animate CSS -->
-		<?php echo HTML::style('css/libs/animate.min.css'); ?>
+		<?php echo HTML::style('assets/css/libs/animate.min.css'); ?>
 
 		<!-- Bootstrap Switch -->
-		<?php echo HTML::style('css/libs/bootstrap-switch.css'); ?>
+		<?php echo HTML::style('assets/css/libs/bootstrap-switch.css'); ?>
 
 		<!-- Bootstrap Select -->
-		<?php echo HTML::style('css/libs/bootstrap-select.min.css'); ?>
+		<?php echo HTML::style('assets/css/libs/bootstrap-select.min.css'); ?>
 
 		<!-- Bootstrap WYSIHTML5 -->
-		<?php echo HTML::style('css/libs/bootstrap-wysihtml5.css'); ?>
+		<?php echo HTML::style('assets/css/libs/bootstrap-wysihtml5.css'); ?>
 
 		<!-- jQuery Fullcalendar -->
-		<?php echo HTML::style('css/libs/fullcalendar.css'); ?>
+		<?php echo HTML::style('assets/css/libs/fullcalendar.css'); ?>
 
 		<!-- jVectorMap -->
-		<?php echo HTML::style('css/libs/jquery-jvectormap-1.2.2.css'); ?>
+		<?php echo HTML::style('assets/css/libs/jquery-jvectormap-1.2.2.css'); ?>
 
 		<!-- Prism -->
-		<?php echo HTML::style('css/libs/prism.css'); ?>
+		<?php echo HTML::style('assets/css/libs/prism.css'); ?>
 
 		<!-- Custom styles for this template -->
-		<?php echo HTML::style('css/styler/style.css'); ?>
-		<?php echo HTML::style('css/demo.css'); ?>
+		<?php echo HTML::style('assets/css/styler/style.css'); ?>
+		<?php echo HTML::style('assets/css/demo.css'); ?>
 
 		
 
@@ -69,65 +69,65 @@
 	<!-- ./ Outline -->
 
 		<!-- jQuery -->
-		<?php echo HTML::script('js/libs/jquery-1.10.2.min.js'); ?>
+		<?php echo HTML::script('assets/js/libs/jquery-1.10.2.min.js'); ?>
 
 		<!-- jQuery UI -->
-		<?php echo HTML::script('js/libs/jquery-ui.min.js'); ?>
+		<?php echo HTML::script('assets/js/libs/jquery-ui.min.js'); ?>
 
 		<!-- Bootstrap core JavaScript -->
-		<?php echo HTML::script('bootstrap/js/bootstrap.min.js?v=3.0.2'); ?>
+		<?php echo HTML::script('assets/bootstrap/js/bootstrap.min.js?v=3.0.2'); ?>
 
 		<!-- jQuery Transit -->
-		<?php echo HTML::script('js/libs/jquery.transit.min.js?v=0.9.9'); ?>
+		<?php echo HTML::script('assets/js/libs/jquery.transit.min.js?v=0.9.9'); ?>
 
 		<!-- Bootstrap Switch -->
-		<?php echo HTML::script('js/libs/bootstrap-switch.js'); ?>
+		<?php echo HTML::script('assets/js/libs/bootstrap-switch.js'); ?>
 
 		<!-- Bootstrap Select -->
-		<?php echo HTML::script('js/libs/bootstrap-select.min.js'); ?>
+		<?php echo HTML::script('assets/js/libs/bootstrap-select.min.js'); ?>
 
 		<!-- Bootstrap File -->
-		<?php echo HTML::script('js/libs/bootstrap-filestyle.js'); ?>
+		<?php echo HTML::script('assets/js/libs/bootstrap-filestyle.js'); ?>
 
-		<?php echo HTML::script('js/libs/wysihtml5-0.3.0.min.js'); ?>
+		<?php echo HTML::script('assets/js/libs/wysihtml5-0.3.0.min.js'); ?>
 
 		<!-- Bootstrap WYSIHTML5 -->
-		<?php echo HTML::script('js/libs/bootstrap-wysihtml5.js'); ?>
+		<?php echo HTML::script('assets/js/libs/bootstrap-wysihtml5.js'); ?>
 
 		<!-- jQuery FullCalendar -->
-		<?php echo HTML::script('js/libs/fullcalendar.min.js'); ?>
-		<?php echo HTML::script('js/libs/gcal.js'); ?>
+		<?php echo HTML::script('assets/js/libs/fullcalendar.min.js'); ?>
+		<?php echo HTML::script('assets/js/libs/gcal.js'); ?>
 
 		<!-- Prism -->
-		<?php echo HTML::script('js/libs/prism.js'); ?>
+		<?php echo HTML::script('assets/js/libs/prism.js'); ?>
 
 		<!-- jVectorMap -->
-		<?php echo HTML::script('js/libs/jquery-jvectormap-1.2.2.min.js'); ?>
-		<?php echo HTML::script('js/libs/jquery-jvectormap-world-mill-en.js'); ?>
+		<?php echo HTML::script('assets/js/libs/jquery-jvectormap-1.2.2.min.js'); ?>
+		<?php echo HTML::script('assets/js/libs/jquery-jvectormap-world-mill-en.js'); ?>
 
 		<!-- Flot -->
-		<?php echo HTML::script('js/libs/jquery.flot.min.js'); ?>
-		<?php echo HTML::script('js/libs/jquery.flot.time.min.js'); ?>
-		<?php echo HTML::script('js/libs/jquery.flot.pie.min.js'); ?>
-		<?php echo HTML::script('js/libs/jquery.flot.resize.min.js'); ?>
-		<?php echo HTML::script('js/libs/jquery.flot.stack.min.js'); ?>
-		<?php echo HTML::script('js/libs/jquery.flot.tooltip.min.js'); ?>
+		<?php echo HTML::script('assets/js/libs/jquery.flot.min.js'); ?>
+		<?php echo HTML::script('assets/js/libs/jquery.flot.time.min.js'); ?>
+		<?php echo HTML::script('assets/js/libs/jquery.flot.pie.min.js'); ?>
+		<?php echo HTML::script('assets/js/libs/jquery.flot.resize.min.js'); ?>
+		<?php echo HTML::script('assets/js/libs/jquery.flot.stack.min.js'); ?>
+		<?php echo HTML::script('assets/js/libs/jquery.flot.tooltip.min.js'); ?>
 
 		<!-- Sparkline -->
-		<?php echo HTML::script('js/libs/jquery.sparkline.min.js'); ?>
+		<?php echo HTML::script('assets/js/libs/jquery.sparkline.min.js'); ?>
 
 		<!-- Prism -->
-		<?php echo HTML::script('js/libs/jquery.sparkline.min.js'); ?>
+		<?php echo HTML::script('assets/js/libs/jquery.sparkline.min.js'); ?>
 
 		<!-- jQuery EqualHeights -->
-		<?php echo HTML::script('js/libs/jquery.equalheights.min.js'); ?>
+		<?php echo HTML::script('assets/js/libs/jquery.equalheights.min.js'); ?>
 
 		<!-- jQuery Nicescroll -->
-		<?php echo HTML::script('js/libs/jquery.nicescroll.min.js'); ?>
+		<?php echo HTML::script('assets/js/libs/jquery.nicescroll.min.js'); ?>
 
 		<!-- Theme script -->
-		<?php echo HTML::script('js/styler/script.js'); ?>
-		<?php echo HTML::script('js/styler/sample_graphs.js'); ?>
+		<?php echo HTML::script('assets/js/styler/script.js'); ?>
+		<?php echo HTML::script('assets/js/styler/sample_graphs.js'); ?>
 	</body>
 </html>
 <!-- Localized -->

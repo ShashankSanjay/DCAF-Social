@@ -26,8 +26,8 @@ DCAF
 						<form class="form-signin" role="form" method="POST" action="<?php echo e((Confide::checkAction('UserController@store')) ?: URL::to('user')); ?>" accept-charset="UTF-8">
 						    <input type="hidden" name="_token" value="<?php echo e(Session::getToken()); ?>">
 						    <fieldset>
-				   	            <input class="form-control input-lg" placeholder="<?php echo e(Lang::get('confide::confide.username')); ?>" type="text" name="username" id="username" value="<?php echo e(Input::old('username')); ?>" required>
-								<input type="text" class="form-control input-lg" placeholder="<?php echo e(Lang::get('confide::confide.e_mail')); ?>" type="text" name="email" id="email" value="<?php echo e(Input::old('email')); ?>" required autofocus>
+				   	            <input class="form-control input-lg" placeholder="<?php echo e(Lang::get('confide::confide.username')); ?>" type="text" name="username" id="username" value="<?php echo e(Input::old('username')); ?>" required autofocus>
+								<input type="text" class="form-control input-lg" placeholder="<?php echo e(Lang::get('confide::confide.e_mail')); ?>" type="text" name="email" id="email" value="<?php echo e(Input::old('email')); ?>" required>
 								<input type="password" class="form-control input-lg" placeholder="<?php echo e(Lang::get('confide::confide.password')); ?>" type="password" name="password" id="password" required>
 								<input type="password" placeholder="<?php echo e(Lang::get('confide::confide.password_confirmation')); ?>" type="password" name="password_confirmation" id="password_confirmation" class="form-control input-lg" required>
 								<label class="checkbox">
@@ -43,7 +43,7 @@ DCAF
 						        <?php endif; ?>
 
 						        <?php if ( Session::get('notice') ): ?>
-						            <div class="alert"><?php echo Session::get('notice'); ?></div>
+						            <div class="alert alert-info"><?php echo Session::get('notice'); ?></div>
 						        <?php endif; ?>
 
 								<button class="btn btn-lg btn-primary btn-block" type="submit"><?php echo e(Lang::get('confide::confide.signup.submit')); ?></button>

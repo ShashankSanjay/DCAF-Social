@@ -23,6 +23,13 @@ DCAF
 			<div class="container">
 				<div class="row">
 					<div class="col-lg-4 col-md-6 col-lg-offset-4 col-md-offset-3">
+						@if ( Session::get('error') )
+					    	<div class="alert alert-danger">{{ Session::get('error') }}</div>
+					    @endif
+
+					    @if ( Session::get('notice') )
+					    	<div class="alert alert-info">{{ Session::get('notice') }}</div>
+					    @endif
 						<form class="form-signin" role="form" method="POST" action="{{ URL::to('user/login') }}" accept-charset="UTF-8">
 							<input type="hidden" name="_token" value="{{ csrf_token() }}">
     						<fieldset>	
@@ -31,7 +38,6 @@ DCAF
 								<label class="checkbox">
 									<input type="checkbox" value="remember-me"> Remember me
 								</label>
-
 								<button class="btn btn-lg btn-primary btn-block" type="submit">{{ Lang::get('confide::confide.login.submit') }}</button>
 							</fieldset>
 						</form>

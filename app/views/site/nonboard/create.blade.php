@@ -27,8 +27,8 @@ DCAF
 						<form class="form-signin" role="form" method="POST" action="{{{ (Confide::checkAction('UserController@store')) ?: URL::to('user')  }}}" accept-charset="UTF-8">
 						    <input type="hidden" name="_token" value="{{{ Session::getToken() }}}">
 						    <fieldset>
-				   	            <input class="form-control input-lg" placeholder="{{{ Lang::get('confide::confide.username') }}}" type="text" name="username" id="username" value="{{{ Input::old('username') }}}" required>
-								<input type="text" class="form-control input-lg" placeholder="{{{ Lang::get('confide::confide.e_mail') }}}" type="text" name="email" id="email" value="{{{ Input::old('email') }}}" required autofocus>
+				   	            <input class="form-control input-lg" placeholder="{{{ Lang::get('confide::confide.username') }}}" type="text" name="username" id="username" value="{{{ Input::old('username') }}}" required autofocus>
+								<input type="text" class="form-control input-lg" placeholder="{{{ Lang::get('confide::confide.e_mail') }}}" type="text" name="email" id="email" value="{{{ Input::old('email') }}}" required>
 								<input type="password" class="form-control input-lg" placeholder="{{{ Lang::get('confide::confide.password') }}}" type="password" name="password" id="password" required>
 								<input type="password" placeholder="{{{ Lang::get('confide::confide.password_confirmation') }}}" type="password" name="password_confirmation" id="password_confirmation" class="form-control input-lg" required>
 								<label class="checkbox">
@@ -44,7 +44,7 @@ DCAF
 						        @endif
 
 						        @if ( Session::get('notice') )
-						            <div class="alert">{{ Session::get('notice') }}</div>
+						            <div class="alert alert-info">{{ Session::get('notice') }}</div>
 						        @endif
 
 								<button class="btn btn-lg btn-primary btn-block" type="submit">{{{ Lang::get('confide::confide.signup.submit') }}}</button>
