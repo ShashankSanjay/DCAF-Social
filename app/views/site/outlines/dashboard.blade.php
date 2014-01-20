@@ -20,7 +20,7 @@ Dashboard
 										<img src="img/samples/avatar-4.jpg">
 									</span>
 									<span>
-										<span class="user-name">{{{ $name or 'Default' }}}</span>
+										<span class="user-name">{{{ Auth::user()->username }}}</span>
 										<span class="connection online"><i class="fa fa-circle"></i> Online</span>
 									</span>
 

@@ -27,7 +27,7 @@ return array(
     |
     */
 
-    //'redirect' => '',
+    'redirect' => 'http://shashanksanjay.com/user/registernetworks',
 
     /*
     |--------------------------------------------------------------------------

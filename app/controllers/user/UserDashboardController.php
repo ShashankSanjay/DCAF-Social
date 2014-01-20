@@ -94,6 +94,10 @@ class UserDashboardController extends BaseController {
 
     public function getDemographics()
     {
+    	
+
+
+    	
     	//
     	return View::make('site.dashboard.demographics', array('network'=>'facebook', 'company'=>'pepsi'));
     }
