@@ -55,9 +55,9 @@ return array(
 		'mysql' => array(
 			'driver'    => 'mysql',
 			'host'      => 'localhost',
-			'database'  => 'shashan2_DCAF-Social',
-			'username'  => 'shashan2_DCAF',
-			'password'  => 'DatabaseBean',
+			'database'  => 'laravelbootstrapstarter',
+			'username'  => 'root',
+			'password'  => 'root',
 			'charset'   => 'utf8',
 			'collation' => 'utf8_unicode_ci',
 			'prefix'    => '',
