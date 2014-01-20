@@ -89,7 +89,13 @@ class UserDashboardController extends BaseController {
         list($user,$redirect) = User::checkAuthAndRedirect('dashboard/settings');
         if($redirect){return $redirect;}
 
-        return View::make('site/dashboard/settings', compact('user'));
+        return View::make('site.dashboard.settings', compact('user'));
+    }
+
+    public function getDemographics()
+    {
+    	//
+    	return View::make('site.dashboard.demographics', array('network'=>'facebook', 'company'=>'pepsi'));
     }
 
 }

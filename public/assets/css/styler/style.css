@@ -228,7 +228,7 @@ fieldset legend {
 }
 .panel .panel-heading .panel-title {
   float: left;
-  font-size: 16px;
+  font-size: 25px;
   font-weight: 300;
   height: 40px;
   line-height: 40px;
@@ -1827,6 +1827,9 @@ body {
 }
 .social-network.brand-gplus {
   background-color: #d6492f;
+}
+.social-network.brand-instagram {
+  background-color: #517fa4;
 }
 .jqstooltip {
   border: 0 !important;

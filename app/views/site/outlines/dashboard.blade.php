@@ -86,10 +86,10 @@ Dashboard
 								</ul>
 							</li>
 
-							<li >
-								<a href="charts">
+							<li {{ (Request::is('demographics') ? ' class="active"' : '') }}>
+								<a href="demographics">
 									<i class="fa fa-bar-chart-o"></i>
-									Charts
+									Demographics
 								</a>
 							</li>
 

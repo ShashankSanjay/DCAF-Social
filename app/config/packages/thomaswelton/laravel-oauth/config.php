@@ -125,7 +125,7 @@ return array(
     'facebook' => array(
         'key' => '494865777271597',
         'secret' => '55ad9a3e7e53fd0fd7727de6e6787da6',
-        'scope' => 'email, read_stream, manage_pages, publish_actions, read_page_mailboxes'
+        'scope' => 'email, read_stream, manage_pages, publish_actions'
     ),
 
     /*
@@ -162,7 +162,7 @@ return array(
     'google' => array(
         'key' => '955814469005.apps.googleusercontent.com',
         'secret' => 'OF0G2xJHv_3DRlYAsa-wWN5j',
-        'scope' => 'openid email'
+        'scope' => 'email'
     ),
 
     /*

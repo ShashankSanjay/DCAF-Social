@@ -100,6 +100,8 @@ Route::group(array('before' => 'auth'), function()
         return View::make('site.dashboard.exampleboard');
     });
 
+    Route::get('demographics', 'UserDashboardController@getDemographics');
+
     Route::get('/', 'UserDashboardController@index');
 });
 

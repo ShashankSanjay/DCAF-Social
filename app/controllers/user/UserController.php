@@ -329,12 +329,13 @@ class UserController extends BaseController {
 
     public function registerNetworks()
     {
-        //use data to show which networks are registered and which are not
+        /*use data to show which networks are registered and which are not
         $data = array();
 
         $user = Auth::user();
-        
-        
-        return View::make('site.nonboard.registernetworks')->with($data);
+        */
+
+        //return View::make('site.nonboard.registernetworks')->with($data);
+        return View::make('site.nonboard.registernetworks');
     }
 }
