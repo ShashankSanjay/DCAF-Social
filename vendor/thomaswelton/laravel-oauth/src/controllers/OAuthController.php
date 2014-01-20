@@ -9,7 +9,7 @@ use Illuminate\Support\MessageBag;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Redirect;
-use Illuminate\Routing\Controllers\Controller;
+use Illuminate\Routing\Controller;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 
