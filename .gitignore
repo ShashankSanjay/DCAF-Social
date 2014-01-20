@@ -17,4 +17,4 @@ desktop.ini
 *.lock
 app.php
 database.php
-vendor
+vendor/
