@@ -420,7 +420,7 @@ a, li {
 }
 
 /* Styling the toggle menu link and hiding it */
-.nav .navtoogle	
+.nav .navtoogle	{
 	width: 100%;
 	padding: 0.5em 0.5em 0.8em;
 	font-family: 'Lato',Calibri,Arial,sans-serif;
