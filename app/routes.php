@@ -102,7 +102,51 @@ Route::group(array('before' => 'auth'), function()
 
     Route::get('demographics', 'UserDashboardController@getDemographics');
 
-    Route::get('/', 'UserDashboardController@index');
+    Route::get('rawr', function()
+    {
+        //
+        $companies = [
+                    'Pepsi' => ['0' => 'fa fa-facebook-square',
+                                '1' => 'fa fa-twitter-square',
+                                '2' => 'fa fa-google-plus-square',
+                                '3' => 'fa fa-instagram'],
+                    'Coke' => ['0' => 'fa fa-facebook-square',
+                                '1' => 'fa fa-twitter-square',
+                                '2' => 'fa fa-google-plus-square',
+                                '3' => 'fa fa-instagram'],
+                    'Samsung' => ['0' => 'fa fa-facebook-square',
+                                '1' => 'fa fa-twitter-square',
+                                '2' => 'fa fa-google-plus-square',
+                                '3' => 'fa fa-instagram'],
+                    'Apple' => ['0' => 'fa fa-facebook-square',
+                                '1' => 'fa fa-twitter-square',
+                                '2' => 'fa fa-google-plus-square',
+                                '3' => 'fa fa-instagram'],
+                    'Levi' => ['0' => 'fa fa-facebook-square',
+                                '1' => 'fa fa-twitter-square',
+                                '2' => 'fa fa-google-plus-square',
+                                '3' => 'fa fa-instagram'],
+                    'American Apparel' => ['0' => 'fa fa-facebook-square',
+                                '1' => 'fa fa-twitter-square',
+                                '2' => 'fa fa-google-plus-square',
+                                '3' => 'fa fa-instagram'],
+                    /*'Likeable Media' => ['0' => 'fa fa-facebook-square',
+                                '1' => 'fa fa-twitter-square',
+                                '2' => 'fa fa-google-plus-square',
+                                '3' => 'fa fa-instagram'],
+                    'CPX' => ['0' => 'fa fa-facebook-square',
+                                '1' => 'fa fa-twitter-square',
+                                '2' => 'fa fa-google-plus-square',
+                                '3' => 'fa fa-instagram'],
+                    'Hofstra' => ['0' => 'fa fa-facebook-square',
+                                '1' => 'fa fa-twitter-square',
+                                '2' => 'fa fa-google-plus-square',
+                                '3' => 'fa fa-instagram']*/
+                    ];
+        
+        return View::make('site.dashboard.exampleboard', compact('companies'));
+
+    });
 });
 
 
@@ -127,6 +171,12 @@ Route::get('user/confirmation', 'UserController@getConfirmation');
 
 //after user clicks confirm link on email, redirected here. Then proceed to register DCAF with each network. THen go to dashboard
 Route::get('user/registernetworks', 'UserController@registerNetworks');
+
+Route::get('animate', function()
+{
+    //
+    return View::make('theme.animate');
+});
 
 # User RESTful Routes (Login, Logout, Register, etc)
 Route::controller('user', 'UserController');

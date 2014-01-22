@@ -292,7 +292,7 @@ Dashboard
 				</div><!-- /#wrapper -->
 				
 				<footer id="footer">
-					<div class="row">
+					<!--div class="row">
 						<div class="col-xs-6">
 							<ul class="list-inline">
 								<li>&copy; <a href="#">Admin</a></li>
@@ -306,7 +306,29 @@ Dashboard
 								<li><a href="#"><i class="fa fa-github-square"></i></a></li>
 							</ul>
 						</div>
-					</div>
+					</div-->
+						<div class="container">
+							<div class="main clearfix animate">
+								<nav id="menu" class="nav">				
+									<ul>
+										<?php foreach ($companies as $company => $network): ?> 
+										<li>
+											<a class="xbox" href="<?php echo URL::to('demographics'); ?>" onclick="$('<?php echo URL::to('/'); ?>').animatescroll();">
+												<span> <?php echo $company; ?> </span>
+												<span class="icon">
+													<?php foreach ($network as $network): ?> 
+													<i aria-hidden="true" class="<?php echo $network; ?>"></i>
+													<?php endforeach; ?>
+												</span>
+												</a>
+										</li>
+										<?php endforeach; ?>
+										
+									</ul>
+								</nav>
+							</div>
+						</div>
+					
 				</footer>
 <?php $__env->stopSection(); ?>
 <?php echo $__env->make('site.layouts.default', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

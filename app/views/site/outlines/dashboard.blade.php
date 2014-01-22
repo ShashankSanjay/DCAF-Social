@@ -293,7 +293,7 @@ Dashboard
 				</div><!-- /#wrapper -->
 				
 				<footer id="footer">
-					<div class="row">
+					<!--div class="row">
 						<div class="col-xs-6">
 							<ul class="list-inline">
 								<li>&copy; <a href="#">Admin</a></li>
@@ -307,6 +307,28 @@ Dashboard
 								<li><a href="#"><i class="fa fa-github-square"></i></a></li>
 							</ul>
 						</div>
-					</div>
+					</div-->
+						<div class="container">
+							<div class="main clearfix animate">
+								<nav id="menu" class="nav">				
+									<ul>
+										@foreach ($companies as $company => $network) 
+										<li>
+											<a class="xbox" href="{{ URL::to('demographics')}}" onclick="$('{{URL::to('/')}}').animatescroll();">
+												<span> {{ $company }} </span>
+												<span class="icon">
+													@foreach ($network as $network) 
+													<i aria-hidden="true" class="{{ $network }}"></i>
+													@endforeach
+												</span>
+												</a>
+										</li>
+										@endforeach
+										
+									</ul>
+								</nav>
+							</div>
+						</div>
+					
 				</footer>
 @stop
