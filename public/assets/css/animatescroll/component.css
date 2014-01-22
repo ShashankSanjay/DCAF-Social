@@ -231,10 +231,10 @@ a, li {
 		height: 1.5em;
 	}
 
-	.animate .no-touch .animate .nav a:hover ,
+	.no-touch .animate .nav a:hover ,
 	.animate .nav a:active ,
 	.animate .nav a:focus {
-		height: 10em;
+		height: 4em;
 	}	
 
 	/* Making the text follow the height animation */
