@@ -82,11 +82,12 @@ a, li {
 	display: block;
 	color: rgba(249, 249, 249, .9);
 	text-decoration: none;
-	-webkit-transition: color .5s, background .5s, height .5s;
-	-moz-transition: color .5s, background .5s, height .5s;
-	-o-transition: color .5s, background .5s, height .5s;
-	-ms-transition: color .5s, background .5s, height .5s;
-	transition: color .5s, background .5s, height .5s;
+	position: relative;
+	-webkit-transition: color 1s, background 1s, height 1s;
+	-moz-transition: color 1s, background 1s, height 1s;
+	-o-transition: color 1s, background 1s, height 1s;
+	-ms-transition: color 1s, background 1s, height 1s;
+	transition: color 1s, background 1s, height 1s;
 }
 
 .animate .nav i{
@@ -207,11 +208,11 @@ a, li {
 
 	.animate .icon + span {
 		margin-top: 1em;
-		-webkit-transition: margin .5s;
-		-moz-transition: margin .5s;
-		-o-transition: margin .5s;
-		-ms-transition: margin .5s;
-		transition: margin .5s;
+		-webkit-transition: margin 10s;
+		-moz-transition: margin 10s;
+		-o-transition: margin 10s;
+		-ms-transition: margin 10s;
+		transition: margin 10s;
 	}
 
 	/* get popup socials */
@@ -238,6 +239,7 @@ a, li {
 		height: 4em;
 	}	
 
+	.no-touch .animate .nav a:hover>span.icon,
 	.nav a:hover>span.icon,
 	.nav a:focus>span.icon {
 		display:table-cell;
@@ -246,18 +248,18 @@ a, li {
 	/* Making the text follow the height animation */
 	.animate .no-touch .animate .nav a:hover .icon + span {
 		margin-top: 1em;
-		-webkit-transition: margin .5s;
-		-moz-transition: margin .5s;
-		-o-transition: margin .5s;
-		-ms-transition: margin .5s;
-		transition: margin .5s;
+		-webkit-transition: margin 5s;
+		-moz-transition: margin 5s;
+		-o-transition: margin 5s;
+		-ms-transition: margin 5s;
+		transition: margin 5s;
 	}
 
 	/* Positioning the icons and preparing for the animation*/
 	.animate .nav i {
 		position: relative;
 		display: inline-block;
-		margin: 0 auto;
+		margin-top: 0 auto;
 		padding: 0.5em;
 		border-radius: 50%;
 		font-size: 1em;
@@ -280,11 +282,11 @@ a, li {
 	.animate .no-touch .nav a:active i,
 	.animate .no-touch .nav a:focus i {		
 		box-shadow: 0 0 0 0 rgba(255,255,255,0.2);
-		-webkit-transition: box-shadow .4s ease-in-out;
-		-moz-transition: box-shadow .4s ease-in-out;
-		-o-transition: box-shadow .4s ease-in-out;
-		-ms-transition: box-shadow .4s ease-in-out;
-		transition: box-shadow .4s ease-in-out;
+		-webkit-transition: box-shadow 10s ease-in-out;
+		-moz-transition: box-shadow 10s ease-in-out;
+		-o-transition: box-shadow 10s ease-in-out;
+		-ms-transition: box-shadow 10s ease-in-out;
+		transition: box-shadow 10s ease-in-out;
 	}
 		
 }
