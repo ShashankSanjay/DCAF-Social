@@ -106,7 +106,7 @@ Route::group(array('before' => 'auth'), function()
     {
         //
         $companies = [
-                    'Pepsi' => ['0' => 'fa fa-facebook-square',
+                    'Pepsi' => ['0' => 'icon-custom-logo',
                                 '1' => 'fa fa-twitter-square',
                                 '2' => 'fa fa-google-plus-square',
                                 '3' => 'fa fa-instagram'],

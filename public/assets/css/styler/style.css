@@ -13,6 +13,15 @@
   -o-background-size: cover;
   background-size: cover;
 }
+
+[class^="icon-custom-"],
+[class*=" icon-custom-"] {
+  background-image: HTML::images('flat-social/PNG/128/01_twitter.png');
+}
+
+.icon-custom-logo { background-position : -530px -700px; width : 142px; height : 158px;  }
+.icon-custom-intheoffice { background-position: -395px -60px; width: 24px; height: 24px  } 
+
 body {
   background-color: #ffffff;
   color: #333333;

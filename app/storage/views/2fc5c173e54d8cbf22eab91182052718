@@ -1,0 +1,59 @@
+ 
+<?php /* Web site Title */ ?>
+<?php $__env->startSection('title'); ?>
+Network Registration
+<?php $__env->stopSection(); ?>
+
+<?php /* Outline */ ?>
+<?php $__env->startSection('outline'); ?>
+<body>
+<div id="wrapper">
+<section id="middle" class="no-sidebar border-top">
+
+	<div id="content">
+
+		<div class="section-content">
+			<div class="header align-center">
+				<a id="brand" class="circle" href=<?php echo URL::to('/'); ?> >DCAF</a>
+			</div>
+		</div>
+
+		<div class="section-content section-content-dark signin-page">
+			<div class="container">
+				<div class="row">
+					<li></li>
+					<div class="col-lg-6 col-md-6 col-lg-offset-3 col-md-offset-3">
+					    <?php if ( Session::get('error') ): ?>
+					        <div class="alert alert-error alert-danger"><?php echo e(Session::get('error')); ?></div>
+					    <?php endif; ?>
+
+					    <?php if ( Session::get('notice') ): ?>
+					        <div class="alert alert-info"><?php echo e(Session::get('notice')); ?></div>
+					    <?php endif; ?>
+						<style>
+							h3,
+							h2,
+							a:visited {
+							  color: #ffffff !important;
+							}
+						</style>
+						<h2 class="align-center"><strong>Sign into the following networks and we'll begin brewing your analytics</strong><h2>
+
+						<ul class="nav nav-pills nav-justified">
+							<li><a href=<?php echo OAuth::getAuthorizeUrl('facebook'); ?> class="btn btn-md<?php echo (OAuth::hasToken('facebook') ? 'btn-disabled' : ''); ?> social-network brand-facebook"><i class="fa fa-facebook-square"></i> Facebook</a></li>
+							<li><a href=<?php echo OAuth::getAuthorizeUrl('google'); ?> class="btn btn-md <?php echo (OAuth::hasToken('google') ? 'btn-disabled' : ''); ?> social-network brand-gplus"><i class="fa fa-google-plus-square"></i> Google+</a></li>
+							<li><a href=<?php echo OAuth::getAuthorizeUrl('twitter'); ?> class="btn btn-md <?php echo (OAuth::hasToken('twitter') ? 'btn-disabled' : ''); ?> social-network brand-twitter"><i class="fa fa-twitter-square"></i> Twitter</a></li>
+							<li><a href=<?php echo OAuth::getAuthorizeUrl('instagram'); ?> class="btn btn-md <?php echo (OAuth::hasToken('instagram') ? 'btn-disabled' : ''); ?> social-network brand-instagram"><i class="fa fa-instagram"></i> Instagram</a></li>
+						</ul>
+						<br />
+						<hr>
+						<h3 class="align-center">All done?<br /> You'll be able to add or remove networks later if you want to<h3>
+						<!--button class="btn btn-lg btn-primary btn-block" type="submit"> I'm all done</button-->
+						<a class="btn btn-lg btn-warning col-lg-4 col-lg-offset-4" href=<?php echo URL::to('/'); ?>><strong> Go to dashboard!</strong></a>
+					</div>
+				</div>
+			</div> <!-- /container -->
+		</div>
+
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('site.layouts.default', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
