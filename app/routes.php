@@ -144,7 +144,7 @@ Route::group(array('before' => 'auth'), function()
                                 '3' => 'fa fa-instagram']*/
                     ];
         
-        return View::make('site.dashboard.exampleboard', compact('companies'));
+        return View::make('site.outlines.dashboard', compact('companies'));
 
     });
 });
