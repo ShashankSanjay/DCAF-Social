@@ -222,7 +222,8 @@ a, li {
 	}
 
 	.animate .nav li span.icon {
-		display:table-cell;
+		/*display:table-cell;*/
+		display: none;
 	}
 	
 
@@ -236,6 +237,11 @@ a, li {
 	.animate .nav a:focus {
 		height: 4em;
 	}	
+
+	.nav a:hover>span.icon,
+	.nav a:focus>span.icon {
+		display:table-cell;
+	}
 
 	/* Making the text follow the height animation */
 	.animate .no-touch .animate .nav a:hover .icon + span {
@@ -414,8 +420,7 @@ a, li {
 }
 
 /* Styling the toggle menu link and hiding it */
-.nav .navtoogle{
-	display: none;	
+.nav .navtoogle	
 	width: 100%;
 	padding: 0.5em 0.5em 0.8em;
 	font-family: 'Lato',Calibri,Arial,sans-serif;
