@@ -155,57 +155,57 @@ a, li {
 		transition: border .5s;
 	}
 
-	.nav a {
+	.animate .nav a {
 		display: block;
 		width: auto;
 	}
 
 	/* hover, focused and active effects that add a little colored border to the different items */
-	.no-touch .animate .nav li:nth-child(6n+1) a:hover,
-	.no-touch .animate .nav li:nth-child(6n+1) a:active,
-	.no-touch .animate .nav li:nth-child(6n+1) a:focus {
+	.animate .no-touch .animate .nav li:nth-child(6n+1) a:hover,
+	.animate .no-touch .animate .nav li:nth-child(6n+1) a:active,
+	.animate .no-touch .animate .nav li:nth-child(6n+1) a:focus {
 		border-bottom: 4px solid rgb(174, 78, 1);
 	}
 
-	.no-touch .animate .nav li:nth-child(6n+2) a:hover,
-	.no-touch .animate .nav li:nth-child(6n+2) a:active,
-	.no-touch .animate .nav li:nth-child(6n+2) a:focus {
+	.animate .no-touch .animate .nav li:nth-child(6n+2) a:hover,
+	.animate .no-touch .animate .nav li:nth-child(6n+2) a:active,
+	.animate .no-touch .animate .nav li:nth-child(6n+2) a:focus {
 		border-bottom: 4px solid rgb(191, 117, 20);
 	}
 
-	.no-touch .animate .nav li:nth-child(6n+3) a:hover,
-	.no-touch .animate .nav li:nth-child(6n+3) a:active,
-	.no-touch .animate .nav li:nth-child(6n+3) a:focus {
+	.animate .no-touch .animate .nav li:nth-child(6n+3) a:hover,
+	.animate .no-touch .animate .nav li:nth-child(6n+3) a:active,
+	.animate .no-touch .animate .nav li:nth-child(6n+3) a:focus {
 		border-bottom: 4px solid rgb(12, 110, 149);
 	}
 
-	.no-touch .animate .nav li:nth-child(6n+4) a:hover,
-	.no-touch .animate .nav li:nth-child(6n+4) a:active,
-	.no-touch .animate .nav li:nth-child(6n+4) a:focus {
+	.animate .no-touch .animate .nav li:nth-child(6n+4) a:hover,
+	.animate .no-touch .animate .nav li:nth-child(6n+4) a:active,
+	.animate .no-touch .animate .nav li:nth-child(6n+4) a:focus {
 		border-bottom: 4px solid rgb(10, 75, 117);
 	}
 
-	.no-touch .animate .nav li:nth-child(6n+5) a:hover,
-	.no-touch .animate .nav li:nth-child(6n+5) a:active,
-	.no-touch .animate .nav li:nth-child(6n+5) a:focus {
+	.animate .no-touch .animate .nav li:nth-child(6n+5) a:hover,
+	.animate .no-touch .animate .nav li:nth-child(6n+5) a:active,
+	.animate .no-touch .animate .nav li:nth-child(6n+5) a:focus {
 		border-bottom: 4px solid rgb(16, 34, 44);
 	}
 
-	.no-touch .animate .nav li:nth-child(6n+6) a:hover,
-	.no-touch .animate .nav li:nth-child(6n+6) a:active,
-	.no-touch .animate .nav li:nth-child(6n+6) a:focus {
+	.animate .no-touch .animate .nav li:nth-child(6n+6) a:hover,
+	.animate .no-touch .animate .nav li:nth-child(6n+6) a:active,
+	.animate .no-touch .animate .nav li:nth-child(6n+6) a:focus {
 		border-bottom: 4px solid rgb(9, 18, 25);
 	}
 
 	/* Placing the icon */
 	
-	.icon {
+	.animate .icon {
 		padding-top: 0.2em;
 		padding-left: 0.1em;
 		padding-right: 0.1em;
 	}
 
-	.icon + span {
+	.animate .icon + span {
 		margin-top: 1em;
 		-webkit-transition: margin .5s;
 		-moz-transition: margin .5s;
@@ -231,14 +231,14 @@ a, li {
 		height: 1.5em;
 	}
 
-	.no-touch .animate .nav a:hover ,
+	.animate .no-touch .animate .nav a:hover ,
 	.animate .nav a:active ,
 	.animate .nav a:focus {
 		height: 10em;
 	}	
 
 	/* Making the text follow the height animation */
-	.no-touch .animate .nav a:hover .icon + span {
+	.animate .no-touch .animate .nav a:hover .icon + span {
 		margin-top: 1em;
 		-webkit-transition: margin .5s;
 		-moz-transition: margin .5s;
@@ -270,9 +270,9 @@ a, li {
 	}	
 	
 	/* Animate the box-shadow to create the effect */
-	.no-touch .nav a:hover i,
-	.no-touch .nav a:active i,
-	.no-touch .nav a:focus i {		
+	.animate .no-touch .nav a:hover i,
+	.animate .no-touch .nav a:active i,
+	.animate .no-touch .nav a:focus i {		
 		box-shadow: 0 0 0 0 rgba(255,255,255,0.2);
 		-webkit-transition: box-shadow .4s ease-in-out;
 		-moz-transition: box-shadow .4s ease-in-out;

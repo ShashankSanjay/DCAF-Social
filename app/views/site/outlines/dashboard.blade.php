@@ -293,21 +293,7 @@ Dashboard
 				</div><!-- /#wrapper -->
 				
 				<footer id="footer">
-					<!--div class="row">
-						<div class="col-xs-6">
-							<ul class="list-inline">
-								<li>&copy; <a href="#">Admin</a></li>
-							</ul>
-						</div>
-						<div class="col-xs-6">
-							<ul class="list-inline social-network">
-								<li><a href="#"><i class="fa fa-facebook-square"></i></a></li>
-								<li><a href="#"><i class="fa fa-twitter-square"></i></a></li>
-								<li><a href="#"><i class="fa fa-linkedin-square"></i></a></li>
-								<li><a href="#"><i class="fa fa-github-square"></i></a></li>
-							</ul>
-						</div>
-					</div-->
+						@if (isset($companies))
 						<div class="container">
 							<div class="main clearfix animate">
 								<nav id="menu" class="nav">				
@@ -324,11 +310,28 @@ Dashboard
 												</a>
 										</li>
 										@endforeach
-										
 									</ul>
 								</nav>
 							</div>
 						</div>
+						@else
+							<div class="row">
+								<div class="col-xs-6">
+									<ul class="list-inline">
+										<li>&copy; <a href="#">Admin</a></li>
+									</ul>
+								</div>
+								<div class="col-xs-6">
+									<ul class="list-inline social-network">
+										<li><a href="#"><i class="fa fa-facebook-square"></i></a></li>
+										<li><a href="#"><i class="fa fa-twitter-square"></i></a></li>
+										<li><a href="#"><i class="fa fa-linkedin-square"></i></a></li>
+										<li><a href="#"><i class="fa fa-github-square"></i></a></li>
+									</ul>
+								</div>
+							</div>
+						@endif	
+									
 					
 				</footer>
 @stop
