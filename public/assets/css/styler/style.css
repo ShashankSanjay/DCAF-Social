@@ -1196,6 +1196,10 @@ body {
 #footer .list-inline {
   margin-bottom: 0;
 }
+
+.row {
+  margin-right: 0 !important;
+}
 #footer .list-inline li a {
   color: #428bca;
   font-size: 12px;
