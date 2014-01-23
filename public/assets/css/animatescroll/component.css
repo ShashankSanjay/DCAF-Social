@@ -65,8 +65,14 @@ a, li {
 
 /* Global CSS that are applied for all screen sizes */
 
+footer#footer {
+	height: 3em;
+	overflow: visible;
+}
+
 .animate .nav ul {
 	max-width: 1240px;
+	height: 1.5em;
 	margin: 0;
 	padding: 0;
 	list-style: none;
@@ -162,7 +168,7 @@ a, li {
 	.no-touch .animate .nav li:hover,
 	.animate .nav li:active ,
 	.animate .nav li:focus {
-		top: -2em;
+		top: -2.5em;
 	}
 
 	.animate .nav a {
