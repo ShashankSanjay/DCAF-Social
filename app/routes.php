@@ -130,7 +130,7 @@ Route::group(array('before' => 'auth'), function()
                                 '1' => 'fa fa-twitter-square',
                                 '2' => 'fa fa-google-plus-square',
                                 '3' => 'fa fa-instagram'],
-                    /*'Likeable Media' => ['0' => 'fa fa-facebook-square',
+                    'Likeable Media' => ['0' => 'fa fa-facebook-square',
                                 '1' => 'fa fa-twitter-square',
                                 '2' => 'fa fa-google-plus-square',
                                 '3' => 'fa fa-instagram'],
@@ -141,7 +141,7 @@ Route::group(array('before' => 'auth'), function()
                     'Hofstra' => ['0' => 'fa fa-facebook-square',
                                 '1' => 'fa fa-twitter-square',
                                 '2' => 'fa fa-google-plus-square',
-                                '3' => 'fa fa-instagram']*/
+                                '3' => 'fa fa-instagram']
                     ];
         
         return View::make('site.outlines.dashboard', compact('companies'));
