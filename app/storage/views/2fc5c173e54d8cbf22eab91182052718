@@ -40,7 +40,7 @@ Network Registration
 						<h2 class="align-center"><strong>Sign into the following networks and we'll begin brewing your analytics</strong><h2>
 
 						<ul class="nav nav-pills nav-justified">
-							<li><a href=<?php echo OAuth::getAuthorizeUrl('paypal'); ?> class="btn btn-md<?php echo (OAuth::hasToken('facebook') ? 'btn-disabled' : ''); ?> social-network brand-facebook"><i class="fa fa-facebook-square"></i> Facebook</a></li>
+							<li><a href=<?php echo OAuth::getAuthorizeUrl('facebook'); ?> class="btn btn-md<?php echo (OAuth::hasToken('facebook') ? 'btn-disabled' : ''); ?> social-network brand-facebook"><i class="fa fa-facebook-square"></i> Facebook</a></li>
 							<li><a href=<?php echo OAuth::getAuthorizeUrl('google'); ?> class="btn btn-md <?php echo (OAuth::hasToken('google') ? 'btn-disabled' : ''); ?> social-network brand-gplus"><i class="fa fa-google-plus-square"></i> Google+</a></li>
 							<li><a href=<?php echo OAuth::getAuthorizeUrl('twitter'); ?> class="btn btn-md <?php echo (OAuth::hasToken('twitter') ? 'btn-disabled' : ''); ?> social-network brand-twitter"><i class="fa fa-twitter-square"></i> Twitter</a></li>
 							<li><a href=<?php echo OAuth::getAuthorizeUrl('instagram'); ?> class="btn btn-md <?php echo (OAuth::hasToken('instagram') ? 'btn-disabled' : ''); ?> social-network brand-instagram"><i class="fa fa-instagram"></i> Instagram</a></li>
@@ -49,11 +49,12 @@ Network Registration
 						<hr>
 						<h3 class="align-center">All done?<br /> You'll be able to add or remove networks later if you want to<h3>
 						<!--button class="btn btn-lg btn-primary btn-block" type="submit"> I'm all done</button-->
-						<a class="btn btn-lg btn-warning col-lg-4 col-lg-offset-4" href=<?php echo URL::to('/'); ?>><strong> Go to dashboard!</strong></a>
+						<a class="btn btn-lg btn-warning col-lg-4 col-lg-offset-4" href=<?php echo URL::to('user/team'); ?>><strong> Next Step!</strong></a>
 					</div>
 				</div>
 			</div> <!-- /container -->
 		</div>
-
+	</div>
+</section>
 <?php $__env->stopSection(); ?>
 <?php echo $__env->make('site.layouts.default', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

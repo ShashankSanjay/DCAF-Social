@@ -291,7 +291,11 @@ Dashboard
 
 				</div><!-- /#wrapper -->
 				
+				<?php if (isset($companies) && $companies > 6): ?>
 				<footer id="footer">
+				<?php else: ?>
+				<footer id="footer">
+				<?php endif; ?>
 						<?php if (isset($companies)): ?>
 						<div class="container">
 							<div class="main clearfix animate">

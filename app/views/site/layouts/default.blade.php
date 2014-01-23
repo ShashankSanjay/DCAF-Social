@@ -138,8 +138,8 @@
 		<!-- Animate -->
 		{{ HTML::script('assets/js/libs/modernizr.custom.js')}}
 
-		{{ HTML::script('assets/js/libs/animatescroll.js')}}
-		{{ HTML::script('assets/js/libs/animatescroll.noeasing.js')}}
+		{{-- HTML::script('assets/js/libs/animatescroll.js') --}}
+		{{-- HTML::script('assets/js/libs/animatescroll.noeasing.js') --}}
 		
 		
 	</body>

@@ -292,7 +292,11 @@ Dashboard
 
 				</div><!-- /#wrapper -->
 				
+				@if (isset($companies) && $companies > 6)
 				<footer id="footer">
+				@else
+				<footer id="footer">
+				@endif
 						@if (isset($companies))
 						<div class="container">
 							<div class="main clearfix animate">
