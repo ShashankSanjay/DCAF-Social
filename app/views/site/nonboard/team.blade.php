@@ -22,8 +22,8 @@ Network Registration
 		<div class="section-content section-content-dark signin-page">
 			<div class="container">
 				<div class="row">
-					<li></li>
-					<div class="col-lg-6 col-md-6 col-lg-offset-3 col-md-offset-3">
+					
+					<div class="col-lg-6 col-md-6 col-lg-offset-3 col-md-offset-3 abc">
 					    @if ( Session::get('error') )
 					        <div class="alert alert-error alert-danger">{{{ Session::get('error') }}}</div>
 					    @endif
@@ -38,14 +38,24 @@ Network Registration
 							  color: #ffffff !important;
 							}
 						</style>
-						<h2 class="align-center"><strong>Have your co-workers registered on our site already? Or are you the bravest?</strong><h2>
+						<h2 class="align-center"><strong>Have your co-workers registered on our site already? Or are you the bravest?</strong></h2>
 
-						<ul class="nav nav-pills nav-justified">
-							<li><a href="/" class="btn btn-md social-network brand-facebook"><i class="fa fa-facebook-square"></i> Facebook</a></li>
-							
-							<li><a href="/"  class="btn btn-md social-network brand-instagram"><i class="fa fa-instagram"></i> Instagram</a></li>
-						</ul>
+						<div class='btn-group'>
+							<button type='button' class="btn btn-primary btn-block">Me First</button>
+							<button type='button' class="btn btn-primary btn-block">Fashionably Late</button>
+						</div>
 						<br />
+
+						<form class="form-signin" role="form" method="POST" action="{{ URL::to('user/login') }}" accept-charset="UTF-8">
+							<input type="hidden" name="_token" value="{{ csrf_token() }}">
+    							
+								<input type="text" class="form-control input-lg" placeholder="{{ Lang::get('confide::confide.username_e_mail') }}" type="text" name="email" id="email" value="{{ Input::old('email') }}" required autofocus>
+								<input type="password" class="form-control input-lg" placeholder="{{ Lang::get('confide::confide.password') }}" type="password" name="password" id="password" required>
+								
+								<button class="btn btn-lg btn-primary btn-block" type="submit">{{ Lang::get('confide::confide.login.submit') }}</button>
+							
+						</form>
+						
 						<hr>
 						<h3 class="align-center">All done?<br /><h3>
 						<!--button class="btn btn-lg btn-primary btn-block" type="submit"> I'm all done</button-->

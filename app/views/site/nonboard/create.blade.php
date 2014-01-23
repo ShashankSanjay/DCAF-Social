@@ -26,7 +26,6 @@ DCAF
 					<div class="col-lg-4 col-md-6 col-lg-offset-4 col-md-offset-3">
 						<form class="form-signin" role="form" method="POST" action="{{{ (Confide::checkAction('UserController@store')) ?: URL::to('user')  }}}" accept-charset="UTF-8">
 						    <input type="hidden" name="_token" value="{{{ Session::getToken() }}}">
-						    <fieldset>
 				   	            <input class="form-control input-lg" placeholder="{{{ Lang::get('confide::confide.username') }}}" type="text" name="username" id="username" value="{{{ Input::old('username') }}}" required autofocus>
 								<input type="text" class="form-control input-lg" placeholder="{{{ Lang::get('confide::confide.e_mail') }}}" type="text" name="email" id="email" value="{{{ Input::old('email') }}}" required>
 								<input type="password" class="form-control input-lg" placeholder="{{{ Lang::get('confide::confide.password') }}}" type="password" name="password" id="password" required>
@@ -49,7 +48,6 @@ DCAF
 
 								<button class="btn btn-lg btn-primary btn-block" type="submit">{{{ Lang::get('confide::confide.signup.submit') }}}</button>
 
-						    </fieldset>
 
 						</form>
 					</div>

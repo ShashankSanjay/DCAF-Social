@@ -31,14 +31,13 @@ DCAF
 					    <?php endif; ?>
 						<form class="form-signin" role="form" method="POST" action="<?php echo URL::to('user/login'); ?>" accept-charset="UTF-8">
 							<input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
-    						<fieldset>	
 								<input type="text" class="form-control input-lg" placeholder="<?php echo Lang::get('confide::confide.username_e_mail'); ?>" type="text" name="email" id="email" value="<?php echo Input::old('email'); ?>" required autofocus>
 								<input type="password" class="form-control input-lg" placeholder="<?php echo Lang::get('confide::confide.password'); ?>" type="password" name="password" id="password" required>
 								<label class="checkbox">
 									<input type="checkbox" value="remember-me"> Remember me
 								</label>
 								<button class="btn btn-lg btn-primary btn-block" type="submit"><?php echo Lang::get('confide::confide.login.submit'); ?></button>
-							</fieldset>
+								
 						</form>
 					</div>
 				</div>

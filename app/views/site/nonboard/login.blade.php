@@ -32,14 +32,13 @@ DCAF
 					    @endif
 						<form class="form-signin" role="form" method="POST" action="{{ URL::to('user/login') }}" accept-charset="UTF-8">
 							<input type="hidden" name="_token" value="{{ csrf_token() }}">
-    						<fieldset>	
 								<input type="text" class="form-control input-lg" placeholder="{{ Lang::get('confide::confide.username_e_mail') }}" type="text" name="email" id="email" value="{{ Input::old('email') }}" required autofocus>
 								<input type="password" class="form-control input-lg" placeholder="{{ Lang::get('confide::confide.password') }}" type="password" name="password" id="password" required>
 								<label class="checkbox">
 									<input type="checkbox" value="remember-me"> Remember me
 								</label>
 								<button class="btn btn-lg btn-primary btn-block" type="submit">{{ Lang::get('confide::confide.login.submit') }}</button>
-							</fieldset>
+								
 						</form>
 					</div>
 				</div>
