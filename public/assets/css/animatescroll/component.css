@@ -90,7 +90,7 @@ a, li {
 	transition: color 1s, background 1s, height 1s;
 }
 
-.animate .nav i{
+.animate .nav i {
 	/* Make the font smoother for Chrome */
 	-webkit-transform: translate3d(0, 0, 0);
 	-moz-transform: translate3d(0, 0, 0);
@@ -148,12 +148,21 @@ a, li {
 	.animate .nav li {
 		float: left;
 		width: 16.66666666666667%;
+		position: relative;
+		top: 0em;
 		text-align: center;
-		-webkit-transition: border .5s;
-		-moz-transition: border .5s;
-		-o-transition: border .5s;
-		-ms-transition: border .5s;
-		transition: border .5s;
+		-webkit-transition: border 1s, top 1s;
+		-moz-transition: border 1s, top 1s;
+		-o-transition: border 1s, top 1s;
+		-ms-transition: border 1s, top 1s;
+		transition: border 1s, top 1s;
+	}
+	
+	/* Animating the position of the element */
+	.no-touch .animate .nav li:hover,
+	.animate .nav li:active ,
+	.animate .nav li:focus {
+		top: -2em;
 	}
 
 	.animate .nav a {
