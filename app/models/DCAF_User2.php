@@ -16,37 +16,17 @@
 
 /**
  * import namespaces and class names
- * 
- * Note:
- * Eloquent is defined as an alias of Illuminate\Database\Eloquent\Model
- * in app/config/app.php via the php function class_alias()
  */
-// use Illuminate\Database\Eloquent\Model as Eloquent;
-// use Eloquent;
-use Illuminate\Auth\UserInterface;
-use LaravelBook\Ardent\Ardent;
+// use Illuminate\Auth\UserInterface;
+// use LaravelBook\Ardent\Ardent;
 use Zizaco\Confide\ConfideUser;
 use Zizaco\Confide\Confide;
 use Zizaco\Confide\ConfideEloquentRepository;
 use Zizaco\Entrust\HasRole;
+use Robbo\Presenter\PresentableInterface;
 use Carbon\Carbon;
+use HasRole;
 
-/**
- * @abstract
- *
-abstract class User
-{
-	private $id;
-	private $username;
-	private $gender;
-	private $email;
-	private $firstName;
-	private $lastName;
-	private $likes = array();
-}
-*/
-
-// @extends, @implements, @global
 
 /**
  * Eloquent User Model
@@ -54,9 +34,6 @@ abstract class User
  * @author	Alexander Rosenberg
  * @version	1.0
  * @throws  exceptionclass
- **
- * Eloquent		laravel model class
- * Ardent		validation class
  **
  * Note:
  * configure database connection in app/config/database.php
@@ -66,7 +43,7 @@ abstract class User
  * $user->name = 'John';
  * $success = $user->save();
  */
-class DCAF_User extends Ardent implements AbstractUser, UserInterface
+class DCAF_User extends ConfideUser implements AbstractUser, PresentableInterface
 {
 	/**
 	 * DCAF_User version
@@ -99,7 +76,7 @@ class DCAF_User extends Ardent implements AbstractUser, UserInterface
 	 */
 	protected $table		= 'DCAF_users';		// defaults to classname + 's'
 	
-	protected $primaryKey	= 'DCAF_User_ID';	// defaults to 'id'
+	protected $primaryKey	= 'id';				// defaults to 'id'
 	protected $incrementing	= false;			// defaults to true; false disables auto-incrementing the primary key
 	protected $timestamps	= false;			// defaults to true to maintain 'updated_at' and 'created_at' columns
 	
@@ -288,13 +265,6 @@ class DCAF_User extends Ardent implements AbstractUser, UserInterface
 	 * Eloquent Relations *
 	 **********************/
 	
-	/*
-	public function morph()
-	{
-		return $this->morphTo();
-	}
-	*/
-	
 	public function abstractUsers()
     {
         return $this->morphMany('AbstractUser', 'morphTo');
@@ -314,12 +284,11 @@ class DCAF_User extends Ardent implements AbstractUser, UserInterface
 	 * 
 	 * @requiredBy Robbo\Presenter\PresentableInterface
 	 * @return     Robbo\Presenter\Presenter
-	 *
+	 */
 	public function getPresenter()
     {
         return new UserPresenter($this);
     }
-	*/
 	
 	/**
      * Get user by username
@@ -337,14 +306,16 @@ class DCAF_User extends Ardent implements AbstractUser, UserInterface
 	/**
 	 * Get the unique identifier for the user.
 	 * 
-	 * (migrated from ConfideUser)
+	 * @override
+	 * @inherited \Zizaco\Confide\ConfideUser
 	 * 
 	 * @return mixed
-	 */
+	 *
 	public function getAuthIdentifier()
 	{
 		return $this->getKey();
 	}
+	*/
 	
 	/**
 	 * Get the date the user was created.
@@ -361,30 +332,34 @@ class DCAF_User extends Ardent implements AbstractUser, UserInterface
 	/**
 	 * Get the password for the user.
 	 * 
-	 * (migrated from ConfideUser)
+	 * @override
+	 * @inherited \Zizaco\Confide\ConfideUser
 	 * 
 	 * @return string
-	 */
+	 *
 	public function getAuthPassword()
 	{
 		return $this->password;
 	}
+	*/
 	
 	/**
      * [Deprecated]
      * 
-	 * (migrated from ConfideUser)
+	 * @override
+	 * @inherited \Zizaco\Confide\ConfideUser
 	 * 
      * @deprecated
 	 * @override
 	 * @inherited \Illuminate\Database\Eloquent\Model
 	 * 
 	 * @fixed
-     */
+     *
     public function getRules()
     {
 		return static::$rules;
     }
+	*/
 	
 	/**
      * Returns user's current role ids only.
@@ -485,10 +460,11 @@ class DCAF_User extends Ardent implements AbstractUser, UserInterface
 	/**
 	 * Confirm user's email is valid.
 	 * 
-	 * (migrated from ConfideUser)
+	 * @override
+	 * @inherited \Zizaco\Confide\ConfideUser
 	 * 
 	 * @return bool
-	 */
+	 *
 	public function confirm()
 	{
 		$this->confirmed = 1;
@@ -498,14 +474,16 @@ class DCAF_User extends Ardent implements AbstractUser, UserInterface
 		
 		return true;
     }
+	*/
 	
 	/**
 	 * Send password reset email
 	 * 
-	 * (migrated from ConfideUser)
+	 * @override
+	 * @inherited \Zizaco\Confide\ConfideUser
 	 * 
 	 * @return string
-	 */
+	 *
     public function forgotPassword()
     {
         // ConfideRepository will generate token (and save it into database)
@@ -517,15 +495,17 @@ class DCAF_User extends Ardent implements AbstractUser, UserInterface
 
         return true;
     }
+	*/
 	
 	/**
      * Change user password
      * 
-	 * (migrated from ConfideUser)
+	 * @override
+	 * @inherited \Zizaco\Confide\ConfideUser
 	 * 
      * @param  $params
      * @return string
-     */
+     *
     public function resetPassword($params)
     {
         $password = array_get($params, 'password', '');
@@ -540,11 +520,13 @@ class DCAF_User extends Ardent implements AbstractUser, UserInterface
             return false;
         }
     }
+	*/
 	
 	/**
      * Save model data to database
      * 
-	 * (migrated from ConfideUser)
+	 * @override
+	 * @inherited \Zizaco\Confide\ConfideUser
 	 * 
 	 * @override  Ardent save method
 	 * 
@@ -554,7 +536,7 @@ class DCAF_User extends Ardent implements AbstractUser, UserInterface
      * @param  \Closure $beforeSave
      * @param  \Closure $afterSave
      * @return bool
-     */
+     * /
     public function save(array $rules = array(), array $customMessages = array(), array $options = array(), \Closure $beforeSave = null, \Closure $afterSave = null)
     {
         $duplicated = false;
@@ -579,17 +561,19 @@ class DCAF_User extends Ardent implements AbstractUser, UserInterface
 			return false;
         }
     }
+	*/
 	
 	/**
      * Ardent method overloading:
      * Before saving the user. Generate a confirmation
      * code if is a new user.
      * 
-	 * (migrated from ConfideUser)
+	 * @override
+	 * @inherited \Zizaco\Confide\ConfideUser
 	 * 
      * @param  bool $forced
      * @return bool
-     */
+     *
     public function beforeSave($forced = false)
     {
         if (empty($this->id))
@@ -599,7 +583,7 @@ class DCAF_User extends Ardent implements AbstractUser, UserInterface
 
         /*
          * remove password_confirmation field before saving to the database
-         */
+         * /
         if (isset($this->password_confirmation))
         {
             unset($this->password_confirmation);
@@ -607,18 +591,20 @@ class DCAF_User extends Ardent implements AbstractUser, UserInterface
 
         return true;
     }
+	*/
 
     /**
      * Ardent method overloading:
      * After save, delivers the confirmation link email.
      * code if is a new user.
      * 
-	 * (migrated from ConfideUser)
+	 * @override
+	 * @inherited \Zizaco\Confide\ConfideUser
 	 * 
      * @param  bool $success
      * @param  bool $forced
      * @return bool
-     */
+     *
     public function afterSave($success=true, $forced = false)
     {
         if (!$this->confirmed && !static::$app['cache']->get('confirmation_email_'.$this->id))
@@ -641,12 +627,14 @@ class DCAF_User extends Ardent implements AbstractUser, UserInterface
 
         return true;
     }
+	*/
 
     /**
      * Runs the real eloquent save method or returns
      * true if it's under testing.
      * 
-	 * (migrated from ConfideUser)
+	 * @override
+	 * @inherited \Zizaco\Confide\ConfideUser
 	 * 
      * @param  array    $rules
      * @param  array    $customMessages
@@ -654,7 +642,7 @@ class DCAF_User extends Ardent implements AbstractUser, UserInterface
      * @param  \Closure $beforeSave
      * @param  \Closure $afterSave
      * @return bool
-     */
+     *
     protected function real_save(array $rules = array(), array $customMessages = array(), array $options = array(), \Closure $beforeSave = null, \Closure $afterSave = null)
     {
         if (defined('CONFIDE_TEST'))
@@ -668,7 +656,7 @@ class DCAF_User extends Ardent implements AbstractUser, UserInterface
             /*
              * Prevents a non-modified password from triggering a validation error.
              * @fixed Pull #110
-             */
+             * /
             if (isset($rules['password']) && $this->password == $this->getOriginal('password'))
             {
                 unset($rules['password']);
@@ -678,32 +666,36 @@ class DCAF_User extends Ardent implements AbstractUser, UserInterface
             return parent::save($rules, $customMessages, $options, $beforeSave, $afterSave);
         }
     }
+	*/
 
     /**
      * Add the namespace 'confide::' to view hints.
      * this makes it possible to send emails using package views from
      * the command line
      * 
-	 * (migrated from ConfideUser)
+	 * @override
+	 * @inherited \Zizaco\Confide\ConfideUser
 	 * 
      * @return void
-     */
+     *
     protected static function fixViewHint()
     {
-        if (isset(static::$app['view.finder']))
-            static::$app['view.finder']->addNamespace('confide', __DIR__.'/../../views');
+		if (isset(static::$app['view.finder']))
+			static::$app['view.finder']->addNamespace('confide', __DIR__.'/../../views');
     }
+	*/
 
     /**
      * Send email using the lang sentence as subject and the viewname
      * 
-	 * (migrated from ConfideUser)
+	 * @override
+	 * @inherited \Zizaco\Confide\ConfideUser
 	 * 
      * @param  mixed $subject_translation
      * @param  mixed $view_name
      * @param  array $params
      * @return voi.
-     */
+     *
     protected function sendEmail( $subject_translation, $view_name, $params = array() )
     {
         if ( static::$app['config']->getEnvironment() == 'testing' )
@@ -719,6 +711,7 @@ class DCAF_User extends Ardent implements AbstractUser, UserInterface
                 ->subject( ConfideUser::$app['translator']->get($subject_translation) );
         });
     }
+	*/
 	
 	/**
      * Redirect after auth.
@@ -760,7 +753,8 @@ class DCAF_User extends Ardent implements AbstractUser, UserInterface
     /**
      * Rules for updating a user
      * 
-	 * (migrated from ConfideUser)
+	 * @override
+	 * @inherited \Zizaco\Confide\ConfideUser
 	 * 
      * @deprecated
      * @var array
@@ -776,7 +770,8 @@ class DCAF_User extends Ardent implements AbstractUser, UserInterface
     /**
      * Alias of save but uses updateRules instead of rules.
 	 * 
-	 * (migrated from ConfideUser)
+	 * @override
+	 * @inherited \Zizaco\Confide\ConfideUser
 	 * 
      * @deprecated  use updateUnique() instead
 	 * 
@@ -786,7 +781,7 @@ class DCAF_User extends Ardent implements AbstractUser, UserInterface
      * @param  Closure $beforeSave
      * @param  Closure $afterSave
      * @return bool
-     */
+     *
     public function amend(array $rules = array(), array $customMessages = array(), array $options = array(), \Closure $beforeSave = NULL, \Closure $afterSave = NULL)
     {
         if (empty($rules)) {
@@ -794,46 +789,52 @@ class DCAF_User extends Ardent implements AbstractUser, UserInterface
         }
         return $this->save($rules, $customMessages, $options, $beforeSave, $afterSave);
     }
+	*/
 
     /**
      * [Deprecated] Generates UUID and checks it for uniqueness against a table/column.
      * 
-	 * (migrated from ConfideUser)
+	 * @override
+	 * @inherited \Zizaco\Confide\ConfideUser
 	 * 
      * @deprecated
 	 * 
      * @param  $table
      * @param  $field
      * @return string
-     */
+     *
     protected function generateUuid($table, $field)
     {
         return md5(uniqid(mt_rand(), true));
     }
+	*/
 
     /**
      * [Deprecated]
      * 
-	 * (migrated from ConfideUser)
+	 * @override
+	 * @inherited \Zizaco\Confide\ConfideUser
 	 * 
      * @deprecated
-     */
+     *
     public function getUpdateRules()
     {
         return $this->updateRules;
     }
+	*/
 
     /**
      * [Deprecated] Parses the two given users and compares the unique fields.
      * 
-	 * (migrated from ConfideUser)
+	 * @override
+	 * @inherited \Zizaco\Confide\ConfideUser
 	 * 
      * @deprecated
 	 * 
      * @param $oldUser
      * @param $updatedUser
      * @param array $rules
-     */
+     *
     public function prepareRules($oldUser, $updatedUser, $rules=array())
     {
         if (empty($rules)) {
@@ -856,73 +857,80 @@ class DCAF_User extends Ardent implements AbstractUser, UserInterface
             }
         }
     }
+	*/
 
     /**
      * [Deprecated]
      * 
-	 * (migrated from ConfideUser)
+	 * @override
+	 * @inherited \Zizaco\Confide\ConfideUser
 	 * 
      * @deprecated
-     */
+     *
     public function setUpdateRules($set)
     {
-        $this->updateRules = $set;
+		$this->updateRules = $set;
     }
+	*/
 
     /**
      * [Deprecated] Find an user by it's credentials. Perform a 'where' within
      * the fields contained in the $identityColumns.
      * 
-	 * (migrated from ConfideUser)
+	 * @override
+	 * @inherited \Zizaco\Confide\ConfideUser
 	 * 
      * @deprecated  Use ConfideRepository getUserByIdentity instead.
 	 * 
      * @param  array  $credentials      An array containing the attributes to search for
      * @param  mixed  $identityColumns  Array of attribute names or string (for one atribute)
      * @return ConfideUser              User object
-     */
+     *
     public function getUserFromCredsIdentity($credentials, $identity_columns = array('username', 'email'))
     {
-        return static::$app['confide.repository']->getUserByIdentity($credentials, $identity_columns);
+		return static::$app['confide.repository']->getUserByIdentity($credentials, $identity_columns);
     }
-	
+	*/
 
     /**
      * [Deprecated] Checks if an user exists by it's credentials. Perform a 'where' within
      * the fields contained in the $identityColumns.
      * 
-	 * (migrated from ConfideUser)
+	 * @override
+	 * @inherited \Zizaco\Confide\ConfideUser
 	 * 
      * @deprecated Use ConfideRepository getUserByIdentity instead.
 	 * 
      * @param  array  $credentials      An array containing the attributes to search for
      * @param  mixed  $identityColumns  Array of attribute names or string (for one atribute)
      * @return boolean                  Exists?
-     */
+     *
     public function checkUserExists($credentials, $identity_columns = array('username', 'email'))
     {
         $user = static::$app['confide.repository']->getUserByIdentity($credentials, $identity_columns);
 		return $user ? true : false;
     }
-
+	*/
+	
     /**
      * [Deprecated] Checks if an user is confirmed by it's credentials. Perform a 'where' within
      * the fields contained in the $identityColumns.
      * 
-	 * (migrated from ConfideUser)
+	 * @override
+	 * @inherited \Zizaco\Confide\ConfideUser
 	 * 
      * @deprecated Use ConfideRepository getUserByIdentity instead.
 	 * 
      * @param  array  $credentials      An array containing the attributes to search for
      * @param  mixed  $identityColumns  Array of attribute names or string (for one atribute)
      * @return boolean                  Is confirmed?
-     */
+     *
     public function isConfirmed($credentials, $identity_columns = array('username', 'email'))
     {
         $user = static::$app['confide.repository']->getUserByIdentity($credentials, $identity_columns);
         return !is_null($user) && $user->confirmed;
     }
-	
+	*/
     
 	/**
 	 * @override

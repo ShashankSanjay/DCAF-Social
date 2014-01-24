@@ -1,4 +1,5 @@
 composer.phar
+_htaccess
 
 # ignore temporary files
 # such as backup files,
@@ -17,4 +18,4 @@ desktop.ini
 *.lock
 app.php
 vendor/
-database.php
+app/config/database.php
