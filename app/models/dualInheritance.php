@@ -21,7 +21,7 @@ class dualInheritance
 			return $this->objB->$name;
 		}
 	}
-	 
+	
 	public function __call($name, $arguments)
 	{
 		if (method_exists($this->objA, $name))

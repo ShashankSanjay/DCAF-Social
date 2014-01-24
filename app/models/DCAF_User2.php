@@ -44,7 +44,7 @@ use HasRole;
  * $success = $user->save();
  */
 // class DCAF_User extends ConfideUser implements AbstractUser, PresentableInterface
-class DCAF_User extends dualInheritance implements AbstractUser, PresentableInterface
+class DCAF_User2 extends dualInheritance implements AbstractUser, PresentableInterface
 {
 	/**
 	 * DCAF_User version
