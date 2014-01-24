@@ -21,7 +21,7 @@ Dashboard
 									</span>
 									<span>
 										<span class="user-name">{{{ Auth::user()->username }}}</span>
-										<span class="connection online"><i class="fa fa-circle"></i> Online</span>
+										<span class="connection online"> Team Name</span>
 									</span>
 
 									<b class="caret"></b>
@@ -155,7 +155,7 @@ Dashboard
 								</ul>
 							</li>
 						</ul>
-						<style>
+						<!--style>
 							#sidebar .inner nav.side-nav ul.nav.cbox {
 								display: table;
 								width: 100%;
@@ -171,7 +171,7 @@ Dashboard
 						<ul class="nav nav-pills nav-stacked cbox">
 							<li><a href="#">AYO</a></li>
 							<li><a href="#">AYO</a></li>
-						</ul>
+						</ul-->
 					</nav>
 
 					<div class="panel panel-outline">
@@ -280,18 +280,7 @@ Dashboard
 					@yield('content')
 					
 				<!-- ./ content -->
-			</div>	
-			<footer>
-				<div class="row">
-					<div class="col-lg-12">
-						
-					</div>
-				</div><!-- /.row -->
-			</footer>
-			</div>
-
-				</div><!-- /#wrapper -->
-				
+			</div>				
 				@if (isset($companies) && $companies > 6)
 				<footer id="footer">
 				@else
