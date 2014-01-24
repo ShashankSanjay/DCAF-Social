@@ -138,8 +138,8 @@
 		<!-- Animate -->
 		<?php echo HTML::script('assets/js/libs/modernizr.custom.js'); ?>
 
-		<?php echo HTML::script('assets/js/libs/animatescroll.js'); ?>
-		<?php echo HTML::script('assets/js/libs/animatescroll.noeasing.js'); ?>
+		<?php /* HTML::script('assets/js/libs/animatescroll.js') */ ?>
+		<?php /* HTML::script('assets/js/libs/animatescroll.noeasing.js') */ ?>
 		
 		
 	</body>

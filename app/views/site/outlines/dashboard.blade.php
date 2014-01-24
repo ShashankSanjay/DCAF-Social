@@ -292,7 +292,11 @@ Dashboard
 
 				</div><!-- /#wrapper -->
 				
+				@if (isset($companies) && $companies > 6)
 				<footer id="footer">
+				@else
+				<footer id="footer">
+				@endif
 						@if (isset($companies))
 						<div class="container">
 							<div class="main clearfix animate">
@@ -300,14 +304,15 @@ Dashboard
 									<ul>
 										@foreach ($companies as $company => $network) 
 										<li>
-											<a class="xbox" href="{{ URL::to('demographics')}}" onclick="$('{{URL::to('/')}}').animatescroll();">
+											<!-- Each <a> should map to company page, and each network to company->network page -->
+											<a href="{{ URL::to('demographics') }}" onclick="$('{{URL::to('/')}}').animatescroll();">
 												<span> {{ $company }} </span>
 												<span class="icon">
 													@foreach ($network as $network) 
-													<i aria-hidden="true" class="{{ $network }}"></i>
+													<i class="{{ $network }}"></i>
 													@endforeach
 												</span>
-												</a>
+											</a>
 										</li>
 										@endforeach
 									</ul>

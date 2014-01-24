@@ -291,7 +291,11 @@ Dashboard
 
 				</div><!-- /#wrapper -->
 				
+				<?php if (isset($companies) && $companies > 6): ?>
 				<footer id="footer">
+				<?php else: ?>
+				<footer id="footer">
+				<?php endif; ?>
 						<?php if (isset($companies)): ?>
 						<div class="container">
 							<div class="main clearfix animate">
@@ -299,14 +303,15 @@ Dashboard
 									<ul>
 										<?php foreach ($companies as $company => $network): ?> 
 										<li>
-											<a class="xbox" href="<?php echo URL::to('demographics'); ?>" onclick="$('<?php echo URL::to('/'); ?>').animatescroll();">
+											<!-- Each <a> should map to company page, and each network to company->network page -->
+											<a href="<?php echo URL::to('demographics'); ?>" onclick="$('<?php echo URL::to('/'); ?>').animatescroll();">
 												<span> <?php echo $company; ?> </span>
 												<span class="icon">
 													<?php foreach ($network as $network): ?> 
-													<i aria-hidden="true" class="<?php echo $network; ?>"></i>
+													<i class="<?php echo $network; ?>"></i>
 													<?php endforeach; ?>
 												</span>
-												</a>
+											</a>
 										</li>
 										<?php endforeach; ?>
 									</ul>

@@ -130,7 +130,7 @@ Route::group(array('before' => 'auth'), function()
                                 '1' => 'fa fa-twitter-square',
                                 '2' => 'fa fa-google-plus-square',
                                 '3' => 'fa fa-instagram'],
-                    /*'Likeable Media' => ['0' => 'fa fa-facebook-square',
+                    'Likeable Media' => ['0' => 'fa fa-facebook-square',
                                 '1' => 'fa fa-twitter-square',
                                 '2' => 'fa fa-google-plus-square',
                                 '3' => 'fa fa-instagram'],
@@ -141,7 +141,7 @@ Route::group(array('before' => 'auth'), function()
                     'Hofstra' => ['0' => 'fa fa-facebook-square',
                                 '1' => 'fa fa-twitter-square',
                                 '2' => 'fa fa-google-plus-square',
-                                '3' => 'fa fa-instagram']*/
+                                '3' => 'fa fa-instagram']
                     ];
         
         return View::make('site.outlines.dashboard', compact('companies'));
@@ -172,6 +172,8 @@ Route::get('user/confirmation', 'UserController@getConfirmation');
 //after user clicks confirm link on email, redirected here. Then proceed to register DCAF with each network. THen go to dashboard
 Route::get('user/registernetworks', 'UserController@registerNetworks');
 
+Route::get('user/team', 'UserController@team');
+
 Route::get('animate', function()
 {
     //
@@ -198,7 +200,7 @@ Route::get('{postSlug}', 'BlogController@getView');
 Route::post('{postSlug}', 'BlogController@postView');
 
 # Index Page - Last route, no matches
-Route::get('/', array('before' => 'auth','uses' => 'UserDashboardController@index'));
+Route::get('/', array('before' => 'auth','uses' => 'UserController@getIndex'));
 
 
 App::missing(function($exception)

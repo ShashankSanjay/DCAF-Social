@@ -62,6 +62,10 @@ a:hover {
 a:visited {
   color: #a6670d;
 }
+
+a.social-network:visited {
+  color: #ffffff;
+}
 .form-horizontal {
   padding: 20px 0;
 }

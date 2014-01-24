@@ -29,7 +29,46 @@ class UserController extends BaseController {
         if($redirect){return $redirect;}
 
         // Show the page
-        return View::make('site/dashboard/home', compact('user'));
+        $companies = [
+                    'Pepsi' => ['0' => 'fa fa-facebook-square',
+                                '1' => 'fa fa-twitter-square',
+                                '2' => 'fa fa-google-plus-square',
+                                '3' => 'fa fa-instagram'],
+                    'Coke' => ['0' => 'fa fa-facebook-square',
+                                '1' => 'fa fa-twitter-square',
+                                '2' => 'fa fa-google-plus-square',
+                                '3' => 'fa fa-instagram'],
+                    'Samsung' => ['0' => 'fa fa-facebook-square',
+                                '1' => 'fa fa-twitter-square',
+                                '2' => 'fa fa-google-plus-square',
+                                '3' => 'fa fa-instagram'],
+                    'Apple' => ['0' => 'fa fa-facebook-square',
+                                '1' => 'fa fa-twitter-square',
+                                '2' => 'fa fa-google-plus-square',
+                                '3' => 'fa fa-instagram'],
+                    'Levi' => ['0' => 'fa fa-facebook-square',
+                                '1' => 'fa fa-twitter-square',
+                                '2' => 'fa fa-google-plus-square',
+                                '3' => 'fa fa-instagram'],
+                    'American Apparel' => ['0' => 'fa fa-facebook-square',
+                                '1' => 'fa fa-twitter-square',
+                                '2' => 'fa fa-google-plus-square',
+                                '3' => 'fa fa-instagram'],
+                    'Likeable Media' => ['0' => 'fa fa-facebook-square',
+                                '1' => 'fa fa-twitter-square',
+                                '2' => 'fa fa-google-plus-square',
+                                '3' => 'fa fa-instagram'],
+                    'CPX' => ['0' => 'fa fa-facebook-square',
+                                '1' => 'fa fa-twitter-square',
+                                '2' => 'fa fa-google-plus-square',
+                                '3' => 'fa fa-instagram'],
+                    'Hofstra' => ['0' => 'fa fa-facebook-square',
+                                '1' => 'fa fa-twitter-square',
+                                '2' => 'fa fa-google-plus-square',
+                                '3' => 'fa fa-instagram']
+                    ];
+
+        return View::make('site/dashboard/home', compact('user', 'companies'));
     }
 
     /**
@@ -337,5 +376,11 @@ class UserController extends BaseController {
 
         //return View::make('site.nonboard.registernetworks')->with($data);
         return View::make('site.nonboard.registernetworks');
+    }
+
+    public function team()
+    {
+        //
+        return View::make('site.nonboard.team');
     }
 }
