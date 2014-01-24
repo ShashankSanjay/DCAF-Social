@@ -97,9 +97,9 @@ class DCAF_User extends Ardent implements AbstractUser, UserInterface
 	 * @access protected
 	 * @type   string
 	 */
-	protected $table		= 'DCAF_users';		// defaults to classname + 's'
+	protected $table		= 'DCAF_Users';		// defaults to classname + 's'
 	
-	protected $primaryKey	= 'DCAF_User_ID';	// defaults to 'id'
+	protected $primaryKey	= 'id';				// defaults to 'id'
 	protected $incrementing	= false;			// defaults to true; false disables auto-incrementing the primary key
 	protected $timestamps	= false;			// defaults to true to maintain 'updated_at' and 'created_at' columns
 	

@@ -43,7 +43,8 @@ use HasRole;
  * $user->name = 'John';
  * $success = $user->save();
  */
-class DCAF_User extends ConfideUser implements AbstractUser, PresentableInterface
+// class DCAF_User extends ConfideUser implements AbstractUser, PresentableInterface
+class DCAF_User extends dualInheritance implements AbstractUser, PresentableInterface
 {
 	/**
 	 * DCAF_User version
@@ -74,7 +75,7 @@ class DCAF_User extends ConfideUser implements AbstractUser, PresentableInterfac
 	 * @access protected
 	 * @type   string
 	 */
-	protected $table		= 'DCAF_users';		// defaults to classname + 's'
+	protected $table		= 'DCAF_Users';		// defaults to classname + 's'
 	
 	protected $primaryKey	= 'id';				// defaults to 'id'
 	protected $incrementing	= false;			// defaults to true; false disables auto-incrementing the primary key
@@ -252,7 +253,7 @@ class DCAF_User extends ConfideUser implements AbstractUser, PresentableInterfac
      */
 	public function __construct(array $attributes = array())
 	{
-		parent::__construct($attributes);
+		parent::__construct('ConfideUser', 'AbstractUser');
 		
 		/*
 		if (!static::$app) {

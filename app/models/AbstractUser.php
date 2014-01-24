@@ -26,7 +26,7 @@ use Eloquent;
  * @author	Alexander Rosenberg
  * @version	1.0
  */
-abstract class AbstractUser extends Eloquent
+/* abstract */ class AbstractUser extends Eloquent
 {
 	/**********************
 	 * Instance Variables *
@@ -48,7 +48,7 @@ abstract class AbstractUser extends Eloquent
 	 */
 	protected $table		= 'User_Profiles';
 	
-	protected $primaryKey	= 'User_ID';
+	// protected $primaryKey	= 'User_ID';
 	
 	/**
 	 * Permits all properties to be set from the constructor
