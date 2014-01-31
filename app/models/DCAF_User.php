@@ -135,8 +135,9 @@ class DCAF_User extends Ardent implements AbstractUser, UserInterface
     public static $passwordAttributes = array('password');
 	
 	/**
-     * This way the model will automatically replace the plain-text password
+     * When set to true, Ardent automatically replaces the plain-text password
      * attribute (from $passwordAttributes) with the hash checksum on save.
+	 * See {@link http://laravel.com/docs/security} for implementation details
      * 
      * @since  1.0
 	 * @access public

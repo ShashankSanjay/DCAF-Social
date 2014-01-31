@@ -219,11 +219,12 @@ class DCAF_User2 extends dualInheritance implements AbstractUser, PresentableInt
      *
      * @var array
      */
-    public static $passwordAttributes = array();
+    public static $passwordAttributes = array('password');
 	
     /**
-     * If set to true, the model will automatically replace all plain-text passwords
-     * attributes (listed in $passwordAttributes) with hash checksums
+     * When set to true, Ardent automatically replaces the plain-text password
+     * attribute (from $passwordAttributes) with the hash checksum on save.
+	 * See {@link http://laravel.com/docs/security} for implementation details
      *
      * @var bool
      */
