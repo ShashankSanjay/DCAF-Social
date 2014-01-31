@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: mysql
--- Generation Time: Jan 24, 2014 at 12:15 PM
+-- Generation Time: Jan 30, 2014 at 02:59 PM
 -- Server version: 5.1.55
 -- PHP Version: 5.3.6
 
@@ -23,15 +23,100 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `Billing_Accounts`
+--
+
+CREATE TABLE IF NOT EXISTS `Billing_Accounts` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `billing_contact` int(10) unsigned NOT NULL,
+  `payment_method` char(1) NOT NULL,
+  `billing_name` varchar(30) NOT NULL,
+  `billing_address` varchar(126) NOT NULL,
+  `plan_id` tinyint(3) unsigned NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `Billing_Plans`
+--
+
+CREATE TABLE IF NOT EXISTS `Billing_Plans` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `plan_name` varchar(15) NOT NULL,
+  `payment_amount` decimal(5,2) unsigned NOT NULL,
+  `payment_frequency` smallint(5) unsigned NOT NULL,
+  `description` text NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `plan_name` (`plan_name`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `DCAF_Roles`
+--
+
+CREATE TABLE IF NOT EXISTS `DCAF_Roles` (
+  `role_id` int(11) NOT NULL AUTO_INCREMENT,
+  `role_name` varchar(30) NOT NULL,
+  PRIMARY KEY (`role_id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
+
+--
+-- Dumping data for table `DCAF_Roles`
+--
+
+INSERT INTO `DCAF_Roles` (`role_id`, `role_name`) VALUES
+(1, 'Site Administrator'),
+(2, 'Team Member'),
+(3, 'Team Manager');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `DCAF_Teams`
+--
+
+CREATE TABLE IF NOT EXISTS `DCAF_Teams` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `billing_account` int(10) unsigned NOT NULL,
+  `subscription_status` char(1) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `DCAF_Users`
 --
 
 CREATE TABLE IF NOT EXISTS `DCAF_Users` (
-  `id` int(10) NOT NULL AUTO_INCREMENT,
+  `uid` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT 'User ID',
+  `profile_id` int(10) unsigned NOT NULL,
+  `display_name` varchar(30) DEFAULT NULL,
   `password` char(40) DEFAULT NULL,
-  `team_id` int(10) NOT NULL,
-  PRIMARY KEY (`id`)
+  `salt` char(8) NOT NULL,
+  `bio` text NOT NULL COMMENT 'bio/description',
+  `team_id` int(10) unsigned NOT NULL,
+  `login_count` int(10) unsigned NOT NULL DEFAULT '0',
+  `locked` tinyint(1) NOT NULL DEFAULT '0',
+  `disabled` tinyint(1) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`uid`),
+  UNIQUE KEY `profile_id` (`profile_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `DCAF_User_Roles`
+--
+
+CREATE TABLE IF NOT EXISTS `DCAF_User_Roles` (
+  `uid` int(10) unsigned NOT NULL,
+  `role_id` int(10) unsigned NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=latin1 COMMENT='Association/Junction/Pivot Table';
 
 -- --------------------------------------------------------
 
@@ -48,6 +133,13 @@ CREATE TABLE IF NOT EXISTS `FB_Covers` (
   PRIMARY KEY (`cover_id`),
   UNIQUE KEY `INDEX` (`Index`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+
+--
+-- Dumping data for table `FB_Covers`
+--
+
+INSERT INTO `FB_Covers` (`Index`, `cover_id`, `source`, `offset_y`, `offset_x`) VALUES
+(1, 10151937932013280, 'https://scontent-b.xx.fbcdn.net/hphotos-prn2/s720x720/1467326_10151937932013280_17599880_n.jpg', 0, 0);
 
 -- --------------------------------------------------------
 
@@ -123,7 +215,7 @@ CREATE TABLE IF NOT EXISTS `FB_Posts` (
 
 CREATE TABLE IF NOT EXISTS `FB_Users` (
   `Index` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
-  `FB_User_ID` bigint(20) unsigned NOT NULL COMMENT 'PRIMARY',
+  `id` bigint(20) unsigned NOT NULL COMMENT 'PRIMARY (FK: FB_User_ID or FBUID)',
   `username` varchar(30) NOT NULL,
   `first_name` varchar(30) NOT NULL,
   `middle_name` varchar(30) NOT NULL,
@@ -131,8 +223,11 @@ CREATE TABLE IF NOT EXISTS `FB_Users` (
   `full_name` varchar(90) NOT NULL,
   `name_format` varchar(90) NOT NULL DEFAULT '{first} {last}',
   `email` varchar(254) NOT NULL,
-  `link` varchar(256) NOT NULL COMMENT 'URL',
+  `link` varchar(254) NOT NULL COMMENT 'URL',
   `gender` char(12) NOT NULL,
+  `age_range_min` enum('13','18','21') DEFAULT NULL,
+  `age_range_max` enum('17','20') DEFAULT NULL,
+  `birthday` date NOT NULL,
   `is_verified` tinyint(1) NOT NULL,
   `verified` tinyint(1) NOT NULL,
   `viewer_can_send_gift` tinyint(1) NOT NULL,
@@ -140,7 +235,7 @@ CREATE TABLE IF NOT EXISTS `FB_Users` (
   `relationship_status` varchar(30) NOT NULL,
   `timeline_link` mediumtext NOT NULL,
   `quotes` text NOT NULL,
-  `hometown` mediumtext NOT NULL,
+  `hometown` bigint(20) NOT NULL COMMENT 'page id',
   `bio` text NOT NULL,
   `religion` varchar(30) NOT NULL,
   `about` text NOT NULL,
@@ -150,10 +245,10 @@ CREATE TABLE IF NOT EXISTS `FB_Users` (
   `political` text NOT NULL,
   `significant_other` bigint(20) unsigned NOT NULL,
   `website` mediumtext NOT NULL,
-  `location` text NOT NULL,
+  `location` bigint(20) NOT NULL COMMENT 'page id',
   `installed` tinyint(1) NOT NULL,
   `install_type` varchar(32) NOT NULL,
-  PRIMARY KEY (`FB_User_ID`),
+  PRIMARY KEY (`id`),
   UNIQUE KEY `INDEX` (`Index`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
@@ -167,6 +262,17 @@ CREATE TABLE IF NOT EXISTS `migrations` (
   `migration` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `batch` int(11) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `migrations`
+--
+
+INSERT INTO `migrations` (`migration`, `batch`) VALUES
+('2013_09_01_024008_migration_oauth_facebook', 1),
+('2013_09_01_024008_migration_oauth_github', 1),
+('2013_09_01_024008_migration_oauth_google', 1),
+('2013_09_01_024008_migration_oauth_instagram', 1),
+('2013_09_01_024008_migration_oauth_twitter', 1);
 
 -- --------------------------------------------------------
 
@@ -261,6 +367,18 @@ CREATE TABLE IF NOT EXISTS `oauth_twitter` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `password_reminders`
+--
+
+CREATE TABLE IF NOT EXISTS `password_reminders` (
+  `email` int(11) NOT NULL,
+  `token` int(11) NOT NULL,
+  `created_at` int(11) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `Tw_Tweets`
 --
 
@@ -300,8 +418,8 @@ CREATE TABLE IF NOT EXISTS `Tw_Tweets` (
 --
 
 CREATE TABLE IF NOT EXISTS `Tw_Users` (
-  `User_ID` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
-  `Tw_User_ID` int(11) NOT NULL,
+  `index` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `Tw_User_ID` bigint(20) unsigned NOT NULL,
   `contributors_enabled` tinyint(1) NOT NULL,
   `created_at` datetime NOT NULL,
   `default_profile` tinyint(1) NOT NULL,
@@ -342,7 +460,8 @@ CREATE TABLE IF NOT EXISTS `Tw_Users` (
   `verified` tinyint(1) NOT NULL,
   `withheld_in_countries` varchar(30) DEFAULT NULL,
   `withheld_scope` varchar(16) DEFAULT NULL,
-  PRIMARY KEY (`User_ID`)
+  PRIMARY KEY (`Tw_User_ID`),
+  UNIQUE KEY `index` (`index`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
@@ -353,7 +472,7 @@ CREATE TABLE IF NOT EXISTS `Tw_Users` (
 
 CREATE TABLE IF NOT EXISTS `User_Profiles` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT 'User ID',
-  `username` varchar(30) NOT NULL,
+  `username` varchar(30) NOT NULL COMMENT 'loginid',
   `gender` enum('M','F','O') NOT NULL,
   `email` varchar(254) NOT NULL,
   `firstName` varchar(30) NOT NULL,
