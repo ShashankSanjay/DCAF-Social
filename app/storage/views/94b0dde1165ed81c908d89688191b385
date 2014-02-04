@@ -10,16 +10,8 @@ Example Board
 	
 <div id="content">
 	<div class="container">
-		<style type="text/css">
-			
-			@media (min-width: 100em) {
-				#keep {
-					padding-right: 10%;
-					padding-left: 10%;
-				}
-			}
-		</style>
-		<div class="row post" id="keep">
+		
+		<div class="row">
 			<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
 				<div class="stat-block stat-primary">
 					<div class="icon"> <i class="fa fa-comments"></i>
@@ -76,7 +68,7 @@ Example Board
 	<hr class="ayo">
 
 	<div class="container">
-		<div class="row post">
+		<div class="row">
 
 			<div class="col-lg-7 col-md-7">
 
