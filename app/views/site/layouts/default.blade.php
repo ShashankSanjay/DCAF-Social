@@ -63,6 +63,26 @@
 		{{ HTML::style('assets/css/animatescroll/default.css') }}
 		{{ HTML::style('assets/css/animatescroll/component.css') }}
 
+		<!-- Scroll -->
+		{{ HTML::style('assets/css/scroll/style.css') }}
+
+		{{ HTML::script('assets/js/libs/jquery-1.10.2.min.js') }}
+
+		<!-- jQuery UI -->
+		{{ HTML::script('assets/js/libs/jquery-ui.min.js') }}	
+
+		{{ HTML::script('assets/js/scroll/jquery.mousewheel.js') }}
+
+		<script>
+		$(function(){
+			$("#container").wrapInner("<table cellspacing='30'><tr>");
+			$(".post").wrap("<td></td>");
+			$("content").mousewheel(function(event, delta) {
+				this.scrollLeft -= (delta * 30);
+				event.preventDefault();
+			});   
+		});
+		</script>
 
 		<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
 		<!--[if lt IE 9]>
@@ -75,10 +95,7 @@
 	<!-- ./ Outline -->
 
 		<!-- jQuery -->
-		{{ HTML::script('assets/js/libs/jquery-1.10.2.min.js') }}
-
-		<!-- jQuery UI -->
-		{{ HTML::script('assets/js/libs/jquery-ui.min.js') }}
+		
 
 		<!-- Bootstrap core JavaScript -->
 		{{ HTML::script('assets/bootstrap/js/bootstrap.min.js?v=3.0.2') }}
@@ -141,6 +158,8 @@
 		{{-- HTML::script('assets/js/libs/animatescroll.js') --}}
 		{{-- HTML::script('assets/js/libs/animatescroll.noeasing.js') --}}
 		
+		<!-- Horizontal Scrolling -->
+
 		
 	</body>
 </html>

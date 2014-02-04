@@ -9,212 +9,7 @@ Dashboard
 @section('outline')
   <body>
 		<div id="wrapper">
-			<div id="sidebar">
-				<div class="inner">
-
-					<nav class="side-nav">
-						<ul class="nav nav-pills nav-stacked user-bar">
-							<li>
-								<a href="#user-menu" data-toggle="collapse" class="dropdown-toggle">
-									<span class="pull-left">
-										<img src="img/samples/avatar-4.jpg">
-									</span>
-									<span>
-										<span class="user-name">{{{ Auth::user()->username }}}</span>
-										<span class="connection online"> Team Name</span>
-									</span>
-
-									<b class="caret"></b>
-								</a>
-								<ul class="panel-collapse collapse" id="user-menu">
-									<li><a href="settings"><i class="fa fa-cogs"></i> Settings</a></li>
-									<li><a href="#"><i class="fa fa-question-circle"></i> Help</a></li>
-									<li><a href="{{ URL::to('user/logout') }}"><i class="fa fa-sign-out"></i> Logout</a></li>
-								</ul>
-							</li>
-						</ul>
-					</nav>
-					
-					<!--nav class="navbar navbar-inverse user-notification">
-						<div class="">
-							<ul class="nav navbar-nav">
-								
-								<li class="dropdown">
-									<a href="tasks" class="dropdown-toggle" data-toggle="tooltip" title="My Tasks" data-placement="bottom" data-trigger="hover">
-										<i class="fa fa-th-list"></i>
-										<span class="badge badge-info">1</span>
-									</a>
-								</li>
-								<li class="dropdown">
-									<a href="messages" class="dropdown-toggle" data-toggle="tooltip" title="Messages" data-placement="bottom" data-trigger="hover">
-										<i class="fa fa-envelope"></i>
-										<span class="badge badge-danger">4</span>
-									</a>
-								</li>
-							</ul>
-						</div>
-					</nav-->
-
-					<nav class="side-nav">
-						<ul class="nav nav-pills nav-stacked">
-							<li {{ (Request::is('/') ? ' class="active"' : '') }}>
-								<a href="{{ URL::to('/') }}">
-									<i class="fa fa-dashboard"></i>
-									Dashboard
-								</a>
-							</li>
-
-							<li>
-								<a href="#tasks" data-toggle="collapse" data-parent=".side-nav" class="collapsed">
-									<i class="fa fa-list-ul"></i>
-									Task Lists <b class="caret"></b>
-								</a>
-								<ul class="panel-collapse collapse {{ (Request::is('tasks') ? 'in' : '') }} " id="tasks">
-									<li {{ (Request::is('tasks') ? ' class="active"' : '') }} ><a href="tasks"><i class="fa fa-arrow-right"></i> Task inside Panel</a></li>
-									<li ><a href="tasks-alt"><i class="fa fa-arrow-right"></i> Task without Panel</a></li>
-								</ul>
-							</li>
-
-							<li>
-								<a href="#messages" data-toggle="collapse" data-parent=".side-nav" class="collapsed">
-									<i class="fa fa-comments"></i>
-									Messages <b class="caret"></b>
-								</a>
-								<ul class="panel-collapse collapse {{ (Request::is('messages') ? 'in' : '') }} " id="messages">
-									<li {{ (Request::is('messages') ? ' class="active"' : '') }}><a href="messages"><i class="fa fa-arrow-right"></i> Messages inside Panel</a></li>
-									<li ><a href="messages-alt"><i class="fa fa-arrow-right"></i> Messages without Panel</a></li>
-								</ul>
-							</li>
-
-							<li {{ (Request::is('demographics') ? ' class="active"' : '') }}>
-								<a href="demographics">
-									<i class="fa fa-bar-chart-o"></i>
-									Demographics
-								</a>
-							</li>
-
-							<li >
-								<a href="exampleBoard">
-									<i class="fa fa-calendar"></i>
-									ExampleBoard
-								</a>
-							</li>
-
-							<li>
-								<a href="#ui" data-toggle="collapse" data-parent=".side-nav" class="collapsed">
-									<i class="icon-wand"></i>
-									UI Elements <b class="caret"></b>
-								</a>
-								<ul class="panel-collapse collapse " id="ui">
-									<li >
-										<a href="forms">
-											<i class="fa fa-list-alt"></i>
-											Forms
-										</a>
-									</li>
-									<li >
-										<a href="typo">
-											<i class="fa fa-font"></i>
-											Typography
-										</a>
-									</li>
-
-									<li >
-										<a href="icons">
-											<i class="fa fa-picture-o"></i>
-											Icons
-										</a>
-									</li>
-
-									<li >
-										<a href="tables">
-											<i class="fa fa-table"></i>
-											Tables
-										</a>
-									</li>
-
-									<li >
-										<a href="panels">
-											<i class="fa fa-th-large"></i>
-											Panels
-										</a>
-									</li>
-								</ul>
-							</li>
-
-							<li>
-								<a href="#pages" data-toggle="collapse" data-parent=".side-nav" class="collapsed">
-									<i class="icon-copy"></i>
-									Pages <b class="caret"></b>
-								</a>
-								<ul class="panel-collapse collapse {{ (Request::is('404') ? 'in' : '') }}" id="pages">
-									<li ><a href="signup"><i class="fa fa-arrow-right"></i> Sign up</a></li>
-									<li ><a href="signin"><i class="fa fa-arrow-right"></i> Sign in</a></li>
-									<li ><a href="profile"><i class="fa fa-arrow-right"></i> Profile</a></li>
-									<li {{ (Request::is('404') ? ' class="active"' : '') }}><a href="404"><i class="fa fa-arrow-right"></i> Error 404</a></li>
-								</ul>
-							</li>
-						</ul>
-						<!--style>
-							#sidebar .inner nav.side-nav ul.nav.cbox {
-								display: table;
-								width: 100%;
-							}
-							#sidebar .inner nav.side-nav ul.nav.cbox>li {
-								display: table-cell;
-							}
-							#sidebar .inner nav.side-nav ul.nav.cbox>li>a {
-								text-align: center;
-							}
-							
-						</style>
-						<ul class="nav nav-pills nav-stacked cbox">
-							<li><a href="#">AYO</a></li>
-							<li><a href="#">AYO</a></li>
-						</ul-->
-					</nav>
-
-					<div class="panel panel-outline">
-						<div class="panel-body">
-							<ul class="list-unstyled">
-								
-								<li>
-									CPU Usage
-									<div class="progress">
-										<div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 40%">
-											<span class="sr-only">40%</span>
-										</div>
-									</div>
-								</li>
-								<li>
-									RAM Usage
-									<div class="progress">
-										<div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100" style="width: 10%">
-											<span class="sr-only">10%</span>
-										</div>
-									</div>
-								</li>
-								<li>
-									Bandwidth
-									<div class="progress">
-										<div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%">
-											<span class="sr-only">60%</span>
-										</div>
-									</div>
-								</li>
-								<li>
-									HDD Space
-									<div class="progress">
-										<div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width: 80%">
-											<span class="sr-only">80%</span>
-										</div>
-									</div>
-								</li>
-							</ul>
-						</div>
-					</div>
-				</div>
-			</div>
+			
 			<div id="middle">
 
 				<header id="header">
@@ -281,13 +76,34 @@ Dashboard
 					
 				<!-- ./ content -->
 			</div>				
-				@if (isset($companies) && $companies > 6)
 				<footer id="footer">
-				@else
-				<footer id="footer">
-				@endif
 						@if (isset($companies))
-						<div class="container">
+						<!--div class="container"-->
+							<style type="text/css">
+								.animate .nav li {
+									width: {{ (100/count($companies))*2; }}%;
+								}
+								@if (count($companies)>5)
+								#middle #content {
+									padding-bottom: 5em !important;
+								}
+								@endif
+								/*.animate .icon {
+									padding-left: {{ ((100/count($companies))*2)/10; }}%;
+								}
+
+								.no-touch .animate .nav li:hover,
+								.animate .nav li:active ,
+								.animate .nav li:focus {
+									top: -5em !important;
+								}
+
+								.no-touch .animate .nav a:hover ,
+								.animate .nav a:active ,
+								.animate .nav a:focus  {
+									height: 8em !important;
+								}*/
+							</style>
 							<div class="main clearfix animate">
 								<nav id="menu" class="nav">				
 									<ul>
@@ -307,7 +123,7 @@ Dashboard
 									</ul>
 								</nav>
 							</div>
-						</div>
+						<!--/div-->
 						@else
 							<div class="row">
 								<div class="col-xs-6">

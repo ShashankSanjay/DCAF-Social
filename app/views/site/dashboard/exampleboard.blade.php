@@ -7,10 +7,20 @@ Example Board
 
 {{-- Content --}}
 @section('content')
+
+	
 <div id="content">
 	<div class="container">
-
-		<div class="row">
+		<style type="text/css">
+			
+			@media (min-width: 100em) {
+				#keep {
+					padding-right: 10%;
+					padding-left: 10%;
+				}
+			}
+		</style>
+		<div class="row post" id="keep">
 			<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
 				<div class="stat-block stat-primary">
 					<div class="icon"> <i class="fa fa-comments"></i>
@@ -58,11 +68,16 @@ Example Board
 
 	</div>
 	<!-- /.container -->
-
-	<hr>
+	<style type="text/css">
+		hr.ayo {
+			margin-top: 0.5em;
+			border-top: 5px solid #eee;
+		}
+	</style>
+	<hr class="ayo">
 
 	<div class="container">
-		<div class="row">
+		<div class="row post">
 
 			<div class="col-lg-7 col-md-7">
 
@@ -75,7 +90,7 @@ Example Board
 					</div>
 					<!-- /.panel-heading -->
 					<div class="panel-body">
-						<div class="row">
+						<div class="row post">
 							<div class="col-sm-3">
 								<div class="sparkline-chart" id="sparkline-graph2">25,27,18,29,23,9,6,5,12,15,5,29,10,28,20,21,16,7,5,7</div>
 								<div class="align-center">Server Load</div>
@@ -147,7 +162,7 @@ Example Board
 
 								<div class="media">
 									<a class="pull-left" href="profile">
-										<img class="media-object" src="img/samples/avatar-7.jpg" alt="Jason Lee"></a>
+										<img class="media-object" src="assets/img/samples/avatar-7.jpg" alt="Jason Lee"></a>
 									<div class="media-body">
 										<h4 class="media-heading">
 											<a href="#">Jeremy White</a>
@@ -181,14 +196,14 @@ Example Board
 
 								<div class="media">
 									<a class="pull-left" href="profile">
-										<img class="media-object" src="img/samples/avatar-4.jpg" alt="Jason Lee"></a>
+										<img class="media-object" src="assets/img/samples/avatar-4.jpg" alt="Jason Lee"></a>
 									<div class="media-body">
 										<h4 class="media-heading">
 											<a href="#">Rob Thomas</a>
 										</h4>
 										<p>Enjoying the firework</p>
 										<a href="#" class="thumbnail inline-thumbnail">
-											<img src="img/samples/slide-2.jpg"></a>
+											<img src="assets/img/samples/slide-2.jpg"></a>
 
 										<ul class="list-inline">
 											<li>
@@ -217,14 +232,14 @@ Example Board
 
 								<div class="media">
 									<a class="pull-left" href="profile">
-										<img class="media-object" src="img/samples/avatar-6.jpg" alt="A.J. Cook"></a>
+										{{ HTML::image('assets/assets/img/samples/avatar-6.jpg')}}</a>
 									<div class="media-body">
 										<h4 class="media-heading">
 											<a href="#">A.J. Cook</a>
 										</h4>
 										<p>Can't beat the nature!</p>
 										<a href="#" class="thumbnail inline-thumbnail">
-											<img src="img/samples/slide-1.jpg"></a>
+											<img src="assets/assets/img/samples/slide-1.jpg"></a>
 
 										<ul class="list-inline">
 											<li>
@@ -246,7 +261,7 @@ Example Board
 
 										<div class="media">
 											<a class="pull-left" href="profile">
-												<img class="media-object" src="img/samples/avatar-2.jpg" alt="Jason Lee"></a>
+												<img class="media-object" src="assets/img/samples/avatar-2.jpg" alt="Jason Lee"></a>
 											<div class="media-body">
 												<h4 class="media-heading">
 													<a href="#">Nick Adam</a>
@@ -277,7 +292,7 @@ Example Board
 
 										<div class="media">
 											<a class="pull-left" href="#">
-												<img class="media-object" src="img/samples/avatar-9.jpg" alt="Jason Lee"></a>
+												<img class="media-object" src="assets/img/samples/avatar-9.jpg" alt="Jason Lee"></a>
 											<div class="media-body">
 												<h4 class="media-heading">
 													<a href="#">Nick Adam</a>
@@ -330,7 +345,7 @@ Example Board
 					<div class="panel-body messages">
 
 						<div class="message-detail">
-							<div class="row table-heading">
+							<div class="row post table-heading">
 								<div class="col-lg-7 col-md-7 col-sm-7">
 									<input type="checkbox" name="checkAll" class="checkbox pull-left">
 
@@ -345,7 +360,7 @@ Example Board
 							</div>
 							<!-- /.row -->
 
-							<div class="row table-row status-pending">
+							<div class="row post table-row status-pending">
 								<div class="col-lg-7 col-md-7 col-sm-7">
 									<input type="checkbox" name="checkAll" class="checkbox pull-left">
 									<span class="title">Id quod mazim placerat facer possim</span>
@@ -358,7 +373,7 @@ Example Board
 								</div>
 							</div>
 							<!-- /.row -->
-							<div class="row table-row status-new">
+							<div class="row post table-row status-new">
 								<div class="col-lg-7 col-md-7 col-sm-7">
 									<input type="checkbox" name="checkAll" class="checkbox pull-left">
 									<span class="title">Soluta nobis eleifend option congue</span>
@@ -371,7 +386,7 @@ Example Board
 								</div>
 							</div>
 							<!-- /.row -->
-							<div class="row table-row status-new">
+							<div class="row post table-row status-new">
 								<div class="col-lg-7 col-md-7 col-sm-7">
 									<input type="checkbox" name="checkAll" class="checkbox pull-left">
 									<span class="title">Humanitatis per seacula quarta</span>
@@ -384,7 +399,7 @@ Example Board
 								</div>
 							</div>
 							<!-- /.row -->
-							<div class="row table-row status-new">
+							<div class="row post table-row status-new">
 								<div class="col-lg-7 col-md-7 col-sm-7">
 									<input type="checkbox" name="checkAll" class="checkbox pull-left">
 									<span class="title">Quam nunc putamus parum</span>
@@ -397,7 +412,7 @@ Example Board
 								</div>
 							</div>
 							<!-- /.row -->
-							<div class="row table-row status-new">
+							<div class="row post table-row status-new">
 								<div class="col-lg-7 col-md-7 col-sm-7">
 									<input type="checkbox" name="checkAll" class="checkbox pull-left">
 									<span class="title">Mirum est notare quam littera gothica</span>
@@ -431,32 +446,32 @@ Example Board
 							<li>
 								<a href="#">
 									<span class="label label-success">online</span>
-									<img src="img/samples/avatar-8.jpg">Samantha Hills</a>
+									<img src="assets/img/samples/avatar-8.jpg">Samantha Hills</a>
 							</li>
 							<li>
 								<a href="#">
 									<span class="label label-success">online</span>
-									<img src="img/samples/avatar-2.jpg">Nick Adam</a>
+									<img src="assets/img/samples/avatar-2.jpg">Nick Adam</a>
 							</li>
 							<li>
 								<a href="#">
 									<span class="label label-success">online</span>
-									<img src="img/samples/avatar-3.jpg">Samantha Brown</a>
+									<img src="assets/img/samples/avatar-3.jpg">Samantha Brown</a>
 							</li>
 							<li>
 								<a href="#">
 									<span class="label label-success">online</span>
-									<img src="img/samples/avatar-10.jpg">Will Smith</a>
+									<img src="assets/img/samples/avatar-10.jpg">Will Smith</a>
 							</li>
 							<li>
 								<a href="#">
 									<span class="label label-success">online</span>
-									<img src="img/samples/avatar-1.jpg">John Carter</a>
+									<img src="assets/img/samples/avatar-1.jpg">John Carter</a>
 							</li>
 							<li>
 								<a href="#">
 									<span class="label label-success">online</span>
-									<img src="img/samples/avatar-7.jpg">Jeremy White</a>
+									<img src="assets/img/samples/avatar-7.jpg">Jeremy White</a>
 							</li>
 						</ul>
 					</div>
@@ -515,51 +530,51 @@ Example Board
 						<ul class="list-unstyled user-list">
 							<li>
 								<a href="#">
-									<img src="img/samples/avatar-2.jpg"></a>
+									<img src="assets/img/samples/avatar-2.jpg"></a>
 							</li>
 							<li>
 								<a href="#">
-									<img src="img/samples/avatar-3.jpg"></a>
+									<img src="assets/img/samples/avatar-3.jpg"></a>
 							</li>
 							<li>
 								<a href="#">
-									<img src="img/samples/avatar-4.jpg"></a>
+									<img src="assets/img/samples/avatar-4.jpg"></a>
 							</li>
 							<li>
 								<a href="#">
-									<img src="img/samples/avatar-5.jpg"></a>
+									<img src="assets/img/samples/avatar-5.jpg"></a>
 							</li>
 							<li>
 								<a href="#">
-									<img src="img/samples/avatar-6.jpg"></a>
+									<img src="assets/img/samples/avatar-6.jpg"></a>
 							</li>
 							<li>
 								<a href="#">
-									<img src="img/samples/avatar-7.jpg"></a>
+									<img src="assets/img/samples/avatar-7.jpg"></a>
 							</li>
 							<li>
 								<a href="#">
-									<img src="img/samples/avatar-8.jpg"></a>
+									<img src="assets/img/samples/avatar-8.jpg"></a>
 							</li>
 							<li>
 								<a href="#">
-									<img src="img/samples/avatar-9.jpg"></a>
+									<img src="assets/img/samples/avatar-9.jpg"></a>
 							</li>
 							<li>
 								<a href="#">
-									<img src="img/samples/avatar-10.jpg"></a>
+									<img src="assets/img/samples/avatar-10.jpg"></a>
 							</li>
 							<li>
 								<a href="#">
-									<img src="img/samples/avatar-2.jpg"></a>
+									<img src="assets/img/samples/avatar-2.jpg"></a>
 							</li>
 							<li>
 								<a href="#">
-									<img src="img/samples/avatar-3.jpg"></a>
+									<img src="assets/img/samples/avatar-3.jpg"></a>
 							</li>
 							<li>
 								<a href="#">
-									<img src="img/samples/avatar-4.jpg"></a>
+									<img src="assets/img/samples/avatar-4.jpg"></a>
 							</li>
 						</ul>
 					</div>
@@ -583,7 +598,7 @@ Example Board
 				<div class="statistic-list-chart">
 					<div class="panel panel-default">
 						<div class="panel-heading">
-							<h3 class="panel-title">Inline Bar Statistics</h3>
+							<h3 class="panel-title">Bar Stats</h3>
 						</div>
 						<div class="panel-body">
 							<ul class="listing list-unstyled">
@@ -620,7 +635,7 @@ Example Board
 				<div class="statistic-list-chart">
 					<div class="panel panel-default">
 						<div class="panel-heading">
-							<h3 class="panel-title">Inline Line Statistics</h3>
+							<h3 class="panel-title">Line Stats</h3>
 						</div>
 						<div class="panel-body">
 							<ul class="listing list-unstyled">
@@ -657,7 +672,7 @@ Example Board
 				<div class="statistic-list-chart">
 					<div class="panel panel-default">
 						<div class="panel-heading">
-							<h3 class="panel-title">Inline Bar Statistics</h3>
+							<h3 class="panel-title">Bar Stats</h3>
 						</div>
 						<div class="panel-body">
 							<ul class="listing list-unstyled">
@@ -694,7 +709,7 @@ Example Board
 				<div class="statistic-list-chart">
 					<div class="panel panel-default">
 						<div class="panel-heading">
-							<h3 class="panel-title">Statistics</h3>
+							<h3 class="panel-title">Line Stats</h3>
 						</div>
 						<div class="panel-body">
 							<ul class="listing list-unstyled">

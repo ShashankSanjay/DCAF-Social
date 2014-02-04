@@ -141,10 +141,14 @@ Route::group(array('before' => 'auth'), function()
                     'Hofstra' => ['0' => 'fa fa-facebook-square',
                                 '1' => 'fa fa-twitter-square',
                                 '2' => 'fa fa-google-plus-square',
+                                '3' => 'fa fa-instagram'],
+                    'Long Beach Incubator' => ['0' => 'fa fa-facebook-square',
+                                '1' => 'fa fa-twitter-square',
+                                '2' => 'fa fa-google-plus-square',
                                 '3' => 'fa fa-instagram']
                     ];
         
-        return View::make('site.outlines.dashboard', compact('companies'));
+        return View::make('site.dashboard.exampleboard', compact('companies'));
 
     });
 });
@@ -182,6 +186,8 @@ Route::get('animate', function()
 
 # User RESTful Routes (Login, Logout, Register, etc)
 Route::controller('user', 'UserController');
+
+Route::get('dcaf', 'DCAFController@index');
 
 //:: Application Routes ::
 
