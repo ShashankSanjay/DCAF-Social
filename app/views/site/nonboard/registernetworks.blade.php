@@ -50,7 +50,7 @@ Network Registration
 						<hr>
 						<h3 class="align-center">All done?<br /> You'll be able to add or remove networks later if you want to<h3>
 						<!--button class="btn btn-lg btn-primary btn-block" type="submit"> I'm all done</button-->
-						<a class="btn btn-lg btn-warning col-lg-4 col-lg-offset-4" href={{ URL::to('user/team') }}><strong> Next Step!</strong></a>
+						<a class="btn btn-lg btn-warning col-lg-4 col-lg-offset-4" href={{ URL::to('/') }}><strong> Go to Dashboard! </strong></a>
 					</div>
 				</div>
 			</div> <!-- /container -->

@@ -31,7 +31,36 @@ class UserController extends BaseController {
         // Show the page
         
 
-        return View::make('site/dashboard/home', compact('user', 'companies'));
+        //return View::make('site/dashboard/home', compact('user', 'companies'));
+
+        $companies = [
+                    'Pepsi' => ['0' => 'fa fa-facebook-square',
+                                '1' => 'fa fa-twitter-square',
+                                '2' => 'fa fa-google-plus-square',
+                                '3' => 'fa fa-instagram'],
+                    
+                    'Samsung' => ['0' => 'fa fa-facebook-square',
+                                '1' => 'fa fa-twitter-square',
+                                '2' => 'fa fa-google-plus-square',
+                                '3' => 'fa fa-instagram'],
+                    'Apple' => ['0' => 'fa fa-facebook-square',
+                                '1' => 'fa fa-twitter-square',
+                                '2' => 'fa fa-google-plus-square',
+                                '3' => 'fa fa-instagram'],
+                    
+                    
+                    'Costco' => ['0' => 'fa fa-facebook-square',
+                                '1' => 'fa fa-twitter-square',
+                                '2' => 'fa fa-google-plus-square',
+                                '3' => 'fa fa-instagram'],
+                    'Hofstra' => ['0' => 'fa fa-facebook-square',
+                                '1' => 'fa fa-twitter-square',
+                                '2' => 'fa fa-google-plus-square',
+                                '3' => 'fa fa-instagram'],
+                    
+                    ];
+        
+        return View::make('site.dashboard.exampleboard', compact('companies'));
     }
 
     /**

@@ -80,12 +80,23 @@ Dashboard
 						@if (isset($companies))
 						<!--div class="container"-->
 							<style type="text/css">
-								.animate .nav li {
-									width: {{ (100/count($companies))*2; }}%;
-								}
+								
 								@if (count($companies)>5)
 								#middle #content {
 									padding-bottom: 5em !important;
+								}
+								.animate .nav li {
+									width: {{ (100/count($companies))*2; }}%;
+								}
+								@else
+								footer#footer {
+									height: 2.8em !important;
+								}
+								.animate .nav li {
+									width: {{ (100/count($companies)); }}%;
+								}
+								#middle #content {
+									padding-bottom: 2.8em !important;
 								}
 								@endif
 								/*.animate .icon {
