@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: mysql
--- Generation Time: Jan 30, 2014 at 02:59 PM
+-- Generation Time: Feb 07, 2014 at 03:14 PM
 -- Server version: 5.1.55
 -- PHP Version: 5.3.6
 
@@ -51,6 +51,53 @@ CREATE TABLE IF NOT EXISTS `Billing_Plans` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `plan_name` (`plan_name`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `Brand_Groups`
+--
+
+CREATE TABLE IF NOT EXISTS `Brand_Groups` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `name` varchar(30) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `Client_Brand_Groups`
+--
+
+CREATE TABLE IF NOT EXISTS `Client_Brand_Groups` (
+  `company_id` int(11) NOT NULL,
+  `brand_group_id` int(11) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `Client_Companies`
+--
+
+CREATE TABLE IF NOT EXISTS `Client_Companies` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(30) NOT NULL,
+  `industry` int(30) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `Client_User_Assoc`
+--
+
+CREATE TABLE IF NOT EXISTS `Client_User_Assoc` (
+  `uid` bigint(20) NOT NULL,
+  `company_id` int(11) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -273,6 +320,18 @@ INSERT INTO `migrations` (`migration`, `batch`) VALUES
 ('2013_09_01_024008_migration_oauth_google', 1),
 ('2013_09_01_024008_migration_oauth_instagram', 1),
 ('2013_09_01_024008_migration_oauth_twitter', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `Network_Users`
+--
+
+CREATE TABLE IF NOT EXISTS `Network_Users` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `profile_id` bigint(20) unsigned NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
