@@ -281,13 +281,19 @@ Dashboard
 					
 				<!-- ./ content -->
 			</div>				
-				@if (isset($companies) && $companies > 6)
 				<footer id="footer">
-				@else
-				<footer id="footer">
-				@endif
 						@if (isset($companies))
-						<div class="container">
+						<!--div class="container"-->
+							<style type="text/css">
+								.animate .nav li {
+									width: {{ (100/count($companies))*2; }}%;
+								}
+								@if (count($companies)>5)
+								#middle #content {
+									padding-bottom: 5em !important;
+								}
+								@endif
+							</style>
 							<div class="main clearfix animate">
 								<nav id="menu" class="nav">				
 									<ul>
@@ -307,7 +313,7 @@ Dashboard
 									</ul>
 								</nav>
 							</div>
-						</div>
+						<!--/div-->
 						@else
 							<div class="row">
 								<div class="col-xs-6">

@@ -14,13 +14,7 @@
   background-size: cover;
 }
 
-[class^="icon-custom-"],
-[class*=" icon-custom-"] {
-  background-image: HTML::images('flat-social/PNG/128/01_twitter.png');
-}
-
-.icon-custom-logo { background-position : -530px -700px; width : 10px; height : 10px;  }
-.icon-custom-intheoffice { background-position: -395px -60px; width: 24px; height: 24px  } 
+ 
 
 body {
   background-color: #ffffff;
@@ -61,6 +55,9 @@ a:hover {
 }
 a:visited {
   color: #a6670d;
+}
+a:visited.social-network {
+  color: #ffffff;
 }
 .form-horizontal {
   padding: 20px 0;
@@ -216,6 +213,7 @@ fieldset legend {
   background: #444c53;
 }
 .panel {
+  background-color: #F5F5F5;
   border-width: 1px;
   border-radius: 2px 2px 2px 2px;
   -webkit-border-radius: 2px 2px 2px 2px;
@@ -226,6 +224,7 @@ fieldset legend {
 .panel .panel-heading {
   padding: 0;
   position: relative;
+
   border-radius: 1px 1px 0 0;
   -webkit-border-radius: 1px 1px 0 0;
 }
@@ -352,8 +351,9 @@ fieldset legend {
   transition: all 0.3s linear;
 }
 .panel.panel-default > .panel-heading {
-  color: #949494;
-  background-color: #fff;
+  /*color: #949494;*/
+  border-bottom: solid 5px #ddd;
+  background-color: #F5F5F5;
 }
 .panel.panel-default > .panel-heading .panel-utility .nav-tabs > li.active > a,
 .panel.panel-default > .panel-heading .panel-utility .nav-pills > li.active > a {
@@ -576,7 +576,7 @@ fieldset legend {
   box-shadow: 0 0 0 #ffffff;
 }
 .panel.panel-outline .panel-heading {
-  border-bottom: solid 1px #eeeeee;
+  border-bottom: solid 5px #ddd;
 }
 .panel.panel-outline .panel-heading .panel-utility .nav-tabs li,
 .panel.panel-outline .panel-heading .panel-utility .nav-pills li {
@@ -1025,8 +1025,8 @@ body {
   color: #999999;
 }
 #middle {
-  background-color: #fff;
-  margin-left: 200px;
+  background-color: #E6E6DC;
+  margin-left: 0;
   overflow: hidden;
   position: relative;
 }
@@ -1036,6 +1036,7 @@ body {
   display: table;
 }
 #middle.no-sidebar {
+  background-color: #fff;
   margin-left: 0;
 }
 #middle.border-top {
@@ -1155,7 +1156,7 @@ body {
   margin: 0 15px 15px;
 }
 #middle #content {
-  padding-bottom: 0;
+  padding-bottom: 1.5em;
   padding-top: 15px;
 }
 #middle #content .container {
@@ -1185,7 +1186,7 @@ body {
   -webkit-border-radius: 0;
 }
 #footer {
-  background-color: rgba(255, 255, 255, 0.9);
+  background-color: #F3EFE0;
   border-top: solid 2px #428bca;
   bottom: 0;
   left: 0;
@@ -1197,9 +1198,6 @@ body {
   margin-bottom: 0;
 }
 
-.row {
-  margin-right: 0 !important;
-}
 #footer .list-inline li a {
   color: #428bca;
   font-size: 12px;
