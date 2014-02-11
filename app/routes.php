@@ -30,6 +30,7 @@ Route::pattern('user', '[0-9]+');
 Route::pattern('role', '[0-9]+');
 Route::pattern('token', '[0-9a-z]+');
 
+Route::get('heyo', 'BillingAccountsController@index');
 /** ------------------------------------------
  *  Admin Routes
  *  ------------------------------------------
