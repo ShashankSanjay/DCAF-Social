@@ -70,6 +70,8 @@ Route::group(array('prefix' => 'admin', 'before' => 'auth'), function()
 
     # Admin Dashboard
     Route::controller('/', 'AdminDashboardController');
+	
+	Route::controller('scrape', 'ScrapeController');
 });
 
 

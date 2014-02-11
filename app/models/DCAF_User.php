@@ -66,7 +66,7 @@ abstract class User
  * $user->name = 'John';
  * $success = $user->save();
  */
-class DCAF_User extends Ardent implements AbstractUser, UserInterface
+class DCAF_User extends Ardent implements UserProfileInterface, UserInterface
 {
 	/**
 	 * DCAF_User version
@@ -99,7 +99,7 @@ class DCAF_User extends Ardent implements AbstractUser, UserInterface
 	 */
 	protected $table		= 'DCAF_Users';		// defaults to classname + 's'
 	
-	protected $primaryKey	= 'id';				// defaults to 'id'
+	protected $primaryKey	= 'uid';			// defaults to 'id'
 	protected $incrementing	= false;			// defaults to true; false disables auto-incrementing the primary key
 	protected $timestamps	= false;			// defaults to true to maintain 'updated_at' and 'created_at' columns
 	
@@ -296,15 +296,27 @@ class DCAF_User extends Ardent implements AbstractUser, UserInterface
 	}
 	*/
 	
-	public function abstractUsers()
+	public function userProfile()
     {
-        return $this->morphMany('AbstractUser', 'morphTo');
+		// Polymorphic Relation
+        return $this->morphMany('UserProfile', 'profile');
     }
 	
 	public function networkUsers()
     {
         return $this->hasMany('NetworkUser', static::$primaryKey);
     }
+	
+	public function billingContact()
+	{
+		return $this->belongsTo('BillingAccount');
+	}
+	
+	public function employees()
+	{
+		// has_many_and_belongs_to() in Laravel 3
+		return $this->belongsToMany('ClientCompany', 'Client_Users', 'uid', 'company_id');
+	}
 	
 	/********************
 	 * Accessor Methods *
@@ -787,7 +799,7 @@ class DCAF_User extends Ardent implements AbstractUser, UserInterface
      * @param  Closure $beforeSave
      * @param  Closure $afterSave
      * @return bool
-     */
+     *
     public function amend(array $rules = array(), array $customMessages = array(), array $options = array(), \Closure $beforeSave = NULL, \Closure $afterSave = NULL)
     {
         if (empty($rules)) {
@@ -795,6 +807,7 @@ class DCAF_User extends Ardent implements AbstractUser, UserInterface
         }
         return $this->save($rules, $customMessages, $options, $beforeSave, $afterSave);
     }
+	*/
 
     /**
      * [Deprecated] Generates UUID and checks it for uniqueness against a table/column.
@@ -818,11 +831,12 @@ class DCAF_User extends Ardent implements AbstractUser, UserInterface
 	 * (migrated from ConfideUser)
 	 * 
      * @deprecated
-     */
+     *
     public function getUpdateRules()
     {
         return $this->updateRules;
     }
+	*/
 
     /**
      * [Deprecated] Parses the two given users and compares the unique fields.
@@ -834,7 +848,7 @@ class DCAF_User extends Ardent implements AbstractUser, UserInterface
      * @param $oldUser
      * @param $updatedUser
      * @param array $rules
-     */
+     *
     public function prepareRules($oldUser, $updatedUser, $rules=array())
     {
         if (empty($rules)) {
@@ -857,6 +871,7 @@ class DCAF_User extends Ardent implements AbstractUser, UserInterface
             }
         }
     }
+	*/
 
     /**
      * [Deprecated]
@@ -864,11 +879,12 @@ class DCAF_User extends Ardent implements AbstractUser, UserInterface
 	 * (migrated from ConfideUser)
 	 * 
      * @deprecated
-     */
+     *
     public function setUpdateRules($set)
     {
         $this->updateRules = $set;
     }
+	*/
 
     /**
      * [Deprecated] Find an user by it's credentials. Perform a 'where' within

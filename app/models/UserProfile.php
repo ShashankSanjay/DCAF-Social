@@ -1,4 +1,6 @@
 <?php
+namespace Models;
+
 /**
  * @package    {package}
  * @subpackage {subpackage}
@@ -15,18 +17,20 @@
  * Eloquent is defined as an alias of Illuminate\Database\Eloquent\Model
  * in app/config/app.php via the php function class_alias()
  */
-// use Illuminate\Database\Eloquent\Model as Eloquent;
-use Eloquent;
+use Illuminate\Database\Eloquent\Model as Eloquent;
+// use Eloquent;
 
 /**
- * AbstractUser
+ * UserProfile
+ * 
+ * Base user profile class
  * 
  * @abstract
  * 
  * @author	Alexander Rosenberg
  * @version	1.0
  */
-/* abstract */ class AbstractUser extends Eloquent
+class UserProfile extends Eloquent implements UserProfileInterface, UserInterface
 {
 	/**********************
 	 * Instance Variables *
@@ -48,6 +52,13 @@ use Eloquent;
 	 */
 	protected $table		= 'User_Profiles';
 	
+	/**
+	 * Field name of the table's primary key
+	 *
+	 * @since  1.0
+	 * @access protected
+	 * @type   string
+	 */
 	// protected $primaryKey	= 'User_ID';
 	
 	/**
@@ -58,6 +69,11 @@ use Eloquent;
 	 * @type   array
 	 */
 	protected $fillable		= array('*');
+	
+	public function profile()
+    {
+        return $this->morphTo();
+    }
 }
 
 ?>

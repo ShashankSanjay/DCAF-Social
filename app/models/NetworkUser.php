@@ -16,11 +16,11 @@ use Carbon\Carbon;
  * @author	Alexander Rosenberg
  * @version	1.0
  */
-class NetworkUser extends Ardent
+class NetworkUser extends Ardent implements UserProfileInterface, UserInterface
 {
 	/**
 	 * The database table used by the model.
-	 *
+	 * 
 	 * @since  1.0
 	 * @access protected
 	 * @type   string
