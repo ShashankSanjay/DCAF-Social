@@ -1,4 +1,4 @@
-<?php
+<?php namespace Models;
 /**
  * Eloquent Model
  * 
@@ -100,8 +100,8 @@ class DCAF_User extends Ardent implements UserProfileInterface, UserInterface
 	protected $table		= 'DCAF_Users';		// defaults to classname + 's'
 	
 	protected $primaryKey	= 'uid';			// defaults to 'id'
-	protected $incrementing	= false;			// defaults to true; false disables auto-incrementing the primary key
-	protected $timestamps	= false;			// defaults to true to maintain 'updated_at' and 'created_at' columns
+	public $incrementing	= false;			// defaults to true; false disables auto-incrementing the primary key
+	public $timestamps	= false;			// defaults to true to maintain 'updated_at' and 'created_at' columns
 	
 	/**
 	 * Defines which attributes can be set through
@@ -132,7 +132,7 @@ class DCAF_User extends Ardent implements UserProfileInterface, UserInterface
 	 * @access public
      * @var    array
      */
-    public static $passwordAttributes = array('password');
+    //public static $passwordAttributes = array('password');
 	
 	/**
      * When set to true, Ardent automatically replaces the plain-text password
@@ -143,7 +143,7 @@ class DCAF_User extends Ardent implements UserProfileInterface, UserInterface
 	 * @access public
 	 * @type   bool
      */
-    public $autoHashPasswordAttributes = true;
+    //public $autoHashPasswordAttributes = true;
 	
 	/**
 	 * Ardent validation rules

@@ -35,10 +35,10 @@ class ScrapeController extends BaseController
 		return View::make('node', $data);
 	}
 	
-	public function getNode($node) {
+	/*public function getNode($node) {
 		$data = array('node' => $node);
 		return View::make('node', $data);
-	}
+	}*/
 	
 	/*
 	$nodes = Node::all();
