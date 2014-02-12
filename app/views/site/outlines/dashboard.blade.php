@@ -18,9 +18,15 @@ Dashboard
                 <button type="button" class="navbar-toggle pull-right" data-toggle="collapse" data-target=".sidebar-collapse">
                     <i class="fa fa-bars"></i> Menu
                 </button>
+                <style type="text/css">
+                    .navbar-brand>a{
+                        color: white;
+                    }
+                </style>
                 <div class="navbar-brand">
-                    <a href="index-2.html">
-                        <img src="{{ URL::to('/') }}/assets/img/flex-admin-logo.png" class="img-responsive" alt="">
+                    <a href={{ URL::to('/') }}>
+                        <!--img src="{{ URL::to('/') }}/assets/img/flex-admin-logo.png" class="img-responsive" alt=""-->
+                        DCAF - Social
                     </a>
                 </div>
             </div>
