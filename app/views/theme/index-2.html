@@ -13,33 +13,33 @@
     <title>Flex Admin - Responsive Admin Theme</title>
 
     <!-- PACE LOAD BAR PLUGIN - This creates the subtle load bar effect at the top of the page. -->
-    <link href="css/plugins/pace/pace.css" rel="stylesheet">
-    <script src="js/plugins/pace/pace.js"></script>
+    {{ HTML::style('assets/css/plugins/pace/pace.css') }}
+    {{ HTML::script('assets/js/plugins/pace/pace.js') }}
 
     <!-- GLOBAL STYLES - Include these on every page. -->
-    <link href="css/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    {{ HTML::style('assets/css/plugins/bootstrap/css/bootstrap.min.css') }}
     <link href='../../fonts.googleapis.com/css3ef8.css?family=Ubuntu:300,400,500,700,300italic,400italic,500italic,700italic' rel="stylesheet" type="text/css">
     <link href='../../fonts.googleapis.com/css5c84.css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel="stylesheet" type="text/css">
-    <link href="icons/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    {{ HTML::style("icons/font-awesome/css/font-awesome.min.css') }}
 
     <!-- PAGE LEVEL PLUGIN STYLES -->
-    <link href="css/plugins/messenger/messenger.css" rel="stylesheet">
-    <link href="css/plugins/messenger/messenger-theme-flat.css" rel="stylesheet">
-    <link href="css/plugins/daterangepicker/daterangepicker-bs3.css" rel="stylesheet">
-    <link href="css/plugins/morris/morris.css" rel="stylesheet">
-    <link href="css/plugins/jvectormap/jquery-jvectormap-1.2.2.css" rel="stylesheet">
-    <link href="css/plugins/datatables/datatables.css" rel="stylesheet">
+    {{ HTML::style('assets/css/plugins/messenger/messenger.css') }}
+    {{ HTML::style('assets/css/plugins/messenger/messenger-theme-flat.css') }}
+    {{ HTML::style('assets/css/plugins/daterangepicker/daterangepicker-bs3.css') }}
+    {{ HTML::style('assets/css/plugins/morris/morris.css') }}
+    {{ HTML::style('assets/css/plugins/jvectormap/jquery-jvectormap-1.2.2.css') }}
+    {{ HTML::style('assets/css/plugins/datatables/datatables.css') }}
 
     <!-- THEME STYLES - Include these on every page. -->
-    <link href="css/style.css" rel="stylesheet">
-    <link href="css/plugins.css" rel="stylesheet">
+    {{ HTML::style('assets/css/style.css') }}
+    {{ HTML::style('assets/css/plugins.css') }}
 
     <!-- THEME DEMO STYLES - Use these styles for reference if needed. Otherwise they can be deleted. -->
-    <link href="css/demo.css" rel="stylesheet">
+    {{ HTML::style('assets/css/demo.css') }}
 
     <!--[if lt IE 9]>
-      <script src="js/html5shiv.js"></script>
-      <script src="js/respond.min.js"></script>
+      {{ HTML::script('assets/js/html5shiv.js') }}
+      {{ HTML::script('assets/js/respond.min.js') }}
     <![endif]-->
 
 </head>
@@ -1406,11 +1406,11 @@
     <!-- /#wrapper -->
 
     <!-- GLOBAL SCRIPTS -->
-    <script src="../../ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-    <script src="js/plugins/bootstrap/bootstrap.min.js"></script>
-    <script src="js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
-    <script src="js/plugins/popupoverlay/jquery.popupoverlay.js"></script>
-    <script src="js/plugins/popupoverlay/defaults.js"></script>
+    {{ HTML::script('assets/../../ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js') }}
+    {{ HTML::script('assets/js/plugins/bootstrap/bootstrap.min.js') }}
+    {{ HTML::script('assets/js/plugins/slimscroll/jquery.slimscroll.min.js') }}
+    {{ HTML::script('assets/js/plugins/popupoverlay/jquery.popupoverlay.js') }}
+    {{ HTML::script('assets/js/plugins/popupoverlay/defaults.js') }}
     <!-- Logout Notification Box -->
     <div id="logout">
         <div class="logout-message">
@@ -1433,40 +1433,40 @@
     </div>
     <!-- /#logout -->
     <!-- Logout Notification jQuery -->
-    <script src="js/plugins/popupoverlay/logout.js"></script>
+    {{ HTML::script('assets/js/plugins/popupoverlay/logout.js') }}
     <!-- HISRC Retina Images -->
-    <script src="js/plugins/hisrc/hisrc.js"></script>
+    {{ HTML::script('assets/js/plugins/hisrc/hisrc.js') }}
 
     <!-- PAGE LEVEL PLUGIN SCRIPTS -->
     <!-- HubSpot Messenger -->
-    <script src="js/plugins/messenger/messenger.min.js"></script>
-    <script src="js/plugins/messenger/messenger-theme-flat.js"></script>
+    {{ HTML::script('assets/js/plugins/messenger/messenger.min.js') }}
+    {{ HTML::script('assets/js/plugins/messenger/messenger-theme-flat.js') }}
     <!-- Date Range Picker -->
-    <script src="js/plugins/daterangepicker/moment.js"></script>
-    <script src="js/plugins/daterangepicker/daterangepicker.js"></script>
+    {{ HTML::script('assets/js/plugins/daterangepicker/moment.js') }}
+    {{ HTML::script('assets/js/plugins/daterangepicker/daterangepicker.js') }}
     <!-- Morris Charts -->
-    <script src="js/plugins/morris/raphael-2.1.0.min.js"></script>
-    <script src="js/plugins/morris/morris.js"></script>
+    {{ HTML::script('assets/js/plugins/morris/raphael-2.1.0.min.js') }}
+    {{ HTML::script('assets/js/plugins/morris/morris.js') }}
     <!-- Flot Charts -->
-    <script src="js/plugins/flot/jquery.flot.js"></script>
-    <script src="js/plugins/flot/jquery.flot.resize.js"></script>
+    {{ HTML::script('assets/js/plugins/flot/jquery.flot.js') }}
+    {{ HTML::script('assets/js/plugins/flot/jquery.flot.resize.js') }}
     <!-- Sparkline Charts -->
-    <script src="js/plugins/sparkline/jquery.sparkline.min.js"></script>
+    {{ HTML::script('assets/js/plugins/sparkline/jquery.sparkline.min.js') }}
     <!-- Moment.js -->
-    <script src="js/plugins/moment/moment.min.js"></script>
+    {{ HTML::script('assets/js/plugins/moment/moment.min.js') }}
     <!-- jQuery Vector Map -->
-    <script src="js/plugins/jvectormap/jquery-jvectormap-1.2.2.min.js"></script>
-    <script src="js/plugins/jvectormap/maps/jquery-jvectormap-world-mill-en.js"></script>
-    <script src="js/demo/map-demo-data.js"></script>
+    {{ HTML::script('assets/js/plugins/jvectormap/jquery-jvectormap-1.2.2.min.js') }}
+    {{ HTML::script('assets/js/plugins/jvectormap/maps/jquery-jvectormap-world-mill-en.js') }}
+    {{ HTML::script('assets/js/demo/map-demo-data.js') }}
     <!-- Easy Pie Chart -->
-    <script src="js/plugins/easypiechart/jquery.easypiechart.min.js"></script>
+    {{ HTML::script('assets/js/plugins/easypiechart/jquery.easypiechart.min.js') }}
     <!-- DataTables -->
-    <script src="js/plugins/datatables/jquery.dataTables.js"></script>
-    <script src="js/plugins/datatables/datatables-bs3.js"></script>
+    {{ HTML::script('assets/js/plugins/datatables/jquery.dataTables.js') }}
+    {{ HTML::script('assets/js/plugins/datatables/datatables-bs3.js') }}
 
     <!-- THEME SCRIPTS -->
-    <script src="js/flex.js"></script>
-    <script src="js/demo/dashboard-demo.js"></script>
+    {{ HTML::script('assets/js/flex.js') }}
+    {{ HTML::script('assets/js/demo/dashboard-demo.js') }}
 
 </body>
 
