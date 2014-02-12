@@ -280,13 +280,19 @@ Dashboard
 					
 				<!-- ./ content -->
 			</div>				
-				<?php if (isset($companies) && $companies > 6): ?>
 				<footer id="footer">
-				<?php else: ?>
-				<footer id="footer">
-				<?php endif; ?>
 						<?php if (isset($companies)): ?>
-						<div class="container">
+						<!--div class="container"-->
+							<style type="text/css">
+								.animate .nav li {
+									width: <?php echo (100/count($companies))*2;; ?>%;
+								}
+								<?php if (count($companies)>5): ?>
+								#middle #content {
+									padding-bottom: 5em !important;
+								}
+								<?php endif; ?>
+							</style>
 							<div class="main clearfix animate">
 								<nav id="menu" class="nav">				
 									<ul>
@@ -306,7 +312,7 @@ Dashboard
 									</ul>
 								</nav>
 							</div>
-						</div>
+						<!--/div-->
 						<?php else: ?>
 							<div class="row">
 								<div class="col-xs-6">

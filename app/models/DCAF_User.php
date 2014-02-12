@@ -328,11 +328,11 @@ class DCAF_User extends Ardent implements UserProfileInterface, UserInterface
 	 * @requiredBy Robbo\Presenter\PresentableInterface
 	 * @return     Robbo\Presenter\Presenter
 	 *
-	public function getPresenter()
-    {
-        return new UserPresenter($this);
-    }
-	*/
+	 *public function getPresenter()
+	 *{
+	 *    return new UserPresenter($this);
+	 *}
+	 */
 	
 	/**
      * Get user by username
@@ -476,7 +476,7 @@ class DCAF_User extends Ardent implements UserProfileInterface, UserInterface
 	 *
 	 * @throws \Illuminate\Database\Eloquent\MassAssignmentException
 	 *
-	public function fill(array $attributes) {}
+	 *public function fill(array $attributes) {}
 	*/
 	
 	/**
@@ -492,7 +492,7 @@ class DCAF_User extends Ardent implements UserProfileInterface, UserInterface
 	 * @throws \Illuminate\Database\Eloquent\MassAssignmentException
      * @throws \LaravelBook\Ardent\InvalidModelException
      *
-    public function validate(array $rules = array(), array $customMessages = array()) {}
+     *public function validate(array $rules = array(), array $customMessages = array()) {}
 	*/
 	
 	/**
@@ -1005,10 +1005,131 @@ class DCAF_User extends Ardent implements UserProfileInterface, UserInterface
 	 *     run on shutdown caused by fatal errors.
 	 * see also: http://www.php.net/manual/en/features.gc.php
 	 */
+
+	/******************/
+	/* getter methods */
+	/******************/
+	
+	/**
+	 * Gets the user's internal id.
+	 *
+	 * @access public
+	 * @return int
+	 */
+	public function getUID(){
+		//
+	}
+	
+	/**
+	 * Gets the user's username.
+	 *
+	 * @access public
+	 * @return string
+	 */
+	public function getUsername() {
+		//
+	}
+	
+	/**
+	 * Gets the user's gender.
+	 *
+	 * @access public
+	 * @return string
+	 */
+	public function getGender() {
+		//
+	}
+	
+	/**
+	 * Gets the user's email address.
+	 *
+	 * @access public
+	 * @return string
+	 */
+	public function getEmail() {
+		//
+	}
+	
+	/**
+	 * Gets the user's first name,
+	 * optionally including middle initial.
+	 *
+	 * @access public
+	 * @return string
+	 */
+	public function getFirstName() {
+		//
+	}
+	
+	/**
+	 * Gets the user's last name.
+	 *
+	 * @access public
+	 * @return string
+	 */
+	public function getLastName() {
+		//
+	}
+	
+	/******************/
+	/* setter methods */
+	/******************/
+		
+	/**
+	 * Sets the user's username
+	 *
+	 * @access public
+	 * @param  string	$uname
+	 */
+	public function setUsername($uname) {
+		//
+	}
+	
+	/**
+	 * Sets the user's gender
+	 *
+	 * @access public
+	 * @param  string	$gender
+	 */
+	public function setGender($gender) {
+		//
+	}
+	
+	/**
+	 * Sets the user's email
+	 *
+	 * @access public
+	 * @param  string	$email
+	 */
+	public function setEmail($email) {
+		//
+	}
+	
+	/**
+	 * Sets the user's first name
+	 *
+	 * @access public
+	 * @param  string	$fname
+	 */
+	public function setFirstName($fname) {
+		//
+	}
+	
+	/**
+	 * Sets the user's last name
+	 *
+	 * @access public
+	 * @param  string	$lname
+	 */
+	public function setLastName($lname) {
+		//
+	}
+
+
 	public function __destruct()
 	{
 		// {implementation code}
-		parent::__destruct();
+		//parent::__destruct();
 	}
 }
 
