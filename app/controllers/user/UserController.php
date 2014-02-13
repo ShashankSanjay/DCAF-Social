@@ -1,5 +1,7 @@
 <?php
 
+use Models\DCAF_User;
+
 class UserController extends BaseController {
 
     /**
@@ -103,7 +105,8 @@ class UserController extends BaseController {
 
         // Save if valid. Password field will be hashed before save
         $this->user->save();
-
+       
+        
         if ( $this->user->id )
         {
             // Redirect with success message, You may replace "Lang::get(..." for your custom message.

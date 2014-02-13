@@ -66,7 +66,7 @@ abstract class User
  * $user->name = 'John';
  * $success = $user->save();
  */
-class DCAF_User extends Ardent implements UserProfileInterface, UserInterface
+class DCAF_User extends ConfideUser implements UserProfileInterface, UserInterface
 {
 	/**
 	 * DCAF_User version
@@ -342,10 +342,7 @@ class DCAF_User extends Ardent implements UserProfileInterface, UserInterface
      * @param $username
      * @return mixed
      */
-    public function getUserByUsername($username)
-    {
-		return $this->where('username', '=', $username)->first();
-    }
+    
 	
 	/**
 	 * Get the unique identifier for the user.
@@ -898,7 +895,7 @@ class DCAF_User extends Ardent implements UserProfileInterface, UserInterface
      * @param  mixed  $identityColumns  Array of attribute names or string (for one atribute)
      * @return ConfideUser              User object
      */
-    public function getUserFromCredsIdentity($credentials, $identity_columns = array('username', 'email'))
+    public function getUserFromCredsIdentity($credentials, $identity_columns = array('email'))
     {
         return static::$app['confide.repository']->getUserByIdentity($credentials, $identity_columns);
     }
@@ -916,7 +913,7 @@ class DCAF_User extends Ardent implements UserProfileInterface, UserInterface
      * @param  mixed  $identityColumns  Array of attribute names or string (for one atribute)
      * @return boolean                  Exists?
      */
-    public function checkUserExists($credentials, $identity_columns = array('username', 'email'))
+    public function checkUserExists($credentials, $identity_columns = array('email'))
     {
         $user = static::$app['confide.repository']->getUserByIdentity($credentials, $identity_columns);
 		return $user ? true : false;
@@ -934,7 +931,7 @@ class DCAF_User extends Ardent implements UserProfileInterface, UserInterface
      * @param  mixed  $identityColumns  Array of attribute names or string (for one atribute)
      * @return boolean                  Is confirmed?
      */
-    public function isConfirmed($credentials, $identity_columns = array('username', 'email'))
+    public function isConfirmed($credentials, $identity_columns = array('email'))
     {
         $user = static::$app['confide.repository']->getUserByIdentity($credentials, $identity_columns);
         return !is_null($user) && $user->confirmed;

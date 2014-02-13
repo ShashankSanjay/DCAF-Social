@@ -206,7 +206,8 @@ return array(
         'Datatables'      => 'Bllim\Datatables\Datatables', // DataTables
 
         /* DCAF Stuff */
-        'OAuth'			=> 'Thomaswelton\LaravelOauth\Facades\OAuth' //Oauth
+        'OAuth'			=> 'Thomaswelton\LaravelOauth\Facades\OAuth', //Oauth
+        //'AlchemyAPI'	=> 'AlchemyAPI\alchemyapi_php\alchemyapi',
 
     ),
 

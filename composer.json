@@ -9,11 +9,26 @@
             "homepage": "http://www.andrewelkins.com"
         }
     ],
+    "repositories": [
+    	{
+    		"type": "package",
+    		"package": {
+    			"name": "AlchemyAPI/alchemyapi_php",
+    			"version": "dev-master",
+                "source": {
+                    "url": "https://github.com/AlchemyAPI/alchemyapi_php",
+                    "type": "git",
+                    "reference": "origin/master"
+                }
+    		}
+    	}
+    ],
 	"require": {
-		"laravel/framework": "4.1.*",
+		"AlchemyAPI/alchemyapi_php": "dev-master",
+		"laravel/framework": "4.1.16",
 		"twbs/bootstrap":  "3.0.0",
-		"zizaco/confide": "dev-master",
-		"zizaco/entrust": "dev-master",
+		"zizaco/confide": "3.1.0",
+		"zizaco/entrust": "1.1.0",
 		"jasonlewis/basset": "dev-master",
 		"robclancy/presenter": "1.2.*",
         "j20/php-uuid": "dev-master",

@@ -15,22 +15,14 @@ class User extends ConfideUser implements PresentableInterface {
 	 *
 	 * @var string
 	 */
-	protected $table = 'users';
+	protected $table = 'DCAF_Users';
 
     public function getPresenter()
     {
         return new UserPresenter($this);
     }
 
-    /**
-     * Get user by username
-     * @param $username
-     * @return mixed
-     */
-    public function getUserByUsername( $username )
-    {
-        return $this->where('username', '=', $username)->first();
-    }
+    
 
     /**
      * Get the date the user was created.
