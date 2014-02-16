@@ -15,7 +15,7 @@ class User extends ConfideUser implements PresentableInterface {
 	 *
 	 * @var string
 	 */
-	protected $table = 'DCAF_Users';
+	protected $table = 'users';
 
     public function getPresenter()
     {

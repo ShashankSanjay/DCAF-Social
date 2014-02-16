@@ -1,6 +1,6 @@
 <?php
 
-use Models\DCAF_User;
+use Models\DCAF_Use;
 
 class UserController extends BaseController {
 
@@ -14,7 +14,7 @@ class UserController extends BaseController {
      * Inject the models.
      * @param User $user
      */
-    public function __construct(User $user)
+    public function __construct(DCAF_Use $user)
     {
         parent::__construct();
         $this->user = $user;
@@ -84,7 +84,7 @@ class UserController extends BaseController {
 
         $password = Input::get( 'password' );
         $passwordConfirmation = Input::get( 'password_confirmation' );
-
+        
         if(!empty($password)) {
             if($password === $passwordConfirmation) {
                 $this->user->password = $password;
@@ -105,7 +105,7 @@ class UserController extends BaseController {
 
         // Save if valid. Password field will be hashed before save
         $this->user->save();
-       
+
         
         if ( $this->user->id )
         {
@@ -219,9 +219,11 @@ class UserController extends BaseController {
         // with the second parameter as true.
         // logAttempt will check if the 'email' perhaps is the username.
         // Check that the user is confirmed.
+
         if ( Confide::logAttempt( $input, true ) )
         {
             $r = Session::get('loginRedirect');
+            
             if (!empty($r))
             {
                 Session::forget('loginRedirect');
@@ -234,10 +236,12 @@ class UserController extends BaseController {
             // Check if there was too many login attempts
             if ( Confide::isThrottled( $input ) ) {
                 $err_msg = Lang::get('confide::confide.alerts.too_many_attempts');
+                
             } elseif ( $this->user->checkUserExists( $input ) && ! $this->user->isConfirmed( $input ) ) {
                 $err_msg = Lang::get('confide::confide.alerts.not_confirmed');
             } else {
                 $err_msg = Lang::get('confide::confide.alerts.wrong_credentials');
+                
             }
 
             return Redirect::to('user/login')
