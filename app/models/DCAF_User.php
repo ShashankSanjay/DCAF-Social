@@ -304,6 +304,12 @@ class DCAF_User extends ConfideUser implements UserProfileInterface, UserInterfa
 		// has_many_and_belongs_to() in Laravel 3
 		return $this->belongsToMany('ClientCompany', 'Client_Users', 'uid', 'company_id');
 	}
+
+	public function DCAF_Roles()
+	{
+		//
+		return $this->belongsToMany('DCAF_Roles', 'DCAF_User_Roles', 'uid', 'role_id');
+	}
 	
 	/********************
 	 * Accessor Methods *

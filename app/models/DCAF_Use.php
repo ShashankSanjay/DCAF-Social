@@ -50,6 +50,11 @@ class DCAF_Use extends ConfideUser implements UserProfileInterface, UserInterfac
 		return $this->belongsToMany('ClientCompany', 'Client_Users', 'uid', 'company_id');
 	}
 
+	public function DCAF_Roles()
+	{
+		//
+		return $this->belongsToMany('DCAF_Roles', 'DCAF_User_Roles', 'uid', 'role_id');
+	}
 	/**
      * Get the date the user was created.
      *
