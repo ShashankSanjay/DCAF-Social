@@ -14,7 +14,7 @@ class UserController extends BaseController {
      * Inject the models.
      * @param User $user
      */
-    public function __construct(DCAF_Use $user)
+    public function __construct(DCAF_User $user)
     {
         parent::__construct();
         $this->user = $user;

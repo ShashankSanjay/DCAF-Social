@@ -9,7 +9,7 @@ class DCAF extends BaseController {
 	 */
 	public function index()
 	{
-        $user = new DCAF_User2();
+        $user = new DCAF_User();
         
 	}
 

@@ -11,7 +11,7 @@ class ConfideUser extends Ardent implements UserInterface {
      *
      * @var string
      */
-    protected $table = 'users';
+    protected $table = 'DCAF_Users';
 
     /**
      * Laravel application
