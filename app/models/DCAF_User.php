@@ -9,7 +9,7 @@ use Zizaco\Confide\ConfideEloquentRepository;
 use Zizaco\Entrust\HasRole;
 use Carbon\Carbon;
 
-class DCAF_Use extends ConfideUser implements UserProfileInterface, UserInterface
+class DCAF_User extends ConfideUser implements UserProfileInterface, UserInterface
 {
 	use HasRole;
 	protected $guarded = array();
