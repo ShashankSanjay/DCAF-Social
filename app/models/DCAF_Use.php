@@ -14,6 +14,11 @@ class DCAF_Use extends ConfideUser implements UserProfileInterface, UserInterfac
 	use HasRole;
 	protected $guarded = array();
 
+	public $primaryKey	= 'uid';				// defaults to 'id'
+	public $incrementing	= false;			// defaults to true; false disables auto-incrementing the primary key
+	public $timestamps	= false;			// defaults to true to maintain 'updated_at' and 'created_at' columns
+
+
 	public static $rules = array(
 		'username'	=> 'required|alpha_dash|between:4,16',
 		'email'		=> 'required|email|unique:users',
