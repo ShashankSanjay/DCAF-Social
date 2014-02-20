@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Feb 15, 2014 at 09:00 PM
+-- Generation Time: Feb 20, 2014 at 08:39 PM
 -- Server version: 5.5.35-0ubuntu0.13.10.2
 -- PHP Version: 5.5.3-1ubuntu2.1
 
@@ -19,21 +19,6 @@ SET time_zone = "+00:00";
 --
 -- Database: `DCAF_Social`
 --
-
--- --------------------------------------------------------
-
---
--- Table structure for table `assigned_roles`
---
-
-CREATE TABLE IF NOT EXISTS `assigned_roles` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `user_id` int(10) unsigned NOT NULL,
-  `role_id` int(10) unsigned NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `assigned_roles_user_id_index` (`user_id`),
-  KEY `assigned_roles_role_id_index` (`role_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -151,16 +136,16 @@ CREATE TABLE IF NOT EXISTS `DCAF_Users` (
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   PRIMARY KEY (`id`),
-  UNIQUE KEY `profile_id` (`profile_id`),
   UNIQUE KEY `id` (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=14 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=15 ;
 
 --
 -- Dumping data for table `DCAF_Users`
 --
 
 INSERT INTO `DCAF_Users` (`id`, `profile_id`, `display_name`, `salt`, `bio`, `team_id`, `username`, `email`, `password`, `confirmation_code`, `confirmed`, `created_at`, `updated_at`) VALUES
-(13, 0, NULL, '', '', 0, 'user', 'user@user.com', '$2y$10$rjMrSTtEgbwXpslLWjuUf..VKntnKzBsI63ocplI6sRZi4h/Iw/wG', 'ad0172d4156acd4a4634fff34663d987', 1, '2014-02-15 19:15:41', '2014-02-16 00:14:40');
+(13, 0, NULL, '', '', 0, 'user', 'user@user.com', '$2y$10$rjMrSTtEgbwXpslLWjuUf..VKntnKzBsI63ocplI6sRZi4h/Iw/wG', 'ad0172d4156acd4a4634fff34663d987', 1, '2014-02-15 19:15:41', '2014-02-16 00:14:40'),
+(14, 0, NULL, '', '', 0, 'alex', 'alex_roseberg35@yahoo.com', '$2y$10$3YCDSdW6mAAvu.vrAITdg.XdgJpNceVov5tzeogDOmwTxY.xRUlFG', '4f7f9dbf842fe4278824a216ba7fa5cb', 0, '2014-02-18 19:42:56', '0000-00-00 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -656,13 +641,6 @@ CREATE TABLE IF NOT EXISTS `User_Profiles` (
 --
 -- Constraints for dumped tables
 --
-
---
--- Constraints for table `assigned_roles`
---
-ALTER TABLE `assigned_roles`
-  ADD CONSTRAINT `assigned_roles_role_id_foreign` FOREIGN KEY (`role_id`) REFERENCES `roles` (`id`),
-  ADD CONSTRAINT `assigned_roles_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
 
 --
 -- Constraints for table `permission_role`
