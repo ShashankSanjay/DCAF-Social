@@ -1,6 +1,6 @@
 <?php
 
-use Models\DCAF_Use;
+use Models\DCAF_User;
 
 class UserController extends BaseController {
 
@@ -234,6 +234,7 @@ class UserController extends BaseController {
                 Session::forget('loginRedirect');
                 return Redirect::to($r);
             }
+            
             return Redirect::to('/');
         }
         else
