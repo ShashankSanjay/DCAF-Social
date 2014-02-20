@@ -70,11 +70,11 @@ class UserController extends BaseController {
                                 '3' => 'fa fa-instagram']*/
                     ];
         
-        $du = new DCAF_User();
+        $du = Auth::User();
         
-        var_dump($du);
+        var_dump($du->NetworkUsers());
         die();
-        
+	
         return View::make('site/dashboard/home', compact('user', 'companies'));
     }
 
