@@ -1,29 +1,9 @@
 <?php namespace Models;
 /**
- * Eloquent Model
- * 
- * @link       http://laravel.com/docs/eloquent
- * @since      1.0
- * @see        Function/method/class relied on
- * 
- * @package    {package}
- * @subpackage {subpackage}
- * @copyright  Copyright (c) 2013-2014 DCAF
- * @license    {license}
- * @author     Alexander Rosenberg
- * @author 	   Shashank Sanjay
- * @version    1.0
- */
-
-/**
  * import namespaces and class names
- * 
- * Note:
- * Eloquent is defined as an alias of Illuminate\Database\Eloquent\Model
- * in app/config/app.php via the php function class_alias()
+ * (please see aliases defined in app/config/app.php)
  */
 // use Illuminate\Database\Eloquent\Model as Eloquent;
-// use Eloquent;
 use Illuminate\Auth\UserInterface;
 use Illuminate\Support\Facades\Auth;
 use LaravelBook\Ardent\Ardent;
@@ -34,37 +14,21 @@ use Zizaco\Entrust\HasRole;
 use Carbon\Carbon;
 
 /**
- * @abstract
- *
-abstract class User
-{
-	private $id;
-	private $username;
-	private $gender;
-	private $email;
-	private $firstName;
-	private $lastName;
-	private $likes = array();
-}
-*/
-
-// @extends, @implements, @global
-
-/**
- * Eloquent User Model
+ * DCAF_User Model
  * 
- * @author	Alexander Rosenberg
- * @version	1.0
- * @throws  exceptionclass
- **
- * Eloquent		laravel model class
- * Ardent		validation class
- **
- * Note:
- * configure database connection in app/config/database.php
+ * @link       http://laravel.com/docs/eloquent
+ * @since      1.0
+ * @see        Function/method/class relied on
+ * 
+ * @package    Models
+ * @copyright  Copyright (c) 2013-2014 DCAF
+ * @license    {license}
+ * @author     Alexander Rosenberg
+ * @author     Shashank Sanjay
+ * @version    1.0
  **
  * Usage:
- * $user = new User();
+ * $user = new DCAF_User();
  * $user->name = 'John';
  * $success = $user->save();
  */
@@ -78,16 +42,6 @@ class DCAF_User extends ConfideUser implements UserProfileInterface, UserInterfa
 	 * @type   string
 	 */
 	const VERSION = '1.0-dev';
-	
-	/**
-     * Laravel application instance
-     * 
-	 * @since  1.0
-	 * @access public
-     * @type   Illuminate\Foundation\Application
-     *
-    public static $app;
-	*/
 	
 	/**********************
 	 * Instance Variables *
@@ -117,7 +71,7 @@ class DCAF_User extends ConfideUser implements UserProfileInterface, UserInterfa
      * 
 	 * @since  1.0
 	 * @access public
-     * @var    array
+     * @type   array
      */
     //public static $passwordAttributes = array('password');
 	
@@ -264,24 +218,11 @@ class DCAF_User extends ConfideUser implements UserProfileInterface, UserInterfa
 	public function __construct(array $attributes = array())
 	{
 		parent::__construct($attributes);
-		
-		/*
-		if (!static::$app) {
-			static::$app = app();
-		}
-		*/
 	}
 	
 	/**********************
 	 * Eloquent Relations *
 	 **********************/
-	
-	/*
-	public function morph()
-	{
-		return $this->morphTo();
-	}
-	*/
 	
 	public function userProfile()
     {
@@ -316,38 +257,17 @@ class DCAF_User extends ConfideUser implements UserProfileInterface, UserInterfa
 	 ********************/
 	
 	/**
-	 * (from Laravel-4-Bootstrap-Starter-Site User model)
-	 * 
-	 * @requiredBy Robbo\Presenter\PresentableInterface
-	 * @return     Robbo\Presenter\Presenter
-	 *
-	 *public function getPresenter()
-	 *{
-	 *    return new UserPresenter($this);
-	 *}
-	 */
-	
-	/**
-     * Get user by username
+	 * Get user by username
 	 * 
 	 * (from Laravel-4-Bootstrap-Starter-Site User model)
 	 * 
-     * @param $username
-     * @return mixed
-     */
-    
-	
-	/**
-	 * Get the unique identifier for the user.
-	 * 
-	 * (migrated from ConfideUser)
-	 * 
+	 * @param $username
 	 * @return mixed
 	 */
-	public function getAuthIdentifier()
-	{
-		return $this->getKey();
-	}
+     public function getUserByUsername($username)
+     {
+     	return $this->where('username', '=', $username)->first();
+     }
 	
 	/**
 	 * Get the date the user was created.
@@ -360,34 +280,6 @@ class DCAF_User extends ConfideUser implements UserProfileInterface, UserInterfa
 	{
 		return String::date(Carbon::createFromFormat('Y-n-j G:i:s', $this->created_at));
 	}
-	
-	/**
-	 * Get the password for the user.
-	 * 
-	 * (migrated from ConfideUser)
-	 * 
-	 * @return string
-	 */
-	public function getAuthPassword()
-	{
-		return $this->password;
-	}
-	
-	/**
-     * [Deprecated]
-     * 
-	 * (migrated from ConfideUser)
-	 * 
-     * @deprecated
-	 * @override
-	 * @inherited \Illuminate\Database\Eloquent\Model
-	 * 
-	 * @fixed
-     */
-    public function getRules()
-    {
-		return static::$rules;
-    }
 	
 	/**
      * Returns user's current role ids only.
@@ -430,495 +322,7 @@ class DCAF_User extends ConfideUser implements UserProfileInterface, UserInterfa
 	{
 		return (new Confide(new ConfideEloquentRepository()))->user();
 	}
-	
-	/******************
-	 * Setter Methods *
-	 ******************/
-	
-    /**
-     * Save roles inputted from multiselect
-	 * 
-	 * (from Laravel-4-Bootstrap-Starter-Site User model)
-	 * 
-     * @param $inputRoles
-     */
-    public function saveRoles($inputRoles)
-    {
-        if (!empty($inputRoles)) {
-            $this->roles()->sync($inputRoles);
-        } else {
-            $this->roles()->detach();
-        }
-    }
-	
-	/******************
-	 * Helper Methods *
-	 ******************/
-	
-	/**
-	 * Fill the model with an array of attributes.
-	 * 
-	 * @override
-	 * @inherited \Illuminate\Database\Eloquent\Model
-	 * 
-	 * @param  array  $attributes
-	 * @return \Illuminate\Database\Eloquent\Model|static
-	 *
-	 * @throws \Illuminate\Database\Eloquent\MassAssignmentException
-	 *
-	 *public function fill(array $attributes) {}
-	*/
-	
-	/**
-     * Validates the model instance.
-     * 
-	 * @override
-	 * @inherited \LaravelBook\Ardent\Ardent
-	 * 
-     * @param  array  $rules          Validation rules
-     * @param  array  $customMessages Custom error messages
-     * @return bool
-	 * 
-	 * @throws \Illuminate\Database\Eloquent\MassAssignmentException
-     * @throws \LaravelBook\Ardent\InvalidModelException
-     *
-     *public function validate(array $rules = array(), array $customMessages = array()) {}
-	*/
-	
-	/**
-	 * Confirm user's email is valid.
-	 * 
-	 * (migrated from ConfideUser)
-	 * 
-	 * @return bool
-	 */
-	public function confirm()
-	{
-		$this->confirmed = 1;
 		
-		// ConfideRepository will update the database
-		static::$app['confide.repository']->confirmUser($this);
-		
-		return true;
-    }
-	
-	/**
-	 * Send password reset email
-	 * 
-	 * (migrated from ConfideUser)
-	 * 
-	 * @return string
-	 */
-    public function forgotPassword()
-    {
-        // ConfideRepository will generate token (and save it into database)
-        $token = static::$app['confide.repository']->forgotPassword($this);
-
-        $view = static::$app['config']->get('confide::email_reset_password');
-
-        $this->sendEmail('confide::confide.email.password_reset.subject', $view, array('user'=>$this, 'token'=>$token));
-
-        return true;
-    }
-	
-	/**
-     * Change user password
-     * 
-	 * (migrated from ConfideUser)
-	 * 
-     * @param  $params
-     * @return string
-     */
-    public function resetPassword($params)
-    {
-        $password = array_get($params, 'password', '');
-        $passwordConfirmation = array_get($params, 'password_confirmation', '');
-
-        if ($password == $passwordConfirmation)
-        {
-            return static::$app['confide.repository']->changePassword($this, static::$app['hash']->make($password));
-        }
-        else
-		{
-            return false;
-        }
-    }
-	
-	/**
-     * Save model data to database
-     * 
-	 * (migrated from ConfideUser)
-	 * 
-	 * @override  Ardent save method
-	 * 
-     * @param  array    $rules:array
-     * @param  array    $customMessages
-     * @param  array    $options
-     * @param  \Closure $beforeSave
-     * @param  \Closure $afterSave
-     * @return bool
-     */
-    
-	
-	/**
-     * Ardent method overloading:
-     * Before saving the user. Generate a confirmation
-     * code if is a new user.
-     * 
-	 * (migrated from ConfideUser)
-	 * 
-     * @param  bool $forced
-     * @return bool
-     */
-    
-
-    /**
-     * Ardent method overloading:
-     * After save, delivers the confirmation link email.
-     * code if is a new user.
-     * 
-	 * (migrated from ConfideUser)
-	 * 
-     * @param  bool $success
-     * @param  bool $forced
-     * @return bool
-     */
-    
-
-    /**
-     * Runs the real eloquent save method or returns
-     * true if it's under testing.
-     * 
-	 * (migrated from ConfideUser)
-	 * 
-     * @param  array    $rules
-     * @param  array    $customMessages
-     * @param  array    $options
-     * @param  \Closure $beforeSave
-     * @param  \Closure $afterSave
-     * @return bool
-     */
-    
-
-    /**
-     * Add the namespace 'confide::' to view hints.
-     * this makes it possible to send emails using package views from
-     * the command line
-     * 
-	 * (migrated from ConfideUser)
-	 * 
-     * @return void
-     */
-    protected static function fixViewHint()
-    {
-        if (isset(static::$app['view.finder']))
-            static::$app['view.finder']->addNamespace('confide', __DIR__.'/../../views');
-    }
-
-    /**
-     * Send email using the lang sentence as subject and the viewname
-     * 
-	 * (migrated from ConfideUser)
-	 * 
-     * @param  mixed $subject_translation
-     * @param  mixed $view_name
-     * @param  array $params
-     * @return voi.
-     */
-    protected function sendEmail( $subject_translation, $view_name, $params = array() )
-    {
-        if ( static::$app['config']->getEnvironment() == 'testing' )
-            return;
-
-        static::fixViewHint();
-
-        $user = $this;
-
-        static::$app['mailer']->send($view_name, $params, function($m) use ($subject_translation, $user)
-        {
-            $m->to( $user->email )
-                ->subject( ConfideUser::$app['translator']->get($subject_translation) );
-        });
-    }
-	
-	/**
-     * Redirect after auth.
-     * If $ifValid is true, redirect a logged in user.
-	 * 
-	 * (from Laravel-4-Bootstrap-Starter-Site User model)
-	 * 
-     * @param $redirect
-     * @param bool $ifValid
-     * @return mixed
-     */
-    public static function checkAuthAndRedirect($redirect, $ifValid=false)
-    {
-        // Get user information
-        $user = Auth::user();
-        
-        $redirectTo = false;
-		
-		// Not logged in redirect, set session.
-        if (empty($user->id) && ! $ifValid)
-        {
-			Session::put('loginRedirect', $redirect);
-			$redirectTo = Redirect::to('user/login')->with('notice', Lang::get('user/user.login_first'));
-		}
-		// Valid user, we want to redirect.
-		else if (!empty($user->id) && $ifValid)
-		{
-			$redirectTo = Redirect::to($redirect);
-		}
-		
-		return array($user, $redirectTo);
-	}
-	
-	/*
-    |--------------------------------------------------------------------------
-    | Deprecated variables and methods
-    |--------------------------------------------------------------------------
-    */
-
-    /**
-     * Rules for updating a user
-     * 
-	 * (migrated from ConfideUser)
-	 * 
-     * @deprecated
-     * @var array
-     *
-    protected $updateRules = array(
-        'username'	=> 'required|alpha_dash',
-        'email'		=> 'required|email',
-        'password'	=> 'between:4,11|confirmed',
-        'password_confirmation' => 'between:4,11',
-    );
-	*/
-
-    /**
-     * Alias of save but uses updateRules instead of rules.
-	 * 
-	 * (migrated from ConfideUser)
-	 * 
-     * @deprecated  use updateUnique() instead
-	 * 
-     * @param  array   $rules
-     * @param  array   $customMessages
-     * @param  array   $options
-     * @param  Closure $beforeSave
-     * @param  Closure $afterSave
-     * @return bool
-     *
-    public function amend(array $rules = array(), array $customMessages = array(), array $options = array(), \Closure $beforeSave = NULL, \Closure $afterSave = NULL)
-    {
-        if (empty($rules)) {
-            $rules = $this->getUpdateRules();
-        }
-        return $this->save($rules, $customMessages, $options, $beforeSave, $afterSave);
-    }
-	*/
-
-    /**
-     * [Deprecated] Generates UUID and checks it for uniqueness against a table/column.
-     * 
-	 * (migrated from ConfideUser)
-	 * 
-     * @deprecated
-	 * 
-     * @param  $table
-     * @param  $field
-     * @return string
-     */
-    protected function generateUuid($table, $field)
-    {
-        return md5(uniqid(mt_rand(), true));
-    }
-
-    /**
-     * [Deprecated]
-     * 
-	 * (migrated from ConfideUser)
-	 * 
-     * @deprecated
-     *
-    public function getUpdateRules()
-    {
-        return $this->updateRules;
-    }
-	*/
-
-    /**
-     * [Deprecated] Parses the two given users and compares the unique fields.
-     * 
-	 * (migrated from ConfideUser)
-	 * 
-     * @deprecated
-	 * 
-     * @param $oldUser
-     * @param $updatedUser
-     * @param array $rules
-     *
-    public function prepareRules($oldUser, $updatedUser, $rules=array())
-    {
-        if (empty($rules)) {
-            $rules = $this->getRules();
-        }
-
-        foreach ($rules as $rule => $validation)
-		{
-            // get the rules with unique.
-            if (strpos($validation, 'unique'))
-			{
-                // Compare old vs new
-                if ($oldUser->$rule != $updatedUser->$rule)
-				{
-                    // Set update rule to creation rule
-                    $updateRules = $this->getUpdateRules();
-                    $updateRules[$rule] = $validation;
-                    $this->setUpdateRules($updateRules);
-                }
-            }
-        }
-    }
-	*/
-
-    /**
-     * [Deprecated]
-     * 
-	 * (migrated from ConfideUser)
-	 * 
-     * @deprecated
-     *
-    public function setUpdateRules($set)
-    {
-        $this->updateRules = $set;
-    }
-	*/
-
-    /**
-     * [Deprecated] Find an user by it's credentials. Perform a 'where' within
-     * the fields contained in the $identityColumns.
-     * 
-	 * (migrated from ConfideUser)
-	 * 
-     * @deprecated  Use ConfideRepository getUserByIdentity instead.
-	 * 
-     * @param  array  $credentials      An array containing the attributes to search for
-     * @param  mixed  $identityColumns  Array of attribute names or string (for one atribute)
-     * @return ConfideUser              User object
-     */
-    public function getUserFromCredsIdentity($credentials, $identity_columns = array('email'))
-    {
-        return static::$app['confide.repository']->getUserByIdentity($credentials, $identity_columns);
-    }
-	
-
-    /**
-     * [Deprecated] Checks if an user exists by it's credentials. Perform a 'where' within
-     * the fields contained in the $identityColumns.
-     * 
-	 * (migrated from ConfideUser)
-	 * 
-     * @deprecated Use ConfideRepository getUserByIdentity instead.
-	 * 
-     * @param  array  $credentials      An array containing the attributes to search for
-     * @param  mixed  $identityColumns  Array of attribute names or string (for one atribute)
-     * @return boolean                  Exists?
-     */
-    public function checkUserExists($credentials, $identity_columns = array('email'))
-    {
-        $user = static::$app['confide.repository']->getUserByIdentity($credentials, $identity_columns);
-		return $user ? true : false;
-    }
-
-    /**
-     * [Deprecated] Checks if an user is confirmed by it's credentials. Perform a 'where' within
-     * the fields contained in the $identityColumns.
-     * 
-	 * (migrated from ConfideUser)
-	 * 
-     * @deprecated Use ConfideRepository getUserByIdentity instead.
-	 * 
-     * @param  array  $credentials      An array containing the attributes to search for
-     * @param  mixed  $identityColumns  Array of attribute names or string (for one atribute)
-     * @return boolean                  Is confirmed?
-     */
-    public function isConfirmed($credentials, $identity_columns = array('email'))
-    {
-        $user = static::$app['confide.repository']->getUserByIdentity($credentials, $identity_columns);
-        return !is_null($user) && $user->confirmed;
-    }
-	
-    
-	/**
-	 * @override
-	 *
-	public static all() {}
-	*/
-	
-	/**
-	 * @override
-	 *
-	public static find($primaryKey) {}
-	*/
-	
-	/**
-	 * retrieves a model instance from the database by
-	 * primary key, or throws an exception if not found,
-	 * which may be caught with an App::error handler
-	 * 
-	 * @override
-	 *
-	public static findOrFail($primaryKey) {}
-	*/
-	
-	/**
-	 * notable class (static) method examples
-	 **
-	 * $users = User::all();
-	 * $user  = User::find(1);
-	 **
-	 * $users = User::whereRaw('age > ? and votes = 100', array(25))->get();
-	 **
-	 * $model = User::findOrFail(1);
-	 * $model = User::where('votes', '>', 100)->firstOrFail();
-	 **
-	 * use Illuminate\Database\Eloquent\ModelNotFoundException;
-	 * 
-	 * // register an error handler
-	 * App::error(function(ModelNotFoundException $e) {
-	 *     return Response::make('Not Found', 404);
-	 * });
-	 **
-	 * $count = User::where('votes', '>', 100)->count();
-	 **
-	 * $users = User::where('votes', '>', 100)->take(10)->get();
-	 * foreach ($users as $user)
-	 * {
-	 *     var_dump($user->name);
-	 * }
-	 **
-	 * User::chunk(200, function($users)
-	 * {
-	 *     foreach ($users as $user)
-	 *     {
-	 *         // {implementation code}
-	 *     }
-	 * });
-	 */
-	
-	/**
-	 * Destructor
-	 * 
-	 * Note: As of PHP 5.3.10 destructors are not
-	 *     run on shutdown caused by fatal errors.
-	 * see also: http://www.php.net/manual/en/features.gc.php
-	 */
-
-	/******************/
-	/* getter methods */
-	/******************/
-	
 	/**
 	 * Gets the user's internal id.
 	 *
@@ -980,9 +384,25 @@ class DCAF_User extends ConfideUser implements UserProfileInterface, UserInterfa
 		//
 	}
 	
-	/******************/
-	/* setter methods */
-	/******************/
+	/******************
+	 * Setter Methods *
+	 ******************/
+	
+    /**
+     * Save roles inputted from multiselect
+	 * 
+	 * (from Laravel-4-Bootstrap-Starter-Site User model)
+	 * 
+     * @param $inputRoles
+     */
+    public function saveRoles($inputRoles)
+    {
+        if (!empty($inputRoles)) {
+            $this->roles()->sync($inputRoles);
+        } else {
+            $this->roles()->detach();
+        }
+    }
 		
 	/**
 	 * Sets the user's username
@@ -1033,12 +453,124 @@ class DCAF_User extends ConfideUser implements UserProfileInterface, UserInterfa
 	public function setLastName($lname) {
 		//
 	}
-
-
+	
+	/******************
+	 * Helper Methods *
+	 ******************/
+	
+	/**
+	 * Fill the model with an array of attributes.
+	 * 
+	 * @override
+	 * @inherited \Illuminate\Database\Eloquent\Model
+	 * 
+	 * @param  array  $attributes
+	 * @return \Illuminate\Database\Eloquent\Model|static
+	 *
+	 * @throws \Illuminate\Database\Eloquent\MassAssignmentException
+	 *
+	 *public function fill(array $attributes) {}
+	*/
+	
+	/**
+     * Validates the model instance.
+     * 
+	 * @override
+	 * @inherited \LaravelBook\Ardent\Ardent
+	 * 
+     * @param  array  $rules          Validation rules
+     * @param  array  $customMessages Custom error messages
+     * @return bool
+	 * 
+	 * @throws \Illuminate\Database\Eloquent\MassAssignmentException
+     * @throws \LaravelBook\Ardent\InvalidModelException
+     *
+     *public function validate(array $rules = array(), array $customMessages = array()) {}
+	*/
+	
+	/**
+     * Redirect after auth.
+     * If $ifValid is true, redirect a logged in user.
+	 * 
+	 * (from Laravel-4-Bootstrap-Starter-Site User model)
+	 * 
+     * @param $redirect
+     * @param bool $ifValid
+     * @return mixed
+     */
+    public static function checkAuthAndRedirect($redirect, $ifValid=false)
+    {
+        // Get user information
+        $user = Auth::user();
+        
+        $redirectTo = false;
+		
+		// Not logged in redirect, set session.
+        if (empty($user->id) && ! $ifValid)
+        {
+			Session::put('loginRedirect', $redirect);
+			$redirectTo = Redirect::to('user/login')->with('notice', Lang::get('user/user.login_first'));
+		}
+		// Valid user, we want to redirect.
+		else if (!empty($user->id) && $ifValid)
+		{
+			$redirectTo = Redirect::to($redirect);
+		}
+		
+		return array($user, $redirectTo);
+	}
+	
+	/**
+	 * notable class (static) method examples
+	 **
+	 * $users = User::all();
+	 * $user  = User::find(1);
+	 **
+	 * $users = User::whereRaw('age > ? and votes = 100', array(25))->get();
+	 **
+	 * retrieves a model instance from the database by
+	 * primary key, or throws an exception if not found,
+	 * which may be caught with an App::error handler
+	 * 
+	 * $model = User::findOrFail(1);
+	 **
+	 * $model = User::where('votes', '>', 100)->firstOrFail();
+	 **
+	 * use Illuminate\Database\Eloquent\ModelNotFoundException;
+	 * 
+	 * // register an error handler
+	 * App::error(function(ModelNotFoundException $e) {
+	 *     return Response::make('Not Found', 404);
+	 * });
+	 **
+	 * $count = User::where('votes', '>', 100)->count();
+	 **
+	 * $users = User::where('votes', '>', 100)->take(10)->get();
+	 * foreach ($users as $user)
+	 * {
+	 *     var_dump($user->name);
+	 * }
+	 **
+	 * User::chunk(200, function($users)
+	 * {
+	 *     foreach ($users as $user)
+	 *     {
+	 *         // {implementation code}
+	 *     }
+	 * });
+	 */
+	
+	/**
+	 * Destructor
+	 * 
+	 * Note: As of PHP 5.3.10 destructors are not
+	 *     run on shutdown caused by fatal errors.
+	 * see also: http://www.php.net/manual/en/features.gc.php
+	 */
 	public function __destruct()
 	{
 		// {implementation code}
-		//parent::__destruct();
+		// parent::__destruct();
 	}
 }
 
