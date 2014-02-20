@@ -1,4 +1,5 @@
 <?php
+namespace Models;
 
 class DCAF_Roles extends Eloquent {
     protected $guarded = array();

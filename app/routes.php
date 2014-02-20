@@ -203,6 +203,12 @@ Route::post('{postSlug}', 'BlogController@postView');
 
 # Index Page - Last route, no matches
 Route::get('/', array('before' => 'auth','uses' => 'UserController@getIndex'));
+/*Route::get('/', function() 
+{
+    //
+    var_dump(Auth::user());
+    die();
+});*/
 
 
 App::missing(function($exception)

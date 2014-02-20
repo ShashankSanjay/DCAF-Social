@@ -1,15 +1,15 @@
 <?php
 
-use Models\DCAF_Use;
+use Models\DCAF_User;
 
 class UserController extends BaseController {
-
+    
     /**
      * User Model
      * @var User
      */
     protected $user;
-
+    
     /**
      * Inject the models.
      * @param User $user
@@ -19,7 +19,7 @@ class UserController extends BaseController {
         parent::__construct();
         $this->user = $user;
     }
-
+    
     /**
      * Users settings page
      *
@@ -234,6 +234,7 @@ class UserController extends BaseController {
                 Session::forget('loginRedirect');
                 return Redirect::to($r);
             }
+            
             return Redirect::to('/');
         }
         else
