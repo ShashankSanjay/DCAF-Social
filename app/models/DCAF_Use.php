@@ -68,7 +68,7 @@ abstract class User
  * $user->name = 'John';
  * $success = $user->save();
  */
-class DCAF_Use extends ConfideUser implements UserProfileInterface, UserInterface
+class DCAF_User extends ConfideUser implements UserProfileInterface, UserInterface
 {
 	use HasRole;
 	/**
