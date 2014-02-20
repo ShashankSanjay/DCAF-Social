@@ -29,7 +29,7 @@ class UserController extends BaseController {
     {
         list($user,$redirect) = $this->user->checkAuthAndRedirect('user');
         if($redirect){return $redirect;}
-
+        
         // Show the page
         $companies = [
                     'Pepsi' => ['0' => 'fa fa-facebook-square',
@@ -69,7 +69,12 @@ class UserController extends BaseController {
                                 '2' => 'fa fa-google-plus-square',
                                 '3' => 'fa fa-instagram']*/
                     ];
-
+        
+        $du = new DCAF_User();
+        
+        var_dump($du);
+        die();
+        
         return View::make('site/dashboard/home', compact('user', 'companies'));
     }
 
