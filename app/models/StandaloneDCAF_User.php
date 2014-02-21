@@ -333,7 +333,10 @@ class DCAF_User extends Eloquent implements UserProfileInterface, UserInterface
 	 * @param $username
 	 * @return mixed
 	 */
-	
+     public function getUserByUsername($username)
+     {
+     	return $this->where('username', '=', $username)->first();
+     }
 	
 	/**
 	 * Get the unique identifier for the user.
