@@ -25,7 +25,7 @@ class UserController extends BaseController {
 	 * Inject the models.
 	 * @param User $user
 	 */
-	public function __construct(DCAF_User $user)
+	public function __construct(DcafUser $user)
 	{
 		parent::__construct();
 		$this->user = $user;
@@ -134,7 +134,7 @@ class UserController extends BaseController {
 		$this->user->save();
 
 		
-		if ( $this->user->id )
+		if ($this->user->id)
 		{
 			// Redirect with success message, You may replace "Lang::get(..." for your custom message.
 			return Redirect::to('user/confirmation')
