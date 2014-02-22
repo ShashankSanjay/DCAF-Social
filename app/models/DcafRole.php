@@ -3,13 +3,15 @@
 use Zizaco\Entrust\EntrustRole;
 use Robbo\Presenter\PresentableInterface;
 
-class DCAF_Role extends EntrustRole implements PresentableInterface
+class DcafRole extends EntrustRole implements PresentableInterface
 {
 	protected $guarded = array();
 	
 	protected $table = 'DCAF_Roles';
 	
-	public static $rules = array();
+	public static $rules = array(
+		'name' => 'required|between:4,32'
+	);
 	
 	protected $roleId;
 	protected $roleName;

@@ -1,5 +1,7 @@
 <?php
-
+/**
+ * import namespaces and class names
+ */
 use Illuminate\Auth\UserInterface;
 use Illuminate\Support\Facades\Auth;
 use LaravelBook\Ardent\Ardent;
