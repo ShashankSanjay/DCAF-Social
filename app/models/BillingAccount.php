@@ -57,12 +57,12 @@ class BillingAccount extends Eloquent
 	
 	public function billingContact()
 	{
-		return $this->hasOne('DCAF_User', 'billing_contact', 'uid');
+		return $this->hasOne('DcafUser', 'billing_contact', 'uid');
 	}
 	
 	public function teams()
 	{
-		return $this->hasMany('DCAF_Team', 'billing_account_id', 'id');
+		return $this->hasMany('DcafTeam', 'billing_account_id', 'id');
 	}
 	
 	public function billingPlan()

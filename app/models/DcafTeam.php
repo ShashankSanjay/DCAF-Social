@@ -25,7 +25,7 @@ use Illuminate\Database\Eloquent\Model as Eloquent;
  * @author	Alexander Rosenberg
  * @version	1.0
  */
-class DCAF_Team extends Eloquent
+class DcafTeam extends Eloquent
 {
 	/**********************
 	 * Instance Variables *

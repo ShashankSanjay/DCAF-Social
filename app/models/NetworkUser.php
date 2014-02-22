@@ -61,12 +61,12 @@ class NetworkUser extends Ardent implements UserProfileInterface, UserInterface
 	
 	public function userProfile()
     {
-        return $this->belongsTo('Models\UserProfile', 'profile_id');
+        return $this->belongsTo('UserProfile', 'profile_id');
     }
 	
 	public function dcafUser()
     {
-        return $this->belongsTo('Models\DCAF_User', 'DCAF_User_ID');
+        return $this->belongsTo('DcafUser', 'DCAF_User_ID');
     }
 	
 	/********************

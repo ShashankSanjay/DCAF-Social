@@ -79,7 +79,7 @@ class UserProfile extends Eloquent implements UserProfileInterface, UserInterfac
     
     public function dcafUser()
     {
-        return $this->belongsTo('Models\DCAF_User', 'DCAF_User_ID');
+        return $this->belongsTo('DcafUser', 'DCAF_User_ID');
     }
     
     	/********************

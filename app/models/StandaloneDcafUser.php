@@ -51,7 +51,7 @@ use Carbon\Carbon;
  * $user->name = 'John';
  * $success = $user->save();
  */
-class DCAF_User extends Eloquent implements UserProfileInterface, UserInterface
+class StandaloneDcafUser extends Eloquent implements UserProfileInterface, UserInterface
 {
 	use HasRole;
 	/**
@@ -306,7 +306,7 @@ class DCAF_User extends Eloquent implements UserProfileInterface, UserInterface
 	
 	public function DCAF_Roles()
 	{
-		return $this->belongsToMany('DCAF_Roles', 'DCAF_User_Roles', 'uid', 'role_id');
+		return $this->belongsToMany('DcafRoles', 'DCAF_User_Roles', 'uid', 'role_id');
 	}
 	
 	/********************

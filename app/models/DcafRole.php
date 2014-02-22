@@ -18,7 +18,7 @@ class DcafRole extends EntrustRole implements PresentableInterface
 	
 	public function DCAF_Users()
 	{
-		return $this->belongsToMany('DCAF_User', 'DCAF_User_Roles', 'role_id', 'uid');
+		return $this->belongsToMany('DcafUser', 'DCAF_User_Roles', 'role_id', 'uid');
 	}
 	
 	/**
@@ -37,7 +37,7 @@ class DcafRole extends EntrustRole implements PresentableInterface
 	 * @param array $roles
 	 * @return stdClass
 	 */
-	public function validateRoles( array $roles )
+	public function validateRoles(array $roles)
 	{
 		$user = Confide::user();
 		$roleValidation = new stdClass();

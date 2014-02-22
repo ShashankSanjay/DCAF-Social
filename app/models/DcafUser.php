@@ -11,7 +11,7 @@ use Zizaco\Confide\ConfideEloquentRepository;
 use Zizaco\Entrust\HasRole;
 use Carbon\Carbon;
 
-class DCAF_User extends ConfideUser implements UserProfileInterface, UserInterface
+class DcafUser extends ConfideUser implements UserProfileInterface, UserInterface
 {
 	use HasRole;
 	protected $guarded = array();
@@ -37,29 +37,29 @@ class DCAF_User extends ConfideUser implements UserProfileInterface, UserInterfa
 	public function userProfile()
     {
 		// Polymorphic Relation
-        return $this->morphMany('Models\UserProfile', 'profile');
+        return $this->morphMany('UserProfile', 'profile');
     }
 	
 	public function networkUsers()	// works!
     {
-        return $this->hasMany('Models\NetworkUser', 'DCAF_User_ID');
+        return $this->hasMany('NetworkUser', 'DCAF_User_ID');
     }
 	
 	public function billingContact()
 	{
-		return $this->belongsTo('Models\BillingAccount');
+		return $this->belongsTo('BillingAccount');
 	}
 	
 	public function employers()		// works!
 	{
 		// has_many_and_belongs_to() in Laravel 3
-		return $this->belongsToMany('Models\ClientCompany', 'Client_User_Assoc', 'uid', 'company_id');
+		return $this->belongsToMany('ClientCompany', 'Client_User_Assoc', 'uid', 'company_id');
 	}
 
 	public function DCAF_Roles()
 	{
 		//
-		return $this->belongsToMany('Models\DCAF_Roles', 'DCAF_User_Roles', 'uid', 'role_id');
+		return $this->belongsToMany('DcafRoles', 'DCAF_User_Roles', 'uid', 'role_id');
 	}
 	
 	
