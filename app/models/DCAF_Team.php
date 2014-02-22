@@ -1,12 +1,11 @@
 <?php
-namespace Models;
-
 /**
  * @package    {package}
  * @subpackage {subpackage}
  * @copyright  Copyright (c) 2013-2014 DCAF
  * @license    {license}
  * @author     Alexander Rosenberg
+ * @author     Shashank Sanjay
  * @version    1.0
  */
 

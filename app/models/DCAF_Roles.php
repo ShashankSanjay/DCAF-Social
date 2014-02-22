@@ -1,5 +1,4 @@
 <?php
-namespace Models;
 
 class DCAF_Roles extends Eloquent {
     protected $guarded = array();
@@ -17,3 +16,5 @@ class DCAF_Roles extends Eloquent {
     	return $this->belongsToMany('DCAF_User', 'DCAF_User_Roles', 'role_id', 'uid');
     }
 }
+
+?>

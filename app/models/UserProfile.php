@@ -1,5 +1,4 @@
 <?php
-namespace Models;
 
 use Illuminate\Auth\UserInterface;
 use Models\UserProfileInterface;

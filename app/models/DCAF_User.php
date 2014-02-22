@@ -1,4 +1,4 @@
-<?php namespace Models;
+<?php
 
 use Illuminate\Auth\UserInterface;
 use Illuminate\Support\Facades\Auth;
@@ -38,7 +38,7 @@ class DCAF_User extends ConfideUser implements UserProfileInterface, UserInterfa
         return $this->morphMany('Models\UserProfile', 'profile');
     }
 	
-	public function networkUsers()
+	public function networkUsers()	// works!
     {
         return $this->hasMany('Models\NetworkUser', 'DCAF_User_ID');
     }
@@ -48,10 +48,10 @@ class DCAF_User extends ConfideUser implements UserProfileInterface, UserInterfa
 		return $this->belongsTo('Models\BillingAccount');
 	}
 	
-	public function employers()
+	public function employers()		// works!
 	{
 		// has_many_and_belongs_to() in Laravel 3
-		return $this->belongsToMany('Models\ClientCompany', 'Client_Users', 'uid', 'company_id');
+		return $this->belongsToMany('Models\ClientCompany', 'Client_User_Assoc', 'uid', 'company_id');
 	}
 
 	public function DCAF_Roles()

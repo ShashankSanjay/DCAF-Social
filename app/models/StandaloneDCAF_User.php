@@ -1,4 +1,4 @@
-<?php namespace Models;
+<?php
 /**
  * Eloquent Model
  * 

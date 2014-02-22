@@ -1,6 +1,4 @@
 <?php
-namespace Models;
-
 /**
  * @package    {package}
  * @subpackage {subpackage}
