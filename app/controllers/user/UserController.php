@@ -93,7 +93,7 @@ class UserController extends BaseController {
 		// $user = User::find($user->uid);
 		// $employers = $user::with('ClientCompany')->find($user->id)
 		
-		// User::with('ClientCompany')->find($user->uid);
+		// var_dump($user::with('ClientCompany')->find($user->id));
 		echo '</pre>';
 		die();
 	

@@ -117,7 +117,6 @@ return array(
     'MigrationOauthSoundcloud' => $vendorDir . '/thomaswelton/laravel-oauth/src/migrations/2013_09_01_024008_migration_oauth_soundcloud.php',
     'MigrationOauthTumblr' => $vendorDir . '/thomaswelton/laravel-oauth/src/migrations/2013_09_01_024008_migration_oauth_tumblr.php',
     'MigrationOauthTwitter' => $vendorDir . '/thomaswelton/laravel-oauth/src/migrations/2013_09_01_024008_migration_oauth_twitter.php',
-    'Models\\DCAF_User' => $baseDir . '/app/models/DcafUserBackup.php',
     'NetworkUser' => $baseDir . '/app/models/NetworkUser.php',
     'Networkauth' => $baseDir . '/app/database/migrations/2014_01_15_081444_networkauth.php',
     'Node' => $baseDir . '/app/models/node.php',
