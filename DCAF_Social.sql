@@ -1,13 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 4.0.6deb1
+-- version 3.4.11.1
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Feb 20, 2014 at 08:39 PM
--- Server version: 5.5.35-0ubuntu0.13.10.2
--- PHP Version: 5.5.3-1ubuntu2.1
+-- Generation Time: Feb 22, 2014 at 11:44 AM
+-- Server version: 5.5.36
+-- PHP Version: 5.2.17
 
-SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
 
 
@@ -17,20 +17,23 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8 */;
 
 --
--- Database: `DCAF_Social`
+-- Database: `shashan2_DCAF-Social`
 --
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `BillingAccount`
+-- Table structure for table `assigned_roles`
 --
 
-CREATE TABLE IF NOT EXISTS `BillingAccount` (
+DROP TABLE IF EXISTS `assigned_roles`;
+CREATE TABLE IF NOT EXISTS `assigned_roles` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `created_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
-  PRIMARY KEY (`id`)
+  `user_id` int(10) unsigned NOT NULL,
+  `role_id` int(10) unsigned NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `assigned_roles_user_id_index` (`user_id`),
+  KEY `assigned_roles_role_id_index` (`role_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
@@ -39,6 +42,7 @@ CREATE TABLE IF NOT EXISTS `BillingAccount` (
 -- Table structure for table `Billing_Accounts`
 --
 
+DROP TABLE IF EXISTS `Billing_Accounts`;
 CREATE TABLE IF NOT EXISTS `Billing_Accounts` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `billing_contact` int(10) unsigned NOT NULL,
@@ -46,8 +50,10 @@ CREATE TABLE IF NOT EXISTS `Billing_Accounts` (
   `billing_name` varchar(30) NOT NULL,
   `billing_address` varchar(126) NOT NULL,
   `plan_id` tinyint(3) unsigned NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -55,6 +61,7 @@ CREATE TABLE IF NOT EXISTS `Billing_Accounts` (
 -- Table structure for table `Billing_Plans`
 --
 
+DROP TABLE IF EXISTS `Billing_Plans`;
 CREATE TABLE IF NOT EXISTS `Billing_Plans` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `plan_name` varchar(15) NOT NULL,
@@ -63,7 +70,86 @@ CREATE TABLE IF NOT EXISTS `Billing_Plans` (
   `description` text NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `plan_name` (`plan_name`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `Brand_Groups`
+--
+
+DROP TABLE IF EXISTS `Brand_Groups`;
+CREATE TABLE IF NOT EXISTS `Brand_Groups` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `name` varchar(30) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+
+--
+-- Dumping data for table `Brand_Groups`
+--
+
+INSERT INTO `Brand_Groups` (`id`, `name`) VALUES
+(1, 'Pepsi');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `Client_Brand_Groups`
+--
+
+DROP TABLE IF EXISTS `Client_Brand_Groups`;
+CREATE TABLE IF NOT EXISTS `Client_Brand_Groups` (
+  `company_id` int(11) NOT NULL,
+  `brand_group_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `Client_Brand_Groups`
+--
+
+INSERT INTO `Client_Brand_Groups` (`company_id`, `brand_group_id`) VALUES
+(1, 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `Client_Companies`
+--
+
+DROP TABLE IF EXISTS `Client_Companies`;
+CREATE TABLE IF NOT EXISTS `Client_Companies` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(30) NOT NULL,
+  `industry` varchar(30) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+
+--
+-- Dumping data for table `Client_Companies`
+--
+
+INSERT INTO `Client_Companies` (`id`, `name`, `industry`) VALUES
+(1, 'CPX', 'Advertising');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `Client_User_Assoc`
+--
+
+DROP TABLE IF EXISTS `Client_User_Assoc`;
+CREATE TABLE IF NOT EXISTS `Client_User_Assoc` (
+  `uid` bigint(20) NOT NULL,
+  `company_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `Client_User_Assoc`
+--
+
+INSERT INTO `Client_User_Assoc` (`uid`, `company_id`) VALUES
+(13, 1);
 
 -- --------------------------------------------------------
 
@@ -71,6 +157,7 @@ CREATE TABLE IF NOT EXISTS `Billing_Plans` (
 -- Table structure for table `comments`
 --
 
+DROP TABLE IF EXISTS `comments`;
 CREATE TABLE IF NOT EXISTS `comments` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `user_id` int(10) unsigned NOT NULL,
@@ -87,11 +174,12 @@ CREATE TABLE IF NOT EXISTS `comments` (
 -- Table structure for table `DCAF_Roles`
 --
 
+DROP TABLE IF EXISTS `DCAF_Roles`;
 CREATE TABLE IF NOT EXISTS `DCAF_Roles` (
   `role_id` int(11) NOT NULL AUTO_INCREMENT,
   `role_name` varchar(30) NOT NULL,
   PRIMARY KEY (`role_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
 
 --
 -- Dumping data for table `DCAF_Roles`
@@ -108,12 +196,13 @@ INSERT INTO `DCAF_Roles` (`role_id`, `role_name`) VALUES
 -- Table structure for table `DCAF_Teams`
 --
 
+DROP TABLE IF EXISTS `DCAF_Teams`;
 CREATE TABLE IF NOT EXISTS `DCAF_Teams` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `billing_account` int(10) unsigned NOT NULL,
   `subscription_status` char(1) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -121,6 +210,7 @@ CREATE TABLE IF NOT EXISTS `DCAF_Teams` (
 -- Table structure for table `DCAF_Users`
 --
 
+DROP TABLE IF EXISTS `DCAF_Users`;
 CREATE TABLE IF NOT EXISTS `DCAF_Users` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT 'User ID',
   `profile_id` int(10) unsigned NOT NULL,
@@ -136,16 +226,16 @@ CREATE TABLE IF NOT EXISTS `DCAF_Users` (
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   PRIMARY KEY (`id`),
+  UNIQUE KEY `profile_id` (`profile_id`),
   UNIQUE KEY `id` (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=15 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=14 ;
 
 --
 -- Dumping data for table `DCAF_Users`
 --
 
 INSERT INTO `DCAF_Users` (`id`, `profile_id`, `display_name`, `salt`, `bio`, `team_id`, `username`, `email`, `password`, `confirmation_code`, `confirmed`, `created_at`, `updated_at`) VALUES
-(13, 0, NULL, '', '', 0, 'user', 'user@user.com', '$2y$10$rjMrSTtEgbwXpslLWjuUf..VKntnKzBsI63ocplI6sRZi4h/Iw/wG', 'ad0172d4156acd4a4634fff34663d987', 1, '2014-02-15 19:15:41', '2014-02-16 00:14:40'),
-(14, 0, NULL, '', '', 0, 'alex', 'alex_roseberg35@yahoo.com', '$2y$10$3YCDSdW6mAAvu.vrAITdg.XdgJpNceVov5tzeogDOmwTxY.xRUlFG', '4f7f9dbf842fe4278824a216ba7fa5cb', 0, '2014-02-18 19:42:56', '0000-00-00 00:00:00');
+(13, 0, NULL, '', '', 0, 'user', 'user@user.com', '$2y$10$rjMrSTtEgbwXpslLWjuUf..VKntnKzBsI63ocplI6sRZi4h/Iw/wG', 'ad0172d4156acd4a4634fff34663d987', 1, '2014-02-15 19:15:41', '2014-02-16 00:14:40');
 
 -- --------------------------------------------------------
 
@@ -153,10 +243,11 @@ INSERT INTO `DCAF_Users` (`id`, `profile_id`, `display_name`, `salt`, `bio`, `te
 -- Table structure for table `DCAF_User_Roles`
 --
 
+DROP TABLE IF EXISTS `DCAF_User_Roles`;
 CREATE TABLE IF NOT EXISTS `DCAF_User_Roles` (
   `uid` int(10) unsigned NOT NULL,
   `role_id` int(10) unsigned NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=latin1 COMMENT='Association/Junction/Pivot Table';
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='Association/Junction/Pivot Table';
 
 -- --------------------------------------------------------
 
@@ -164,6 +255,7 @@ CREATE TABLE IF NOT EXISTS `DCAF_User_Roles` (
 -- Table structure for table `FB_Covers`
 --
 
+DROP TABLE IF EXISTS `FB_Covers`;
 CREATE TABLE IF NOT EXISTS `FB_Covers` (
   `Index` bigint(20) NOT NULL AUTO_INCREMENT,
   `cover_id` bigint(20) NOT NULL COMMENT 'PRIMARY',
@@ -172,7 +264,7 @@ CREATE TABLE IF NOT EXISTS `FB_Covers` (
   `offset_x` smallint(5) NOT NULL DEFAULT '0',
   PRIMARY KEY (`cover_id`),
   UNIQUE KEY `INDEX` (`Index`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
 
 --
 -- Dumping data for table `FB_Covers`
@@ -187,6 +279,7 @@ INSERT INTO `FB_Covers` (`Index`, `cover_id`, `source`, `offset_y`, `offset_x`) 
 -- Table structure for table `FB_Pages`
 --
 
+DROP TABLE IF EXISTS `FB_Pages`;
 CREATE TABLE IF NOT EXISTS `FB_Pages` (
   `Index` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   `FB_Page_ID` bigint(20) unsigned NOT NULL COMMENT 'PRIMARY',
@@ -219,7 +312,7 @@ CREATE TABLE IF NOT EXISTS `FB_Pages` (
   `category` varchar(63) NOT NULL,
   PRIMARY KEY (`FB_Page_ID`),
   UNIQUE KEY `INDEX` (`Index`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
 
 -- --------------------------------------------------------
 
@@ -227,6 +320,7 @@ CREATE TABLE IF NOT EXISTS `FB_Pages` (
 -- Table structure for table `FB_Posts`
 --
 
+DROP TABLE IF EXISTS `FB_Posts`;
 CREATE TABLE IF NOT EXISTS `FB_Posts` (
   `Index` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   `FB_Post_ID` bigint(20) unsigned NOT NULL COMMENT 'PRIMARY',
@@ -245,7 +339,7 @@ CREATE TABLE IF NOT EXISTS `FB_Posts` (
   `media_url` varchar(256) NOT NULL,
   PRIMARY KEY (`FB_Post_ID`),
   UNIQUE KEY `INDEX` (`Index`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -253,6 +347,7 @@ CREATE TABLE IF NOT EXISTS `FB_Posts` (
 -- Table structure for table `FB_Users`
 --
 
+DROP TABLE IF EXISTS `FB_Users`;
 CREATE TABLE IF NOT EXISTS `FB_Users` (
   `Index` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   `id` bigint(20) unsigned NOT NULL COMMENT 'PRIMARY (FK: FB_User_ID or FBUID)',
@@ -290,7 +385,7 @@ CREATE TABLE IF NOT EXISTS `FB_Users` (
   `install_type` varchar(32) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `INDEX` (`Index`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -298,6 +393,7 @@ CREATE TABLE IF NOT EXISTS `FB_Users` (
 -- Table structure for table `migrations`
 --
 
+DROP TABLE IF EXISTS `migrations`;
 CREATE TABLE IF NOT EXISTS `migrations` (
   `migration` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `batch` int(11) NOT NULL
@@ -324,9 +420,32 @@ INSERT INTO `migrations` (`migration`, `batch`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `Network_Users`
+--
+
+DROP TABLE IF EXISTS `Network_Users`;
+CREATE TABLE IF NOT EXISTS `Network_Users` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `profile_id` bigint(20) unsigned NOT NULL,
+  `DCAF_User_ID` bigint(20) unsigned NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `profile_id` (`profile_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+
+--
+-- Dumping data for table `Network_Users`
+--
+
+INSERT INTO `Network_Users` (`id`, `profile_id`, `DCAF_User_ID`) VALUES
+(1, 2, 13);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `oauth_facebook`
 --
 
+DROP TABLE IF EXISTS `oauth_facebook`;
 CREATE TABLE IF NOT EXISTS `oauth_facebook` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `user_id` int(10) unsigned NOT NULL,
@@ -337,7 +456,7 @@ CREATE TABLE IF NOT EXISTS `oauth_facebook` (
   `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   PRIMARY KEY (`id`),
   UNIQUE KEY `oauth_facebook_user_id_unique` (`user_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -345,6 +464,7 @@ CREATE TABLE IF NOT EXISTS `oauth_facebook` (
 -- Table structure for table `oauth_github`
 --
 
+DROP TABLE IF EXISTS `oauth_github`;
 CREATE TABLE IF NOT EXISTS `oauth_github` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `user_id` int(10) unsigned NOT NULL,
@@ -355,7 +475,7 @@ CREATE TABLE IF NOT EXISTS `oauth_github` (
   `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   PRIMARY KEY (`id`),
   UNIQUE KEY `oauth_github_user_id_unique` (`user_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -363,6 +483,7 @@ CREATE TABLE IF NOT EXISTS `oauth_github` (
 -- Table structure for table `oauth_google`
 --
 
+DROP TABLE IF EXISTS `oauth_google`;
 CREATE TABLE IF NOT EXISTS `oauth_google` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `user_id` int(10) unsigned NOT NULL,
@@ -373,7 +494,7 @@ CREATE TABLE IF NOT EXISTS `oauth_google` (
   `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   PRIMARY KEY (`id`),
   UNIQUE KEY `oauth_google_user_id_unique` (`user_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -381,6 +502,7 @@ CREATE TABLE IF NOT EXISTS `oauth_google` (
 -- Table structure for table `oauth_instagram`
 --
 
+DROP TABLE IF EXISTS `oauth_instagram`;
 CREATE TABLE IF NOT EXISTS `oauth_instagram` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `user_id` int(10) unsigned NOT NULL,
@@ -391,7 +513,7 @@ CREATE TABLE IF NOT EXISTS `oauth_instagram` (
   `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   PRIMARY KEY (`id`),
   UNIQUE KEY `oauth_instagram_user_id_unique` (`user_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -399,6 +521,7 @@ CREATE TABLE IF NOT EXISTS `oauth_instagram` (
 -- Table structure for table `oauth_twitter`
 --
 
+DROP TABLE IF EXISTS `oauth_twitter`;
 CREATE TABLE IF NOT EXISTS `oauth_twitter` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `user_id` int(10) unsigned NOT NULL,
@@ -409,7 +532,7 @@ CREATE TABLE IF NOT EXISTS `oauth_twitter` (
   `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   PRIMARY KEY (`id`),
   UNIQUE KEY `oauth_twitter_user_id_unique` (`user_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -417,6 +540,7 @@ CREATE TABLE IF NOT EXISTS `oauth_twitter` (
 -- Table structure for table `password_reminders`
 --
 
+DROP TABLE IF EXISTS `password_reminders`;
 CREATE TABLE IF NOT EXISTS `password_reminders` (
   `email` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `token` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
@@ -429,6 +553,7 @@ CREATE TABLE IF NOT EXISTS `password_reminders` (
 -- Table structure for table `permissions`
 --
 
+DROP TABLE IF EXISTS `permissions`;
 CREATE TABLE IF NOT EXISTS `permissions` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
@@ -444,6 +569,7 @@ CREATE TABLE IF NOT EXISTS `permissions` (
 -- Table structure for table `permission_role`
 --
 
+DROP TABLE IF EXISTS `permission_role`;
 CREATE TABLE IF NOT EXISTS `permission_role` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `permission_id` int(10) unsigned NOT NULL,
@@ -460,6 +586,7 @@ CREATE TABLE IF NOT EXISTS `permission_role` (
 -- Table structure for table `posts`
 --
 
+DROP TABLE IF EXISTS `posts`;
 CREATE TABLE IF NOT EXISTS `posts` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `user_id` int(10) unsigned NOT NULL,
@@ -487,6 +614,7 @@ INSERT INTO `posts` (`id`, `user_id`, `title`, `slug`, `content`, `meta_title`, 
 -- Table structure for table `roles`
 --
 
+DROP TABLE IF EXISTS `roles`;
 CREATE TABLE IF NOT EXISTS `roles` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
@@ -509,6 +637,7 @@ INSERT INTO `roles` (`id`, `name`, `created_at`, `updated_at`) VALUES
 -- Table structure for table `Tw_Tweets`
 --
 
+DROP TABLE IF EXISTS `Tw_Tweets`;
 CREATE TABLE IF NOT EXISTS `Tw_Tweets` (
   `Tweet_ID` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   `Tw_Tweet_ID` bigint(20) unsigned NOT NULL,
@@ -536,7 +665,7 @@ CREATE TABLE IF NOT EXISTS `Tw_Tweets` (
   `withheld_in_countries` text,
   `withheld_scope` varchar(16) DEFAULT NULL,
   PRIMARY KEY (`Tweet_ID`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -544,6 +673,7 @@ CREATE TABLE IF NOT EXISTS `Tw_Tweets` (
 -- Table structure for table `Tw_Users`
 --
 
+DROP TABLE IF EXISTS `Tw_Users`;
 CREATE TABLE IF NOT EXISTS `Tw_Users` (
   `index` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   `Tw_User_ID` bigint(20) unsigned NOT NULL,
@@ -589,7 +719,7 @@ CREATE TABLE IF NOT EXISTS `Tw_Users` (
   `withheld_scope` varchar(16) DEFAULT NULL,
   PRIMARY KEY (`Tw_User_ID`),
   UNIQUE KEY `index` (`index`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -597,6 +727,7 @@ CREATE TABLE IF NOT EXISTS `Tw_Users` (
 -- Table structure for table `users`
 --
 
+DROP TABLE IF EXISTS `users`;
 CREATE TABLE IF NOT EXISTS `users` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `username` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
@@ -627,6 +758,7 @@ INSERT INTO `users` (`id`, `username`, `email`, `password`, `confirmation_code`,
 -- Table structure for table `User_Profiles`
 --
 
+DROP TABLE IF EXISTS `User_Profiles`;
 CREATE TABLE IF NOT EXISTS `User_Profiles` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT 'User ID',
   `username` varchar(30) NOT NULL COMMENT 'loginid',
@@ -636,11 +768,25 @@ CREATE TABLE IF NOT EXISTS `User_Profiles` (
   `lastName` varchar(30) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `UNIQUE` (`username`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+
+--
+-- Dumping data for table `User_Profiles`
+--
+
+INSERT INTO `User_Profiles` (`id`, `username`, `gender`, `email`, `firstName`, `lastName`) VALUES
+(1, 'User', 'O', 'user@test.com', 'Bro', 'Smoe');
 
 --
 -- Constraints for dumped tables
 --
+
+--
+-- Constraints for table `assigned_roles`
+--
+ALTER TABLE `assigned_roles`
+  ADD CONSTRAINT `assigned_roles_role_id_foreign` FOREIGN KEY (`role_id`) REFERENCES `roles` (`id`),
+  ADD CONSTRAINT `assigned_roles_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
 
 --
 -- Constraints for table `permission_role`
