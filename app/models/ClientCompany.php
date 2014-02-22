@@ -57,7 +57,7 @@ class ClientCompany extends Eloquent
 	public function employees()
 	{
 		// has_many_and_belongs_to() in Laravel 3
-		return $this->belongsToMany('DCAF_User', 'Client_Users', 'company_id', 'uid');
+		return $this->belongsToMany('Models\DCAF_User', 'Client_Users', 'company_id', 'uid');
 	}
 }
 

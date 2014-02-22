@@ -9,7 +9,7 @@ use Zizaco\Confide\ConfideEloquentRepository;
 use Zizaco\Entrust\HasRole;
 use Carbon\Carbon;
 
-class DCAF_Use extends ConfideUser implements UserProfileInterface, UserInterface
+class DCAF_User extends ConfideUser implements UserProfileInterface, UserInterface
 {
 	use HasRole;
 	protected $guarded = array();
@@ -40,7 +40,7 @@ class DCAF_Use extends ConfideUser implements UserProfileInterface, UserInterfac
 	
 	public function networkUsers()
     {
-        return $this->hasMany('Models\NetworkUser', $primaryKey);
+        return $this->hasMany('Models\NetworkUser', 'DCAF_User_ID');
     }
 	
 	public function billingContact()
@@ -48,7 +48,7 @@ class DCAF_Use extends ConfideUser implements UserProfileInterface, UserInterfac
 		return $this->belongsTo('Models\BillingAccount');
 	}
 	
-	public function employees()
+	public function employers()
 	{
 		// has_many_and_belongs_to() in Laravel 3
 		return $this->belongsToMany('Models\ClientCompany', 'Client_Users', 'uid', 'company_id');

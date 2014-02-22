@@ -1,6 +1,15 @@
 <?php
 
 use Models\DCAF_User;
+use Models\NetworkUser;
+use Models\UserProfile;
+use Models\UserInterface;
+
+/* spl_autoload_register(function ($class) {
+    die('cannot find class: '.$class);
+    $parts = explode();
+    // include 'classes/' . $class . '.class.php';
+}, true, true); */
 
 class UserController extends BaseController {
     
@@ -70,9 +79,19 @@ class UserController extends BaseController {
                                 '3' => 'fa fa-instagram']*/
                     ];
         
-        $du = Auth::User();
+        $user = Auth::User();
+        echo '<pre>';
+        // var_dump($user->networkUsers->toArray());
+        // var_dump($user->networkUsers()->first()->userProfile);
+        // var_dump($user->networkUsers[0]->userProfile);
+        var_dump($user->employers);
         
-        var_dump($du->NetworkUsers());
+        // $user = Auth::user();
+        // $user = User::find($user->uid);
+        // $employers = $user::with('ClientCompany')->find($user->id)
+        
+        // User::with('ClientCompany')->find($user->uid);
+        echo '</pre>';
         die();
 	
         return View::make('site/dashboard/home', compact('user', 'companies'));

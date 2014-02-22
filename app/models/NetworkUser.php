@@ -1,7 +1,8 @@
-<?php
+<?php namespace Models;
 /**
  * import namespaces and class names
  */
+use Illuminate\Auth\UserInterface;
 use LaravelBook\Ardent\Ardent;
 use Zizaco\Confide\ConfideUser;
 use Zizaco\Confide\Confide;
@@ -25,11 +26,11 @@ class NetworkUser extends Ardent implements UserProfileInterface, UserInterface
 	 * @access protected
 	 * @type   string
 	 */
-	protected $table		= 'networkUsers';	// defaults to classname + 's'
+	protected $table		= 'Network_Users';	// defaults to classname + 's'
 	
 	protected $primaryKey	= 'FB_User_ID';		// defaults to 'id'
-	protected $incrementing	= false;			// defaults to true; false disables auto-incrementing the primary key
-	protected $timestamps	= false;			// defaults to true to maintain 'updated_at' and 'created_at' columns
+	public $incrementing	= false;			// defaults to true; false disables auto-incrementing the primary key
+	public $timestamps	= false;			// defaults to true to maintain 'updated_at' and 'created_at' columns
 	
 	/**
 	 * defines which properties can be set through
@@ -58,14 +59,14 @@ class NetworkUser extends Ardent implements UserProfileInterface, UserInterface
 	 * Eloquent Relations *
 	 **********************/
 	
-	public function abstractUsers()
+	public function userProfile()
     {
-        return $this->morphMany('AbstractUser', 'morphTo');
+        return $this->belongsTo('Models\UserProfile', 'profile_id');
     }
 	
 	public function dcafUser()
     {
-        return $this->belongsTo('DCAF_User', 'DCAF_User_ID');
+        return $this->belongsTo('Models\DCAF_User', 'DCAF_User_ID');
     }
 	
 	/********************
@@ -78,9 +79,9 @@ class NetworkUser extends Ardent implements UserProfileInterface, UserInterface
      * @param $username
      * @return mixed
      */
-    public function getUserByUsername($username)
+    public function getUsersByUsername($username)
     {
-        return $this->where('username', '=', $username)->first();
+        return $this->UserProfile->where('username', '=', $username)->first();
     }
 	
 	/**
@@ -122,6 +123,121 @@ class NetworkUser extends Ardent implements UserProfileInterface, UserInterface
     {
         return String::date(Carbon::createFromFormat('Y-n-j G:i:s', $this->created_at));
     }
+	
+	/**
+	 * Gets the user's internal id.
+	 *
+	 * @access public
+	 * @return int
+	 */
+	public function getUID(){
+		//
+	}
+	
+	/**
+	 * Gets the user's username.
+	 *
+	 * @access public
+	 * @return string
+	 */
+	public function getUsername() {
+		//
+	}
+	
+	/**
+	 * Gets the user's gender.
+	 *
+	 * @access public
+	 * @return string
+	 */
+	public function getGender() {
+		//
+	}
+	
+	/**
+	 * Gets the user's email address.
+	 *
+	 * @access public
+	 * @return string
+	 */
+	public function getEmail() {
+		//
+	}
+	
+	/**
+	 * Gets the user's first name,
+	 * optionally including middle initial.
+	 *
+	 * @access public
+	 * @return string
+	 */
+	public function getFirstName() {
+		//
+	}
+	
+	/**
+	 * Gets the user's last name.
+	 *
+	 * @access public
+	 * @return string
+	 */
+	public function getLastName() {
+		//
+	}
+	
+	/******************/
+	/* setter methods */
+	/******************/
+		
+	/**
+	 * Sets the user's username
+	 *
+	 * @access public
+	 * @param  string	$uname
+	 */
+	public function setUsername($uname) {
+		//
+	}
+	
+	/**
+	 * Sets the user's gender
+	 *
+	 * @access public
+	 * @param  string	$gender
+	 */
+	public function setGender($gender) {
+		//
+	}
+	
+	/**
+	 * Sets the user's email
+	 *
+	 * @access public
+	 * @param  string	$email
+	 */
+	public function setEmail($email) {
+		//
+	}
+	
+	/**
+	 * Sets the user's first name
+	 *
+	 * @access public
+	 * @param  string	$fname
+	 */
+	public function setFirstName($fname) {
+		//
+	}
+	
+	/**
+	 * Sets the user's last name
+	 *
+	 * @access public
+	 * @param  string	$lname
+	 */
+	public function setLastName($lname) {
+		//
+	}
 	
     /**
      * Save roles inputted from multiselect
@@ -194,7 +310,7 @@ class NetworkUser extends Ardent implements UserProfileInterface, UserInterface
 	public function __destruct()
 	{
 		// {implementation code}
-		parent::__destruct();
+		// parent::__destruct();
 	}
 }
 

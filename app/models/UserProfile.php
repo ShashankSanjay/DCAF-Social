@@ -1,6 +1,9 @@
 <?php
 namespace Models;
 
+use Illuminate\Auth\UserInterface;
+use Models\UserProfileInterface;
+
 /**
  * @package    {package}
  * @subpackage {subpackage}
@@ -74,6 +77,181 @@ class UserProfile extends Eloquent implements UserProfileInterface, UserInterfac
     {
         return $this->morphTo();
     }
+    
+    public function dcafUser()
+    {
+        return $this->belongsTo('Models\DCAF_User', 'DCAF_User_ID');
+    }
+    
+    	/********************
+	 * Accessor Methods *
+	 ********************/
+	
+	/**
+     * Get user by username
+	 * 
+     * @param $username
+     * @return mixed
+     */
+    public function getUsersByUsername($username)
+    {
+        // return $this->UserProfile->where('username', '=', $username)->first();
+    }
+	
+	/**
+	 * Get the unique identifier for the user.
+	 *
+	 * @return mixed
+	 */
+	public function getAuthIdentifier()
+	{
+	  return $this->getKey();
+	}
+	 
+	/**
+	 * Get the password for the user.
+	 *
+	 * @return string
+	 */
+	public function getAuthPassword()
+	{
+	  return $this->password;
+	}
+	 
+	/**
+	 * Get the e-mail address where password reminders are sent.
+	 *
+	 * @return string
+	 */
+	public function getReminderEmail()
+	{
+	  return $this->email;
+	}
+	
+	/**
+     * Get the date the user was created.
+     *
+     * @return string
+     */
+    public function joined()
+    {
+        return String::date(Carbon::createFromFormat('Y-n-j G:i:s', $this->created_at));
+    }
+	
+	/**
+	 * Gets the user's internal id.
+	 *
+	 * @access public
+	 * @return int
+	 */
+	public function getUID(){
+		//
+	}
+	
+	/**
+	 * Gets the user's username.
+	 *
+	 * @access public
+	 * @return string
+	 */
+	public function getUsername() {
+		//
+	}
+	
+	/**
+	 * Gets the user's gender.
+	 *
+	 * @access public
+	 * @return string
+	 */
+	public function getGender() {
+		//
+	}
+	
+	/**
+	 * Gets the user's email address.
+	 *
+	 * @access public
+	 * @return string
+	 */
+	public function getEmail() {
+		//
+	}
+	
+	/**
+	 * Gets the user's first name,
+	 * optionally including middle initial.
+	 *
+	 * @access public
+	 * @return string
+	 */
+	public function getFirstName() {
+		//
+	}
+	
+	/**
+	 * Gets the user's last name.
+	 *
+	 * @access public
+	 * @return string
+	 */
+	public function getLastName() {
+		//
+	}
+	
+	/******************/
+	/* setter methods */
+	/******************/
+		
+	/**
+	 * Sets the user's username
+	 *
+	 * @access public
+	 * @param  string	$uname
+	 */
+	public function setUsername($uname) {
+		//
+	}
+	
+	/**
+	 * Sets the user's gender
+	 *
+	 * @access public
+	 * @param  string	$gender
+	 */
+	public function setGender($gender) {
+		//
+	}
+	
+	/**
+	 * Sets the user's email
+	 *
+	 * @access public
+	 * @param  string	$email
+	 */
+	public function setEmail($email) {
+		//
+	}
+	
+	/**
+	 * Sets the user's first name
+	 *
+	 * @access public
+	 * @param  string	$fname
+	 */
+	public function setFirstName($fname) {
+		//
+	}
+	
+	/**
+	 * Sets the user's last name
+	 *
+	 * @access public
+	 * @param  string	$lname
+	 */
+	public function setLastName($lname) {
+		//
+	}
 }
 
 ?>
