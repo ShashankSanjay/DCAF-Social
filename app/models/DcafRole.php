@@ -16,7 +16,7 @@ class DcafRole extends EntrustRole implements PresentableInterface
 	protected $roleId;
 	protected $roleName;
 	
-	public function DCAF_Users()
+	public function dcafUsers()
 	{
 		return $this->belongsToMany('DcafUser', 'DCAF_User_Roles', 'role_id', 'uid');
 	}

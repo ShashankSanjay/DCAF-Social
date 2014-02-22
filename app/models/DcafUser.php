@@ -16,9 +16,9 @@ class DcafUser extends ConfideUser implements UserProfileInterface, UserInterfac
 	use HasRole;
 	protected $guarded = array();
 
-	public $primaryKey	= 'id';				// defaults to 'id'
-	public $incrementing = false;			// defaults to true; false disables auto-incrementing the primary key
-	public $timestamps	= false;			// defaults to true to maintain 'updated_at' and 'created_at' columns
+	public $primaryKey	= 'id';			// defaults to 'id'
+	public $incrementing = true;		// defaults to true; false disables auto-incrementing the primary key
+	public $timestamps	= true;			// defaults to true to maintain 'updated_at' and 'created_at' columns
 
 
 	public static $rules = array(
@@ -62,7 +62,6 @@ class DcafUser extends ConfideUser implements UserProfileInterface, UserInterfac
 		return $this->belongsToMany('DcafRoles', 'DCAF_User_Roles', 'uid', 'role_id');
 	}
 	
-	
 	/**
      * Get the date the user was created.
      *
@@ -79,13 +78,13 @@ class DcafUser extends ConfideUser implements UserProfileInterface, UserInterfac
      */
     public function saveRoles($inputRoles)
     {
-        if(! empty($inputRoles)) {
+        if (!empty($inputRoles)) {
             $this->roles()->sync($inputRoles);
         } else {
             $this->roles()->detach();
         }
     }
-
+    
     /**
      * Returns user's current role ids only.
      * @return array|bool
@@ -103,7 +102,7 @@ class DcafUser extends ConfideUser implements UserProfileInterface, UserInterfac
         }
         return $roleIds;
     }
-
+    
     /**
      * Redirect after auth.
      * If ifValid is set to true it will redirect a logged in user.
@@ -132,7 +131,7 @@ class DcafUser extends ConfideUser implements UserProfileInterface, UserInterfac
 
 		return array($user, $redirectTo);
 	}
-
+	
 	/******************/
 	/* getter methods */
 	/******************/

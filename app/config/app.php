@@ -208,6 +208,7 @@ return array(
         /* DCAF Stuff */
         'OAuth'			=> 'Thomaswelton\LaravelOauth\Facades\OAuth', //Oauth
         //'AlchemyAPI'	=> 'AlchemyAPI\alchemyapi_php\alchemyapi',
+        'Role'			=> 'DcafRole',
 
     ),
 

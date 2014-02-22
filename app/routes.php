@@ -15,10 +15,10 @@
  *  Route model binding
  *  ------------------------------------------
  */
-Route::model('user', 'User');
+Route::model('user', 'DcafUser');
 Route::model('comment', 'Comment');
 Route::model('post', 'Post');
-Route::model('role', 'Role');
+Route::model('role', 'DcafRole');
 
 /** ------------------------------------------
  *  Route constraint patterns

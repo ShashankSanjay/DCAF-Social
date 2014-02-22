@@ -17,13 +17,15 @@ class UserController extends BaseController {
 	
 	/**
 	 * User Model
-	 * @var User
+	 * @var DcafUser
 	 */
 	protected $user;
 	
 	/**
-	 * Inject the models.
-	 * @param User $user
+	 * Instantiates UserController and stores
+	 * a reference to the instance of DcafUser.
+	 * 
+	 * @param DcafUser $user
 	 */
 	public function __construct(DcafUser $user)
 	{
@@ -82,20 +84,22 @@ class UserController extends BaseController {
 					];
 		
 		$user = Auth::User();
+		// $user = User::find($user->uid);
 		echo '<pre>';
 
-		var_dump($user = DcafUser::where('username','=','user')->first());
+		// var_dump($user = DcafUser::where('username','=','user')->first());
 		// var_dump($user->networkUsers()->first()->userProfile);	// NULL
 		// var_dump($user->networkUsers[0]->userProfile);			// NULL
 		
 		// var_dump($user->networkUsers[0]->toArray());     // works!
 		// var_dump($user->employers->toArray());           // works!
 		
-		// $user = Auth::user();
-		// $user = User::find($user->uid);
-		// $employers = $user::with('ClientCompany')->find($user->id)
+		// $employers = $user::with('ClientCompany')->find($user->id);		// doesn't work
+		// $employers = DcafUser::with('ClientCompany')->find($user->id);	// doesn't work
+		// var_dump($employers);
 		
-		// var_dump($user::with('ClientCompany')->find($user->id));
+		var_dump($user->employers->toArray());
+		
 		echo '</pre>';
 		die();
 	
@@ -104,7 +108,6 @@ class UserController extends BaseController {
 
 	/**
 	 * Stores new user
-	 *
 	 */
 	public function postIndex()
 	{
@@ -114,7 +117,7 @@ class UserController extends BaseController {
 		$password = Input::get( 'password' );
 		$passwordConfirmation = Input::get( 'password_confirmation' );
 		
-		if(!empty($password)) {
+		if (!empty($password)) {
 			if($password === $passwordConfirmation) {
 				$this->user->password = $password;
 				// The password confirmation will be removed from model
@@ -131,13 +134,17 @@ class UserController extends BaseController {
 			unset($this->user->password);
 			unset($this->user->password_confirmation);
 		}
-
+		
 		// Save if valid. Password field will be hashed before save
 		$this->user->save();
-
 		
 		if ($this->user->id)
 		{
+			$company = new ClientCompany();
+			$company->name = 'Test';
+			$company->industry = 'Test Industry';
+			$company->save();
+			
 			// Redirect with success message, You may replace "Lang::get(..." for your custom message.
 			return Redirect::to('user/confirmation')
 				->with( 'notice', Lang::get('user/user.user_account_created') );
@@ -146,7 +153,7 @@ class UserController extends BaseController {
 		{
 			// Get validation errors (see Ardent package)
 			$error = $this->user->errors()->all();
-
+			
 			return Redirect::to('user/create')
 				->withInput(Input::except('password'))
 				->with( 'error', $error );
@@ -172,8 +179,8 @@ class UserController extends BaseController {
 			$password = Input::get( 'password' );
 			$passwordConfirmation = Input::get( 'password_confirmation' );
 
-			if(!empty($password)) {
-				if($password === $passwordConfirmation) {
+			if (!empty($password)) {
+				if ($password === $passwordConfirmation) {
 					$user->password = $password;
 					// The password confirmation will be removed from model
 					// before saving. This field will be used in Ardent's
@@ -197,7 +204,7 @@ class UserController extends BaseController {
 		// Get validation errors (see Ardent package)
 		$error = $user->errors()->all();
 
-		if(empty($error)) {
+		if (empty($error)) {
 			return Redirect::to('user')
 				->with( 'success', Lang::get('user/user.user_account_updated') );
 		} else {
@@ -209,7 +216,6 @@ class UserController extends BaseController {
 
 	/**
 	 * Displays the form for user creation
-	 *
 	 */
 	public function getCreate()
 	{
@@ -219,12 +225,11 @@ class UserController extends BaseController {
 
 	/**
 	 * Displays the login form
-	 *
 	 */
 	public function getLogin()
 	{
 		$user = Auth::user();
-		if(!empty($user->id)){
+		if (!empty($user->id)){
 			return Redirect::to('/');
 		}
 
@@ -233,7 +238,6 @@ class UserController extends BaseController {
 
 	/**
 	 * Attempt to do login
-	 *
 	 */
 	public function postLogin()
 	{
@@ -249,7 +253,7 @@ class UserController extends BaseController {
 		// logAttempt will check if the 'email' perhaps is the username.
 		// Check that the user is confirmed.
 
-		if ( Confide::logAttempt( $input, true ) )
+		if (Confide::logAttempt($input, true))
 		{
 			$r = Session::get('loginRedirect');
 			
@@ -264,19 +268,19 @@ class UserController extends BaseController {
 		else
 		{
 			// Check if there was too many login attempts
-			if ( Confide::isThrottled( $input ) ) {
+			if (Confide::isThrottled($input)) {
 				$err_msg = Lang::get('confide::confide.alerts.too_many_attempts');
 				
-			} elseif ( $this->user->checkUserExists( $input ) && ! $this->user->isConfirmed( $input ) ) {
+			} elseif ($this->user->checkUserExists( $input ) && ! $this->user->isConfirmed($input)) {
 				$err_msg = Lang::get('confide::confide.alerts.not_confirmed');
 			} else {
 				$err_msg = Lang::get('confide::confide.alerts.wrong_credentials');
 				
 			}
-
+			
 			return Redirect::to('user/login')
 				->withInput(Input::except('password'))
-				->with( 'error', $err_msg );
+				->with('error', $err_msg);
 		}
 	}
 
@@ -285,9 +289,9 @@ class UserController extends BaseController {
 	 *
 	 * @param  string  $code
 	 */
-	public function getConfirm( $code )
+	public function getConfirm($code)
 	{
-		if ( Confide::confirm( $code ) )
+		if (Confide::confirm($code))
 		{
 			return Redirect::to('user/registernetworks')
 				->with( 'notice', Lang::get('confide::confide.alerts.confirmation') );

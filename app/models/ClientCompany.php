@@ -30,9 +30,15 @@ class ClientCompany extends Eloquent
 	 * Instance Variables *
 	 **********************/
 	
-	protected $id;
-	protected $name;
-	protected $industry;
+	public $id;
+	public $name;
+	public $industry;
+	
+	protected $guarded = array();
+
+	public $primaryKey	= 'id';			// defaults to 'id'
+	public $incrementing = true;		// defaults to true; false disables auto-incrementing the primary key
+	public $timestamps	= false;		// defaults to true to maintain 'updated_at' and 'created_at' columns
 	
 	/**
 	 * The database table used by the model.
