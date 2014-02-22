@@ -263,12 +263,12 @@
         "source": {
             "type": "git",
             "url": "https://github.com/phpseclib/phpseclib.git",
-            "reference": "8dc659d694d3e0af68688600908ff1cac9d079dc"
+            "reference": "b3a1f52bffcbd002fd8ed44a1ea01cb1ece4cbe3"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/phpseclib/phpseclib/zipball/8dc659d694d3e0af68688600908ff1cac9d079dc",
-            "reference": "8dc659d694d3e0af68688600908ff1cac9d079dc",
+            "url": "https://api.github.com/repos/phpseclib/phpseclib/zipball/b3a1f52bffcbd002fd8ed44a1ea01cb1ece4cbe3",
+            "reference": "b3a1f52bffcbd002fd8ed44a1ea01cb1ece4cbe3",
             "shasum": ""
         },
         "require": {
@@ -282,7 +282,7 @@
             "ext-mcrypt": "Install the Mcrypt extension in order to speed up a wide variety of cryptographic operations.",
             "pear-pear/PHP_Compat": "Install PHP_Compat to get phpseclib working on PHP < 4.3.3."
         },
-        "time": "2014-02-17 17:53:54",
+        "time": "2014-02-22 05:15:24",
         "type": "library",
         "extra": {
             "branch-alias": {
@@ -407,12 +407,12 @@
         "source": {
             "type": "git",
             "url": "https://github.com/Seldaek/monolog.git",
-            "reference": "4c74b127eb5f1475157bb54c2b7cb3d529fe18f7"
+            "reference": "08f09c20805695212ebe713b6706b8efb24f96e7"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/Seldaek/monolog/zipball/4c74b127eb5f1475157bb54c2b7cb3d529fe18f7",
-            "reference": "4c74b127eb5f1475157bb54c2b7cb3d529fe18f7",
+            "url": "https://api.github.com/repos/Seldaek/monolog/zipball/08f09c20805695212ebe713b6706b8efb24f96e7",
+            "reference": "08f09c20805695212ebe713b6706b8efb24f96e7",
             "shasum": ""
         },
         "require": {
@@ -436,7 +436,7 @@
             "raven/raven": "Allow sending log messages to a Sentry server",
             "ruflin/elastica": "Allow sending log messages to an Elastic Search server"
         },
-        "time": "2014-02-18 14:12:15",
+        "time": "2014-02-20 10:38:44",
         "type": "library",
         "extra": {
             "branch-alias": {
@@ -1760,12 +1760,12 @@
         "source": {
             "type": "git",
             "url": "https://github.com/doctrine/dbal.git",
-            "reference": "ca6a8dd20f3e8c1ad5fadaac8eac4547c081cf3b"
+            "reference": "3c3a4b14bd9c98c2e27dc98613676442717891a1"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/doctrine/dbal/zipball/ca6a8dd20f3e8c1ad5fadaac8eac4547c081cf3b",
-            "reference": "ca6a8dd20f3e8c1ad5fadaac8eac4547c081cf3b",
+            "url": "https://api.github.com/repos/doctrine/dbal/zipball/3c3a4b14bd9c98c2e27dc98613676442717891a1",
+            "reference": "3c3a4b14bd9c98c2e27dc98613676442717891a1",
             "shasum": ""
         },
         "require": {
@@ -1779,7 +1779,7 @@
         "suggest": {
             "symfony/console": "Allows use of the command line interface"
         },
-        "time": "2014-02-16 21:36:04",
+        "time": "2014-02-21 20:27:19",
         "type": "library",
         "extra": {
             "branch-alias": {
@@ -1798,7 +1798,7 @@
         ],
         "authors": [
             {
-                "name": "Jonathan H. Wage",
+                "name": "Jonathan Wage",
                 "email": "jonwage@gmail.com",
                 "homepage": "http://www.jwage.com/",
                 "role": "Creator"
@@ -3332,12 +3332,12 @@
         "source": {
             "type": "git",
             "url": "https://github.com/barryvdh/laravel-ide-helper.git",
-            "reference": "f79776d06ffdc2bfffb675a5ad424a12efb5930c"
+            "reference": "7b47af171d6e78a5b7422c9104e186e4215adfd0"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/barryvdh/laravel-ide-helper/zipball/f79776d06ffdc2bfffb675a5ad424a12efb5930c",
-            "reference": "f79776d06ffdc2bfffb675a5ad424a12efb5930c",
+            "url": "https://api.github.com/repos/barryvdh/laravel-ide-helper/zipball/7b47af171d6e78a5b7422c9104e186e4215adfd0",
+            "reference": "7b47af171d6e78a5b7422c9104e186e4215adfd0",
             "shasum": ""
         },
         "require": {
@@ -3349,7 +3349,7 @@
             "phpdocumentor/reflection-docblock": "2.0.0",
             "symfony/class-loader": "~2.3"
         },
-        "time": "2014-02-19 13:40:47",
+        "time": "2014-02-21 11:00:54",
         "type": "library",
         "installation-source": "dist",
         "autoload": {
@@ -3419,7 +3419,7 @@
         ],
         "authors": [
             {
-                "name": "Thomas Welton",
+                "name": "ThomasWelton",
                 "email": "thomaswelton@me.com",
                 "homepage": "https://github.com/thomaswelton",
                 "role": "Developer"

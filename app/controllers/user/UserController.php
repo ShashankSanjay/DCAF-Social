@@ -83,6 +83,8 @@ class UserController extends BaseController {
 		
 		$user = Auth::User();
 		echo '<pre>';
+
+		var_dump($user = DcafUser::where('username','=','user')->first());
 		// var_dump($user->networkUsers()->first()->userProfile);	// NULL
 		// var_dump($user->networkUsers[0]->userProfile);			// NULL
 		
