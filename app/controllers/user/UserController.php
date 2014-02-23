@@ -92,27 +92,29 @@ class UserController extends BaseController {
 			$successful = true;
 		} else {
 			$r = new DcafRole();
-			$r->role_name = 'billy3';
+			$r->role_name = 'ar';
 			$successful = $r->save();
 		}
 		
 		$manageUsers = new Permission();
-		$manageUsers->name = 'joe3';
-		$manageUsers->display_name = 'joe3';
+		$manageUsers->name = 'ap';
+		$manageUsers->display_name = 'ap';
 		$manageUsers->save();
 		
-		$r->permissions()->attach($manageUsers);
+		$r->perms()->attach($manageUsers);
 		
 		// $r->perms()->sync(array($manageUsers->id));
-		// echo "o";
-		var_dump($user->hasRole("billy3"));
-		var_dump($user->can("joe3"));
 		
+		echo "success: ";		
 		var_dump($successful);
 		if ($successful) {
 			$user->attachRole($r);
 		}
-		var_dump($user->dcafRoles->toArray());
+		echo "hasrole then can";
+		//var_dump($user->hasRole("ar"));	//can't use hasRole. DcafRole object is structured differently from zizaco/role so to use, this would involve changes to Entrust/HasRole
+		var_dump($user->can("ap"));
+
+		var_dump($user->roles->toArray());
 		die();
 		
 		// var_dump($user = DcafUser::where('username','=','user')->first());

@@ -6,7 +6,7 @@ class Permission extends EntrustPermission
 {
     public static $rules = array();
     
-    public function dcafRoles()
+    public function roles()
     {
         return $this->belongsToMany('DcafRole', 'permission_role', 'permission_id', 'role_id');
     }

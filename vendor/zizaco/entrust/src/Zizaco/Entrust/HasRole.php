@@ -29,7 +29,8 @@ trait HasRole
                 return true;
             }
         }
-
+        var_dump($this->roles);
+        die();
         return false;
     }
 
