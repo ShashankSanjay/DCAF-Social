@@ -45,48 +45,76 @@ class UserController extends BaseController {
 		
 		// Show the page
 		$companies = [
-					'Pepsi' => ['0' => 'fa fa-facebook-square',
-								'1' => 'fa fa-twitter-square',
-								'2' => 'fa fa-google-plus-square',
-								'3' => 'fa fa-instagram'],
-					'Coke' => ['0' => 'fa fa-facebook-square',
-								'1' => 'fa fa-twitter-square',
-								'2' => 'fa fa-google-plus-square',
-								'3' => 'fa fa-instagram'],
-					'Samsung' => ['0' => 'fa fa-facebook-square',
-								'1' => 'fa fa-twitter-square',
-								'2' => 'fa fa-google-plus-square',
-								'3' => 'fa fa-instagram'],
-					'Apple' => ['0' => 'fa fa-facebook-square',
-								'1' => 'fa fa-twitter-square',
-								'2' => 'fa fa-google-plus-square',
-								'3' => 'fa fa-instagram'],
-					'Levi' => ['0' => 'fa fa-facebook-square',
-								'1' => 'fa fa-twitter-square',
-								'2' => 'fa fa-google-plus-square',
-								'3' => 'fa fa-instagram'],
-					'American Apparel' => ['0' => 'fa fa-facebook-square',
-								'1' => 'fa fa-twitter-square',
-								'2' => 'fa fa-google-plus-square',
-								'3' => 'fa fa-instagram'],
-					/*'Likeable Media' => ['0' => 'fa fa-facebook-square',
-								'1' => 'fa fa-twitter-square',
-								'2' => 'fa fa-google-plus-square',
-								'3' => 'fa fa-instagram'],
-					'CPX' => ['0' => 'fa fa-facebook-square',
-								'1' => 'fa fa-twitter-square',
-								'2' => 'fa fa-google-plus-square',
-								'3' => 'fa fa-instagram'],
-					'Hofstra' => ['0' => 'fa fa-facebook-square',
-								'1' => 'fa fa-twitter-square',
-								'2' => 'fa fa-google-plus-square',
-								'3' => 'fa fa-instagram']*/
-					];
+			'Pepsi' => ['0' => 'fa fa-facebook-square',
+						'1' => 'fa fa-twitter-square',
+						'2' => 'fa fa-google-plus-square',
+						'3' => 'fa fa-instagram'],
+			'Coke' => ['0' => 'fa fa-facebook-square',
+						'1' => 'fa fa-twitter-square',
+						'2' => 'fa fa-google-plus-square',
+						'3' => 'fa fa-instagram'],
+			'Samsung' => ['0' => 'fa fa-facebook-square',
+						'1' => 'fa fa-twitter-square',
+						'2' => 'fa fa-google-plus-square',
+						'3' => 'fa fa-instagram'],
+			'Apple' => ['0' => 'fa fa-facebook-square',
+						'1' => 'fa fa-twitter-square',
+						'2' => 'fa fa-google-plus-square',
+						'3' => 'fa fa-instagram'],
+			'Levi' => ['0' => 'fa fa-facebook-square',
+						'1' => 'fa fa-twitter-square',
+						'2' => 'fa fa-google-plus-square',
+						'3' => 'fa fa-instagram'],
+			'American Apparel' => ['0' => 'fa fa-facebook-square',
+						'1' => 'fa fa-twitter-square',
+						'2' => 'fa fa-google-plus-square',
+						'3' => 'fa fa-instagram'],
+			/*'Likeable Media' => ['0' => 'fa fa-facebook-square',
+						'1' => 'fa fa-twitter-square',
+						'2' => 'fa fa-google-plus-square',
+						'3' => 'fa fa-instagram'],
+			'CPX' => ['0' => 'fa fa-facebook-square',
+						'1' => 'fa fa-twitter-square',
+						'2' => 'fa fa-google-plus-square',
+						'3' => 'fa fa-instagram'],
+			'Hofstra' => ['0' => 'fa fa-facebook-square',
+						'1' => 'fa fa-twitter-square',
+						'2' => 'fa fa-google-plus-square',
+						'3' => 'fa fa-instagram']*/
+		];
 		
 		$user = Auth::User();
 		// $user = User::find($user->uid);
 		echo '<pre>';
-
+		
+		// check if role already exists
+		if (false) {
+			$successful = true;
+		} else {
+			$r = new DcafRole();
+			$r->role_name = 'billy3';
+			$successful = $r->save();
+		}
+		
+		$manageUsers = new Permission();
+		$manageUsers->name = 'joe3';
+		$manageUsers->display_name = 'joe3';
+		$manageUsers->save();
+		
+		$r->permissions()->attach($manageUsers);
+		
+		// $r->perms()->sync(array($manageUsers->id));
+		// echo "o";
+		var_dump($user->hasRole("billy3"));
+		var_dump($user->can("joe3"));
+		
+		var_dump($successful);
+		if ($successful) {
+			$user->attachRole($r);
+		}
+		var_dump($user->dcafRoles->toArray());
+		die();
+		
 		// var_dump($user = DcafUser::where('username','=','user')->first());
 		// var_dump($user->networkUsers()->first()->userProfile);	// NULL
 		// var_dump($user->networkUsers[0]->userProfile);			// NULL
@@ -94,15 +122,24 @@ class UserController extends BaseController {
 		// var_dump($user->networkUsers[0]->toArray());     // works!
 		// var_dump($user->employers->toArray());           // works!
 		
-		// $employers = $user::with('ClientCompany')->find($user->id);		// doesn't work
-		// $employers = DcafUser::with('ClientCompany')->find($user->id);	// doesn't work
-		// var_dump($employers);
+		// $employers = $user::with('employers')->find($user->id);	// works!
+		// $employers = DcafUser::with('employers')->get();			// works!
 		
-		var_dump($user->employers->toArray());
+		var_dump($user->billingContact);
+		
+		// var_dump($user->employers->toArray());
+		
+		$company = new ClientCompany();
+		$company->name = 'Test';
+		$company->industry = 'Test Industry';
+		$company->save();
+		
+		$company->employees()->attach($user);
+		var_dump($company->employees->toArray());
 		
 		echo '</pre>';
 		die();
-	
+		
 		return View::make('site/dashboard/home', compact('user', 'companies'));
 	}
 
@@ -114,7 +151,7 @@ class UserController extends BaseController {
 		$this->user->username = Input::get( 'username' );
 		$this->user->email = Input::get( 'email' );
 
-		$password = Input::get( 'password' );
+		$password = Input::get('password');
 		$passwordConfirmation = Input::get( 'password_confirmation' );
 		
 		if (!empty($password)) {
@@ -140,14 +177,19 @@ class UserController extends BaseController {
 		
 		if ($this->user->id)
 		{
+			/*
 			$company = new ClientCompany();
 			$company->name = 'Test';
 			$company->industry = 'Test Industry';
 			$company->save();
 			
+			$company->employees()->attach($user);
+			var_dump($company->employees->toArray());
+			*/
+			
 			// Redirect with success message, You may replace "Lang::get(..." for your custom message.
 			return Redirect::to('user/confirmation')
-				->with( 'notice', Lang::get('user/user.user_account_created') );
+				->with('notice', Lang::get('user/user.user_account_created'));
 		}
 		else
 		{
@@ -156,7 +198,7 @@ class UserController extends BaseController {
 			
 			return Redirect::to('user/create')
 				->withInput(Input::except('password'))
-				->with( 'error', $error );
+				->with('error', $error);
 		}
 	}
 
@@ -173,11 +215,11 @@ class UserController extends BaseController {
 		if ($validator->passes())
 		{
 			$oldUser = clone $user;
-			$user->username = Input::get( 'username' );
-			$user->email = Input::get( 'email' );
+			$user->username = Input::get('username');
+			$user->email = Input::get('email');
 
-			$password = Input::get( 'password' );
-			$passwordConfirmation = Input::get( 'password_confirmation' );
+			$password = Input::get('password');
+			$passwordConfirmation = Input::get('password_confirmation');
 
 			if (!empty($password)) {
 				if ($password === $passwordConfirmation) {
@@ -206,11 +248,11 @@ class UserController extends BaseController {
 
 		if (empty($error)) {
 			return Redirect::to('user')
-				->with( 'success', Lang::get('user/user.user_account_updated') );
+				->with('success', Lang::get('user/user.user_account_updated'));
 		} else {
 			return Redirect::to('user')
 				->withInput(Input::except('password','password_confirmation'))
-				->with( 'error', $error );
+				->with('error', $error);
 		}
 	}
 
@@ -270,8 +312,7 @@ class UserController extends BaseController {
 			// Check if there was too many login attempts
 			if (Confide::isThrottled($input)) {
 				$err_msg = Lang::get('confide::confide.alerts.too_many_attempts');
-				
-			} elseif ($this->user->checkUserExists( $input ) && ! $this->user->isConfirmed($input)) {
+			} else if ($this->user->checkUserExists($input) && !$this->user->isConfirmed($input)) {
 				$err_msg = Lang::get('confide::confide.alerts.not_confirmed');
 			} else {
 				$err_msg = Lang::get('confide::confide.alerts.wrong_credentials');
@@ -294,18 +335,17 @@ class UserController extends BaseController {
 		if (Confide::confirm($code))
 		{
 			return Redirect::to('user/registernetworks')
-				->with( 'notice', Lang::get('confide::confide.alerts.confirmation') );
+				->with('notice', Lang::get('confide::confide.alerts.confirmation'));
 		}
 		else
 		{
 			return Redirect::to('user/login')
-				->with( 'error', Lang::get('confide::confide.alerts.wrong_confirmation') );
+				->with('error', Lang::get('confide::confide.alerts.wrong_confirmation'));
 		}
 	}
 
 	/**
 	 * Displays the forgot password form
-	 *
 	 */
 	public function getForgot()
 	{
@@ -314,7 +354,6 @@ class UserController extends BaseController {
 
 	/**
 	 * Attempt to reset password with given email
-	 *
 	 */
 	public function postForgot()
 	{
@@ -333,7 +372,6 @@ class UserController extends BaseController {
 
 	/**
 	 * Shows the change password form with the given token
-	 *
 	 */
 	public function getReset( $token )
 	{
@@ -344,34 +382,32 @@ class UserController extends BaseController {
 
 
 	/**
-	 * Attempt change password of the user
-	 *
+	 * Attempt change password of the user.
 	 */
 	public function postReset()
 	{
 		$input = array(
-			'token'=>Input::get( 'token' ),
-			'password'=>Input::get( 'password' ),
-			'password_confirmation'=>Input::get( 'password_confirmation' ),
+			'token'=>Input::get('token'),
+			'password'=>Input::get('password'),
+			'password_confirmation'=>Input::get('password_confirmation'),
 		);
 
 		// By passing an array with the token, password and confirmation
-		if( Confide::resetPassword( $input ) )
+		if (Confide::resetPassword($input))
 		{
 			return Redirect::to('user/login')
-			->with( 'notice', Lang::get('confide::confide.alerts.password_reset') );
+			->with('notice', Lang::get('confide::confide.alerts.password_reset'));
 		}
 		else
 		{
 			return Redirect::to('user/reset/'.$input['token'])
 				->withInput()
-				->with( 'error', Lang::get('confide::confide.alerts.wrong_password_reset') );
+				->with('error', Lang::get('confide::confide.alerts.wrong_password_reset'));
 		}
 	}
 
 	/**
 	 * Log the user out of the application.
-	 *
 	 */
 	public function getLogout()
 	{
@@ -379,20 +415,19 @@ class UserController extends BaseController {
 
 		return Redirect::to('/');
 	}
-
 	
-
 	/**
 	 * Process a dumb redirect.
+	 * 
 	 * @param $url1
 	 * @param $url2
 	 * @param $url3
 	 * @return string
 	 */
-	public function processRedirect($url1,$url2,$url3)
+	public function processRedirect($url1, $url2, $url3)
 	{
 		$redirect = '';
-		if( ! empty( $url1 ) )
+		if (!empty($url1))
 		{
 			$redirect = $url1;
 			$redirect .= (empty($url2)? '' : '/' . $url2);
@@ -400,16 +435,16 @@ class UserController extends BaseController {
 		}
 		return $redirect;
 	}
-
+	
 	public function getConfirmation()
 	{
-		//
 		return View::make('site.nonboard.confirmation');
 	}
-
+	
 	public function registerNetworks()
 	{
-		/*use data to show which networks are registered and which are not
+		/*
+		use data to show which networks are registered and which are not
 		$data = array();
 
 		$user = Auth::user();
@@ -418,10 +453,9 @@ class UserController extends BaseController {
 		//return View::make('site.nonboard.registernetworks')->with($data);
 		return View::make('site.nonboard.registernetworks');
 	}
-
+	
 	public function team()
 	{
-		//
 		return View::make('site.nonboard.team');
 	}
 }

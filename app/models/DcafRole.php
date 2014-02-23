@@ -9,8 +9,12 @@ class DcafRole extends EntrustRole implements PresentableInterface
 	
 	protected $table = 'DCAF_Roles';
 	
+	public $primaryKey	= 'role_id';	// defaults to 'id'
+	public $incrementing = true;		// defaults to true; false disables auto-incrementing the primary key
+	public $timestamps	= true;			// defaults to true to maintain 'updated_at' and 'created_at' columns
+	
 	public static $rules = array(
-		'name' => 'required|between:4,32'
+	//	'name' => 'required|between:4,32'
 	);
 	
 	protected $roleId;
@@ -18,8 +22,13 @@ class DcafRole extends EntrustRole implements PresentableInterface
 	
 	public function dcafUsers()
 	{
-		return $this->belongsToMany('DcafUser', 'DCAF_User_Roles', 'role_id', 'uid');
+		return $this->belongsToMany('DcafUser', 'DCAF_User_Roles', 'dcaf_role_id', 'uid');
 	}
+	
+	public function permissions()
+    {
+        return $this->belongsToMany('Permission', 'permission_role', 'role_id', 'permission_id');
+    }
 	
 	/**
 	 * Same presenter as the user model.
@@ -48,6 +57,17 @@ class DcafRole extends EntrustRole implements PresentableInterface
 		}
 		return $roleValidation;
 	}
+	
+	/**
+     * Checks if a role with the given name exists.
+     *
+     * @param  string $name      
+     * @return boolean           Exists?
+     */
+    public function checkRoleExists($name)
+    {
+        // 
+    }
 }
 
 ?>

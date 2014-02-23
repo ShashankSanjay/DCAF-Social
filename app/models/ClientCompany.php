@@ -38,7 +38,7 @@ class ClientCompany extends Eloquent
 
 	public $primaryKey	= 'id';			// defaults to 'id'
 	public $incrementing = true;		// defaults to true; false disables auto-incrementing the primary key
-	public $timestamps	= false;		// defaults to true to maintain 'updated_at' and 'created_at' columns
+	public $timestamps	= true;		// defaults to true to maintain 'updated_at' and 'created_at' columns
 	
 	/**
 	 * The database table used by the model.
@@ -61,7 +61,7 @@ class ClientCompany extends Eloquent
 	public function employees()
 	{
 		// has_many_and_belongs_to() in Laravel 3
-		return $this->belongsToMany('DcafUser', 'Client_Users', 'company_id', 'uid');
+		return $this->belongsToMany('DcafUser', 'Client_User_Assoc', 'company_id', 'uid');
 	}
 }
 

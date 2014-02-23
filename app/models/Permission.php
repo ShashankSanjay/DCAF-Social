@@ -4,6 +4,13 @@ use Zizaco\Entrust\EntrustPermission;
 
 class Permission extends EntrustPermission
 {
+    public static $rules = array();
+    
+    public function dcafRoles()
+    {
+        return $this->belongsToMany('DcafRole', 'permission_role', 'permission_id', 'role_id');
+    }
+    
     public function preparePermissionsForDisplay($permissions)
     {
         // Get all the available permissions
