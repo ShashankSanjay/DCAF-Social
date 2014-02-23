@@ -209,10 +209,6 @@ return array(
         'OAuth'			=> 'Thomaswelton\LaravelOauth\Facades\OAuth', //Oauth
         //'AlchemyAPI'	=> 'AlchemyAPI\alchemyapi_php\alchemyapi',
         'Role'			=> 'DcafRole',
-<<<<<<< Updated upstream
-
-=======
->>>>>>> Stashed changes
     ),
 
     'available_language' => array('en', 'pt', 'es'),
