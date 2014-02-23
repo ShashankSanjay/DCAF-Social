@@ -29,6 +29,7 @@ class UserController extends BaseController {
 	 */
 	public function __construct(DcafUser $user)
 	{
+		
 		parent::__construct();
 		$this->user = $user;
 	}
@@ -84,6 +85,7 @@ class UserController extends BaseController {
 		];
 		
 		$user = Auth::User();
+<<<<<<< Updated upstream
 		// $user = User::find($user->uid);
 		echo '<pre>';
 		
@@ -116,6 +118,20 @@ class UserController extends BaseController {
 		die();
 		
 		// var_dump($user = DcafUser::where('username','=','user')->first());
+=======
+		//echo '<pre>';
+
+		
+		$adminRole = new DcafRole;
+        $adminRole->role_name = 'heyo';
+        $adminRole->save();
+        //var_dump($adminRole->save());
+        //$user = DcafUser::where('username','=','user')->first();
+        $user->attachRole( $adminRole );
+        //var_dump($user->DCAF_Roles->toArray());
+        //$adminRole->DCAF_Users()->attach($user);
+        var_dump($user->DCAF_Roles);
+>>>>>>> Stashed changes
 		// var_dump($user->networkUsers()->first()->userProfile);	// NULL
 		// var_dump($user->networkUsers[0]->userProfile);			// NULL
 		
@@ -137,7 +153,21 @@ class UserController extends BaseController {
 		$company->employees()->attach($user);
 		var_dump($company->employees->toArray());
 		
+<<<<<<< Updated upstream
 		echo '</pre>';
+=======
+		// var_dump($user::with('ClientCompany')->find($user->id));
+
+        /*$cc = new ClientCompany;
+        $cc->name = 'admin';
+        $cc->industry = 'heyo';
+        $cc->save();
+
+        $cc->employees()->attach($user);
+
+        var_dump($cc->employees->toArray());*/
+		//echo '</pre>';
+>>>>>>> Stashed changes
 		die();
 		
 		return View::make('site/dashboard/home', compact('user', 'companies'));
@@ -174,7 +204,11 @@ class UserController extends BaseController {
 		
 		// Save if valid. Password field will be hashed before save
 		$this->user->save();
+<<<<<<< Updated upstream
 		
+=======
+
+>>>>>>> Stashed changes
 		if ($this->user->id)
 		{
 			/*

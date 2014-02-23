@@ -24,10 +24,10 @@ class EntrustSetupTables extends Migration {
         {
             $table->engine = 'InnoDB';
             $table->increments('id');
-            $table->integer('user_id')->unsigned()->index();
-            $table->integer('role_id')->unsigned()->index();
-            $table->foreign('user_id')->references('id')->on('users');
-            $table->foreign('role_id')->references('id')->on('roles');
+            $table->integer('dcaf_user_id')->unsigned()->index();
+            $table->integer('dcaf_role_id')->unsigned()->index();
+            $table->foreign('dcaf_user_id')->references('id')->on('DCAF_Users');
+            $table->foreign('dcaf_role_id')->references('role_id')->on('DCAF_Roles');
         });
     }
 

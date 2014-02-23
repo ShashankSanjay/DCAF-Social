@@ -16,8 +16,13 @@ class DcafUser extends ConfideUser implements UserProfileInterface, UserInterfac
 	use HasRole;
 	protected $guarded = array();
 
+<<<<<<< Updated upstream
 	public $primaryKey	= 'id';			// defaults to 'id'
 	public $incrementing = true;		// defaults to true; false disables auto-incrementing the primary key
+=======
+	public $primaryKey	= 'id';				// defaults to 'id'
+	public $incrementing = true;			// defaults to true; false disables auto-incrementing the primary key
+>>>>>>> Stashed changes
 	public $timestamps	= true;			// defaults to true to maintain 'updated_at' and 'created_at' columns
 
 
