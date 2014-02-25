@@ -102,7 +102,7 @@ class UserController extends BaseController {
 		$company->save();*/
 		$company = ClientCompany::find(1);
 		
-		$company->employees()->attach($user);
+		//$company->employees()->attach($user);
 
 		// Make new BillingAccount
 		/*$billing = new BillingAccount;
@@ -111,21 +111,25 @@ class UserController extends BaseController {
 		$billing->save();*/
 		$billing = BillingAccount::find(15);
 		// Associate a billing plan to billing account
-		$billing->billingPlan()->associate($bplan);
+		//$billing->billingPlan()->associate($bplan);
 
 		// Make user billing contact
 		//$billing->billingContact()->associate($user); //doesn't work
-		//$user->billingContact()->associate($billing);
-		//$user->save();
+		$user->billingContact()->associate($billing);
+		$user->save();
+		$user = Auth::User();
+		var_dump($user->billingContact->billing_address); //works
+		//var_dump($billing->billingContact()->get());	// doesn't work
 		// Attach billing plan to company
-		$billing->companies()->associate($company); //nope
+		//$billing->clientCompany()->associate($company); 
 		//$company->billingAccount()->associate($billing);
 		//$company->save();
-		$company->save();
-		$billing->save();
-		var_dump($billing->billingPlan);
-		var_dump($billing->billingContact);
-		var_dump($billing->companies);
+		//$company->save();
+		//$billing->save();
+		/*var_dump($billing->billingPlan()->get());	// works!
+		var_dump($user->billingContact()->first());	// works!
+		var_dump($billing->clientCompany()->get());*/	// works!
+		//var_dump($billing->billingPlan->plan_name);
 
 		// check if role already exists
 		/*if (false) {

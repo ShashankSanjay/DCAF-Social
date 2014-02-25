@@ -57,7 +57,7 @@ class BillingAccount extends Eloquent
 	
 	public function billingContact()
 	{
-		return $this->hasOne('DcafUser', 'billing_contact', 'uid');
+		return $this->hasOne('DcafUser');
 	}
 	
 	public function teams()
@@ -65,9 +65,9 @@ class BillingAccount extends Eloquent
 		return $this->hasMany('DcafTeam', 'billing_account_id', 'id');
 	}
 
-	public function companies()
+	public function clientCompany()
 	{
-		return $this->belongsTo('ClientCompany', 'company_id', 'id');
+		return $this->belongsTo('ClientCompany');
 	}
 	
 	public function billingPlan()

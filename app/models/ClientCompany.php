@@ -60,7 +60,7 @@ class ClientCompany extends Eloquent
 	
 	public function billingAccount()
 	{
-		return $this->hasMany('BillingAccount', 'company_id', 'id');
+		return $this->hasMany('BillingAccount');
 	}
 
 	public function employees()
