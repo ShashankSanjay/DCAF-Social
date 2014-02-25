@@ -1991,6 +1991,7 @@ return array(
     'Symfony\\Component\\Translation\\Translator' => $vendorDir . '/symfony/translation/Symfony/Component/Translation/Translator.php',
     'Symfony\\Component\\Translation\\TranslatorInterface' => $vendorDir . '/symfony/translation/Symfony/Component/Translation/TranslatorInterface.php',
     'Symfony\\Component\\Translation\\Writer\\TranslationWriter' => $vendorDir . '/symfony/translation/Symfony/Component/Translation/Writer/TranslationWriter.php',
+    'TeamUserPivotTable' => $baseDir . '/app/database/migrations/2013_02_24_113250_team_user_pivot_table.php',
     'TestCase' => $baseDir . '/app/tests/library/TestCase.php',
     'Thomaswelton\\LaravelOauth\\AbstractMigration' => $vendorDir . '/thomaswelton/laravel-oauth/src/Thomaswelton/LaravelOauth/AbstractMigration.php',
     'Thomaswelton\\LaravelOauth\\Common\\Storage\\LaravelSession' => $vendorDir . '/thomaswelton/laravel-oauth/src/Thomaswelton/LaravelOauth/Common/Storage/LaravelSession.php',

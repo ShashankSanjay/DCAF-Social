@@ -58,6 +58,12 @@ class DcafTeam extends Eloquent
 	{
 		return $this->belongsTo('BillingAccount', 'billing_account_id', 'id');
 	}
+
+	public function DcafUser()
+	{
+		//
+		return $this->belongsToMany('DcafUser', 'DCAF_team_user', 'dcaf_team_id', 'dcaf_user_id') ;
+	}
 }
 
 ?>

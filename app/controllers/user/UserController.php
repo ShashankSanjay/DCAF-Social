@@ -87,23 +87,42 @@ class UserController extends BaseController {
 		// $user = User::find($user->uid);
 		echo '<pre>';
 		
+		// Make new BillingPlan
+		$bplan = new BillingPlan;
+		$bplan->plan_name = 'md-DCAF';
+		$bplan->payment_amount = '500.00';
+		$bplan->payment_frequency = '6';
+		$bplan->description = 'heyo its the small plan';
+		$bplan->save();
+		// Make new BillingAccount
+		$billing = new BillingAccount;
+		$billing->billing_name = 'j Guy';
+		$billing->billing_address = '395 Some Guy St, Hempstead, 95505, NY';
+		$billing->save();
+		// Attach a plan
+		$billing->billingPlan()->associate($bplan);
+
+		// Make user billing contact
+		$billing->billingContact()->save($user);
+
+		var_dump($billing);
 		// check if role already exists
-		if (false) {
+		/*if (false) {
 			$successful = true;
 		} else {
 			$r = new DcafRole();
-			$r->role_name = 'ar';
+			$r->role_name = 'cr';
 			$successful = $r->save();
 		}
 		
 		$manageUsers = new Permission();
-		$manageUsers->name = 'ap';
-		$manageUsers->display_name = 'ap';
+		$manageUsers->name = 'cp';
+		$manageUsers->display_name = 'cp';
 		$manageUsers->save();
 		
-		$r->perms()->attach($manageUsers);
+		//$r->perms()->attach($manageUsers); //works
 		
-		// $r->perms()->sync(array($manageUsers->id));
+		$r->perms()->sync(array($manageUsers->id));	//works
 		
 		echo "success: ";		
 		var_dump($successful);
@@ -111,10 +130,10 @@ class UserController extends BaseController {
 			$user->attachRole($r);
 		}
 		echo "hasrole then can";
-		//var_dump($user->hasRole("ar"));	//can't use hasRole. DcafRole object is structured differently from zizaco/role so to use, this would involve changes to Entrust/HasRole
-		var_dump($user->can("ap"));
+		var_dump($user->hasRole("cr"));	//can't use hasRole. DcafRole object is structured differently from zizaco/role so to use, this would involve changes to Entrust/HasRole
+		var_dump($user->can("cp"));		//works, by using perms()->attach, can() finds the right relation
 
-		var_dump($user->roles->toArray());
+		//var_dump($user->perms->toArray());*/
 		die();
 		
 		// var_dump($user = DcafUser::where('username','=','user')->first());
@@ -127,17 +146,17 @@ class UserController extends BaseController {
 		// $employers = $user::with('employers')->find($user->id);	// works!
 		// $employers = DcafUser::with('employers')->get();			// works!
 		
-		var_dump($user->billingContact);
+		// var_dump($user->billingContact);
 		
 		// var_dump($user->employers->toArray());
 		
-		$company = new ClientCompany();
+		/*$company = new ClientCompany();
 		$company->name = 'Test';
 		$company->industry = 'Test Industry';
 		$company->save();
 		
 		$company->employees()->attach($user);
-		var_dump($company->employees->toArray());
+		var_dump($company->employees->toArray());*/
 		
 		echo '</pre>';
 		die();
@@ -183,6 +202,7 @@ class UserController extends BaseController {
 			$company = new ClientCompany();
 			$company->name = 'Test';
 			$company->industry = 'Test Industry';
+			$company->billing_account = $billing;
 			$company->save();
 			
 			$company->employees()->attach($user);
@@ -336,7 +356,7 @@ class UserController extends BaseController {
 	{
 		if (Confide::confirm($code))
 		{
-			return Redirect::to('user/registernetworks')
+			return Redirect::to('user/firstTime')
 				->with('notice', Lang::get('confide::confide.alerts.confirmation'));
 		}
 		else
@@ -454,6 +474,47 @@ class UserController extends BaseController {
 
 		//return View::make('site.nonboard.registernetworks')->with($data);
 		return View::make('site.nonboard.registernetworks');
+	}
+
+	public function firstTime()
+	{
+		$user = Auth::DcafUser;
+		// first user from a company or agency
+		if ($first) {
+			// Do all first time initializations. 
+
+			// New Company
+			//$companyName = Input::get('companyName');
+			$company = new ClientCompany;
+			$company->name = Input::get('companyName');
+			$company->industry = Input::get('industry');
+			$company->save();
+			// Attach company to user
+			$company->employees()->attach($user);
+
+			// Make new BillingAccount
+			$billing = new BillingAccount;
+			$billing->billing_name = Input::get('billingName');
+			$billing->billing_address = Input::get('billingAddress');
+			// Make user billing contact
+
+			// Make new team, make user manager
+		}
+
+		// Not the first user from their company
+		else {
+			// get access code for company
+			$access = Input::get('accessCode');
+
+			if (true) {
+				// plug user into existing things
+
+			}
+			
+			else {
+				// access code is incorrect as it does not exist
+			}
+		}
 	}
 	
 	public function team()

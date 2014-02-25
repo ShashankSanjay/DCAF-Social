@@ -47,7 +47,7 @@ class ClientCompany extends Eloquent
 	 * @access protected
 	 * @type   string
 	 */
-	protected $table		= 'Client_Companies';
+	protected $table = 'Client_Companies';
 	
 	/**
 	 * Permits all properties to be set from the constructor
@@ -57,6 +57,11 @@ class ClientCompany extends Eloquent
 	 * @type   array
 	 */
 	protected $fillable		= array('*');
+	
+	public function billingAccount()
+	{
+		return $this->belongsTo('BillingAccount', 'billing_account_id', 'id');
+	}
 	
 	public function employees()
 	{

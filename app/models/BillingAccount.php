@@ -64,6 +64,11 @@ class BillingAccount extends Eloquent
 	{
 		return $this->hasMany('DcafTeam', 'billing_account_id', 'id');
 	}
+
+	public function companies()
+	{
+		return $this->hasMany('ClientCompany', 'billing_account_id', 'id');
+	}
 	
 	public function billingPlan()
 	{

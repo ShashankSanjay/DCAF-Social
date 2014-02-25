@@ -15,10 +15,10 @@
  *  Route model binding
  *  ------------------------------------------
  */
-Route::model('user', 'DcafUser');
+Route::model('user', 'User');
 Route::model('comment', 'Comment');
 Route::model('post', 'Post');
-Route::model('role', 'DcafRole');
+Route::model('role', 'Role');
 
 /** ------------------------------------------
  *  Route constraint patterns
@@ -173,6 +173,9 @@ Route::get('user/confirmation', 'UserController@getConfirmation');
 
 //after user clicks confirm link on email, redirected here. Then proceed to register DCAF with each network. THen go to dashboard
 Route::get('user/registernetworks', 'UserController@registerNetworks');
+
+//configure first time stuff
+Route::get('user/firstTime', 'UserController@firstTime');
 
 Route::get('user/team', 'UserController@team');
 
