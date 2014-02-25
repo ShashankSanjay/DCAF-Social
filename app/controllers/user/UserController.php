@@ -88,24 +88,45 @@ class UserController extends BaseController {
 		echo '<pre>';
 		
 		// Make new BillingPlan
-		$bplan = new BillingPlan;
-		$bplan->plan_name = 'md-DCAF';
+		/*$bplan = new BillingPlan;
+		$bplan->plan_name = 'Small-DCAF';
 		$bplan->payment_amount = '500.00';
 		$bplan->payment_frequency = '6';
 		$bplan->description = 'heyo its the small plan';
-		$bplan->save();
+		$bplan->save();*/
+		$bplan = BillingPlan::find(14);
+
+		/*$company = new ClientCompany();
+		$company->name = 'Test';
+		$company->industry = 'Test Industry';
+		$company->save();*/
+		$company = ClientCompany::find(1);
+		
+		$company->employees()->attach($user);
+
 		// Make new BillingAccount
-		$billing = new BillingAccount;
-		$billing->billing_name = 'j Guy';
+		/*$billing = new BillingAccount;
+		$billing->billing_name = 'Some Guy';
 		$billing->billing_address = '395 Some Guy St, Hempstead, 95505, NY';
-		$billing->save();
-		// Attach a plan
+		$billing->save();*/
+		$billing = BillingAccount::find(15);
+		// Associate a billing plan to billing account
 		$billing->billingPlan()->associate($bplan);
 
 		// Make user billing contact
-		$billing->billingContact()->save($user);
+		//$billing->billingContact()->associate($user); //doesn't work
+		//$user->billingContact()->associate($billing);
+		//$user->save();
+		// Attach billing plan to company
+		$billing->companies()->associate($company); //nope
+		//$company->billingAccount()->associate($billing);
+		//$company->save();
+		$company->save();
+		$billing->save();
+		var_dump($billing->billingPlan);
+		var_dump($billing->billingContact);
+		var_dump($billing->companies);
 
-		var_dump($billing);
 		// check if role already exists
 		/*if (false) {
 			$successful = true;

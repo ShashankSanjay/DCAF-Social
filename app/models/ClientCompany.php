@@ -60,9 +60,9 @@ class ClientCompany extends Eloquent
 	
 	public function billingAccount()
 	{
-		return $this->belongsTo('BillingAccount', 'billing_account_id', 'id');
+		return $this->hasMany('BillingAccount', 'company_id', 'id');
 	}
-	
+
 	public function employees()
 	{
 		// has_many_and_belongs_to() in Laravel 3

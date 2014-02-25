@@ -39,7 +39,7 @@ class BillingAccount extends Eloquent
 	
 	/**
 	 * The database table used by the model.
-	 *
+	 *s
 	 * @since  1.0
 	 * @access protected
 	 * @type   string
@@ -67,7 +67,7 @@ class BillingAccount extends Eloquent
 
 	public function companies()
 	{
-		return $this->hasMany('ClientCompany', 'billing_account_id', 'id');
+		return $this->belongsTo('ClientCompany', 'company_id', 'id');
 	}
 	
 	public function billingPlan()
