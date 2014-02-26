@@ -12,6 +12,7 @@ class BillingPlansTableSeeder extends Seeder {
 		);*/
 		
 		$billingPlanSM = new BillingPlan;
+		$billingPlanSM->id = 1;
 		$billingPlanSM->plan_name = 'Small DCAF';
 		$billingPlanSM->payment_amount = '500.00';
 		$billingPlanSM->payment_frequency = 'upfront'; //upfront, or monthly
@@ -20,6 +21,7 @@ class BillingPlansTableSeeder extends Seeder {
 		$billingPlanSM->save();
 
 		$billingPlanMD = new BillingPlan;
+		$billingPlanMD->id = 2;
 		$billingPlanMD->plan_name = 'Medium DCAF';
 		$billingPlanMD->payment_amount = '1000.00';
 		$billingPlanMD->payment_frequency = 'monthly';
@@ -28,6 +30,7 @@ class BillingPlansTableSeeder extends Seeder {
 		$billingPlanMD->save();
 
 		$billingPlanLG = new BillingPlan;
+		$billingPlanLG->id = 3;
 		$billingPlanLG->plan_name = 'Large DCAF';
 		$billingPlanLG->payment_amount = '12000.00';
 		$billingPlanLG->payment_frequency = 'upfront';
@@ -36,6 +39,7 @@ class BillingPlansTableSeeder extends Seeder {
 		$billingPlanLG->save();
 
 		$billingPlanXLG = new BillingPlan;
+		$billingPlanXLG->id = 4;
 		$billingPlanXLG->plan_name = 'Extra-Large DCAF';
 		$billingPlanXLG->payment_amount = '24000.00';
 		$billingPlanXLG->payment_frequency = 'monthly';

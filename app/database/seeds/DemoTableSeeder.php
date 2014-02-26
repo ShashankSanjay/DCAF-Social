@@ -83,6 +83,7 @@ class DemoTableSeeder extends Seeder {
 
 		// Create a billing account
 		$billing = new BillingAccount;
+		$billing->id = 1;
 		$billing->billing_name = 'Corporation X';
 		$billing->billing_address = '000 X St, X City, 00000, NY';
 		$billing->save();
@@ -103,6 +104,8 @@ class DemoTableSeeder extends Seeder {
         //$userMember->DcafRole()->attach( $teamMember );
         $userMember->attachRole( $teamMember );
 
+        //user as billing contact for billing account
+        $billing = BillingAccount::find(1);
         $userManager->billingContact()->associate($billing);
 		$userManager->save();
 
@@ -113,6 +116,15 @@ class DemoTableSeeder extends Seeder {
 		//attach permissions to role
 		$manageBilling = Permission::find(1);
 		$teamManager->perms()->attach($manageBilling);
+
+		//billing plan to billing acount
+		$bplan = billingPlan::find(1);
+		$billing->billingPlan()->associate($bplan);
+
+		//billing account to company
+		$billing->clientCompany()->associate($company);
+		$billing->save();
+		$company->save();
 	}
 
 }
