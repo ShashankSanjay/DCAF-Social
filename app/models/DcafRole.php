@@ -22,12 +22,12 @@ class DcafRole extends EntrustRole implements PresentableInterface
 	
 	public function dcafUsers()
 	{
-		return $this->belongsToMany('DcafUser', 'DCAF_User_Roles', 'dcaf_role_id', 'uid');
+		return $this->belongsToMany('DcafUser', 'DCAF_User_Roles', 'dcaf_role_id', 'id');
 	}
 
 	public function users()
 	{
-		return $this->belongsToMany('DcafUser', 'DCAF_User_Roles', 'dcaf_role_id', 'uid');
+		return $this->belongsToMany('DcafUser', 'DCAF_User_Roles', 'dcaf_role_id', 'id');
 	}
 
 	public function perms()

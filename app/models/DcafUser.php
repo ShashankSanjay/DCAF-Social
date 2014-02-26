@@ -58,7 +58,7 @@ class DcafUser extends ConfideUser implements UserProfileInterface, UserInterfac
 
 	public function dcafRoles()	//works
 	{
-		return $this->belongsToMany('DcafRole', 'assigned_roles', 'dcaf_user_id', 'dcaf_role_id');
+		return $this->belongsToMany('DcafRole', 'assigned_roles', 'dcaf_user_id', 'id');
 	}
 
 	public function DcafTeam()

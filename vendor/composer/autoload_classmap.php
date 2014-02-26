@@ -253,6 +253,7 @@ return array(
     'DcafTeam' => $baseDir . '/app/models/DcafTeam.php',
     'DcafUser' => $baseDir . '/app/models/DcafUser.php',
     'DcafUserDI' => $baseDir . '/app/models/DcafUserDI.php',
+    'DemoTableSeeder' => $baseDir . '/app/database/seeds/DemoTableSeeder.php',
     'Doctrine\\Common\\Annotations\\Annotation' => $vendorDir . '/doctrine/annotations/lib/Doctrine/Common/Annotations/Annotation.php',
     'Doctrine\\Common\\Annotations\\AnnotationException' => $vendorDir . '/doctrine/annotations/lib/Doctrine/Common/Annotations/AnnotationException.php',
     'Doctrine\\Common\\Annotations\\AnnotationReader' => $vendorDir . '/doctrine/annotations/lib/Doctrine/Common/Annotations/AnnotationReader.php',

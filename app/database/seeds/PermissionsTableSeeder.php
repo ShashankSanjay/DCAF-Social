@@ -6,14 +6,15 @@ class PermissionsTableSeeder extends Seeder {
     {
         DB::table('permissions')->delete();
 
-        $manageUsers = new Permission();
-        $manageUsers->name = 'cp';
-        $manageUsers->display_name = 'cp';
-        $manageUsers->save();
+        $manageBilling = new Permission();
+        $manageBilling->id = 1;
+        $manageBilling->name = 'manage_billing';
+        $manageBilling->display_name = 'manage billing';
+        $manageBilling->save();
         
-        //$r->perms()->attach($manageUsers); //works
+        //$r->perms()->attach($manageBilling); //works
         
-        //$r->perms()->sync(array($manageUsers->id)); //works
+        //$r->perms()->sync(array($manageBilling->id)); //works
     }
 
 }
