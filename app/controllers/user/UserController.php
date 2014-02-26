@@ -83,10 +83,9 @@ class UserController extends BaseController {
 						'3' => 'fa fa-instagram']*/
 		];
 		
-		$user = Auth::User();
 		// $user = User::find($user->uid);
 		echo '<pre>';
-		
+
 		// Make new BillingPlan
 		/*$bplan = new BillingPlan;
 		$bplan->plan_name = 'Small-DCAF';
@@ -94,13 +93,13 @@ class UserController extends BaseController {
 		$bplan->payment_frequency = '6';
 		$bplan->description = 'heyo its the small plan';
 		$bplan->save();*/
-		$bplan = BillingPlan::find(14);
+		//$bplan = BillingPlan::find(14);
 
 		/*$company = new ClientCompany();
 		$company->name = 'Test';
 		$company->industry = 'Test Industry';
 		$company->save();*/
-		$company = ClientCompany::find(1);
+		//$company = ClientCompany::find(1);
 		
 		//$company->employees()->attach($user);
 
@@ -109,16 +108,16 @@ class UserController extends BaseController {
 		$billing->billing_name = 'Some Guy';
 		$billing->billing_address = '395 Some Guy St, Hempstead, 95505, NY';
 		$billing->save();*/
-		$billing = BillingAccount::find(15);
+		//$billing = BillingAccount::find(15);
 		// Associate a billing plan to billing account
 		//$billing->billingPlan()->associate($bplan);
 
 		// Make user billing contact
 		//$billing->billingContact()->associate($user); //doesn't work
-		$user->billingContact()->associate($billing);
+		/*$user->billingContact()->associate($billing);
 		$user->save();
 		$user = Auth::User();
-		var_dump($user->billingContact->billing_address); //works
+		var_dump($user->billingContact->billing_address);*/ //works
 		//var_dump($billing->billingContact()->get());	// doesn't work
 		// Attach billing plan to company
 		//$billing->clientCompany()->associate($company); 

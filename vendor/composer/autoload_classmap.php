@@ -144,6 +144,7 @@ return array(
     'Basset\\Server' => $vendorDir . '/jasonlewis/basset/src/Basset/Server.php',
     'BillingAccount' => $baseDir . '/app/models/BillingAccount.php',
     'BillingPlan' => $baseDir . '/app/models/BillingPlan.php',
+    'BillingPlansTableSeeder' => $baseDir . '/app/database/seeds/BillingPlansTableSeeder.php',
     'Bllim\\Datatables\\Datatables' => $vendorDir . '/bllim/datatables/src/Bllim/Datatables/Datatables.php',
     'Bllim\\Datatables\\DatatablesServiceProvider' => $vendorDir . '/bllim/datatables/src/Bllim/Datatables/DatatablesServiceProvider.php',
     'Bllim\\Datatables\\Facades\\Profiler' => $vendorDir . '/bllim/datatables/src/Bllim/Datatables/Facade/Datatables.php',
