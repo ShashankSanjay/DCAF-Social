@@ -85,34 +85,37 @@ class UserController extends BaseController {
 		
 		// $user = User::find($user->uid);
 		echo '<pre>';
-
-		// Make new BillingPlan
-		/*$bplan = new BillingPlan;
-		$bplan->plan_name = 'Small-DCAF';
-		$bplan->payment_amount = '500.00';
-		$bplan->payment_frequency = '6';
-		$bplan->description = 'heyo its the small plan';
-		$bplan->save();*/
-		//$bplan = BillingPlan::find(14);
-
-		/*$company = new ClientCompany;
-		$company->Name = 'Test';
-		$company->Industry = 'Test Industry';
-		$company->save();
-		//$company = ClientCompany::find(1);
+		
+		// Make a new BillingPlan
+		$plan = new BillingPlan;
+		$plan->plan_name = 'Small-DCAF';
+		$plan->payment_amount = '500.00';
+		$plan->payment_frequency = '6';
+		$plan->time_interval_unit = 'm';
+		$plan->description = 'DCAF Small Business Starter Plan';
+		$plan->save();
+		// $plan = BillingPlan::find(14);
+		var_dump($plan);
+		die();
+		
+		/*$company = new ClientCompany();
+		$company->name = 'Test';
+		$company->industry = 'Test Industry';
+		$company->save();*/
+		// $company = ClientCompany::find(1);
 		var_dump($company);
-		//$company->employees()->attach($user);*/
-
-		// Make new BillingAccount
+		// $company->employees()->attach($user);
+		
+		// Make a new BillingAccount
 		/*$billing = new BillingAccount;
 		$billing->billing_name = 'Some Guy';
 		$billing->billing_address = '395 Some Guy St, Hempstead, 95505, NY';
 		$billing->save();*/
 		//$billing = BillingAccount::find(15);
 		// Associate a billing plan to billing account
-		//$billing->billingPlan()->associate($bplan);
+		//$billing->billingPlan()->associate($plan);
 
-		// Make user billing contact
+		// Make a user billing contact
 		//$billing->billingContact()->associate($user); //doesn't work
 		/*$user->billingContact()->associate($billing);
 		$user->save();
