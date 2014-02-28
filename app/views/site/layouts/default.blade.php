@@ -14,134 +14,107 @@
 			@show
 		</title>
 
-		<!-- Fonts -->
-		<link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,900,200italic,300italic,400italic,600italic,700italic,900italic">
-		<link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Roboto:400,100,100italic,300,300italic,400italic,500,500italic,700,700italic">
-		<link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic,700italic">
-		<link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Roboto+Slab:400,700,300,100">
-		<link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Noto+Sans:400,700,400italic,700italic">
-		<link href='http://fonts.googleapis.com/css?family=Share+Tech' rel='stylesheet' type='text/css'>
-		
-		<!-- Bootstrap core CSS -->
-		{{ HTML::style('assets/bootstrap/css/bootstrap.min-50686.css') }}
+		<!-- PACE LOAD BAR PLUGIN - This creates the subtle load bar effect at the top of the page. -->
+        {{ HTML::style('assets/css/plugins/pace/pace.css') }}
+        {{ HTML::style('assets/js/plugins/pace/pace.js') }}
 
-		<!-- Font Awesome CSS -->
-		{{ HTML::style('assets/fonts/font-awesome/css/font-awesome.min-45579.css') }}
+        <!-- GLOBAL STYLES - Include these on every page. -->
+        {{ HTML::style('assets/css/plugins/bootstrap/css/bootstrap.min.css') }}
+        {{ HTML::style('assets/fonts.googleapis.com/css3ef8.css?family=Ubuntu:300,400,500,700,300italic,400italic,500italic,700italic') }}
+        {{ HTML::style('assets/fonts.googleapis.com/css5c84.css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800') }}
+        {{ HTML::style('assets/icons/font-awesome/css/font-awesome.min.css') }}
 
-		<!-- Icomoon CSS -->
-		{{ HTML::style('assets/fonts/icomoon/style.css') }}
+        <!-- PAGE LEVEL PLUGIN STYLES -->
+        {{ HTML::style('assets/css/plugins/messenger/messenger.css') }}
+        {{ HTML::style('assets/css/plugins/messenger/messenger-theme-flat.css') }}
+        {{ HTML::style('assets/css/plugins/daterangepicker/daterangepicker-bs3.css') }}
+        {{ HTML::style('assets/css/plugins/morris/morris.css') }}
+        {{ HTML::style('assets/css/plugins/jvectormap/jquery-jvectormap-1.2.2.css') }}
+        {{ HTML::style('assets/css/plugins/datatables/datatables.css') }}
 
-		<!-- Animate CSS -->
-		{{ HTML::style('assets/css/libs/animate.min.css') }}
+        <!-- THEME STYLES - Include these on every page. -->
+        {{ HTML::style('assets/css/style.css') }}
+        {{ HTML::style('assets/css/plugins.css') }}
 
-		<!-- Bootstrap Switch -->
-		{{ HTML::style('assets/css/libs/bootstrap-switch.css') }}
+        <!-- THEME DEMO STYLES - Use these styles for reference if needed. Otherwise they can be deleted. -->
+        {{ HTML::style('assets/css/demo.css') }}
 
-		<!-- Bootstrap Select -->
-		{{ HTML::style('assets/css/libs/bootstrap-select.min.css') }}
+        <!--[if lt IE 9]>
+          {{ HTML::style('assets/js/html5shiv.js') }}
+          {{ HTML::style('assets/js/respond.min.js') }}
+        <![endif]-->
+    </head>
+    	<!-- Outline -->
+    @yield('outline')
+    	<!-- ./ Outline -->
 
-		<!-- Bootstrap WYSIHTML5 -->
-		{{ HTML::style('assets/css/libs/bootstrap-wysihtml5.css') }}
+    <!-- GLOBAL SCRIPTS -->
 
-		<!-- jQuery Fullcalendar -->
-		{{ HTML::style('assets/css/libs/fullcalendar.css') }}
+    <!-- Bootstrap core JavaScript -->
+    {{ HTML::script('assets/js/plugins/bootstrap/bootstrap.min.js?v=3.0.2') }}
+    {{ HTML::script('assets/ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js') }}
+    {{ HTML::script('assets/js/plugins/bootstrap/bootstrap.min.js') }}
+    {{ HTML::script('assets/js/plugins/slimscroll/jquery.slimscroll.min.js') }}
+    {{ HTML::script('assets/js/plugins/popupoverlay/jquery.popupoverlay.js') }}
+    {{ HTML::script('assets/js/plugins/popupoverlay/defaults.js') }}
+    <!-- Logout Notification Box -->
+    <div id="logout">
+        <div class="logout-message">
+            <img class="img-circle img-logout" src="img/profile-pic.jpg" alt="">
+            <h3>
+                <i class="fa fa-sign-out text-green"></i> Ready to go?
+            </h3>
+            <p>Select "Logout" below if you are ready<br> to end your current session.</p>
+            <ul class="list-inline">
+                <li>
+                    <a href="login.html" class="btn btn-green">
+                        <strong>Logout</strong>
+                    </a>
+                </li>
+                <li>
+                    <button class="logout_close btn btn-green">Cancel</button>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <!-- /#logout -->
+    <!-- Logout Notification jQuery -->
+    {{ HTML::script('assets/js/plugins/popupoverlay/logout.js') }}
+    <!-- HISRC Retina Images -->
+    {{ HTML::script('assets/js/plugins/hisrc/hisrc.js') }}
 
-		<!-- jVectorMap -->
-		{{ HTML::style('assets/css/libs/jquery-jvectormap-1.2.2.css') }}
+    <!-- PAGE LEVEL PLUGIN SCRIPTS -->
+    <!-- HubSpot Messenger -->
+    {{ HTML::script('assets/js/plugins/messenger/messenger.min.js') }}
+    {{ HTML::script('assets/js/plugins/messenger/messenger-theme-flat.js') }}
+    <!-- Date Range Picker -->
+    {{ HTML::script('assets/js/plugins/daterangepicker/moment.js') }}
+    {{ HTML::script('assets/js/plugins/daterangepicker/daterangepicker.js') }}
+    <!-- Morris Charts -->
+    {{ HTML::script('assets/js/plugins/morris/raphael-2.1.0.min.js') }}
+    {{ HTML::script('assets/js/plugins/morris/morris.js') }}
+    <!-- Flot Charts -->
+    {{ HTML::script('assets/js/plugins/flot/jquery.flot.js') }}
+    {{ HTML::script('assets/js/plugins/flot/jquery.flot.resize.js') }}
+    <!-- Sparkline Charts -->
+    {{ HTML::script('assets/js/plugins/sparkline/jquery.sparkline.min.js') }}
+    <!-- Moment.js -->
+    {{ HTML::script('assets/js/plugins/moment/moment.min.js') }}
+    <!-- jQuery Vector Map -->
+    {{ HTML::script('assets/js/plugins/jvectormap/jquery-jvectormap-1.2.2.min.js') }}
+    {{ HTML::script('assets/js/plugins/jvectormap/maps/jquery-jvectormap-world-mill-en.js') }}
+    {{ HTML::script('assets/js/demo/map-demo-data.js') }}
+    <!-- Easy Pie Chart -->
+    {{ HTML::script('assets/js/plugins/easypiechart/jquery.easypiechart.min.js') }}
+    <!-- DataTables -->
+    {{ HTML::script('assets/js/plugins/datatables/jquery.dataTables.js') }}
+    {{ HTML::script('assets/js/plugins/datatables/datatables-bs3.js') }}
 
-		<!-- Prism -->
-		{{ HTML::style('assets/css/libs/prism.css') }}
-
-		<!-- Custom styles for this template -->
-		{{ HTML::style('assets/css/styler/style.css') }}
-		{{ HTML::style('assets/css/demo.css') }}
-
-		<!-- BuiltByBuffalo Stuff -->
-
-		<!-- Animate -->
-		{{ HTML::style('assets/css/animatescroll/custom.css') }}
-		{{ HTML::style('assets/css/animatescroll/default.css') }}
-		{{ HTML::style('assets/css/animatescroll/component.css') }}
-
-
-		<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
-		<!--[if lt IE 9]>
-			<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-			<script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
-		<![endif]-->
-	</head>
-	<!-- Outline -->
-	@yield('outline')
-	<!-- ./ Outline -->
-
-		<!-- jQuery -->
-		{{ HTML::script('assets/js/libs/jquery-1.10.2.min.js') }}
-
-		<!-- jQuery UI -->
-		{{ HTML::script('assets/js/libs/jquery-ui.min.js') }}
-
-		<!-- Bootstrap core JavaScript -->
-		{{ HTML::script('assets/bootstrap/js/bootstrap.min.js?v=3.0.2') }}
-
-		<!-- jQuery Transit -->
-		{{ HTML::script('assets/js/libs/jquery.transit.min.js?v=0.9.9') }}
-
-		<!-- Bootstrap Switch -->
-		{{ HTML::script('assets/js/libs/bootstrap-switch.js') }}
-
-		<!-- Bootstrap Select -->
-		{{ HTML::script('assets/js/libs/bootstrap-select.min.js') }}
-
-		<!-- Bootstrap File -->
-		{{ HTML::script('assets/js/libs/bootstrap-filestyle.js') }}
-
-		{{ HTML::script('assets/js/libs/wysihtml5-0.3.0.min.js') }}
-
-		<!-- Bootstrap WYSIHTML5 -->
-		{{ HTML::script('assets/js/libs/bootstrap-wysihtml5.js') }}
-
-		<!-- jQuery FullCalendar -->
-		{{ HTML::script('assets/js/libs/fullcalendar.min.js') }}
-		{{ HTML::script('assets/js/libs/gcal.js') }}
-
-		<!-- Prism -->
-		{{ HTML::script('assets/js/libs/prism.js') }}
-
-		<!-- jVectorMap -->
-		{{ HTML::script('assets/js/libs/jquery-jvectormap-1.2.2.min.js') }}
-		{{ HTML::script('assets/js/libs/jquery-jvectormap-world-mill-en.js') }}
-
-		<!-- Flot -->
-		{{ HTML::script('assets/js/libs/jquery.flot.min.js') }}
-		{{ HTML::script('assets/js/libs/jquery.flot.time.min.js') }}
-		{{ HTML::script('assets/js/libs/jquery.flot.pie.min.js') }}
-		{{ HTML::script('assets/js/libs/jquery.flot.resize.min.js') }}
-		{{ HTML::script('assets/js/libs/jquery.flot.stack.min.js') }}
-		{{ HTML::script('assets/js/libs/jquery.flot.tooltip.min.js') }}
-
-		<!-- Sparkline -->
-		{{ HTML::script('assets/js/libs/jquery.sparkline.min.js') }}
-
-		<!-- Prism -->
-		{{ HTML::script('assets/js/libs/jquery.sparkline.min.js') }}
-
-		<!-- jQuery EqualHeights -->
-		{{ HTML::script('assets/js/libs/jquery.equalheights.min.js') }}
-
-		<!-- jQuery Nicescroll -->
-		{{ HTML::script('assets/js/libs/jquery.nicescroll.min.js') }}
-
-		<!-- Theme script -->
-		{{ HTML::script('assets/js/styler/script.js') }}
-		{{ HTML::script('assets/js/styler/sample_graphs.js') }}
-
-		<!-- Animate -->
-		{{ HTML::script('assets/js/libs/modernizr.custom.js')}}
-
-		{{-- HTML::script('assets/js/libs/animatescroll.js') --}}
-		{{-- HTML::script('assets/js/libs/animatescroll.noeasing.js') --}}
-		
-		
+    <!-- THEME SCRIPTS -->
+    {{ HTML::script('assets/js/flex.js') }}
+    {{ HTML::script('assets/js/demo/dashboard-demo.js') }}
+	
+	
 	</body>
 </html>
 <!-- Localized -->
