@@ -51,7 +51,7 @@
                         <a class="btn btn-default" href={{ URL::to('/') }} >Back to Dashboard</a>
                     </li>
                     <li>
-                        <a class="logout_open btn btn-red" href={{ URL::to('logout') }}>Logout</a>
+                        <a class="logout_open btn btn-red" href={{ URL::to('user/logout') }}>Logout</a>
                     </li>
                 </ul>
             </div>

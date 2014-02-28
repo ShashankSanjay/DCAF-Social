@@ -1,5 +1,4 @@
-@extends('site.layouts.default')
- 
+@extends('site.outlines.nonboard') 
 {{-- Web site Title --}}
 @section('title')
 Network Registration

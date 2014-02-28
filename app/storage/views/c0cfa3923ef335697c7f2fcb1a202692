@@ -50,7 +50,7 @@
                         <a class="btn btn-default" href=<?php echo URL::to('/'); ?> >Back to Dashboard</a>
                     </li>
                     <li>
-                        <a class="logout_open btn btn-red" href=<?php echo URL::to('logout'); ?>>Logout</a>
+                        <a class="logout_open btn btn-red" href=<?php echo URL::to('user/logout'); ?>>Logout</a>
                     </li>
                 </ul>
             </div>
