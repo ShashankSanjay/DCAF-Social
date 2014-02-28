@@ -15,7 +15,7 @@ return array(
 	|
 	*/
 
-	'driver' => 'smtp',
+	'driver' => 'mail',
 
 	/*
 	|--------------------------------------------------------------------------
@@ -28,7 +28,8 @@ return array(
 	|
 	*/
 
-	'host' => 'smtp.gmail.com',
+	//'host' => 'mail.dcaf-social.com',
+	'host' => 'box759.bluehost.com',
 
 	/*
 	|--------------------------------------------------------------------------
@@ -41,6 +42,7 @@ return array(
 	|
 	*/
 
+	//'port' => 26,
 	'port' => 465,
 
 	/*
@@ -54,7 +56,7 @@ return array(
 	|
 	*/
 
-	'from' => array('address' => "ayo@ayo.com", 'name' => "ayo"),
+	'from' => array('address' => 'social@dcaf-social.com', 'name' => 'DCAF'),
 
 	/*
 	|--------------------------------------------------------------------------
@@ -67,7 +69,8 @@ return array(
 	|
 	*/
 
-	'encryption' => 'tls',
+	//'encryption' => '',
+	'encryption' => 'ssl',
 
 	/*
 	|--------------------------------------------------------------------------
@@ -80,7 +83,7 @@ return array(
 	|
 	*/
 
-	'username' => 'duinobox@gmail.com',
+	'username' => 'social',
 
 	/*
 	|--------------------------------------------------------------------------
@@ -93,6 +96,6 @@ return array(
 	|
 	*/
 
-	'password' => 'Imd@best',
+	'password' => 'Brewmaster3000',
 
 );
