@@ -413,14 +413,13 @@ class UserController extends BaseController {
 		$facebook = OAuth::consumer('facebook');
 		try {
 			$response = $facebook->request('/me/accounts');
+			$yo = json_decode($response);
+			print_r($yo);
 		} catch (Exception $e) {
 			echo "heyo";
 			die();
 		}
 		
-		$yo = json_decode($response);
-		print_r($yo);
-		die();
 
 		return View::make('site.nonboard.registernetworks');
 	}
