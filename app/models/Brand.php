@@ -32,6 +32,34 @@ class Brand extends Eloquent
 		//
 		return $this->belongsTo('BrandGroup');
 	}
+
+	public function facebook()
+    {
+        return $this->hasOne('Thomaswelton\LaravelOauth\Eloquent\Facebook');
+    }
+
+    public function google()
+    {
+        return $this->hasOne('Thomaswelton\LaravelOauth\Eloquent\Google');
+    }
+    
+    public function twitter()
+    {
+        return $this->hasOne('Thomaswelton\LaravelOauth\Eloquent\Twitter');
+    }
+
+    public function tumblr()
+    {
+        return $this->hasOne('Thomaswelton\LaravelOauth\Eloquent\tumblr');
+    }
+
+    public function instagram()
+    {
+        return $this->hasOne('Thomaswelton\LaravelOauth\Eloquent\Instagram');
+    }
+
+    // $brand = Brand::find(1);
+    // $uid = $brand->facebook->oauth_uid;
 }
 
 ?>
