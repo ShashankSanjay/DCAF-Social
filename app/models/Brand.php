@@ -21,15 +21,19 @@ use Illuminate\Database\Eloquent\Model as Eloquent;
 
 class Brand extends Eloquent
 {
-	//
+
+	protected $id;
+	protected $name;
+	
+	protected $table = 'Brands';
+
+	protected $fillable	= array('*');
 
 	public function Pages() {
-		//
 		return $this->hasMany('');
 	}
 
 	public function BrandGroup() {
-		//
 		return $this->belongsTo('BrandGroup');
 	}
 

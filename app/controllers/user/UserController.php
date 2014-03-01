@@ -83,7 +83,23 @@ class UserController extends BaseController {
 						'3' => 'fa fa-instagram']*/
 		];
 		
+		$brand = new Brand();
+		$brand->id = 1;
+		$brand->name = 'Cherry Coke';
+		$brand->save();
+
+		/*DB::table('Brands')->insert(
+		    array('name' => 'Cherry Coke')
+		);*/
 		
+		$bg = BrandGroup::find(1);
+		$brand = Brand::find(1);
+		$brand->BrandGroup()->associate($bg);
+
+		var_dump($brand->BrandGroup()->first()->name);
+		die();
+		//$brand = Brand::find(1);
+    	//$uid = $brand->facebook->oauth_uid;
 		
 		return View::make('site/dashboard/home', compact('user', 'companies'));
 	}
