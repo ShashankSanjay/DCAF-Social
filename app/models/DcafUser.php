@@ -65,6 +65,26 @@ class DcafUser extends ConfideUser implements UserProfileInterface, UserInterfac
 	{
 		return $this->belongsToMany('DcafTeam', 'DCAF_team_user', 'dcaf_user_id', 'dcaf_team_id') ;
 	}
+
+	public function facebook()
+    {
+        return $this->hasOne('Thomaswelton\LaravelOauth\Eloquent\Facebook');
+    }
+
+    public function google()
+    {
+        return $this->hasOne('Thomaswelton\LaravelOauth\Eloquent\Google');
+    }
+    
+    public function twitter()
+    {
+        return $this->hasOne('Thomaswelton\LaravelOauth\Eloquent\Twitter');
+    }
+
+    public function instagram()
+    {
+        return $this->hasOne('Thomaswelton\LaravelOauth\Eloquent\Instagram');
+    }
 	
 	/**
      * Get the date the user was created.

@@ -83,14 +83,10 @@ class UserController extends BaseController {
 						'3' => 'fa fa-instagram']*/
 		];
 		
-		$brand = new Brand();
+		/*$brand = new Brand();
 		$brand->id = 1;
 		$brand->name = 'Cherry Coke';
 		$brand->save();
-
-		/*DB::table('Brands')->insert(
-		    array('name' => 'Cherry Coke')
-		);*/
 		
 		$bg = BrandGroup::find(1);
 		$brand = Brand::find(1);
@@ -99,7 +95,7 @@ class UserController extends BaseController {
 		var_dump($brand->BrandGroup()->first()->name);
 		die();
 		//$brand = Brand::find(1);
-    	//$uid = $brand->facebook->oauth_uid;
+    	//$uid = $brand->facebook->oauth_uid;*/
 		
 		return View::make('site/dashboard/home', compact('user', 'companies'));
 	}
@@ -413,6 +409,19 @@ class UserController extends BaseController {
 		*/
 
 		//return View::make('site.nonboard.registernetworks')->with($data);
+
+		$facebook = OAuth::consumer('facebook');
+		try {
+			$response = $facebook->request('/me/accounts');
+		} catch (Exception $e) {
+			echo "heyo";
+			die();
+		}
+		
+		$yo = json_decode($response);
+		print_r($yo);
+		die();
+
 		return View::make('site.nonboard.registernetworks');
 	}
 

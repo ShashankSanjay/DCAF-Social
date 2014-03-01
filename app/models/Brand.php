@@ -52,11 +52,6 @@ class Brand extends Eloquent
         return $this->hasOne('Thomaswelton\LaravelOauth\Eloquent\Twitter');
     }
 
-    public function tumblr()
-    {
-        return $this->hasOne('Thomaswelton\LaravelOauth\Eloquent\tumblr');
-    }
-
     public function instagram()
     {
         return $this->hasOne('Thomaswelton\LaravelOauth\Eloquent\Instagram');
