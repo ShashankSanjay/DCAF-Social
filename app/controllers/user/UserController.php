@@ -410,18 +410,34 @@ class UserController extends BaseController {
 
 		//return View::make('site.nonboard.registernetworks')->with($data);
 
-		$facebook = OAuth::consumer('facebook');
-		try {
+		/*if (OAuth::hasToken('facebook')) {
+			//
+			$facebook = OAuth::consumer('facebook');
 			$response = $facebook->request('/me/accounts');
 			$yo = json_decode($response);
 			print_r($yo);
-		} catch (Exception $e) {
-			echo "heyo";
-			die();
+		}
+		else {
+			// Save into db
+		}*/
+		$networks = array('facebook', 'twitter', 'google', 'instagram');
+		foreach ($networks as $network) {
+			$db = 'oauth_'.$network;
+			if ( OAuth::hasToken($network) ) {
+				// Save into db
+				$token = OAuth::token($network);
+				DB::table($db)->insert(
+				    array('access_token' => $token)
+				);
+				Session::forget('lusitanian_oauth_token');
+			}
 		}
 		
-
 		return View::make('site.nonboard.registernetworks');
+	}
+
+	public function postNetworks() {
+		//
 	}
 
 	public function firstTime()
