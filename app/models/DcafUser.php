@@ -14,22 +14,62 @@ use Carbon\Carbon;
 class DcafUser extends ConfideUser implements UserProfileInterface, UserInterface
 {
 	use HasRole;
-	protected $guarded = array();
-
+	
+	protected $table = 'DCAF_Users';
+	
 	public $primaryKey	= 'id';			// defaults to 'id'
 	public $incrementing = true;		// defaults to true; false disables auto-incrementing the primary key
 	public $timestamps	= true;			// defaults to true to maintain 'updated_at' and 'created_at' columns
-
-
+	
+	
 	public static $rules = array(
 		'username'	=> 'required|alpha_dash|between:4,16',
 		'email'		=> 'required|email|unique:users',
 		'password'	=> 'required|alpha_num|between:6,11|confirmed',
 		'password_confirmation' => 'required|alpha_num|between:6,11',
 	);
-
-	protected $table = 'DCAF_Users';	
-
+		
+	/**
+	 * defines which properties can be set through
+	 * the model's constructor (mass-assignable)
+	 * 
+	 * @since  1.0
+	 * @access protected
+	 * @type   array
+	 */
+	// protected $fillable	= array('*');		// permits all properties to be set from the constructor
+	protected $guarded	= array('password');	// by default, blocks all properties from "Mass Assignment"
+	
+	/**
+	 * array of attributes to be included
+	 * for Array or JSON conversion
+	 * 
+	 * @since  1.0
+	 * @access protected
+	 * @type   array
+	 */
+	protected $visible = array('first_name', 'last_name');
+	
+	/**
+	 * array of attributes to be excluded
+	 * from Array or JSON conversion
+	 * 
+	 * @since  1.0
+	 * @access protected
+	 * @type   array
+	 */
+	protected $hidden = array('password');
+	
+	/**
+	 * array of properties to be included in
+	 * both the model's array and JSON forms
+	 * 
+	 * @since  1.0
+	 * @access protected
+	 * @type   array
+	 */
+	protected $appends = array('is_admin');
+	
 	/**********************
 	 * Eloquent Relations *
 	 **********************/

@@ -27,7 +27,7 @@ return array(
     |
     */
 
-    'redirect' => 'http://shashanksanjay.com/user/registernetworks',
+    'redirect' => 'http://dev.dcaf-social.com/user/registernetworks',
 
     /*
     |--------------------------------------------------------------------------

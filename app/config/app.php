@@ -128,6 +128,7 @@ return array(
 
         /* DCAF Stuff */
         'Thomaswelton\LaravelOauth\LaravelOauthServiceProvider',
+        'Facebook\phpSDK\FacebookServiceProvider',
 
     ),
 
@@ -209,6 +210,7 @@ return array(
         'OAuth'			=> 'Thomaswelton\LaravelOauth\Facades\OAuth', //Oauth
         //'AlchemyAPI'	=> 'AlchemyAPI\alchemyapi_php\alchemyapi',
         'Role'			=> 'DcafRole',
+        'Facebook'		=> 'Facebook\phpSDK\FacebookFacade',
     ),
 
     'available_language' => array('en', 'pt', 'es'),
