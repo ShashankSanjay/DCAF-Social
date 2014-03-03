@@ -173,6 +173,7 @@ Route::get('user/confirmation', 'UserController@getConfirmation');
 
 //after user clicks confirm link on email, redirected here. Then proceed to register DCAF with each network. THen go to dashboard
 Route::get('user/registernetworks', 'UserController@registerNetworks');
+Route::post('user/registernetworks', 'UserController@postNetworks');
 
 //configure first time stuff
 Route::get('user/firstTime', 'UserController@firstTime');
