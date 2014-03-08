@@ -17,12 +17,20 @@ class SocialRetriever
 
 	public function fbPageInfo($consumer, $response) {
 		// Get all page info
-		$call = $consumer->request('/me/accounts?fields=access_token');
+		$call = $consumer->request('/me/accounts');
 		$response = json_decode($call, true);
 
 		$data = $response['data'];
 
-		
+		foreach ($data as $page) {
+			# code...
+			//$page['access_token'];
+			//$page['id'];
+			$consumer->setToken($page['access_token']);
+			$c = $consumer->request('/me');
+			$r = json_decode($c, true);
+			var_dump($r);
+		}
 		/*
 		// Define scopes and fields
 		$scope = "/posts.fields(likes)";
