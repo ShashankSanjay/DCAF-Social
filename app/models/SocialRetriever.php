@@ -11,14 +11,19 @@ class SocialRetriever
 
 	public function fbUserInfo($consumer) {
 		// Get user pages
-		$call = $consumer->request('/me/accounts');
+		$call = $consumer->request('/me');
 		$response = json_decode($call, true);
 	}
 
 	public function fbPageInfo($consumer, $response) {
 		// Get all page info
+		$call = $consumer->request('/me/accounts?fields=access_token');
+		$response = json_decode($call, true);
+
 		$data = $response['data'];
 
+		
+		/*
 		// Define scopes and fields
 		$scope = "/posts.fields(likes)";
 
@@ -31,7 +36,7 @@ class SocialRetriever
 				var_dump($e);
 			}
 			$d = json_decode($r, true);
-
+		*/
 			// Parse data and save into db
 
 			/*
