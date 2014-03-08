@@ -478,7 +478,7 @@ class UserController extends BaseController {
 				//$page['access_token'];
 				//$page['id'];
 				$pg = OAuth::consumer('facebook');
-				$pg->setToken($page['access_token']);
+				$pg->getStorage()->storeAccessToken($page['access_token']);
 				$c = $pg->request('/me');
 				$r = json_decode($c, true);
 				var_dump($r);
