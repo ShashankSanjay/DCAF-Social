@@ -466,21 +466,23 @@ class UserController extends BaseController {
 			}
 		}*/
 
-		$consumer = OAuth::consumer('facebook');
-		$call = $consumer->request('/me/accounts');
-		$response = json_decode($call, true);
+		if (OAuth::hasToken('facebook')) {
+			$consumer = OAuth::consumer('facebook');
+			$call = $consumer->request('/me/accounts');
+			$response = json_decode($call, true);
 
-		$data = $response['data'];
+			$data = $response['data'];
 
-		foreach ($data as $page) {
-			# code...
-			//$page['access_token'];
-			//$page['id'];
-			$pg = OAuth::consumer('facebook');
-			$pg->setToken($page['access_token']);
-			$c = $pg->request('/me');
-			$r = json_decode($c, true);
-			var_dump($r);
+			foreach ($data as $page) {
+				# code...
+				//$page['access_token'];
+				//$page['id'];
+				$pg = OAuth::consumer('facebook');
+				$pg->setToken($page['access_token']);
+				$c = $pg->request('/me');
+				$r = json_decode($c, true);
+				var_dump($r);
+			}
 		}
 		
 		return View::make('site.nonboard.registernetworks');
