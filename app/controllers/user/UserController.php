@@ -6,6 +6,7 @@ use Models\NetworkUser;
 use Models\UserProfile;
 use Models\UserInterface;
 */
+use OAuth\OAuth2\Token\StdOAuth2Token;
 
 /* spl_autoload_register(function ($class) {
 	die('cannot find class: '.$class);
@@ -478,7 +479,11 @@ class UserController extends BaseController {
 				//$page['access_token'];
 				//$page['id'];
 				$pg = OAuth::consumer('facebook');
-				$pg->getStorage()->storeAccessToken($page['access_token']);
+
+				// Replace the first param with your saved token
+				$token = new StdOAuth2Token($page['access_token']); 
+				//$facebookService->getStorage()->storeAccessToken("Facebook", $token);
+				$pg->getStorage()->storeAccessToken("Facebook", $token);
 				$c = $pg->request('/me');
 				$r = json_decode($c, true);
 				var_dump($r);
