@@ -100,7 +100,24 @@ class UserController extends BaseController {
     	// (new Facebook\phpSDK\FacebookServiceProvider(App::make('app')))->register();
     	
     	echo '<pre>';
-    	var_dump(App::make('app')['facebook']);
+
+    	
+    	/*$call = $consumer->request('/me/accounts');
+		$response = json_decode($call, true);
+
+		$data = $response['data'];
+
+		foreach ($data as $page) {
+			# code...
+			//$page['access_token'];
+			//$page['id'];
+			$consumer->setToken($page['access_token']);
+			$c = $consumer->request('/me');
+			$r = json_decode($c, true);
+			var_dump($r);
+		}*/
+
+
     	die('</pre>');
     	
     	// $facebook = App::make('facebook');
@@ -110,9 +127,6 @@ class UserController extends BaseController {
 			'secret' => '6dc8ac871858b34798bc2488200e503d'
 	    )); */
     	// App::instance('facebook', $facebook);
-    	
-		var_dump(Facebook::api('/me'));
-    	die();
 		
 		return View::make('site/dashboard/home', compact('user', 'companies'));
 	}
@@ -437,7 +451,7 @@ class UserController extends BaseController {
 		else {
 			// Save into db
 		}*/
-		$networks = array('facebook', 'twitter', 'google', 'instagram');
+		/*$networks = array('facebook', 'twitter', 'google', 'instagram');
 		foreach ($networks as $network) {
 			$db = 'oauth_'.$network;
 			if ( OAuth::hasToken($network) ) {
@@ -450,6 +464,23 @@ class UserController extends BaseController {
 				);
 				Session::forget('lusitanian_oauth_token');
 			}
+		}*/
+
+		$consumer = OAuth::consumer('facebook');
+		$call = $consumer->request('/me/accounts');
+		$response = json_decode($call, true);
+
+		$data = $response['data'];
+
+		foreach ($data as $page) {
+			# code...
+			//$page['access_token'];
+			//$page['id'];
+			$pg = OAuth::consumer('facebook');
+			$pg->setToken($page['access_token']);
+			$c = $pg->request('/me');
+			$r = json_decode($c, true);
+			var_dump($r);
 		}
 		
 		return View::make('site.nonboard.registernetworks');
