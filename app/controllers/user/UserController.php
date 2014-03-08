@@ -488,6 +488,8 @@ class UserController extends BaseController {
 				$r = json_decode($c, true);
 				var_dump($r);
 			}
+			Session::flush();
+			die();
 		}
 		
 		return View::make('site.nonboard.registernetworks');
