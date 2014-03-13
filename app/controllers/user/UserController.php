@@ -452,44 +452,20 @@ class UserController extends BaseController {
 		else {
 			// Save into db
 		}*/
-		/*$networks = array('facebook', 'twitter', 'google', 'instagram');
+
+		$networks = array('facebook', 'twitter', 'google', 'instagram');
+
 		foreach ($networks as $network) {
 			$db = 'oauth_'.$network;
 			if ( OAuth::hasToken($network) ) {
 				// Save into db
 				$token = OAuth::token($network);
-				//var_dump($token);
-				//die();
+				
 				DB::table($db)->insert(
 				    array('access_token' => $token->getAccessToken())
 				);
 				Session::forget('lusitanian_oauth_token');
 			}
-		}*/
-
-		if (OAuth::hasToken('facebook')) {
-			$consumer = OAuth::consumer('facebook');
-			$call = $consumer->request('/me/accounts');
-			$response = json_decode($call, true);
-
-			$data = $response['data'];
-
-			foreach ($data as $page) {
-				# code...
-				//$page['access_token'];
-				//$page['id'];
-				$pg = OAuth::consumer('facebook');
-
-				// Replace the first param with your saved token
-				$token = new StdOAuth2Token($page['access_token']); 
-				//$facebookService->getStorage()->storeAccessToken("Facebook", $token);
-				$pg->getStorage()->storeAccessToken("Facebook", $token);
-				$c = $pg->request('/me');
-				$r = json_decode($c, true);
-				var_dump($r);
-			}
-			Session::flush();
-			die();
 		}
 		
 		return View::make('site.nonboard.registernetworks');

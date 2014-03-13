@@ -16,14 +16,7 @@
  * in app/config/app.php via the php function class_alias()
  */
 use Illuminate\Database\Eloquent\Model as Eloquent;
-// use Eloquent;
 
-/**
- * ClientCompany
- * 
- * @author	Alexander Rosenberg
- * @version	1.0
- */
 class ClientCompany extends Eloquent
 {
 	/**********************

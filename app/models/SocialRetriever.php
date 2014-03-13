@@ -4,33 +4,60 @@ class SocialRetriever
 {
 	//
 
+	public $consumer;
+	public $pages;
 	/*
 	*	Facebook Stuff
 	*	Pass each call a OAuth::Consumer object
 	*/
-
-	public function fbUserInfo($consumer) {
-		// Get user pages
-		$call = $consumer->request('/me');
-		$response = json_decode($call, true);
+	public function __construct($access_token) {
+		//
+		$consumer = new OAuth::consumer('facebook');
+		$token = new StdOAuth2Token($access_token); 
+		$consumer->getStorage()->storeAccessToken("Facebook", $token);
+		$this->consumer = $consumer;
 	}
 
-	public function fbPageInfo($consumer, $response) {
-		// Get all page info
-		$call = $consumer->request('/me/accounts');
+	public function fbUserInfo() {
+		// Get user info
+		$call = $this->consumer->request('/me/data');
 		$response = json_decode($call, true);
 
-		$data = $response['data'];
-
-		foreach ($data as $page) {
-			# code...
-			//$page['access_token'];
-			//$page['id'];
-			$consumer->setToken($page['access_token']);
-			$c = $consumer->request('/me');
-			$r = json_decode($c, true);
-			var_dump($r);
+		// Parse data and save into correct DB's
+		$datas = $response['data'];
+		foreach ($datas as $data) {
+			// Move through and save page ouath
+			$fbpage = new FB_Page;
+			$fbpage->FB_Page_ID = $data->id;
+			$fbpage->access_token = $data->access_token;
+			$fbpage->perms = $data->perms;
+			$fbpage->name = $data->name;
+			$fbpage->save();
 		}
+	}
+
+	public function fbPageInfo($id) {
+		//either instantiate new consumers every page or do...
+
+		// Get all page info
+
+		$pages = array();
+
+		foreach ($ids as $id) {
+			// Get ids from db
+			$db = FB_Pages::find($id);
+			$page = new OAuth::consumer('facebook');
+			$token = new StdOAuth2Token($db->access_token);
+			$page->getStorage()->storeAccessToken("Facebook", $token);
+
+			$pages = array_push($pages, $page); 
+		}
+
+		foreach ($pages as $page) {
+			$c = $this->consumer->request('/me');
+			$r = json_decode($c, true);
+		}
+
 		/*
 		// Define scopes and fields
 		$scope = "/posts.fields(likes)";
