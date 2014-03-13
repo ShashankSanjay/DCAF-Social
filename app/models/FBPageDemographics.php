@@ -1,5 +1,12 @@
 <?php
 
+/**
+ * NetworkUser User Model
+ * 
+ * @author	Shashank Sanjay
+ * @version	1.0
+ */
+
 class FBPageDemographics extends Eloquent
 {
 	//
