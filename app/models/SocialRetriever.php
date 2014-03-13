@@ -53,9 +53,44 @@ class SocialRetriever
 			$pages = array_push($pages, $page); 
 		}
 
+		$params = "/feed";
+
+		$responses = array();
+
 		foreach ($pages as $page) {
-			$c = $this->consumer->request('/me');
-			$r = json_decode($c, true);
+			try {
+				// specific field calls from Alex's email will not work with /me node, must use id?fields=...
+				$call = $page->consumer->request('/me' . $params);
+			} catch (FacebookApiException $e) {
+
+				// CHANGE: WRITE TO LOG FILE
+				var_dump($e);
+
+			}
+			$response = json_decode($call, true);
+
+			//parse through, go through pagination
+			/*
+			*	Accepts decoded fb json, returns unpaginated array of arrays
+			* 	Secondary arrays are returned with name from fb, ie. post, likes
+			*/
+			$response = self::paginate($response);
+			array_push($responses, $response);
+		}
+
+		// save info to db
+
+		if (isset($responses['posts'])) {
+			// parse each post and save into db
+			foreach ($responses['posts'] as $key => $arr) {
+				$p = new FBPost();
+				$p->content = $arr['content'];
+				//$p-> = $arr;
+				$p->save();
+
+				// Attach to appropriate models, ie. fb user and page
+				$p->FacebookUser->attach($userid);
+			}
 		}
 
 		/*
@@ -65,7 +100,6 @@ class SocialRetriever
 		foreach ($data as $page) {
 			// Get data from fb
 			try {
-				//$r = $consumer->request("/".$page['id']."?fields=" . $scope);
 				$r = $consumer->request("/".$page['id'] . $scope);
 			} catch (FacebookApiException $e) {
 				var_dump($e);
