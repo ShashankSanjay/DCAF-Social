@@ -149,5 +149,4 @@ class SocialRetriever
 	*	Instagram/tumblr
 	*/
 
-
 }
