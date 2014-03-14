@@ -22,6 +22,18 @@ class FBPost extends Eloquent
 	public function FacebookUser() {
 		return $this->hasOne('FacebookUser');
 	}
+
+	/*
+		All fields for post. From:https://developers.facebook.com/docs/reference/api/post/
+		
+		actions,application,caption,comments,created_time,description,from,
+		icon,id,is_hidden,link,message,message_tags,name,object_id,picture,
+		place,privacy,properties,shares,source,status_type,story,story_tags,
+		to,type,updated_time,with_tags
+		
+		Only perms are access_token and read_stream
+	*/
+
 }
 
 
