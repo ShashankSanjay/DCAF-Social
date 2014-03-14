@@ -19,46 +19,58 @@
 use Illuminate\Database\Eloquent\Model as Eloquent;
 // use Eloquent;
 
+/**
+ * Brand Model
+ */
 class Brand extends Eloquent
 {
-
+	/**********************
+	 * Instance Variables *
+	 **********************/
+	
 	protected $id;
 	protected $name;
 	
 	protected $table = 'Brands';
-
+	
 	protected $fillable	= array('*');
-
-	public function Pages() {
+	
+	/**********************
+	 * Eloquent Relations *
+	 **********************/
+	
+	public function Pages()
+	{
 		return $this->hasMany('');
 	}
-
-	public function BrandGroup() {
+	
+	public function BrandGroup()
+	{
 		return $this->belongsTo('BrandGroup');
 	}
-
+	
 	public function facebook()
-    {
-        return $this->hasOne('Thomaswelton\LaravelOauth\Eloquent\Facebook');
-    }
-
-    public function google()
-    {
-        return $this->hasOne('Thomaswelton\LaravelOauth\Eloquent\Google');
-    }
-    
-    public function twitter()
-    {
-        return $this->hasOne('Thomaswelton\LaravelOauth\Eloquent\Twitter');
-    }
-
-    public function instagram()
-    {
-        return $this->hasOne('Thomaswelton\LaravelOauth\Eloquent\Instagram');
-    }
-
-    // $brand = Brand::find(1);
-    // $uid = $brand->facebook->oauth_uid;
+	{
+		return $this->hasOne('Thomaswelton\LaravelOauth\Eloquent\Facebook');
+	}
+	
+	public function google()
+	{
+		return $this->hasOne('Thomaswelton\LaravelOauth\Eloquent\Google');
+	}
+	
+	public function twitter()
+	{
+		return $this->hasOne('Thomaswelton\LaravelOauth\Eloquent\Twitter');
+	}
+	
+	public function instagram()
+	{
+		return $this->hasOne('Thomaswelton\LaravelOauth\Eloquent\Instagram');
+	}
+	
+	// $brand = Brand::find(1);
+	// $uid = $brand->facebook->oauth_uid;
 }
 
 ?>

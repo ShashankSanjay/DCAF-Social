@@ -19,7 +19,7 @@ use Illuminate\Database\Eloquent\Model as Eloquent;
 // use Eloquent;
 
 /**
- * BillingPlan
+ * Billing Plan Model
  * 
  * @author	Alexander Rosenberg
  * @version	1.0
@@ -38,12 +38,12 @@ class BillingPlan extends Eloquent
 	
 	/**
 	 * The database table used by the model.
-	 *
+	 * 
 	 * @since  1.0
 	 * @access protected
 	 * @type   string
 	 */
-	protected $table		= 'Billing_Plans';
+	protected $table = 'Billing_Plans';
 	
 	/**
 	 * Permits all properties to be set from the constructor
@@ -52,7 +52,11 @@ class BillingPlan extends Eloquent
 	 * @access protected
 	 * @type   array
 	 */
-	protected $fillable		= array('*');
+	protected $fillable = array('*');
+	
+	/**********************
+	 * Eloquent Relations *
+	 **********************/
 	
 	public function players()
 	{

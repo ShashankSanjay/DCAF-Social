@@ -1,32 +1,35 @@
 <?php
 
 /**
- * Facebook Page Model
+ * Google+ User Model
  * 
+ * @author	Alexander Rosenberg
  * @author	Shashank Sanjay
  * @version	1.0
  */
-class FBPage extends Eloquent
+class GooglePlusUser extends Eloquent
 {
 	/**********************
 	 * Instance Variables *
 	 **********************/
 	
-	protected $table = 'FB_Page';
+	protected $table = 'Google_User';
 	
 	public $FB_Page_ID;
-	public $access_token;
 	public $name;
+	
+	/**
+	 * Constuctor
+	 */
+	public function __construct($consumer)
+	{
+		parent::__construct($consumer);
+	}
 	
 	/**********************
 	 * Eloquent Relations *
 	 **********************/
 	
-	public function FacebookUser()
-	{
-		return $this->hasMany('FacebookUsers');
-	}
-
 	public function DcafUser()
 	{
 		// {implementation code}

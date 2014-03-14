@@ -15,6 +15,7 @@ use Carbon\Carbon;
  * NetworkUser User Model
  * 
  * @author	Alexander Rosenberg
+ * @author	Shashank Sanjay
  * @version	1.0
  */
 class NetworkUser extends Ardent implements UserProfileInterface, UserInterface
@@ -30,7 +31,7 @@ class NetworkUser extends Ardent implements UserProfileInterface, UserInterface
 	
 	protected $primaryKey	= 'FB_User_ID';		// defaults to 'id'
 	public $incrementing	= false;			// defaults to true; false disables auto-incrementing the primary key
-	public $timestamps	= false;			// defaults to true to maintain 'updated_at' and 'created_at' columns
+	public $timestamps		= false;			// defaults to true to maintain 'updated_at' and 'created_at' columns
 	
 	/**
 	 * defines which properties can be set through
@@ -42,7 +43,7 @@ class NetworkUser extends Ardent implements UserProfileInterface, UserInterface
 	 */
 	protected $fillable		= array('*');	// permits all properties to be set from the constructor
 	// protected $guarded	= array('*');	// (default) blocks all properties from "Mass Assignment"
-		
+	
 	/**
 	 * Ardent validation rules
 	 * 
@@ -60,29 +61,29 @@ class NetworkUser extends Ardent implements UserProfileInterface, UserInterface
 	 **********************/
 	
 	public function userProfile()
-    {
-        return $this->belongsTo('UserProfile', 'profile_id');
-    }
+	{
+		return $this->belongsTo('UserProfile', 'profile_id');
+	}
 	
 	public function dcafUser()
-    {
-        return $this->belongsTo('DcafUser', 'DCAF_User_ID');
-    }
+	{
+		return $this->belongsTo('DcafUser', 'DCAF_User_ID');
+	}
 	
 	/********************
 	 * Accessor Methods *
 	 ********************/
 	
 	/**
-     * Get user by username
+	 * Get user by username
 	 * 
-     * @param $username
-     * @return mixed
-     */
-    public function getUsersByUsername($username)
-    {
-        return $this->UserProfile->where('username', '=', $username)->first();
-    }
+	 * @param $username
+	 * @return mixed
+	 */
+	public function getUsersByUsername($username)
+	{
+		return $this->UserProfile->where('username', '=', $username)->first();
+	}
 	
 	/**
 	 * Get the unique identifier for the user.
@@ -115,14 +116,14 @@ class NetworkUser extends Ardent implements UserProfileInterface, UserInterface
 	}
 	
 	/**
-     * Get the date the user was created.
-     *
-     * @return string
-     */
-    public function joined()
-    {
-        return String::date(Carbon::createFromFormat('Y-n-j G:i:s', $this->created_at));
-    }
+	 * Get the date the user was created.
+	 *
+	 * @return string
+	 */
+	public function joined()
+	{
+		return String::date(Carbon::createFromFormat('Y-n-j G:i:s', $this->created_at));
+	}
 	
 	/**
 	 * Gets the user's internal id.
@@ -130,8 +131,9 @@ class NetworkUser extends Ardent implements UserProfileInterface, UserInterface
 	 * @access public
 	 * @return int
 	 */
-	public function getUID(){
-		//
+	public function getUID()
+	{
+		// {implementation code}
 	}
 	
 	/**
@@ -140,8 +142,9 @@ class NetworkUser extends Ardent implements UserProfileInterface, UserInterface
 	 * @access public
 	 * @return string
 	 */
-	public function getUsername() {
-		//
+	public function getUsername()
+	{
+		// {implementation code}
 	}
 	
 	/**
@@ -150,8 +153,9 @@ class NetworkUser extends Ardent implements UserProfileInterface, UserInterface
 	 * @access public
 	 * @return string
 	 */
-	public function getGender() {
-		//
+	public function getGender()
+	{
+		// {implementation code}
 	}
 	
 	/**
@@ -160,8 +164,9 @@ class NetworkUser extends Ardent implements UserProfileInterface, UserInterface
 	 * @access public
 	 * @return string
 	 */
-	public function getEmail() {
-		//
+	public function getEmail()
+	{
+		// {implementation code}
 	}
 	
 	/**
@@ -171,8 +176,9 @@ class NetworkUser extends Ardent implements UserProfileInterface, UserInterface
 	 * @access public
 	 * @return string
 	 */
-	public function getFirstName() {
-		//
+	public function getFirstName()
+	{
+		// {implementation code}
 	}
 	
 	/**
@@ -181,8 +187,9 @@ class NetworkUser extends Ardent implements UserProfileInterface, UserInterface
 	 * @access public
 	 * @return string
 	 */
-	public function getLastName() {
-		//
+	public function getLastName()
+	{
+		// {implementation code}
 	}
 	
 	/******************/
@@ -195,8 +202,9 @@ class NetworkUser extends Ardent implements UserProfileInterface, UserInterface
 	 * @access public
 	 * @param  string	$uname
 	 */
-	public function setUsername($uname) {
-		//
+	public function setUsername($uname)
+	{
+		// {implementation code}
 	}
 	
 	/**
@@ -205,8 +213,9 @@ class NetworkUser extends Ardent implements UserProfileInterface, UserInterface
 	 * @access public
 	 * @param  string	$gender
 	 */
-	public function setGender($gender) {
-		//
+	public function setGender($gender)
+	{
+		// {implementation code}
 	}
 	
 	/**
@@ -215,8 +224,9 @@ class NetworkUser extends Ardent implements UserProfileInterface, UserInterface
 	 * @access public
 	 * @param  string	$email
 	 */
-	public function setEmail($email) {
-		//
+	public function setEmail($email)
+	{
+		// {implementation code}
 	}
 	
 	/**
@@ -225,80 +235,82 @@ class NetworkUser extends Ardent implements UserProfileInterface, UserInterface
 	 * @access public
 	 * @param  string	$fname
 	 */
-	public function setFirstName($fname) {
-		//
+	public function setFirstName($fname)
+	{
+		// {implementation code}
 	}
 	
 	/**
 	 * Sets the user's last name
-	 *
+	 * 
 	 * @access public
 	 * @param  string	$lname
 	 */
-	public function setLastName($lname) {
-		//
+	public function setLastName($lname)
+	{
+		// {implementation code}
 	}
 	
-    /**
-     * Save roles inputted from multiselect
+	/**
+	 * Save roles inputted from multiselect
 	 * 
-     * @param $inputRoles
-     */
-    public function saveRoles($inputRoles)
-    {
-        if(! empty($inputRoles)) {
-            $this->roles()->sync($inputRoles);
-        } else {
-            $this->roles()->detach();
-        }
-    }
+	 * @param $inputRoles
+	 */
+	public function saveRoles($inputRoles)
+	{
+		if(! empty($inputRoles)) {
+			$this->roles()->sync($inputRoles);
+		} else {
+			$this->roles()->detach();
+		}
+	}
 	
-    /**
-     * Returns user's current role ids only.
+	/**
+	 * Returns user's current role ids only.
 	 * 
-     * @return array|bool
-     */
-    public function currentRoleIds()
-    {
-        $roles = $this->roles;
-        $roleIds = false;
-        if( !empty( $roles ) ) {
-            $roleIds = array();
-            foreach( $roles as &$role )
-            {
-                $roleIds[] = $role->id;
-            }
-        }
-        return $roleIds;
-    }
+	 * @return array|bool
+	 */
+	public function currentRoleIds()
+	{
+		$roles = $this->roles;
+		$roleIds = false;
+		if (!empty($roles)) {
+			$roleIds = array();
+			foreach ($roles as &$role)
+			{
+				$roleIds[] = $role->id;
+			}
+		}
+		return $roleIds;
+	}
 	
-    /**
-     * Redirect after auth.
-     * If ifValid is set to true it will redirect a logged in user.
+	/**
+	 * Redirect after auth.
+	 * If ifValid is set to true it will redirect a logged in user.
 	 * 
-     * @param $redirect
-     * @param bool $ifValid
-     * @return mixed
-     */
-    public static function checkAuthAndRedirect($redirect, $ifValid=false)
-    {
-        // Get the user information
-        $user = Auth::user();
-        $redirectTo = false;
+	 * @param $redirect
+	 * @param bool $ifValid
+	 * @return mixed
+	 */
+	public static function checkAuthAndRedirect($redirect, $ifValid=false)
+	{
+		// Get the user information
+		$user = Auth::user();
+		$redirectTo = false;
 
-        if(empty($user->id) && ! $ifValid) // Not logged in redirect, set session.
-        {
-            Session::put('loginRedirect', $redirect);
-            $redirectTo = Redirect::to('user/login')
-                ->with( 'notice', Lang::get('user/user.login_first') );
-        }
-        elseif(!empty($user->id) && $ifValid) // Valid user, we want to redirect.
-        {
-            $redirectTo = Redirect::to($redirect);
-        }
+		if (empty($user->id) && ! $ifValid) // Not logged in redirect, set session.
+		{
+			Session::put('loginRedirect', $redirect);
+			$redirectTo = Redirect::to('user/login')
+				->with( 'notice', Lang::get('user/user.login_first') );
+		}
+		else if (!empty($user->id) && $ifValid) // Valid user, we want to redirect.
+		{
+			$redirectTo = Redirect::to($redirect);
+		}
 
-        return array($user, $redirectTo);
-    }
+		return array($user, $redirectTo);
+	}
 	
 	/**
 	 * Destructor

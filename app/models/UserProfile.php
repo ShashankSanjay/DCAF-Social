@@ -23,7 +23,7 @@ use Illuminate\Database\Eloquent\Model as Eloquent;
 // use Eloquent;
 
 /**
- * UserProfile
+ * UserProfile Model
  * 
  * Base user profile class
  * 
@@ -47,7 +47,7 @@ class UserProfile extends Eloquent implements UserProfileInterface, UserInterfac
 	
 	/**
 	 * The database table used by the model.
-	 *
+	 * 
 	 * @since  1.0
 	 * @access protected
 	 * @type   string
@@ -56,7 +56,7 @@ class UserProfile extends Eloquent implements UserProfileInterface, UserInterfac
 	
 	/**
 	 * Field name of the table's primary key
-	 *
+	 * 
 	 * @since  1.0
 	 * @access protected
 	 * @type   string
@@ -82,7 +82,7 @@ class UserProfile extends Eloquent implements UserProfileInterface, UserInterfac
         return $this->belongsTo('DcafUser', 'DCAF_User_ID');
     }
     
-    	/********************
+    /********************
 	 * Accessor Methods *
 	 ********************/
 	
@@ -99,17 +99,17 @@ class UserProfile extends Eloquent implements UserProfileInterface, UserInterfac
 	
 	/**
 	 * Get the unique identifier for the user.
-	 *
+	 * 
 	 * @return mixed
 	 */
 	public function getAuthIdentifier()
 	{
-	  return $this->getKey();
+		return $this->getKey();
 	}
 	 
 	/**
 	 * Get the password for the user.
-	 *
+	 * 
 	 * @return string
 	 */
 	public function getAuthPassword()
@@ -119,7 +119,7 @@ class UserProfile extends Eloquent implements UserProfileInterface, UserInterfac
 	 
 	/**
 	 * Get the e-mail address where password reminders are sent.
-	 *
+	 * 
 	 * @return string
 	 */
 	public function getReminderEmail()
@@ -129,7 +129,7 @@ class UserProfile extends Eloquent implements UserProfileInterface, UserInterfac
 	
 	/**
      * Get the date the user was created.
-     *
+     * 
      * @return string
      */
     public function joined()
@@ -139,63 +139,69 @@ class UserProfile extends Eloquent implements UserProfileInterface, UserInterfac
 	
 	/**
 	 * Gets the user's internal id.
-	 *
+	 * 
 	 * @access public
 	 * @return int
 	 */
-	public function getUID(){
-		//
+	public function getUID()
+	{
+		// {implementation code}
 	}
 	
 	/**
 	 * Gets the user's username.
-	 *
+	 * 
 	 * @access public
 	 * @return string
 	 */
-	public function getUsername() {
-		//
+	public function getUsername()
+	{
+		// {implementation code}
 	}
 	
 	/**
 	 * Gets the user's gender.
-	 *
+	 * 
 	 * @access public
 	 * @return string
 	 */
-	public function getGender() {
-		//
+	public function getGender()
+	{
+		// {implementation code}
 	}
 	
 	/**
 	 * Gets the user's email address.
-	 *
+	 * 
 	 * @access public
 	 * @return string
 	 */
-	public function getEmail() {
-		//
+	public function getEmail()
+	{
+		// {implementation code}
 	}
 	
 	/**
 	 * Gets the user's first name,
 	 * optionally including middle initial.
-	 *
+	 * 
 	 * @access public
 	 * @return string
 	 */
-	public function getFirstName() {
-		//
+	public function getFirstName()
+	{
+		// {implementation code}
 	}
 	
 	/**
 	 * Gets the user's last name.
-	 *
+	 * 
 	 * @access public
 	 * @return string
 	 */
-	public function getLastName() {
-		//
+	public function getLastName()
+	{
+		// {implementation code}
 	}
 	
 	/******************/
@@ -204,52 +210,57 @@ class UserProfile extends Eloquent implements UserProfileInterface, UserInterfac
 		
 	/**
 	 * Sets the user's username
-	 *
+	 * 
 	 * @access public
 	 * @param  string	$uname
 	 */
-	public function setUsername($uname) {
-		//
+	public function setUsername($uname)
+	{
+		// {implementation code}
 	}
 	
 	/**
 	 * Sets the user's gender
-	 *
+	 * 
 	 * @access public
 	 * @param  string	$gender
 	 */
-	public function setGender($gender) {
-		//
+	public function setGender($gender)
+	{
+		// {implementation code}
 	}
 	
 	/**
 	 * Sets the user's email
-	 *
+	 * 
 	 * @access public
 	 * @param  string	$email
 	 */
-	public function setEmail($email) {
-		//
+	public function setEmail($email)
+	{
+		// {implementation code}
 	}
 	
 	/**
 	 * Sets the user's first name
-	 *
+	 * 
 	 * @access public
 	 * @param  string	$fname
 	 */
-	public function setFirstName($fname) {
-		//
+	public function setFirstName($fname)
+	{
+		// {implementation code}
 	}
 	
 	/**
 	 * Sets the user's last name
-	 *
+	 * 
 	 * @access public
 	 * @param  string	$lname
 	 */
-	public function setLastName($lname) {
-		//
+	public function setLastName($lname)
+	{
+		// {implementation code}
 	}
 }
 

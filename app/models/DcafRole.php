@@ -3,6 +3,11 @@
 use Zizaco\Entrust\EntrustRole;
 use Robbo\Presenter\PresentableInterface;
 
+/**
+ * DCAF Role Model
+ * 
+ * @version	1.0
+ */
 class DcafRole extends EntrustRole implements PresentableInterface
 {
 	protected $guarded = array();
@@ -20,20 +25,24 @@ class DcafRole extends EntrustRole implements PresentableInterface
 	protected $roleId;
 	protected $roleName;
 	
+	/**********************
+	 * Eloquent Relations *
+	 **********************/
+	
 	public function dcafUsers()
 	{
 		return $this->belongsToMany('DcafUser', 'DCAF_User_Roles', 'dcaf_role_id', 'id');
 	}
-
+	
 	public function users()
 	{
 		return $this->belongsToMany('DcafUser', 'DCAF_User_Roles', 'dcaf_role_id', 'id');
 	}
-
+	
 	public function perms()
-    {
-        return $this->belongsToMany('Permission', 'permission_role', 'role_id', 'permission_id');
-    }
+	{
+		return $this->belongsToMany('Permission', 'permission_role', 'role_id', 'permission_id');
+	}
 	
 	/**
 	 * Same presenter as the user model.
@@ -55,6 +64,7 @@ class DcafRole extends EntrustRole implements PresentableInterface
 	{
 		$user = Confide::user();
 		$roleValidation = new stdClass();
+		
 		foreach( $roles as $role )
 		{
 			// Make sure theres a valid user, then check role.
@@ -64,15 +74,15 @@ class DcafRole extends EntrustRole implements PresentableInterface
 	}
 	
 	/**
-     * Checks if a role with the given name exists.
-     *
-     * @param  string $name      
-     * @return boolean           Exists?
-     */
-    public function checkRoleExists($name)
-    {
-        // 
-    }
+	 * Checks if a role with the given name exists.
+	 * 
+	 * @param  string	$name	role name
+	 * @return boolean			Exists?
+	 */
+	public function checkRoleExists($name)
+	{
+		// {implementation code}
+	}
 }
 
 ?>

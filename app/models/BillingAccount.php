@@ -19,7 +19,7 @@ use Illuminate\Database\Eloquent\Model as Eloquent;
 // use Eloquent;
 
 /**
- * BillingAccount
+ * Billing Account Model
  * 
  * @author	Alexander Rosenberg
  * @version	1.0
@@ -39,12 +39,12 @@ class BillingAccount extends Eloquent
 	
 	/**
 	 * The database table used by the model.
-	 *s
+	 * 
 	 * @since  1.0
 	 * @access protected
 	 * @type   string
 	 */
-	protected $table		= 'Billing_Accounts';
+	protected $table = 'Billing_Accounts';
 	
 	/**
 	 * Permits all properties to be set from the constructor
@@ -53,7 +53,11 @@ class BillingAccount extends Eloquent
 	 * @access protected
 	 * @type   array
 	 */
-	protected $fillable		= array('*');
+	protected $fillable = array('*');
+	
+	/**********************
+	 * Eloquent Relations *
+	 **********************/
 	
 	public function billingContact()
 	{

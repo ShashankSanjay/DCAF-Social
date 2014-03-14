@@ -2,6 +2,9 @@
 
 use Zizaco\Entrust\EntrustPermission;
 
+/**
+ * Permission Model
+ */
 class Permission extends EntrustPermission
 {
     public static $rules = array();
@@ -16,9 +19,10 @@ class Permission extends EntrustPermission
         // Get all the available permissions
         $availablePermissions = $this->all()->toArray();
 
-        foreach($permissions as &$permission) {
-            array_walk($availablePermissions, function(&$value) use(&$permission){
-                if($permission->name == $value['name']) {
+        foreach ($permissions as &$permission)
+        {
+            array_walk($availablePermissions, function (&$value) use(&$permission) {
+                if ($permission->name == $value['name']) {
                     $value['checked'] = true;
                 }
             });
@@ -28,6 +32,7 @@ class Permission extends EntrustPermission
 
     /**
      * Convert from input array to savable array.
+     * 
      * @param $permissions
      * @return array
      */
@@ -35,14 +40,15 @@ class Permission extends EntrustPermission
     {
         $availablePermissions = $this->all()->toArray();
         $preparedPermissions = array();
+        
         foreach( $permissions as $permission => $value )
         {
             // If checkbox is selected
-            if( $value == '1' )
+            if ($value == '1')
             {
                 // If permission exists
-                array_walk($availablePermissions, function(&$value) use($permission, &$preparedPermissions){
-                    if($permission == (int)$value['id']) {
+                array_walk($availablePermissions, function (&$value) use($permission, &$preparedPermissions) {
+                    if ($permission == (int)$value['id']) {
                         $preparedPermissions[] = $permission;
                     }
                 });

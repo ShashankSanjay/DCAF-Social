@@ -1,28 +1,37 @@
 <?php
 
 /**
- * NetworkUser User Model
+ * Facebook Post Model
  * 
  * @author	Shashank Sanjay
+ * @author	Alexander Rosenberg
  * @version	1.0
  */
-
 class FBPost extends Eloquent
 {
-	//
+	/**********************
+	 * Instance Variables *
+	 **********************/
+	
 	protected $table = 'FB_Posts';
-
+	
 	public $FB_Post_ID;
 	public $Content;
 	
-	public function FBPage() {
+	/**********************
+	 * Eloquent Relations *
+	 **********************/
+	
+	public function FBPage()
+	{
 		return $this->hasOne('FBPage');
 	}
 
-	public function FacebookUser() {
+	public function FacebookUser()
+	{
 		return $this->hasOne('FacebookUser');
 	}
-
+	
 	/*
 		All fields for post. From:https://developers.facebook.com/docs/reference/api/post/
 		
@@ -33,8 +42,6 @@ class FBPost extends Eloquent
 		
 		Only perms are access_token and read_stream
 	*/
-
 }
-
 
 ?>

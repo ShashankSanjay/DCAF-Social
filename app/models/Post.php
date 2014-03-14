@@ -3,12 +3,15 @@
 use Illuminate\Support\Facades\URL; # not sure why i need this here :c
 use Robbo\Presenter\PresentableInterface;
 
-class Post extends Eloquent implements PresentableInterface {
-
+/**
+ * Post Model base class
+ */
+class Post extends Eloquent implements PresentableInterface
+{
 	/**
 	 * Deletes a blog post and all
 	 * the associated comments.
-	 *
+	 * 
 	 * @return bool
 	 */
 	public function delete()
@@ -23,7 +26,7 @@ class Post extends Eloquent implements PresentableInterface {
 	/**
 	 * Returns a formatted post content entry,
 	 * this ensures that line breaks are returned.
-	 *
+	 * 
 	 * @return string
 	 */
 	public function content()
@@ -33,7 +36,7 @@ class Post extends Eloquent implements PresentableInterface {
 
 	/**
 	 * Get the post's author.
-	 *
+	 * 
 	 * @return User
 	 */
 	public function author()
@@ -43,7 +46,7 @@ class Post extends Eloquent implements PresentableInterface {
 
 	/**
 	 * Get the post's comments.
-	 *
+	 * 
 	 * @return array
 	 */
 	public function comments()
@@ -53,7 +56,7 @@ class Post extends Eloquent implements PresentableInterface {
 
     /**
      * Get the date the post was created.
-     *
+     * 
      * @param \Carbon|null $date
      * @return string
      */
@@ -68,7 +71,7 @@ class Post extends Eloquent implements PresentableInterface {
 
 	/**
 	 * Get the URL to the post.
-	 *
+	 * 
 	 * @return string
 	 */
 	public function url()
@@ -79,7 +82,7 @@ class Post extends Eloquent implements PresentableInterface {
 	/**
 	 * Returns the date of the blog post creation,
 	 * on a good and more readable format :)
-	 *
+	 * 
 	 * @return string
 	 */
 	public function created_at()
@@ -90,7 +93,7 @@ class Post extends Eloquent implements PresentableInterface {
 	/**
 	 * Returns the date of the blog post last update,
 	 * on a good and more readable format :)
-	 *
+	 * 
 	 * @return string
 	 */
 	public function updated_at()
@@ -102,5 +105,6 @@ class Post extends Eloquent implements PresentableInterface {
     {
         return new PostPresenter($this);
     }
-
 }
+
+?>

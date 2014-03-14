@@ -38,12 +38,12 @@ class DcafTeam extends Eloquent
 	
 	/**
 	 * The database table used by the model.
-	 *
+	 * 
 	 * @since  1.0
 	 * @access protected
 	 * @type   string
 	 */
-	protected $table		= 'DCAF_Teams';
+	protected $table = 'DCAF_Teams';
 	
 	/**
 	 * Permits all properties to be set from the constructor
@@ -52,16 +52,19 @@ class DcafTeam extends Eloquent
 	 * @access protected
 	 * @type   array
 	 */
-	protected $fillable		= array('*');
+	protected $fillable = array('*');
+	
+	/**********************
+	 * Eloquent Relations *
+	 **********************/
 	
 	public function billingAccount()
 	{
 		return $this->belongsTo('BillingAccount', 'billing_account_id', 'id');
 	}
-
+	
 	public function DcafUser()
 	{
-		//
 		return $this->belongsToMany('DcafUser', 'DCAF_team_user', 'dcaf_team_id', 'dcaf_user_id') ;
 	}
 }

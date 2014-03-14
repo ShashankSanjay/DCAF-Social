@@ -19,7 +19,7 @@ use Illuminate\Database\Eloquent\Model as Eloquent;
 // use Eloquent;
 
 /**
- * BrandGroup
+ * Brand Group Model
  * 
  * @author	Alexander Rosenberg
  * @version	1.0
@@ -35,12 +35,12 @@ class BrandGroup extends Eloquent
 	
 	/**
 	 * The database table used by the model.
-	 *
+	 * 
 	 * @since  1.0
 	 * @access protected
 	 * @type   string
 	 */
-	protected $table		= 'Brand_Groups';
+	protected $table = 'Brand_Groups';
 	
 	/**
 	 * Permits all properties to be set from the constructor
@@ -49,7 +49,13 @@ class BrandGroup extends Eloquent
 	 * @access protected
 	 * @type   array
 	 */
-	protected $fillable		= array('*');
+	protected $fillable = array('*');
+	
+	/**********************
+	 * Eloquent Relations *
+	 **********************/
+	
+	// ...
 }
 
 ?>
