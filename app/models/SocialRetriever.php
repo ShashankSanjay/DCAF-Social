@@ -163,8 +163,15 @@ class SocialRetriever
 		// Get user pages
 	}
 
+<<<<<<< HEAD
 	/**
 	 * Instagram/tumblr
 	 */
 	
+=======
+	/*
+	*	Instagram/tumblr
+	*/
+
+>>>>>>> 9262e4cb0050c1817daf5d60fec570f19530e84b
 }
