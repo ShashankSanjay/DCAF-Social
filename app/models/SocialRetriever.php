@@ -31,7 +31,7 @@ class SocialRetriever
 		// Get user info
 		$call = $this->consumer->request('/me/data');
 		$response = json_decode($call, true);
-
+		
 		// Parse data and save into correct DB tables
 		$datas = $response['data'];
 		
@@ -111,7 +111,7 @@ class SocialRetriever
 		/*
 		// Define scopes and fields
 		$scope = "/posts.fields(likes)";
-
+		
 		foreach ($data as $page) {
 			// Get data from fb
 			try {
@@ -157,21 +157,13 @@ class SocialRetriever
 		$response = $consumer->request('https://www.googleapis.com/oauth2/v1/userinfo');
 		$data = json_decode($response, true);
 	}
-
+	
 	public function gpPageInfo($consumer)
 	{
 		// Get user pages
 	}
-
-<<<<<<< HEAD
+	
 	/**
 	 * Instagram/tumblr
 	 */
-	
-=======
-	/*
-	*	Instagram/tumblr
-	*/
-
->>>>>>> 9262e4cb0050c1817daf5d60fec570f19530e84b
 }
