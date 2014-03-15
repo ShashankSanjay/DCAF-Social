@@ -14,67 +14,124 @@ class FacebookRetriever extends SocialRetriever
 	/**
 	 * Constructor
 	 */
-	public function __construct($consumer)
+	public function __construct(/* $consumer */)
 	{
-		parent::__construct(($consumer == null) ? new OAuth:consumer('facebook') : $consumer);
+		// parent::__construct(($consumer == null) ? new OAuth:consumer('facebook') : $consumer);
 	}
 	
 	/**
 	 * Facebook Stuff
 	 * Pass each call a OAuth::Consumer object
 	 */
-	public function getUser($consumer)
+	public function getUser()
 	{
-		// Get user pages
-		$call = $consumer->request('/me');
+		// Get user info
+		$call = $this->consumer->request('/me');	// /me/data
 		$response = json_decode($call, true);
+		
+		// Parse data and save into correct DB tables
+		$datas = $response['data'];
+		
+		foreach ($datas as $data)
+		{
+			// Move through and save page ouath
+			$fbpage = new FB_Page;
+			$fbpage->FB_Page_ID = $data->id;
+			$fbpage->access_token = $data->access_token;
+			$fbpage->perms = $data->perms;
+			$fbpage->name = $data->name;
+			$fbpage->save();
+		}
 	}
 	
-	public function fbPageInfo($consumer, $response)
+	public function getPage($id)
 	{
+		// either instantiate new consumers every page or do...
+		
 		// Get all page info
-		$call = $consumer->request('/me/accounts');
-		$response = json_decode($call, true);
-
-		$data = $response['data'];
-
-		foreach ($data as $page) {
-			# code...
-			//$page['access_token'];
-			//$page['id'];
-			$consumer->setToken($page['access_token']);
-			$c = $consumer->request('/me');
-			$r = json_decode($c, true);
-			var_dump($r);
+		
+		$pages = array();
+		
+		foreach ($ids as $id)
+		{
+			// Get ids from db
+			$db = FB_Pages::find($id);
+			$page = new OAuth::consumer('facebook');
+			$token = new StdOAuth2Token($db->access_token);
+			$page->getStorage()->storeAccessToken("Facebook", $token);
+			
+			$pages = array_push($pages, $page); 
+		}
+		
+		$params = "/feed";
+		
+		$responses = array();
+		
+		foreach ($pages as $page)
+		{
+			try {
+				// specific field calls from Alex's email will not work with /me node, must use id?fields=...
+				$call = $page->consumer->request('/me' . $params);
+			} catch (FacebookApiException $e) {
+				// CHANGE: WRITE TO LOG FILE
+				var_dump($e);
+			}
+			$response = json_decode($call, true);
+			
+			// parse through, go through pagination
+			
+			/**
+			 * Accepts decoded fb json, returns unpaginated array of arrays
+			 * Secondary arrays are returned with name from fb, ie. post, likes
+			 */
+			$response = self::paginate($response);
+			array_push($responses, $response);
+		}
+		
+		// save info to db
+		
+		if (isset($responses['posts']))
+		{
+			// parse each post and save into db
+			foreach ($responses['posts'] as $key => $arr)
+			{
+				$p = new FBPost();
+				$p->content = $arr['content'];
+				// $p-> = $arr;
+				$p->save();
+				
+				// Attach to appropriate models, ie. fb user and page
+				$p->FacebookUser->attach($userid);
+			}
 		}
 		
 		/*
 		// Define scopes and fields
 		$scope = "/posts.fields(likes)";
 		
-		foreach ($data as $page)
-		{
+		foreach ($data as $page) {
 			// Get data from fb
 			try {
-				//$r = $consumer->request("/".$page['id']."?fields=" . $scope);
 				$r = $consumer->request("/".$page['id'] . $scope);
 			} catch (FacebookApiException $e) {
 				var_dump($e);
 			}
 			$d = json_decode($r, true);
-			
+		*/
 			// Parse data and save into db
 
-			if (isset($d['posts']))
-			{
+			/*
+			if (isset($d['posts'])) {
 				$data = $d['posts']['data'];
 				print("\nPosts for page: " . $page['name'] . "\n");
 				foreach ($data as $post) {
 					print_r($post);
 					print("\n");
 				}
-			}
+			}*/
+			
 		}
-		*/
 	}
 }
+
+?>

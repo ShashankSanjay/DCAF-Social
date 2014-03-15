@@ -20,14 +20,14 @@ class GooglePlusRetriever extends SocialRetriever
 	/**
 	 * Google Stuff
 	 */
-	public function gpUserInfo($consumer)
+	public function getUser($consumer)
 	{
 		// Get user pages
 		$response = $consumer->request('https://www.googleapis.com/oauth2/v1/userinfo');
 		$data = json_decode($response, true);
 	}
 
-	public function gpPageInfo($consumer)
+	public function getPage($consumer)
 	{
 		// Get user pages
 	}
