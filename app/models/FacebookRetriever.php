@@ -83,69 +83,52 @@ class FacebookRetriever implements SocialRetriever
 		// get page access-token from db
 		$db = FacebookPage::find($id);
 		$token = new StdOAuth2Token($db->access_token);
-				
+		$this->consumer->getStorage()->storeAccessToken("Facebook", $token);
+		
+		// Define scopes and fields
+		// $scope = "/posts.fields(likes)";
+		
 		try {
-			$page->getStorage()->storeAccessToken("Facebook", $token);
 			// specific field calls from Alex's email will not work with /me node, must use id?fields=...
-			$call = $page->request('/me' . '/feed');
+			$response = $consumer->request('/me/feed');
 		} catch (FacebookApiException $e) {
 			// CHANGE: WRITE TO LOG FILE
 			var_dump($e);
 		}
-		$response = json_decode($call, true);
+		$response = json_decode($response, true);
 		
 		// parse through, go through pagination
 		
 		/**
 		 * Accepts decoded fb json, returns unpaginated array of arrays
 		 * Secondary arrays are returned with name from fb, ie. post, likes
-		 */
+		 *
 		$response = self::paginate($response);
 		$responses[] = $response;
+		*/
 		
-		// save info to db
 		
+	}
+	
+	protected function processPost($page_response)
+	{
+		// print("\nProcessing posts for page: ".$page_response['name']."\n");
+		
+		// Parse data and save into db
 		if (isset($response['posts']))
 		{
+			// $posts = $page_response['posts']['data'];
+			
 			// parse each post and save into db
 			foreach ($response['posts'] as $key => $arr)
 			{
-				$p = new FacebookPost();
-				$p->content = $arr['content'];
-				// $p-> = $arr;
-				$p->save();
+				$post = new FacebookPost();
+				$post->content = $arr['content'];
+				$post->save();
 				
 				// Attach to appropriate models, ie. fb user and page
-				$p->FacebookUser->attach($userid);
+				$post->FacebookUser->attach($userid);
 			}
-		}
-		
-		// Define scopes and fields
-		$scope = "/posts.fields(likes)";
-		
-		foreach ($data as $page)
-		{
-			// Get data from fb
-			try {
-				$r = $consumer->request("/".$page['id'].$scope);
-			} catch (FacebookApiException $e) {
-				var_dump($e);
-			}
-			$d = json_decode($r, true);
-			
-			// Parse data and save into db
-			if (isset($d['posts']))
-			{
-				$data = $d['posts']['data'];
-				print("\nPosts for page: " . $page['name'] . "\n");
-				
-				foreach ($data as $post)
-				{
-					print_r($post);
-					print("\n");
-				}
-			}
-			
 		}
 	}
 }
