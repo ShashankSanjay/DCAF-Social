@@ -31,15 +31,14 @@ Route::pattern('role', '[0-9]+');
 Route::pattern('token', '[0-9a-z]+');
 
 Route::get('/cron/run/test', function () {
-    Cron::add('iexample1', '* * * * *', function() {
-                        // Do some crazy things every minute
-                        return null;
-
-                    });
+    Cron::add('example1', '* * * * *', function() {
+        // Do some crazy things every minute
+        return null;
+    });
     Cron::add('example2', '*/2 * * * *', function() {
-                        // Do some crazy things every two minutes
-                        return null;
-                    });
+        // Do some crazy things every two minutes
+        return null;
+    });
     $report = Cron::run();
     return $report;
 });
@@ -194,12 +193,6 @@ Route::post('user/registernetworks', 'UserController@postNetworks');
 Route::get('user/firstTime', 'UserController@firstTime');
 
 Route::get('user/team', 'UserController@team');
-
-Route::get('animate', function()
-{
-    //
-    return View::make('theme.animate');
-});
 
 # User RESTful Routes (Login, Logout, Register, etc)
 Route::controller('user', 'UserController');
