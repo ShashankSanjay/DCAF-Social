@@ -76,6 +76,16 @@ class FacebookUser extends Eloquent implements UserProfileInterface, UserInterfa
     {
         return $this->NetworkUser->userProfile();
     }
+
+    public function oauth_facebook()
+    {
+    	return $this->hasOne('oauth_facebook');
+    }
+
+    public function FacebookPage()
+    {
+    	return $this->hasMany('FacebookPage');
+    }
 	
 	/********************
 	 * Accessor Methods *
