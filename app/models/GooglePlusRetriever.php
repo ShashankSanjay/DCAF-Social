@@ -5,7 +5,7 @@
  * 
  * @version	1.0
  */
-class GooglePlusRetriever extends SocialRetriever
+class GooglePlusRetriever implements SocialRetriever
 {
 	public static GET_USER_URI = 'https://www.googleapis.com/oauth2/v1/userinfo';
 	
@@ -20,16 +20,21 @@ class GooglePlusRetriever extends SocialRetriever
 	/**
 	 * Google Stuff
 	 */
-	public function getUser($consumer)
+	public function getUser($id = null)
 	{
 		// Get user pages
 		$response = $consumer->request('https://www.googleapis.com/oauth2/v1/userinfo');
 		$data = json_decode($response, true);
 	}
 
-	public function getPage($consumer)
+	public function getPage($id)
 	{
 		// Get user pages
+	}
+	
+	public function getContent($id)
+	{
+		
 	}
 }
 

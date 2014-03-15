@@ -5,25 +5,29 @@
  * 
  * @version	1.0
  */
-class FacebookRetriever extends SocialRetriever
+class FacebookRetriever implements SocialRetriever
 {
 	public static USER_CLASS = "FacebookUser";
-	
 	public static GET_USER_URI = '/me';
+	
+	public $consumer;
 	
 	/**
 	 * Constructor
 	 */
-	public function __construct(/* $consumer */)
+	public function __construct($consumer = null)
 	{
 		// parent::__construct(($consumer == null) ? new OAuth:consumer('facebook') : $consumer);
+		if ($consumer == null) $consumer = new OAuth::consumer('facebook');
+		$this->consumer = $consumer;
 	}
 	
 	/**
-	 * Facebook Stuff
-	 * Pass each call a OAuth::Consumer object
+	 * Retrieve a Facebook User's Info
+	 * 
+	 * @param	mixed	$id		(optional) id of user to get; defaults to current user
 	 */
-	public function getUser()
+	public function getUser($id = null)
 	{
 		// Get user info
 		$call = $this->consumer->request('/me');	// /me/data
@@ -44,49 +48,61 @@ class FacebookRetriever extends SocialRetriever
 		}
 	}
 	
-	public function getPage($id)
+	/**
+	 * Alias to getContent()
+	 */
+	public function getPost($id)
 	{
-		// either instantiate new consumers every page or do...
-		
+		return $this->getContent($id);
+	}
+	
+	public function getContent($id)
+	{
+		// {implementation code}
+	}
+	
+	public function getPages()
+	{
 		// Get all page info
 		
 		$pages = array();
 		
-		foreach ($ids as $id)
+		foreach ($pages as $page)
 		{
-			// Get ids from db
 			$db = FB_Pages::find($id);
-			$page = new OAuth::consumer('facebook');
-			$token = new StdOAuth2Token($db->access_token);
-			$page->getStorage()->storeAccessToken("Facebook", $token);
-			
-			$pages = array_push($pages, $page); 
+			// $key = array_push(&$pages, $page);
+			$pages[] = $page;
 		}
-		
+	}
+	
+	public function getPage($id)
+	{
+		// get page access-token from db
+		$db = FB_Pages::find($id);
+		$token = new StdOAuth2Token($db->access_token);
+				
 		$params = "/feed";
 		
 		$responses = array();
 		
-		foreach ($pages as $page)
-		{
-			try {
-				// specific field calls from Alex's email will not work with /me node, must use id?fields=...
-				$call = $page->consumer->request('/me' . $params);
-			} catch (FacebookApiException $e) {
-				// CHANGE: WRITE TO LOG FILE
-				var_dump($e);
-			}
-			$response = json_decode($call, true);
-			
-			// parse through, go through pagination
-			
-			/**
-			 * Accepts decoded fb json, returns unpaginated array of arrays
-			 * Secondary arrays are returned with name from fb, ie. post, likes
-			 */
-			$response = self::paginate($response);
-			array_push($responses, $response);
+		try {
+			$page->getStorage()->storeAccessToken("Facebook", $token);
+			// specific field calls from Alex's email will not work with /me node, must use id?fields=...
+			$call = $page->request('/me' . $params);
+		} catch (FacebookApiException $e) {
+			// CHANGE: WRITE TO LOG FILE
+			var_dump($e);
 		}
+		$response = json_decode($call, true);
+		
+		// parse through, go through pagination
+		
+		/**
+		 * Accepts decoded fb json, returns unpaginated array of arrays
+		 * Secondary arrays are returned with name from fb, ie. post, likes
+		 */
+		$response = self::paginate($response);
+		array_push($responses, $response);
 		
 		// save info to db
 		

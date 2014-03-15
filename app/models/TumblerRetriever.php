@@ -5,7 +5,7 @@
  * 
  * @version	1.0
  */
-class TumblerRetriever extends SocialRetriever
+class TumblerRetriever implements SocialRetriever
 {
 	/**
 	 * Instagram/tumblr
@@ -27,6 +27,11 @@ class TumblerRetriever extends SocialRetriever
 		// Get user info
 		$response = $consumer->request('');
 		$data = json_decode($response, true);
+	}
+	
+	public function getContent($id)
+	{
+		
 	}
 }
 
