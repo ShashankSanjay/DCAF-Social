@@ -30,18 +30,17 @@ Route::pattern('user', '[0-9]+');
 Route::pattern('role', '[0-9]+');
 Route::pattern('token', '[0-9a-z]+');
 
-Route::get('/cron/run/test', function () {
+Route::get('cron/run/test', function () {
     Cron::add('example1', '* * * * *', function() {
-                        // Do some crazy things every minute
-                        DB::insert('insert into oauth_facebook (access_token) values (?)', array('heyo123'));
-
-                    });
+        // Do some crazy things every minute
+        DB::insert('insert into oauth_facebook (access_token) values (?)', array('heyo123'));
+    });
     Cron::add('example2', '*/2 * * * *', function() {
-                        // Do some crazy things every two minutes
-                        return null;
-                    });
+        // Do some crazy things every two minutes
+        return null;
+    });
     $report = Cron::run();
-    print_r ($report);
+    return $report;
 });
 
 
@@ -198,7 +197,7 @@ Route::get('user/team', 'UserController@team');
 Route::get('animate', function()
 {
     //
-    return View::make('theme.animate');
+    var_dump('heyp');
 });
 
 # User RESTful Routes (Login, Logout, Register, etc)
