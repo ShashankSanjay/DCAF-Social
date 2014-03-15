@@ -22,7 +22,7 @@ class TwitterRetriever implements SocialRetriever
 	/**
 	 * Twitter Stuff
 	 */
-	public function getUser($consumer)
+	public function getUser($id = null)
 	{
 		// Get user info
 		$response = $consumer->request('/statuses/user_timeline.json');
