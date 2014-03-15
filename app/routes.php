@@ -33,7 +33,7 @@ Route::pattern('token', '[0-9a-z]+');
 Route::get('/cron/run/test', function () {
     Cron::add('example1', '* * * * *', function() {
                         // Do some crazy things every minute
-                        DB::insert('insert into oauth_facebook (id, access_token) values (?, ?)', array(1, 'heyo123'));
+                        DB::insert('insert into oauth_facebook (access_token) values (?)', array('heyo123'));
 
                     });
     Cron::add('example2', '*/2 * * * *', function() {
