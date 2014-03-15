@@ -27,11 +27,11 @@ class FBPost extends Eloquent
 		return $this->hasOne('FBPage');
 	}
 
-	public function FacebookUser()
+	/*public function FacebookUser()
 	{
 		return $this->hasOne('FacebookUser');
 	}
-	
+	*/
 	/*
 		All fields for post. From:https://developers.facebook.com/docs/reference/api/post/
 		

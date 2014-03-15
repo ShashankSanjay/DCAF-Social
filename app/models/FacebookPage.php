@@ -24,12 +24,7 @@ class FBPage extends Eloquent
 	
 	public function FacebookUser()
 	{
-		return $this->hasMany('FacebookUsers');
-	}
-
-	public function DcafUser()
-	{
-		// {implementation code}
+		return $this->belongstoMany('FacebookUsers');
 	}
 	
 	/*
