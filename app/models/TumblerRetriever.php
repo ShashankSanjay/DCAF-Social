@@ -18,6 +18,16 @@ class TumblerRetriever extends SocialRetriever
 	{
 		parent::__construct($consumer);
 	}
+	
+	/**
+	 * Tumbler Stuff
+	 */
+	public function getUser($consumer)
+	{
+		// Get user info
+		$response = $consumer->request('');
+		$data = json_decode($response, true);
+	}
 }
 
 ?>
