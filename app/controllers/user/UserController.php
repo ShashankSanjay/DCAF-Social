@@ -465,6 +465,28 @@ class UserController extends BaseController {
 				    array('access_token' => $token->getAccessToken())
 				);
 				Session::forget('lusitanian_oauth_token');
+
+				if ($network == 'facebook') {
+					$f = OAuth::consumer('facebook');
+					$f->getStorage()->storeAccessToken("Facebook", $token);
+					$r = $f->request('/me');
+					$d = json_decode($r, true);
+					var_dump($d);
+					die();
+				}
+
+				elseif ($network == 'twitter') {
+					$t = OAuth::consumer('facebook');
+					$t->getStorage()->storeAccessToken("Twitter", $token);
+					$r = $t->request('account/settings.json');
+					$d = json_decode($r, true);
+					var_dump($d);
+					die();
+				}
+
+				elseif ($network == 'google') {
+					# code...
+				}
 			}
 		}
 		
