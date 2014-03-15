@@ -145,7 +145,7 @@ class Column extends AbstractAsset
      */
     public function setLength($length)
     {
-        if ($length !== null) {
+        if($length !== null) {
             $this->_length = (int)$length;
         } else {
             $this->_length = null;
@@ -461,6 +461,14 @@ class Column extends AbstractAsset
     public function getCustomSchemaOptions()
     {
         return $this->_customSchemaOptions;
+    }
+
+    /**
+     * @param \Doctrine\DBAL\Schema\Visitor\Visitor $visitor
+     */
+    public function visit(Visitor $visitor)
+    {
+        $visitor->accept($this);
     }
 
     /**

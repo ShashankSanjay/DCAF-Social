@@ -129,6 +129,7 @@ return array(
         /* DCAF Stuff */
         'Thomaswelton\LaravelOauth\LaravelOauthServiceProvider',
         'Facebook\phpSDK\FacebookServiceProvider',
+        'Liebig\Cron\CronServiceProvider',
 
     ),
 

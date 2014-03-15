@@ -46,7 +46,8 @@
 		"j20/php-uuid": "dev-master",
 		"bllim/datatables": "*",
 		"thomaswelton/laravel-oauth": "0.1.0.*@dev",
-		"facebook/php-sdk" : "*@stable"
+		"facebook/php-sdk" : "*@stable",
+		"liebig/cron": "dev-master"
 	},
 	"require-dev": {
 		"way/generators": "dev-master",

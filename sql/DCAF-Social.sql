@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Mar 14, 2014 at 10:07 PM
+-- Generation Time: Mar 15, 2014 at 05:05 PM
 -- Server version: 5.5.35-0ubuntu0.13.10.2
 -- PHP Version: 5.5.3-1ubuntu2.2
 
@@ -211,6 +211,35 @@ CREATE TABLE IF NOT EXISTS `comments` (
   `content` text COLLATE utf8_unicode_ci NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `cron_job`
+--
+
+CREATE TABLE IF NOT EXISTS `cron_job` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `return` text COLLATE utf8_unicode_ci NOT NULL,
+  `runtime` float(8,2) NOT NULL,
+  `cron_manager_id` int(11) NOT NULL,
+  `type` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `cron_manager`
+--
+
+CREATE TABLE IF NOT EXISTS `cron_manager` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `rundate` datetime NOT NULL,
+  `runtime` float(8,2) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
 
@@ -480,7 +509,10 @@ INSERT INTO `migrations` (`migration`, `batch`) VALUES
 ('2013_09_02_024008_migration_oauth_instagram', 3),
 ('2013_09_02_024008_migration_oauth_tumblr', 3),
 ('2013_09_02_024008_migration_oauth_twitter', 3),
-('2014_03_01_194916_Brand', 4);
+('2014_03_01_194916_Brand', 4),
+('2013_06_27_143953_create_cronmanager_table', 5),
+('2013_06_27_144035_create_cronjob_table', 5),
+('2014_03_15_165027_update_cron_jobs', 6);
 
 -- --------------------------------------------------------
 

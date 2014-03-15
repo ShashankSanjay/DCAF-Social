@@ -842,11 +842,10 @@ class PHPSDKTestCase extends PHPUnit_Framework_TestCase {
       'appId'  => self::APP_ID,
       'secret' => self::SECRET
     ));
-    $sr = self::kValidSignedRequest();
-    $payload = $facebook->publicParseSignedRequest($sr);
+    $payload = $facebook->publicParseSignedRequest(self::kValidSignedRequest());
     $this->assertNotNull($payload, 'Expected token to parse');
     $this->assertEquals($facebook->getSignedRequest(), null);
-    $_REQUEST['signed_request'] = $sr;
+    $_REQUEST['signed_request'] = self::kValidSignedRequest();
     $this->assertEquals($facebook->getSignedRequest(), $payload);
   }
 
@@ -1356,31 +1355,6 @@ class PHPSDKTestCase extends PHPUnit_Framework_TestCase {
       ->method('_oauthRequest')
       ->will($this->returnValue('foo=1'));
     $this->assertFalse($stub->publicGetAccessTokenFromCode('c', ''));
-  }
-
-  public function testAppsecretProofNoParams() {
-    $fb = new FBRecordMakeRequest(array(
-      'appId'  => self::APP_ID,
-      'secret' => self::SECRET,
-    ));
-    $token = $fb->getAccessToken();
-    $proof = $fb->publicGetAppSecretProof($token);
-    $params = array();
-    $fb->api('/mattynoce', $params);
-    $requests = $fb->publicGetRequests();
-    $this->assertEquals($proof, $requests[0]['params']['appsecret_proof']);
-  }
-
-  public function testAppsecretProofWithParams() {
-    $fb = new FBRecordMakeRequest(array(
-      'appId'  => self::APP_ID,
-      'secret' => self::SECRET,
-    ));
-    $proof = 'foo';
-    $params = array('appsecret_proof' => $proof);
-    $fb->api('/mattynoce', $params);
-    $requests = $fb->publicGetRequests();
-    $this->assertEquals($proof, $requests[0]['params']['appsecret_proof']);
   }
 
   public function testExceptionConstructorWithErrorCode() {
@@ -1973,10 +1947,6 @@ class FBRecordMakeRequest extends TransientFacebook {
 
   public function publicGetRequests() {
     return $this->requests;
-  }
-
-  public function publicGetAppSecretProof($access_token) {
-    return $this->getAppSecretProof($access_token);
   }
 }
 
