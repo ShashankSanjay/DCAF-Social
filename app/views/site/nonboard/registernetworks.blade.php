@@ -43,7 +43,7 @@ Network Registration
 							<li><a href={{ OAuth::getAuthorizeUrl('facebook') }} class="btn btn-md{{ (OAuth::hasToken('facebook') ? 'btn-disabled' : '') }} social-network brand-facebook"><i class="fa fa-facebook-square"></i> Facebook</a></li>
 							<li><a href={{ OAuth::getAuthorizeUrl('google') }} class="btn btn-md {{ (OAuth::hasToken('google') ? 'btn-disabled' : '') }} social-network brand-gplus"><i class="fa fa-google-plus-square"></i> Google+</a></li>
 							<li><a href={{ OAuth::getAuthorizeUrl('twitter') }} class="btn btn-md {{ (OAuth::hasToken('twitter') ? 'btn-disabled' : '') }} social-network brand-twitter"><i class="fa fa-twitter-square"></i> Twitter</a></li>
-							<li><a href={{ OAuth::getAuthorizeUrl('instagram') }} class="btn btn-md {{ (OAuth::hasToken('instagram') ? 'btn-disabled' : '') }} social-network brand-instagram"><i class="fa fa-instagram"></i> Instagram</a></li>
+							
 						</ul>
 						<br />
 						<hr>

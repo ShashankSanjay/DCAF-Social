@@ -133,3 +133,43 @@ Stack trace:
 [08-Mar-2014 19:49:26 UTC] PHP Fatal error:  Call to undefined method OAuth\OAuth2\Service\Facebook::setAccessToken() in /home1/shashan2/socialapp/app/controllers/user/UserController.php on line 481
 [08-Mar-2014 19:50:01 UTC] PHP Fatal error:  Call to undefined method Thomaswelton\LaravelOauth\Common\Storage\LaravelSession::setAccessToken() in /home1/shashan2/socialapp/app/controllers/user/UserController.php on line 481
 [15-Mar-2014 18:45:02 UTC] PHP Parse error:  syntax error, unexpected '<<' (T_SL) in /home1/shashan2/socialapp/app/routes.php on line 34
+[15-Mar-2014 21:58:41 UTC] PHP Fatal error:  Call to undefined method OAuth\OAuth2\Token\StdOAuth2Token::clearToken() in /home1/shashan2/socialapp/app/controllers/user/UserController.php on line 474
+[15-Mar-2014 22:01:55 UTC] PHP Fatal error:  Class 'Storage' not found in /home1/shashan2/socialapp/app/controllers/user/UserController.php on line 474
+[15-Mar-2014 22:02:27 UTC] PHP Fatal error:  Class 'OAuth\Common\Storage' not found in /home1/shashan2/socialapp/app/controllers/user/UserController.php on line 475
+[15-Mar-2014 22:03:15 UTC] PHP Parse error:  syntax error, unexpected 'storage' (T_STRING), expecting variable (T_VARIABLE) or '$' in /home1/shashan2/socialapp/app/controllers/user/UserController.php on line 475
+[15-Mar-2014 22:03:49 UTC] PHP Parse error:  syntax error, unexpected 'Session' (T_STRING), expecting variable (T_VARIABLE) or '$' in /home1/shashan2/socialapp/app/controllers/user/UserController.php on line 475
+[15-Mar-2014 22:04:02 UTC] PHP Parse error:  syntax error, unexpected 'Session' (T_STRING), expecting variable (T_VARIABLE) or '$' in /home1/shashan2/socialapp/app/controllers/user/UserController.php on line 475
+[15-Mar-2014 22:04:17 UTC] PHP Parse error:  syntax error, unexpected 'Session' (T_STRING), expecting variable (T_VARIABLE) or '$' in /home1/shashan2/socialapp/app/controllers/user/UserController.php on line 475
+[15-Mar-2014 22:04:22 UTC] PHP Fatal error:  Call to undefined method Thomaswelton\LaravelOauth\OAuth::Session() in /home1/shashan2/socialapp/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php on line 205
+[15-Mar-2014 22:04:24 UTC] PHP Fatal error:  Call to undefined method Thomaswelton\LaravelOauth\OAuth::Session() in /home1/shashan2/socialapp/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php on line 205
+[15-Mar-2014 22:06:21 UTC] PHP Parse error:  syntax error, unexpected '[' in /home1/shashan2/socialapp/app/controllers/user/UserController.php on line 472
+[15-Mar-2014 22:22:34 UTC] PHP Fatal error:  Class 'oauth_facebook' not found in /home1/shashan2/socialapp/app/controllers/user/UserController.php on line 469
+[15-Mar-2014 22:24:20 UTC] PHP Parse error:  syntax error, unexpected ';' in /home1/shashan2/socialapp/app/controllers/user/UserController.php on line 469
+[15-Mar-2014 22:24:40 UTC] PHP Fatal error:  Call to a member function first() on a non-object in /home1/shashan2/socialapp/app/controllers/user/UserController.php on line 469
+[15-Mar-2014 22:24:53 UTC] PHP Parse error:  syntax error, unexpected ';' in /home1/shashan2/socialapp/app/controllers/user/UserController.php on line 469
+[15-Mar-2014 22:25:02 UTC] PHP Parse error:  syntax error, unexpected ';' in /home1/shashan2/socialapp/app/controllers/user/UserController.php on line 469
+[15-Mar-2014 22:26:02 UTC] PHP Parse error:  syntax error, unexpected 'echo' (T_ECHO) in /home1/shashan2/socialapp/app/controllers/user/UserController.php on line 475
+[15-Mar-2014 22:26:03 UTC] PHP Parse error:  syntax error, unexpected 'echo' (T_ECHO) in /home1/shashan2/socialapp/app/controllers/user/UserController.php on line 475
+[15-Mar-2014 22:27:02 UTC] PHP Parse error:  syntax error, unexpected 'echo' (T_ECHO) in /home1/shashan2/socialapp/app/controllers/user/UserController.php on line 475
+[15-Mar-2014 22:28:02 UTC] PHP Parse error:  syntax error, unexpected 'echo' (T_ECHO) in /home1/shashan2/socialapp/app/controllers/user/UserController.php on line 475
+[15-Mar-2014 22:29:02 UTC] PHP Parse error:  syntax error, unexpected 'echo' (T_ECHO) in /home1/shashan2/socialapp/app/controllers/user/UserController.php on line 475
+[15-Mar-2014 22:30:03 UTC] PHP Parse error:  syntax error, unexpected 'echo' (T_ECHO) in /home1/shashan2/socialapp/app/controllers/user/UserController.php on line 475
+[15-Mar-2014 22:31:02 UTC] PHP Parse error:  syntax error, unexpected 'echo' (T_ECHO) in /home1/shashan2/socialapp/app/controllers/user/UserController.php on line 475
+[15-Mar-2014 22:32:03 UTC] PHP Parse error:  syntax error, unexpected 'echo' (T_ECHO) in /home1/shashan2/socialapp/app/controllers/user/UserController.php on line 475
+[15-Mar-2014 22:47:14 UTC] PHP Fatal error:  Can't use function return value in write context in /home1/shashan2/socialapp/app/controllers/user/UserController.php on line 474
+[15-Mar-2014 22:47:14 UTC] PHP Fatal error:  Can't use function return value in write context in /home1/shashan2/socialapp/app/controllers/user/UserController.php on line 474
+[15-Mar-2014 22:47:17 UTC] PHP Fatal error:  Can't use function return value in write context in /home1/shashan2/socialapp/app/controllers/user/UserController.php on line 474
+[15-Mar-2014 22:47:18 UTC] PHP Fatal error:  Can't use function return value in write context in /home1/shashan2/socialapp/app/controllers/user/UserController.php on line 474
+[15-Mar-2014 22:47:37 UTC] PHP Fatal error:  Can't use function return value in write context in /home1/shashan2/socialapp/app/controllers/user/UserController.php on line 474
+[15-Mar-2014 22:47:38 UTC] PHP Fatal error:  Can't use function return value in write context in /home1/shashan2/socialapp/app/controllers/user/UserController.php on line 474
+[15-Mar-2014 22:48:02 UTC] PHP Fatal error:  Can't use function return value in write context in /home1/shashan2/socialapp/app/controllers/user/UserController.php on line 474
+[15-Mar-2014 22:48:02 UTC] PHP Fatal error:  Can't use function return value in write context in /home1/shashan2/socialapp/app/controllers/user/UserController.php on line 474
+[15-Mar-2014 22:50:22 UTC] PHP Warning:  Uncaught exception 'ErrorException' with message 'Undefined variable: token' in /home1/shashan2/socialapp/app/controllers/user/UserController.php:465
+Stack trace:
+#0 /home1/shashan2/socialapp/app/controllers/user/UserController.php(465): Illuminate\Exception\Handler->handleError(8, 'Undefined varia...', '/home1/shashan2...', 465, Array)
+#1 [internal function]: UserController->registerNetworks()
+#2 /home1/shashan2/socialapp/vendor/laravel/framework/src/Illuminate/Routing/Controller.php(194): call_user_func_array(Array, Array)
+#3 /home1/shashan2/socialapp/vendor/laravel/framework/src/Illuminate/Routing/ControllerDispatcher.php(93): Illuminate\Routing\Controller->callAction('registerNetwork...', Array)
+#4 /home1/shashan2/socialapp/vendor/laravel/framework/src/Illuminate/Routing/ControllerDispatcher.php(62): Illuminate\Routing\ControllerDispatcher->call(Object(UserController), Object(Illuminate\Routing\Route), 'registerNetwork...')
+#5 /home1/shashan2/socialapp/vendor/laravel/framework/src/Illuminate/Routing/Route in /home1/shashan2/socialapp/app/controllers/user/UserController.php on line 465
+[15-Mar-2014 22:50:22 UTC] PHP Fatal error:  Call to a member function getAccessToken() on a non-object in /home1/shashan2/socialapp/app/controllers/user/UserController.php on line 465

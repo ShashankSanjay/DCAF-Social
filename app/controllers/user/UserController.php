@@ -100,7 +100,7 @@ class UserController extends BaseController {
     	
     	// (new Facebook\phpSDK\FacebookServiceProvider(App::make('app')))->register();
     	
-    	echo '<pre>';
+    	// echo '<pre>';
 
     	
     	/*$call = $consumer->request('/me/accounts');
@@ -119,7 +119,7 @@ class UserController extends BaseController {
 		}*/
 
 
-    	die('</pre>');
+    	// die('</pre>');
     	
     	// $facebook = App::make('facebook');
     	// $facebook = $app->make('Facebook');
@@ -452,40 +452,48 @@ class UserController extends BaseController {
 		else {
 			// Save into db
 		}*/
-
+		
+		// Session::flash('lusitanian_oauth_token', null);
+		
 		$networks = array('facebook', 'twitter', 'google', 'instagram');
 
 		foreach ($networks as $network) {
 			$db = 'oauth_'.$network;
-			if ( OAuth::hasToken($network) ) {
-				// Save into db
+			
+			$s = ''.$network;
+
+			if ( OAuth::hasToken($network)) {
+
 				$token = OAuth::token($network);
-				
-				DB::table($db)->insert(
-				    array('access_token' => $token->getAccessToken())
-				);
-				Session::forget('lusitanian_oauth_token');
+				if (count(DB::select('select * from '. $db .' where access_token = ?', array($token->getAccessToken()))) == 0) {
+					// Save into db
 
-				if ($network == 'facebook') {
-					$f = OAuth::consumer('facebook');
-					$f->getStorage()->storeAccessToken("Facebook", $token);
-					$r = $f->request('/me');
-					$d = json_decode($r, true);
-					var_dump($d);
-					die();
-				}
+					$token = OAuth::token($network);
+					
+					DB::table($db)->insert(
+						array('access_token' => $token->getAccessToken(), 'user_id' => Auth::User()->id)
+					);
+					
+					
+					if ($network == 'facebook') {
+						$f = OAuth::consumer('facebook');
+						$f->getStorage()->storeAccessToken("Facebook", $token);
+						$r = $f->request('/me');
+						$d = json_decode($r, true);
+						var_dump($d);
+					}
 
-				elseif ($network == 'twitter') {
-					$t = OAuth::consumer('facebook');
-					$t->getStorage()->storeAccessToken("Twitter", $token);
-					$r = $t->request('account/settings.json');
-					$d = json_decode($r, true);
-					var_dump($d);
-					die();
-				}
+					elseif ($network == 'twitter') {
+						$t = OAuth::consumer('facebook');
+						$t->getStorage()->storeAccessToken("Twitter", $token);
+						$r = $t->request('account/settings.json');
+						$d = json_decode($r, true);
+						var_dump($d);
+					}
 
-				elseif ($network == 'google') {
-					# code...
+					elseif ($network == 'google') {
+						# code...
+					}
 				}
 			}
 		}

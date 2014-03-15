@@ -30,11 +30,19 @@ class SocialRetrieverController extends BaseController
 	/**
 	 * Cron job function to be called
 	 */
-	public function getAllData()
+	public function getAllUserData()
 	{
-		// Call SocialRetriver model to retrieve Facebook data
+		$facebookRetriever	 = new FacebookRetriever();
+		$TwitterRetriever	 = new TwitterRetriever();
+		$googlePlusRetriever = new GooglePlusRetriever();
+		$tumblerRetriever	 = new TumblerRetriever();
 		
-		// Call SocialRetriver model to retrieve Google Plus data
+		// get all cron-jobs
+		
+		
+		// Call FacebookRetriver to retrieve Facebook data
+		
+		// Call SocialRetriver to retrieve Google Plus data
 		
 		// Call SocialRetriver model to retrieve Twitter data
 		
