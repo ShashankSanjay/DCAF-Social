@@ -26,6 +26,11 @@ class FBPage extends Eloquent
 	{
 		return $this->belongstoMany('FacebookUsers');
 	}
+
+	public function oauth_facebook()
+	{
+		return $this->hasOne('oauth_facebook');
+	}
 	
 	/*
 		All fields for page. URL: https://developers.facebook.com/docs/graph-api/reference/page
