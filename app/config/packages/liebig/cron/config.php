@@ -15,7 +15,7 @@ return array(
     'logOnlyErrorJobsToDatabase' => true,
     
     // Delte old database entries after how many hours
-    'deleteDatabaseEntriesAfter' => 240,
+    'deleteDatabaseEntriesAfter' => 1,
     
     // Prevent job overlapping - if Cron is still running it could not be started a second time
     'preventOverlapping' => true

@@ -31,9 +31,9 @@ Route::pattern('role', '[0-9]+');
 Route::pattern('token', '[0-9a-z]+');
 
 Route::get('/cron/run/test', function () {
-    Cron::add('example1', '* * * * *', function() {
+    Cron::add('iexample1', '* * * * *', function() {
                         // Do some crazy things every minute
-                        DB::insert('insert into oauth_facebook (access_token) values (?)', array('heyo123'));
+                        return null;
 
                     });
     Cron::add('example2', '*/2 * * * *', function() {
@@ -41,7 +41,7 @@ Route::get('/cron/run/test', function () {
                         return null;
                     });
     $report = Cron::run();
-    print_r ($report);
+    return $report;
 });
 
 

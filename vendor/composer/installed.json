@@ -1308,57 +1308,6 @@
         ]
     },
     {
-        "name": "liebig/cron",
-        "version": "dev-master",
-        "version_normalized": "9999999-dev",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/liebig/cron.git",
-            "reference": "5d8d2329e6fdbdcb6ec3a22aff0eca5165712c23"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/liebig/cron/zipball/5d8d2329e6fdbdcb6ec3a22aff0eca5165712c23",
-            "reference": "5d8d2329e6fdbdcb6ec3a22aff0eca5165712c23",
-            "shasum": ""
-        },
-        "require": {
-            "mtdowling/cron-expression": "1.*",
-            "php": ">=5.3.0"
-        },
-        "require-dev": {
-            "illuminate/support": "4.0.x"
-        },
-        "time": "2014-03-14 16:28:22",
-        "type": "library",
-        "installation-source": "source",
-        "autoload": {
-            "classmap": [
-                "src/migrations"
-            ],
-            "psr-0": {
-                "Liebig\\Cron": "src/"
-            }
-        },
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-            "MIT"
-        ],
-        "authors": [
-            {
-                "name": "Marc Liebig",
-                "email": "marc.liebig@gmx.eu"
-            }
-        ],
-        "description": "Job scheduling for Laravel",
-        "keywords": [
-            "cron",
-            "cronjob",
-            "cronmanager",
-            "laravel"
-        ]
-    },
-    {
         "name": "robclancy/presenter",
         "version": "1.2.0",
         "version_normalized": "1.2.0.0",
@@ -3501,6 +3450,57 @@
                 "homepage": "http://jeffrye-way.com",
                 "role": "Developer"
             }
+        ]
+    },
+    {
+        "name": "liebig/cron",
+        "version": "dev-master",
+        "version_normalized": "9999999-dev",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/liebig/cron.git",
+            "reference": "5d8d2329e6fdbdcb6ec3a22aff0eca5165712c23"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/liebig/cron/zipball/5d8d2329e6fdbdcb6ec3a22aff0eca5165712c23",
+            "reference": "5d8d2329e6fdbdcb6ec3a22aff0eca5165712c23",
+            "shasum": ""
+        },
+        "require": {
+            "mtdowling/cron-expression": "1.*",
+            "php": ">=5.3.0"
+        },
+        "require-dev": {
+            "illuminate/support": "4.0.x"
+        },
+        "time": "2014-03-14 16:28:22",
+        "type": "library",
+        "installation-source": "dist",
+        "autoload": {
+            "classmap": [
+                "src/migrations"
+            ],
+            "psr-0": {
+                "Liebig\\Cron": "src/"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Marc Liebig",
+                "email": "marc.liebig@gmx.eu"
+            }
+        ],
+        "description": "Job scheduling for Laravel",
+        "keywords": [
+            "cron",
+            "cronjob",
+            "cronmanager",
+            "laravel"
         ]
     }
 ]
