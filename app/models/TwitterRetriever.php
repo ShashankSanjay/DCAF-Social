@@ -5,7 +5,7 @@
  * 
  * @version	1.0
  */
-class TwitterRetriever extends SocialRetriever
+class TwitterRetriever implements SocialRetriever
 {
 	public static USER_CLASS = "TwitterUser";
 	
@@ -27,6 +27,22 @@ class TwitterRetriever extends SocialRetriever
 		// Get user info
 		$response = $consumer->request('/statuses/user_timeline.json');
 		$data = json_decode($response, true);
+	}
+	
+	/**
+	 * Alias to getContent()
+	 */
+	public function getTweet($id)
+	{
+		return $this->getContent($id);
+	}
+	
+	/**
+	 * Retieves Tweets
+	 */
+	public function getContent($id)
+	{
+		// {implementation code}
 	}
 }
 
