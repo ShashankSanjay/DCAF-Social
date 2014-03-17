@@ -21,9 +21,9 @@ class GooglePlusUser extends Eloquent
 	/**
 	 * Constuctor
 	 */
-	public function __construct($consumer)
+	public function __construct()
 	{
-		parent::__construct($consumer);
+		parent::__construct();
 	}
 	
 	/**********************

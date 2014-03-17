@@ -15,10 +15,11 @@
  *  Route model binding
  *  ------------------------------------------
  */
-Route::model('user', 'User');
+Route::model('user', 'DcafUser');
 Route::model('comment', 'Comment');
 Route::model('post', 'Post');
-Route::model('role', 'Role');
+Route::model('role', 'DcafRole');
+Route::model('job', 'Job');
 
 /** ------------------------------------------
  *  Route constraint patterns
@@ -43,6 +44,24 @@ Route::get('/cron/run/test', function () {
     return $report;
 });
 
+Route::get('/cron/{job}/run', 'SocialRetrieverController@getAllUserData');
+
+/*
+Route::get('/cron/run/test2', function() {
+    // dispatch the request to the method on the controller
+    // return Route::getControllerDispatcher()->dispatch(Route::current();, Route::getCurrentRequest(), "SocialRetrieverController", "getShow");
+    
+    $generator = new ControllerGenerator(App::files);
+    $cmd = new MakeControllerCommand($generator, App::path.'/controllers');
+    // $cmd->generateController();
+    // $cmd->generator->make($cmd->input->getArgument('name'), $cmd->getPath(), $cmd->getBuildOptions());
+    $path = $cmd->laravel['path.base'].'/'.$cmd->input->getOption('path');
+    $options = array('only' => array(), 'except' => array());
+    $generator->make("SocialRetrieverController", $path, $options)
+    
+    // return View::make('site/contact-us');
+});
+*/
 
 /** ------------------------------------------
  *  Admin Routes
@@ -50,7 +69,6 @@ Route::get('/cron/run/test', function () {
  */
 Route::group(array('prefix' => 'admin', 'before' => 'auth'), function()
 {
-
     # Comment Management
     Route::get('comments/{comment}/edit', 'AdminCommentsController@getEdit');
     Route::post('comments/{comment}/edit', 'AdminCommentsController@postEdit');
@@ -112,53 +130,51 @@ Route::group(array('before' => 'auth'), function()
 
     Route::get('exampleBoard', function()
     {
-        //
         return View::make('site.dashboard.exampleboard');
     });
-
+    
     Route::get('demographics', 'UserDashboardController@getDemographics');
-
+    
     Route::get('rawr', function()
     {
-        //
         $companies = [
-                    'Pepsi' => ['0' => 'fa fa-facebook-square',
-                                '1' => 'fa fa-twitter-square',
-                                '2' => 'fa fa-google-plus-square',
-                                '3' => 'fa fa-instagram'],
-                    'Coke' => ['0' => 'fa fa-facebook-square',
-                                '1' => 'fa fa-twitter-square',
-                                '2' => 'fa fa-google-plus-square',
-                                '3' => 'fa fa-instagram'],
-                    'Samsung' => ['0' => 'fa fa-facebook-square',
-                                '1' => 'fa fa-twitter-square',
-                                '2' => 'fa fa-google-plus-square',
-                                '3' => 'fa fa-instagram'],
-                    'Apple' => ['0' => 'fa fa-facebook-square',
-                                '1' => 'fa fa-twitter-square',
-                                '2' => 'fa fa-google-plus-square',
-                                '3' => 'fa fa-instagram'],
-                    'Levi' => ['0' => 'fa fa-facebook-square',
-                                '1' => 'fa fa-twitter-square',
-                                '2' => 'fa fa-google-plus-square',
-                                '3' => 'fa fa-instagram'],
-                    'American Apparel' => ['0' => 'fa fa-facebook-square',
-                                '1' => 'fa fa-twitter-square',
-                                '2' => 'fa fa-google-plus-square',
-                                '3' => 'fa fa-instagram'],
-                    'Likeable Media' => ['0' => 'fa fa-facebook-square',
-                                '1' => 'fa fa-twitter-square',
-                                '2' => 'fa fa-google-plus-square',
-                                '3' => 'fa fa-instagram'],
-                    'CPX' => ['0' => 'fa fa-facebook-square',
-                                '1' => 'fa fa-twitter-square',
-                                '2' => 'fa fa-google-plus-square',
-                                '3' => 'fa fa-instagram'],
-                    'Hofstra' => ['0' => 'fa fa-facebook-square',
-                                '1' => 'fa fa-twitter-square',
-                                '2' => 'fa fa-google-plus-square',
-                                '3' => 'fa fa-instagram']
-                    ];
+            'Pepsi' => ['0' => 'fa fa-facebook-square',
+                        '1' => 'fa fa-twitter-square',
+                        '2' => 'fa fa-google-plus-square',
+                        '3' => 'fa fa-instagram'],
+            'Coke' => ['0' => 'fa fa-facebook-square',
+                        '1' => 'fa fa-twitter-square',
+                        '2' => 'fa fa-google-plus-square',
+                        '3' => 'fa fa-instagram'],
+            'Samsung' => ['0' => 'fa fa-facebook-square',
+                        '1' => 'fa fa-twitter-square',
+                        '2' => 'fa fa-google-plus-square',
+                        '3' => 'fa fa-instagram'],
+            'Apple' => ['0' => 'fa fa-facebook-square',
+                        '1' => 'fa fa-twitter-square',
+                        '2' => 'fa fa-google-plus-square',
+                        '3' => 'fa fa-instagram'],
+            'Levi' => ['0' => 'fa fa-facebook-square',
+                        '1' => 'fa fa-twitter-square',
+                        '2' => 'fa fa-google-plus-square',
+                        '3' => 'fa fa-instagram'],
+            'American Apparel' => ['0' => 'fa fa-facebook-square',
+                        '1' => 'fa fa-twitter-square',
+                        '2' => 'fa fa-google-plus-square',
+                        '3' => 'fa fa-instagram'],
+            'Likeable Media' => ['0' => 'fa fa-facebook-square',
+                        '1' => 'fa fa-twitter-square',
+                        '2' => 'fa fa-google-plus-square',
+                        '3' => 'fa fa-instagram'],
+            'CPX' => ['0' => 'fa fa-facebook-square',
+                        '1' => 'fa fa-twitter-square',
+                        '2' => 'fa fa-google-plus-square',
+                        '3' => 'fa fa-instagram'],
+            'Hofstra' => ['0' => 'fa fa-facebook-square',
+                        '1' => 'fa fa-twitter-square',
+                        '2' => 'fa fa-google-plus-square',
+                        '3' => 'fa fa-instagram']
+        ];
         
         return View::make('site.outlines.dashboard', compact('companies'));
 
@@ -171,6 +187,9 @@ Route::group(array('before' => 'auth'), function()
  *  ------------------------------------------
  */
 
+Route::get('user', 'UserController@getIndex');
+Route::post('user', 'UserController@postIndex');
+
 // User reset routes
 Route::get('user/reset/{token}', 'UserController@getReset');
 // User password reset
@@ -179,13 +198,14 @@ Route::post('user/reset/{token}', 'UserController@postReset');
 Route::post('user/{user}/edit', 'UserController@postEdit');
 
 //:: User Account Routes ::
+Route::get('user/login', 'UserController@getLogin');
 Route::post('user/login', 'UserController@postLogin');
 
 Route::get('user/profile', 'UserController@getProfile');
 
 Route::get('user/confirmation', 'UserController@getConfirmation');
 
-//after user clicks confirm link on email, redirected here. Then proceed to register DCAF with each network. THen go to dashboard
+//after user clicks confirm link on email, redirected here. Then proceed to register DCAF with each network. Then go to dashboard
 Route::get('user/registernetworks', 'UserController@registerNetworks');
 Route::post('user/registernetworks', 'UserController@postNetworks');
 
@@ -194,15 +214,15 @@ Route::get('user/firstTime', 'UserController@firstTime');
 
 Route::get('user/team', 'UserController@team');
 
-# User RESTful Routes (Login, Logout, Register, etc)
-Route::controller('user', 'UserController');
+// User RESTful Routes (Login, Logout, Register, etc)
+// Route::controller('user', 'UserController');
 
 //:: Application Routes ::
 
-# Filter for detect language
+// Filter for detect language
 Route::when('contact-us','detectLang');
 
-# Contact Us Static Page
+// Contact Us Static Page
 Route::get('contact-us', function()
 {
     // Return about us page
@@ -221,7 +241,6 @@ Route::get('/', array('before' => 'auth','uses' => 'UserController@getIndex'));
     var_dump(Auth::user());
     die();
 });*/
-
 
 App::missing(function($exception)
 {

@@ -7,31 +7,41 @@
  */
 class TumblerRetriever implements SocialRetriever
 {
-	/**
-	 * Instagram/tumblr
-	 */
+	public $consumer;
 	
 	/**
 	 * Constuctor
 	 */
-	public function __construct($consumer)
+	public function __construct($consumer = null)
 	{
-		parent::__construct($consumer);
+		// parent::__construct($consumer);
+		// if ($consumer == null) $consumer = OAuth::consumer('tumbler');
+		$this->consumer = $consumer;
 	}
 	
 	/**
 	 * Tumbler Stuff
 	 */
-	public function getUser($consumer)
+	public function getUser($id = null)
 	{
 		// Get user info
-		$response = $consumer->request('');
+		$response = $this->consumer->request('');
 		$data = json_decode($response, true);
+	}
+	
+	public function getPage($id)
+	{
+		// Get user pages
 	}
 	
 	public function getContent($id)
 	{
-		
+		// {implementation code}
+	}
+	
+	public function paginate()
+	{
+		// {implementation code}
 	}
 }
 

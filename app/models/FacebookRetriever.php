@@ -7,8 +7,8 @@
  */
 class FacebookRetriever implements SocialRetriever
 {
-	public static USER_CLASS = "FacebookUser";
-	public static GET_USER_URI = '/me';
+	const USER_CLASS = "FacebookUser";
+	const GET_USER_URI = '/me';
 	
 	public $consumer;
 	
@@ -18,8 +18,28 @@ class FacebookRetriever implements SocialRetriever
 	public function __construct($consumer = null)
 	{
 		// parent::__construct(($consumer == null) ? new OAuth:consumer('facebook') : $consumer);
-		if ($consumer == null) $consumer = new OAuth::consumer('facebook');
+		if ($consumer == null) $consumer = OAuth::consumer('facebook');
 		$this->consumer = $consumer;
+	}
+	
+	public function getAllUserData($token)
+	{
+		$this->consumer->getStorage()->storeAccessToken("Facebook", $token);
+		// $user = $this->getUser();
+		
+		// $user = FacebookUser::
+		
+		// Parse data and save into correct DB tables
+		foreach ($user['data'] as $data)
+		{
+			// Move through and save page ouath
+			$fbpage = new FB_Page;
+			$fbpage->FB_Page_ID = $data->id;
+			$fbpage->access_token = $data->access_token;
+			$fbpage->perms = $data->perms;
+			$fbpage->name = $data->name;
+			$fbpage->save();
+		}
 	}
 	
 	/**
@@ -30,22 +50,10 @@ class FacebookRetriever implements SocialRetriever
 	public function getUser($id = null)
 	{
 		// Get user info
-		$call = $this->consumer->request('/me');	// /me/data
+		$call = $this->consumer->request($id ? $id : '/me');	// /me/data
 		$response = json_decode($call, true);
 		
-		// Parse data and save into correct DB tables
-		$datas = $response['data'];
-		
-		foreach ($datas as $data)
-		{
-			// Move through and save page ouath
-			$fbpage = new FB_Page;
-			$fbpage->FB_Page_ID = $data->id;
-			$fbpage->access_token = $data->access_token;
-			$fbpage->perms = $data->perms;
-			$fbpage->name = $data->name;
-			$fbpage->save();
-		}
+		$facebookUser = new FacebookUser();
 	}
 	
 	/**
@@ -70,12 +78,13 @@ class FacebookRetriever implements SocialRetriever
 		
 		$pages = array();
 		
-		foreach ($pages as $page)
+		foreach ($ids as $id)
 		{
 			$db = FB_Pages::find($id);
 			// $key = array_push(&$pages, $page);
-			$pages[] = $page;
 		}
+		
+		return $pages;
 	}
 	
 	public function getPage($id)
@@ -103,8 +112,8 @@ class FacebookRetriever implements SocialRetriever
 		 * Accepts decoded fb json, returns unpaginated array of arrays
 		 * Secondary arrays are returned with name from fb, ie. post, likes
 		 *
-		$response = self::paginate($response);
-		$responses[] = $response;
+		 * $response = self::paginate($response);
+		 * $responses[] = $response;
 		*/
 		
 		
@@ -130,6 +139,11 @@ class FacebookRetriever implements SocialRetriever
 				$post->FacebookUser->attach($userid);
 			}
 		}
+	}
+	
+	public function paginate()
+	{
+		// {implementation code}
 	}
 }
 

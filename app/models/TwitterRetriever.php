@@ -7,16 +7,16 @@
  */
 class TwitterRetriever implements SocialRetriever
 {
-	public static USER_CLASS = "TwitterUser";
+	const USER_CLASS = "TwitterUser";
 	
-	public static GET_USER_URI = '/statuses/user_timeline.json';
+	const GET_USER_URI = '/statuses/user_timeline.json';
 	
 	/**
 	 * Constructor
 	 */
-	public function __construct($consumer)
+	public function __construct($consumer = null)
 	{
-		if ($consumer == null) $consumer = new OAuth::consumer('twitter');
+		if ($consumer == null) $consumer = OAuth::consumer('twitter');
 		$this->consumer = $consumer;
 	}
 	
@@ -31,11 +31,16 @@ class TwitterRetriever implements SocialRetriever
 		$data = json_decode($response, true);
 	}
 	
-	/*
-	*	
-	*/
-	public function getTweets($username) {
-		//
+	public function getPage($id)
+	{
+		// {implementation code}
+	}
+	
+	/**
+	 * 	
+	 */
+	public function getTweets($username)
+	{
 		$q = 'search/tweets.json?q=from:' . $username;
 
 		$response = $consumer->request($q);
@@ -57,6 +62,11 @@ class TwitterRetriever implements SocialRetriever
 	 * Retieves Tweets
 	 */
 	public function getContent($id)
+	{
+		// {implementation code}
+	}
+	
+	public function paginate()
 	{
 		// {implementation code}
 	}

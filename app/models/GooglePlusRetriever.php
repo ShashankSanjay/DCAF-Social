@@ -7,16 +7,20 @@
  */
 class GooglePlusRetriever implements SocialRetriever
 {
-	public static GET_USER_URI = 'https://www.googleapis.com/oauth2/v1/userinfo';
+	const GET_USER_URI = 'https://www.googleapis.com/oauth2/v1/userinfo';
+	
+	public $consumer;
 	
 	/**
-	 * Constructor
+	 * Constuctor
 	 */
-	public function __construct($consumer)
+	public function __construct($consumer = null)
 	{
-		parent::__construct($consumer);
+		// parent::__construct($consumer);
+		// if ($consumer == null) $consumer = OAuth::consumer('googleplus');
+		$this->consumer = $consumer;
 	}
-	
+		
 	/**
 	 * Google Stuff
 	 */
@@ -34,7 +38,12 @@ class GooglePlusRetriever implements SocialRetriever
 	
 	public function getContent($id)
 	{
-		
+		// {implementation code}
+	}
+	
+	public function paginate()
+	{
+		// {implementation code}
 	}
 }
 

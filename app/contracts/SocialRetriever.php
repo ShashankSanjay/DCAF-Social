@@ -20,7 +20,7 @@ interface SocialRetriever
 	/**
 	 * Get a post/tweet/comment for a given id
 	 */
-	public function getContent($id)
+	public function getContent($id);
 	
 	public function paginate();
 }

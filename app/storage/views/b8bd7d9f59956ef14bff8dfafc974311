@@ -1,4 +1,3 @@
- 
 <?php /* Web site Title */ ?>
 <?php $__env->startSection('title'); ?>
 Network Registration
@@ -66,4 +65,4 @@ Network Registration
 	</div>
 </section>
 <?php $__env->stopSection(); ?>
-<?php echo $__env->make('site.layouts.default', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+<?php echo $__env->make('site.outlines.nonboard', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?> 

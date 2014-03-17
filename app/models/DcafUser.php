@@ -20,7 +20,7 @@ class DcafUser extends ConfideUser implements UserProfileInterface, UserInterfac
 	public $primaryKey	= 'id';			// defaults to 'id'
 	public $incrementing = true;		// defaults to true; false disables auto-incrementing the primary key
 	public $timestamps	= true;			// defaults to true to maintain 'updated_at' and 'created_at' columns
-	
+	protected $softDelete = true;		// defaults to false; true to set a timestamp in the deleted_at column
 	
 	public static $rules = array(
 		'username'	=> 'required|alpha_dash|between:4,16',

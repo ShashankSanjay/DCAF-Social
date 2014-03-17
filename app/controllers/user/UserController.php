@@ -14,8 +14,8 @@ use OAuth\OAuth2\Token\StdOAuth2Token;
 	// include 'classes/' . $class . '.class.php';
 }, true, true); */
 
-class UserController extends BaseController {
-	
+class UserController extends BaseController
+{
 	/**
 	 * User Model
 	 * @var DcafUser
@@ -35,14 +35,19 @@ class UserController extends BaseController {
 	}
 	
 	/**
-	 * Users settings page
-	 *
+	 * User Dashboard: Main page
+	 * 
+	 * requires authenticated user
+	 * 
+	 * HTTP Request Method:	GET
+	 * Route URL:	/user/
+	 * 
 	 * @return View
 	 */
 	public function getIndex()
 	{
 		list($user,$redirect) = $this->user->checkAuthAndRedirect('user');
-		if($redirect){return $redirect;}
+		if ($redirect) { return $redirect; }
 		
 		// Show the page
 		$companies = [
@@ -70,7 +75,7 @@ class UserController extends BaseController {
 						'1' => 'fa fa-twitter-square',
 						'2' => 'fa fa-google-plus-square',
 						'3' => 'fa fa-instagram'],
-			/*'Likeable Media' => ['0' => 'fa fa-facebook-square',
+			/* 'Likeable Media' => ['0' => 'fa fa-facebook-square',
 						'1' => 'fa fa-twitter-square',
 						'2' => 'fa fa-google-plus-square',
 						'3' => 'fa fa-instagram'],
@@ -81,10 +86,10 @@ class UserController extends BaseController {
 			'Hofstra' => ['0' => 'fa fa-facebook-square',
 						'1' => 'fa fa-twitter-square',
 						'2' => 'fa fa-google-plus-square',
-						'3' => 'fa fa-instagram']*/
+						'3' => 'fa fa-instagram'] */
 		];
-		
-		/*$brand = new Brand();
+				
+		/* $brand = new Brand();
 		$brand->id = 1;
 		$brand->name = 'Cherry Coke';
 		$brand->save();
@@ -95,15 +100,14 @@ class UserController extends BaseController {
 
 		var_dump($brand->BrandGroup()->first()->name);
 		die();
-		//$brand = Brand::find(1);
-    	//$uid = $brand->facebook->oauth_uid;*/
+		// $brand = Brand::find(1);
+    	// $uid = $brand->facebook->oauth_uid; */
     	
     	// (new Facebook\phpSDK\FacebookServiceProvider(App::make('app')))->register();
     	
     	// echo '<pre>';
-
     	
-    	/*$call = $consumer->request('/me/accounts');
+    	/* $call = $consumer->request('/me/accounts');
 		$response = json_decode($call, true);
 
 		$data = $response['data'];
@@ -116,9 +120,8 @@ class UserController extends BaseController {
 			$c = $consumer->request('/me');
 			$r = json_decode($c, true);
 			var_dump($r);
-		}*/
-
-
+		} */
+		
     	// die('</pre>');
     	
     	// $facebook = App::make('facebook');
@@ -129,19 +132,22 @@ class UserController extends BaseController {
 	    )); */
     	// App::instance('facebook', $facebook);
 		
-		return View::make('site/dashboard/home', compact('user', 'companies'));
+		return View::make('site/dashboard/home', array($user, $companies));
 	}
 
 	/**
 	 * Stores new user
+	 * 
+	 * HTTP Method:	POST
+	 * Route URL:	/user/
 	 */
 	public function postIndex()
 	{
-		$this->user->username = Input::get( 'username' );
-		$this->user->email = Input::get( 'email' );
+		$this->user->username = Input::get('username');
+		$this->user->email = Input::get('email');
 
 		$password = Input::get('password');
-		$passwordConfirmation = Input::get( 'password_confirmation' );
+		$passwordConfirmation = Input::get('password_confirmation');
 		
 		if (!empty($password)) {
 			if($password === $passwordConfirmation) {
@@ -194,14 +200,15 @@ class UserController extends BaseController {
 
 	/**
 	 * Edits a user
-	 *
+	 * 
+	 * HTTP Method:	POST
+	 * Route URL:	/user/{user}/edit
 	 */
 	public function postEdit($user)
 	{
 		// Validate the inputs
 		$validator = Validator::make(Input::all(), $user->getUpdateRules());
-
-
+		
 		if ($validator->passes())
 		{
 			$oldUser = clone $user;
@@ -248,15 +255,20 @@ class UserController extends BaseController {
 
 	/**
 	 * Displays the form for user creation
+	 * 
+	 * HTTP Method:	GET
+	 * Route URL:	/user/create
 	 */
 	public function getCreate()
 	{
 		return View::make('site/nonboard/create');
 	}
-
-
+	
 	/**
 	 * Displays the login form
+	 * 
+	 * HTTP Method:	GET
+	 * Route URL:	/user/login
 	 */
 	public function getLogin()
 	{
@@ -270,21 +282,24 @@ class UserController extends BaseController {
 
 	/**
 	 * Attempt to do login
+	 * 
+	 * HTTP Method:	POST
+	 * Route URL:	/user/login
 	 */
 	public function postLogin()
 	{
 		$input = array(
-			'email'    => Input::get( 'email' ), // May be the username too
-			'username' => Input::get( 'email' ), // May be the username too
-			'password' => Input::get( 'password' ),
-			'remember' => Input::get( 'remember' ),
+			'email'    => Input::get('email'), // May be the username too
+			'username' => Input::get('email'), // May be the username too
+			'password' => Input::get('password'),
+			'remember' => Input::get('remember'),
 		);
-
+		
 		// If you wish to only allow login from confirmed users, call logAttempt
 		// with the second parameter as true.
 		// logAttempt will check if the 'email' perhaps is the username.
 		// Check that the user is confirmed.
-
+		
 		if (Confide::logAttempt($input, true))
 		{
 			$r = Session::get('loginRedirect');
@@ -306,7 +321,6 @@ class UserController extends BaseController {
 				$err_msg = Lang::get('confide::confide.alerts.not_confirmed');
 			} else {
 				$err_msg = Lang::get('confide::confide.alerts.wrong_credentials');
-				
 			}
 			
 			return Redirect::to('user/login')
@@ -317,7 +331,10 @@ class UserController extends BaseController {
 
 	/**
 	 * Attempt to confirm account with code
-	 *
+	 * 
+	 * HTTP Method:	GET
+	 * Route URL:	/user/confirm
+	 * 
 	 * @param  string  $code
 	 */
 	public function getConfirm($code)
@@ -336,6 +353,9 @@ class UserController extends BaseController {
 
 	/**
 	 * Displays the forgot password form
+	 * 
+	 * HTTP Method:	GET
+	 * Route URL:	/user/forgot
 	 */
 	public function getForgot()
 	{
@@ -344,6 +364,9 @@ class UserController extends BaseController {
 
 	/**
 	 * Attempt to reset password with given email
+	 * 
+	 * HTTP Method:	POST
+	 * Route URL:	/user/forgot
 	 */
 	public function postForgot()
 	{
@@ -362,6 +385,9 @@ class UserController extends BaseController {
 
 	/**
 	 * Shows the change password form with the given token
+	 * 
+	 * HTTP Method:	GET
+	 * Route URL:	/user/reset
 	 */
 	public function getReset( $token )
 	{
@@ -457,15 +483,18 @@ class UserController extends BaseController {
 		
 		$networks = array('facebook', 'twitter', 'google', 'instagram');
 
-		foreach ($networks as $network) {
+		foreach ($networks as $network)
+		{
 			$db = 'oauth_'.$network;
 			
 			$s = ''.$network;
 
-			if ( OAuth::hasToken($network)) {
-
+			if (OAuth::hasToken($network))
+			{
 				$token = OAuth::token($network);
-				if (count(DB::select('select * from '. $db .' where access_token = ?', array($token->getAccessToken()))) == 0) {
+				
+				if (count(DB::select('select * from '. $db .' where access_token = ?', array($token->getAccessToken()))) == 0)
+				{
 					// Save into db
 
 					$token = OAuth::token($network);
@@ -482,16 +511,14 @@ class UserController extends BaseController {
 						$d = json_decode($r, true);
 						var_dump($d);
 					}
-
-					elseif ($network == 'twitter') {
+					else if ($network == 'twitter') {
 						$t = OAuth::consumer('facebook');
 						$t->getStorage()->storeAccessToken("Twitter", $token);
 						$r = $t->request('account/settings.json');
 						$d = json_decode($r, true);
 						var_dump($d);
 					}
-
-					elseif ($network == 'google') {
+					else if ($network == 'google') {
 						# code...
 					}
 				}
@@ -500,11 +527,12 @@ class UserController extends BaseController {
 		
 		return View::make('site.nonboard.registernetworks');
 	}
-
-	public function postNetworks() {
+	
+	public function postNetworks()
+	{
 		//
 	}
-
+	
 	public function firstTime()
 	{
 		$user = Auth::User();
@@ -513,7 +541,7 @@ class UserController extends BaseController {
 			// Do all first time initializations. 
 
 			// New Company
-			//$companyName = Input::get('companyName');
+			// $companyName = Input::get('companyName');
 			$company = new ClientCompany;
 			$company->name = Input::get('companyName');
 			$company->industry = Input::get('industry');
@@ -537,9 +565,7 @@ class UserController extends BaseController {
 
 			if (true) {
 				// plug user into existing things
-
 			}
-			
 			else {
 				// access code is incorrect as it does not exist
 			}
@@ -549,7 +575,7 @@ class UserController extends BaseController {
 	public function team()
 	{
 		return View::make('site.nonboard.team');
-	}
-
-	
+	}	
 }
+
+?>

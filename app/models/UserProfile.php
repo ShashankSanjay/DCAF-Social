@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Auth\UserInterface;
-use Models\UserProfileInterface;
+// use Models\UserProfileInterface;
 
 /**
  * @package    {package}
