@@ -132,6 +132,7 @@ class UserController extends BaseController
 	    )); */
     	// App::instance('facebook', $facebook);
 		
+		// return View::make('site.outlines.dashboard', compact('companies'));
 		return View::make('site/dashboard/home', array($user, $companies));
 	}
 
@@ -273,10 +274,9 @@ class UserController extends BaseController
 	public function getLogin()
 	{
 		$user = Auth::user();
-		if (!empty($user->id)){
+		if (!empty($user->id)) {
 			return Redirect::to('/');
 		}
-
 		return View::make('site/nonboard/login');
 	}
 
@@ -370,16 +370,16 @@ class UserController extends BaseController
 	 */
 	public function postForgot()
 	{
-		if( Confide::forgotPassword( Input::get( 'email' ) ) )
+		if (Confide::forgotPassword(Input::get('email')))
 		{
 			return Redirect::to('user/login')
-				->with( 'notice', Lang::get('confide::confide.alerts.password_forgot') );
+				->with('notice', Lang::get('confide::confide.alerts.password_forgot'));
 		}
 		else
 		{
 			return Redirect::to('user/forgot')
 				->withInput()
-				->with( 'error', Lang::get('confide::confide.alerts.wrong_password_forgot') );
+				->with('error', Lang::get('confide::confide.alerts.wrong_password_forgot'));
 		}
 	}
 
@@ -387,18 +387,20 @@ class UserController extends BaseController
 	 * Shows the change password form with the given token
 	 * 
 	 * HTTP Method:	GET
-	 * Route URL:	/user/reset
+	 * Route URL:	/user/reset/{token}
 	 */
-	public function getReset( $token )
+	public function getReset($token)
 	{
-
 		return View::make('site/user/reset')
 			->with('token',$token);
 	}
 
 
 	/**
-	 * Attempt change password of the user.
+	 * Attempt change the password of the user.
+	 * 
+	 * HTTP Method:	POST
+	 * Route URL:	/user/reset/{token}
 	 */
 	public function postReset()
 	{
@@ -452,6 +454,12 @@ class UserController extends BaseController
 		return $redirect;
 	}
 	
+	/**
+	 * Attempt change the password of the user.
+	 * 
+	 * HTTP Method:	GET
+	 * Route URL:	/user/confirmation
+	 */
 	public function getConfirmation()
 	{
 		return View::make('site.nonboard.confirmation');
@@ -466,9 +474,9 @@ class UserController extends BaseController
 		$user = Auth::user();
 		*/
 
-		//return View::make('site.nonboard.registernetworks')->with($data);
+		// return View::make('site.nonboard.registernetworks')->with($data);
 
-		/*if (OAuth::hasToken('facebook')) {
+		/* if (OAuth::hasToken('facebook')) {
 			//
 			$facebook = OAuth::consumer('facebook');
 			$response = $facebook->request('/me/accounts');
@@ -477,7 +485,7 @@ class UserController extends BaseController
 		}
 		else {
 			// Save into db
-		}*/
+		} */
 		
 		// Session::flash('lusitanian_oauth_token', null);
 		
@@ -530,14 +538,16 @@ class UserController extends BaseController
 	
 	public function postNetworks()
 	{
-		//
+		// {implementation code}
 	}
 	
 	public function firstTime()
 	{
 		$user = Auth::User();
+		
 		// first user from a company or agency
-		if ($first) {
+		if ($first)
+		{
 			// Do all first time initializations. 
 
 			// New Company
@@ -557,9 +567,8 @@ class UserController extends BaseController
 
 			// Make new team, make user manager
 		}
-
-		// Not the first user from their company
-		else {
+		else	// Not the first user from their company
+		{
 			// get access code for company
 			$access = Input::get('accessCode');
 

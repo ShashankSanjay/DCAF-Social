@@ -108,7 +108,7 @@ Route::group(array('prefix' => 'admin', 'before' => 'auth'), function()
 
 
 /** ------------------------------------------
- *  User Routes
+ *  User Frontend Routes
  *  ------------------------------------------
  */
 
@@ -134,93 +134,43 @@ Route::group(array('before' => 'auth'), function()
     });
     
     Route::get('demographics', 'UserDashboardController@getDemographics');
-    
-    Route::get('rawr', function()
-    {
-        $companies = [
-            'Pepsi' => ['0' => 'fa fa-facebook-square',
-                        '1' => 'fa fa-twitter-square',
-                        '2' => 'fa fa-google-plus-square',
-                        '3' => 'fa fa-instagram'],
-            'Coke' => ['0' => 'fa fa-facebook-square',
-                        '1' => 'fa fa-twitter-square',
-                        '2' => 'fa fa-google-plus-square',
-                        '3' => 'fa fa-instagram'],
-            'Samsung' => ['0' => 'fa fa-facebook-square',
-                        '1' => 'fa fa-twitter-square',
-                        '2' => 'fa fa-google-plus-square',
-                        '3' => 'fa fa-instagram'],
-            'Apple' => ['0' => 'fa fa-facebook-square',
-                        '1' => 'fa fa-twitter-square',
-                        '2' => 'fa fa-google-plus-square',
-                        '3' => 'fa fa-instagram'],
-            'Levi' => ['0' => 'fa fa-facebook-square',
-                        '1' => 'fa fa-twitter-square',
-                        '2' => 'fa fa-google-plus-square',
-                        '3' => 'fa fa-instagram'],
-            'American Apparel' => ['0' => 'fa fa-facebook-square',
-                        '1' => 'fa fa-twitter-square',
-                        '2' => 'fa fa-google-plus-square',
-                        '3' => 'fa fa-instagram'],
-            'Likeable Media' => ['0' => 'fa fa-facebook-square',
-                        '1' => 'fa fa-twitter-square',
-                        '2' => 'fa fa-google-plus-square',
-                        '3' => 'fa fa-instagram'],
-            'CPX' => ['0' => 'fa fa-facebook-square',
-                        '1' => 'fa fa-twitter-square',
-                        '2' => 'fa fa-google-plus-square',
-                        '3' => 'fa fa-instagram'],
-            'Hofstra' => ['0' => 'fa fa-facebook-square',
-                        '1' => 'fa fa-twitter-square',
-                        '2' => 'fa fa-google-plus-square',
-                        '3' => 'fa fa-instagram']
-        ];
-        
-        return View::make('site.outlines.dashboard', compact('companies'));
-
-    });
 });
 
+// Route::get('user', 'UserController@getIndex');
+// Route::post('user', 'UserController@postIndex');
 
-/** ------------------------------------------
- *  Frontend Routes
- *  ------------------------------------------
- */
-
-Route::get('user', 'UserController@getIndex');
-Route::post('user', 'UserController@postIndex');
-
-// User reset routes
+// User password reset routes
 Route::get('user/reset/{token}', 'UserController@getReset');
-// User password reset
 Route::post('user/reset/{token}', 'UserController@postReset');
+
 //:: User Account Routes ::
 Route::post('user/{user}/edit', 'UserController@postEdit');
 
-//:: User Account Routes ::
 Route::get('user/login', 'UserController@getLogin');
 Route::post('user/login', 'UserController@postLogin');
 
-Route::get('user/profile', 'UserController@getProfile');
-
 Route::get('user/confirmation', 'UserController@getConfirmation');
 
-//after user clicks confirm link on email, redirected here. Then proceed to register DCAF with each network. Then go to dashboard
+Route::get('user/create', 'UserController@getCreate');
+
+Route::get('user/profile', 'UserController@getProfile');
+
+// after user clicks confirm link on email, redirected here. Then proceed to register DCAF with each network. Then go to dashboard
 Route::get('user/registernetworks', 'UserController@registerNetworks');
 Route::post('user/registernetworks', 'UserController@postNetworks');
 
-//configure first time stuff
+// configure first time stuff
 Route::get('user/firstTime', 'UserController@firstTime');
 
 Route::get('user/team', 'UserController@team');
 
 // User RESTful Routes (Login, Logout, Register, etc)
-// Route::controller('user', 'UserController');
+Route::controller('user', 'UserController');
 
 //:: Application Routes ::
 
 // Filter for detect language
-Route::when('contact-us','detectLang');
+Route::when('contact-us', 'detectLang');
 
 // Contact Us Static Page
 Route::get('contact-us', function()
@@ -229,18 +179,16 @@ Route::get('contact-us', function()
     return View::make('site/contact-us');
 });
 
-# Posts - Second to last set, match slug
+// Posts - Second to last set, match slug
 Route::get('{postSlug}', 'BlogController@getView');
 Route::post('{postSlug}', 'BlogController@postView');
 
-# Index Page - Last route, no matches
+// Index Page - Last route, no matches
 Route::get('/', array('before' => 'auth','uses' => 'UserController@getIndex'));
-/*Route::get('/', function() 
-{
-    //
+/* Route::get('/', function()  {
     var_dump(Auth::user());
     die();
-});*/
+}); */
 
 App::missing(function($exception)
 {
