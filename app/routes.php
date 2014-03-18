@@ -15,11 +15,17 @@
  *  Route model binding
  *  ------------------------------------------
  */
-Route::model('user', 'DcafUser');
+// Route::model('user', 'DcafUser');
+Route::model('user', 'DcafUser', function()
+{
+    throw new NotFoundException;
+});
 Route::model('comment', 'Comment');
 Route::model('post', 'Post');
 Route::model('role', 'DcafRole');
-Route::model('job', 'Job');
+Route::bind('job', function($value, $route) {
+    return Job::findByIdOrName($value);
+});
 
 /** ------------------------------------------
  *  Route constraint patterns
@@ -67,7 +73,7 @@ Route::get('/cron/run/test2', function() {
  *  Admin Routes
  *  ------------------------------------------
  */
-Route::group(array('prefix' => 'admin', 'before' => 'auth'), function()
+Route::group(array('prefix' => 'admin', 'before' => array('auth', 'admin'), function()
 {
     # Comment Management
     Route::get('comments/{comment}/edit', 'AdminCommentsController@getEdit');
@@ -146,7 +152,7 @@ Route::post('user/reset/{token}', 'UserController@postReset');
 //:: User Account Routes ::
 Route::post('user/{user}/edit', 'UserController@postEdit');
 
-// Route::get('user/login', 'UserController@getLogin');
+Route::get('user/login', 'UserController@getLogin');
 Route::post('user/login', 'UserController@postLogin');
 
 Route::get('user/confirmation', 'UserController@getConfirmation');
@@ -155,6 +161,7 @@ Route::get('user/create', 'UserController@getCreate');
 
 Route::get('user/profile', 'UserController@getProfile');
 
+// Network Login/Registration
 // after user clicks confirm link on email, redirected here. Then proceed to register DCAF with each network. Then go to dashboard
 Route::get('user/registernetworks', 'UserController@registerNetworks');
 Route::post('user/registernetworks', 'UserController@postNetworks');
@@ -184,7 +191,7 @@ Route::get('{postSlug}', 'BlogController@getView');
 Route::post('{postSlug}', 'BlogController@postView');
 
 // Index Page - Last route, no matches
-Route::get('/', array('before' => 'auth','uses' => 'UserController@getIndex'));
+Route::any('/', array('before' => 'auth','uses' => 'UserController@getIndex'));
 /* Route::get('/', function()  {
     var_dump(Auth::user());
     die();

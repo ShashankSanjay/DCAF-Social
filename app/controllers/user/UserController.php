@@ -31,7 +31,12 @@ class UserController extends BaseController
 	public function __construct(DcafUser $user = null)
 	{
 		parent::__construct();
-		$this->user = $user; // ?: Auth::user;
+		$this->user = $user ?: Auth::User();
+		
+		echo '<pre>';
+		print_r($this->user);
+		echo '/<pre>';
+		die();
 	}
 	
 	/**
@@ -507,20 +512,25 @@ class UserController extends BaseController
 			{
 				$token = OAuth::token($network);
 				
-				if (count(DB::select('select * from '. $db .' where access_token = ?', array($token->getAccessToken()))) == 0)
+				if (count(DB::select('select * from '.$db.' where access_token = ?', array($token->getAccessToken()))) == 0)
 				{
 					// Save into db
 					
 					$token = OAuth::token($network);
 					
-					echo '<pre>';
-					var_dump($token);
+					echo '<pre>$token'."\n";
+					print_r($token);
 					echo '</pre>';
 					
 					try {
 					
 					echo '<pre>';
-					var_dump(Auth::User());
+					echo '$this->user'."\n";
+					print_r($this->user);
+					echo "\n".'$this->user->id'."\n";
+					print_r($this->user->id);
+					echo "\n".'Auth::User()'."\n";
+					print_r(Auth::User());
 					echo '</pre>';
 					
 					DB::table($db)->insert(

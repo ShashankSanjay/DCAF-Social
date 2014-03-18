@@ -70,9 +70,11 @@ class SocialRetrieverController extends BaseController
 			}
 		}
 		
+		/*
 		echo '<pre>';
 		var_dump($networkTokens);
 		die('</pre>');
+		*/
 		
 		// Call FacebookRetriver to retrieve Facebook data
 		/* for ($facebookJobs as &$job) {

@@ -115,7 +115,7 @@ class Job extends Eloquent
 	 * @param  array  $columns
 	 * @return \Illuminate\Database\Eloquent\Model|Collection|static
 	 */
-	public static function find($key, $columns = array('*'))
+	public static function findByIdOrName($key, $columns = array('*'))
 	{
 		$instance = new static;
 		// return $instance->newQuery()->find($id, $columns);
