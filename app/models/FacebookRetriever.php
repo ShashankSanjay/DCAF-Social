@@ -1,4 +1,10 @@
 <?php
+// class \OAuth\OAuth2\Token\StdOAuth2Token extends \OAuth\Common\Token\AbstractToken implements TokenInterface
+// interface \OAuth\OAuth1\Token\TokenInterface extends \OAuth\Common\Token\TokenInterface
+
+// \OAuth\Common\Token\TokenInterface
+// \Thomaswelton\LaravelOauth\Common\Storage\LaravelSession
+use OAuth\Common\Token\StdOAuth2Token;
 
 /**
  * Facebook Retriever
@@ -17,23 +23,35 @@ class FacebookRetriever implements SocialRetriever
 	 */
 	public function __construct($consumer = null)
 	{
-		// parent::__construct(($consumer == null) ? new OAuth:consumer('facebook') : $consumer);
+		// parent::__construct(($consumer == null) ? OAuth:consumer('facebook') : $consumer);
 		if ($consumer == null) $consumer = OAuth::consumer('facebook');
 		$this->consumer = $consumer;
 	}
 	
-	public function getAllUserData($token)
+	public function setAccessToken($access_token)
 	{
-		$this->consumer->getStorage()->storeAccessToken("Facebook", $token);
+		$this->consumer->getStorage()->storeAccessToken("Facebook", new StdOAuth2Token($access_token));
+	}
+	
+	/**
+	 * @param	int  $id	FacebookUser id
+	 */
+	public function getAllUserData($id)
+	{
+		if (Config::get('app.debug')) { echo __METHOD__.'($access_token = "'.$access_token.'")'; }
+		
+		$this->setAccessToken($access_token);
+		
 		// $user = $this->getUser();
+		$user = FacebookUser::find($id);
 		
 		// $user = FacebookUser::
 		
 		// Parse data and save into correct DB tables
 		foreach ($user['data'] as $data)
 		{
-			// Move through and save page ouath
-			$fbpage = new FB_Page;
+			// move through and save page
+			$fbpage = new FB_Page();
 			$fbpage->FB_Page_ID = $data->id;
 			$fbpage->access_token = $data->access_token;
 			$fbpage->perms = $data->perms;
@@ -43,12 +61,14 @@ class FacebookRetriever implements SocialRetriever
 	}
 	
 	/**
-	 * Retrieve a Facebook User's Info
+	 * Retrieve a FacebookUser's Info
 	 * 
 	 * @param	mixed	$id		(optional) id of user to get; defaults to current user
 	 */
 	public function getUser($id = null)
 	{
+		if (Config::get('app.debug')) { echo __METHOD__.'($id = "'.$id.'")'; }
+		
 		// Get user info
 		$call = $this->consumer->request($id ? $id : '/me');	// /me/data
 		$response = json_decode($call, true);

@@ -20,7 +20,7 @@ class DcafUser extends ConfideUser implements UserProfileInterface, UserInterfac
 	public $primaryKey	= 'id';			// defaults to 'id'
 	public $incrementing = true;		// defaults to true; false disables auto-incrementing the primary key
 	public $timestamps	= true;			// defaults to true to maintain 'updated_at' and 'created_at' columns
-	protected $softDelete = true;		// defaults to false; true to set a timestamp in the deleted_at column
+	// protected $softDelete = true;		// defaults to false; true to set a timestamp in the deleted_at column
 	
 	public static $rules = array(
 		'username'	=> 'required|alpha_dash|between:4,16',
@@ -170,6 +170,7 @@ class DcafUser extends ConfideUser implements UserProfileInterface, UserInterfac
     /**
      * Redirect after auth.
      * If ifValid is set to true it will redirect a logged in user.
+     * 
      * @param $redirect
      * @param bool $ifValid
      * @return mixed
@@ -206,8 +207,9 @@ class DcafUser extends ConfideUser implements UserProfileInterface, UserInterfac
 	 * @access public
 	 * @return int
 	 */
-	public function getUID(){
-		//
+	public function getUID()
+	{
+		// {implementation code}
 	}
 	
 	/**
@@ -216,8 +218,9 @@ class DcafUser extends ConfideUser implements UserProfileInterface, UserInterfac
 	 * @access public
 	 * @return string
 	 */
-	public function getUsername() {
-		//
+	public function getUsername()
+	{
+		// {implementation code}
 	}
 	
 	/**
@@ -226,8 +229,9 @@ class DcafUser extends ConfideUser implements UserProfileInterface, UserInterfac
 	 * @access public
 	 * @return string
 	 */
-	public function getGender() {
-		//
+	public function getGender()
+	{
+		// {implementation code}
 	}
 	
 	/**
@@ -236,8 +240,9 @@ class DcafUser extends ConfideUser implements UserProfileInterface, UserInterfac
 	 * @access public
 	 * @return string
 	 */
-	public function getEmail() {
-		//
+	public function getEmail()
+	{
+		// {implementation code}
 	}
 	
 	/**
@@ -247,8 +252,9 @@ class DcafUser extends ConfideUser implements UserProfileInterface, UserInterfac
 	 * @access public
 	 * @return string
 	 */
-	public function getFirstName() {
-		//
+	public function getFirstName()
+	{
+		// {implementation code}
 	}
 	
 	/**
@@ -257,8 +263,9 @@ class DcafUser extends ConfideUser implements UserProfileInterface, UserInterfac
 	 * @access public
 	 * @return string
 	 */
-	public function getLastName() {
-		//
+	public function getLastName()
+	{
+		// {implementation code}
 	}
 	
 	/******************/
@@ -271,8 +278,9 @@ class DcafUser extends ConfideUser implements UserProfileInterface, UserInterfac
 	 * @access public
 	 * @param  string	$uname
 	 */
-	public function setUsername($uname) {
-		//
+	public function setUsername($uname)
+	{
+		// {implementation code}
 	}
 	
 	/**
@@ -281,8 +289,9 @@ class DcafUser extends ConfideUser implements UserProfileInterface, UserInterfac
 	 * @access public
 	 * @param  string	$gender
 	 */
-	public function setGender($gender) {
-		//
+	public function setGender($gender)
+	{
+		// {implementation code}
 	}
 	
 	/**
@@ -291,8 +300,9 @@ class DcafUser extends ConfideUser implements UserProfileInterface, UserInterfac
 	 * @access public
 	 * @param  string	$email
 	 */
-	public function setEmail($email) {
-		//
+	public function setEmail($email)
+	{
+		// {implementation code}
 	}
 	
 	/**
@@ -301,8 +311,9 @@ class DcafUser extends ConfideUser implements UserProfileInterface, UserInterfac
 	 * @access public
 	 * @param  string	$fname
 	 */
-	public function setFirstName($fname) {
-		//
+	public function setFirstName($fname)
+	{
+		// {implementation code}
 	}
 	
 	/**
@@ -311,7 +322,8 @@ class DcafUser extends ConfideUser implements UserProfileInterface, UserInterfac
 	 * @access public
 	 * @param  string	$lname
 	 */
-	public function setLastName($lname) {
-		//
+	public function setLastName($lname)
+	{
+		// {implementation code}
 	}
 }

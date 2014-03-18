@@ -32,67 +32,56 @@ class SocialRetrieverController extends BaseController
 	 */
 	public function getAllUserData()
 	{
+		/*
+		$facebook = OAuth::consumer('facebook');
+		$twitter  = OAuth::consumer('twitter');
+		$google   = OAuth::consumer('google');
+		$tumbler  = OAuth::consumer('tumbler');
+		*/
+		
 		$facebookRetriever	 = new FacebookRetriever();
 		$TwitterRetriever	 = new TwitterRetriever();
 		$googlePlusRetriever = new GooglePlusRetriever();
 		$tumblerRetriever	 = new TumblerRetriever();
 		
-		/*
-		$facebookJobs	= array();
-		$twitterJobs	= array();
-		$googlePlusJobs	= array();
-		$tumblerJobs	= array();
-		*/
-		
-		$networkTokens	= array(
-			'oauth_facebook'=> array(),
-			'oauth_twitter'	=> array(),
-			'oauth_google'	=> array(),
-			'oauth_tumbler'	=> array(),
-		);
+		$networkTokens	= array();
 		
 		// get all pending jobs
 		$jobs = Job::all()->all();
 		
-		echo '<pre>';
-		var_dump($jobs);
+		/*
+		echo '<pre>$jobs:'."\n";
+		print_r($jobs);
 		die('</pre>');
+		*/
 		
 		for ($j=0,$n=count($jobs); $j<$n; $j++)
 		// for ($j=0; ($job = $jobs[$j]); $j++)
 		{
-			// process each job: $jobs[$j]
+			// process each job
 			
 			$job = $jobs[$j];
-			$networkTokens[$job->type][] = DB::table($job->type)->find($job->data);
-			
-			/*
-			switch ($job->type)
-			{
-				case 'oauth_facebook':
-					$facebookJobs[] = $job;
-					break;
-				case 'oauth_twitter':
-					$twitterJobs[] = $job;
-					break;
-				case 'oauth_google':
-					$googlePlusJobs[] = $job;
-					break;
-				case 'oauth_tumbler':
-					$tumblerJobs[] = $job;
-					break;
-				default:
+			$token = DB::table($job->data->table)->find($job->data->id);
+			if ($token) {
+				$networkTokens[$job->data->table][] = $token->access_token;
+			} else {
+				Log::warning('unknown token for job "'.$job->name.'" (id: '.$job->id.')');
+				echo 'unknown token for job "'.$job->name.'" (id: '.$job->id.')';
 			}
-			*/
 		}
+		
+		echo '<pre>';
+		var_dump($networkTokens);
+		die('</pre>');
 		
 		// Call FacebookRetriver to retrieve Facebook data
 		/* for ($facebookJobs as &$job) {
 			$oauth = DB::table('oauth_facebook')->where('name', 'John')->first();
 		} */
 		
-		for ($networkTokens['oauth_facebook'] as $token)
+		foreach ($networkTokens['oauth_facebook'] as $token)
 		{
+			echo '$token: '.$token."\n";
 			$facebookRetriever->getAllUserData($token);
 		}
 		

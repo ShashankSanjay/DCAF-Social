@@ -75,10 +75,10 @@ Route::filter('guest', function()
 Entrust::routeNeedsRole( 'admin*', array('admin'), Redirect::to('/') );
 
 // Check for permissions on admin actions
-Entrust::routeNeedsPermission( 'admin/blogs*', 'manage_blogs', Redirect::to('/admin') );
-Entrust::routeNeedsPermission( 'admin/comments*', 'manage_comments', Redirect::to('/admin') );
-Entrust::routeNeedsPermission( 'admin/users*', 'manage_users', Redirect::to('/admin') );
-Entrust::routeNeedsPermission( 'admin/roles*', 'manage_roles', Redirect::to('/admin') );
+Entrust::routeNeedsPermission('admin/blogs*', 'manage_blogs', Redirect::to('/admin'));
+Entrust::routeNeedsPermission('admin/comments*', 'manage_comments', Redirect::to('/admin'));
+Entrust::routeNeedsPermission('admin/users*', 'manage_users', Redirect::to('/admin'));
+Entrust::routeNeedsPermission('admin/roles*', 'manage_roles', Redirect::to('/admin'));
 
 /*
 |--------------------------------------------------------------------------
@@ -110,11 +110,9 @@ Route::filter('csrf', function()
 
 Route::filter('detectLang',  function($route, $request, $lang = 'auto')
 {
-
-    if($lang != "auto" && in_array($lang , Config::get('app.available_language')))
-    {
+    if ($lang != "auto" && in_array($lang , Config::get('app.available_language'))) {
         Config::set('app.locale', $lang);
-    }else{
+    } else {
         $browser_lang = !empty($_SERVER['HTTP_ACCEPT_LANGUAGE']) ? strtok(strip_tags($_SERVER['HTTP_ACCEPT_LANGUAGE']), ',') : '';
         $browser_lang = substr($browser_lang, 0,2);
         $userLang = (in_array($browser_lang, Config::get('app.available_language'))) ? $browser_lang : Config::get('app.locale');

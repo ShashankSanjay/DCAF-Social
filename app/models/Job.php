@@ -20,38 +20,87 @@ class Job extends Eloquent
 	/* Model Instance Variables */
 	
 	/**
+	 * Model instance attributes
+	 * 
+	 * @override
+	 * @var	array
+	 */
+	// public $attributes = array();
+	
+	/**
 	 * Cron Job ID (Primary Key)
 	 * 
 	 * @var	int
 	 */
-	public $id;
+	// public $id;
 	
 	/**
 	 * Cron Job Name
 	 * 
 	 * @var	string
 	 */
-	public $name;
+	// public $name;
 	
 	/**
 	 * Cron Job Data
 	 * 
 	 * @var	string
 	 */
-	public $data;
+	// public $data;
 	
 	/**
 	 * Cron Job Type
 	 * 
 	 * @var	string
 	 */
-	public $type;
+	// public $type;
 	
 	/**********************
 	 * Eloquent Relations *
 	 **********************/
 	
 	// ...
+	
+	/********************/
+	/* Accessor Methods */
+	/********************/
+	
+	/**
+	 * Eloquent accessor to decode the
+	 * JSON content in the data field
+	 * 
+	 * @param	string	$data	JSON encoded data
+	 * @return	mixed
+	 */
+	public function getDataAttribute($data)
+	{
+		// remove padding
+		$data = preg_replace('/.+?({.+}).+/','$1',$data); 
+		
+		// search and remove comments like /* */ and //
+		$data = preg_replace("#(/\*([^*]|[\r\n]|(\*+([^*/]|[\r\n])))*\*+/)|([\s\t]//.*)|(^//.*)#", '', $data);
+    	
+    	$data = str_replace(array("\n","\r"),"",$data);
+    	$data = preg_replace('/([{,]+)(\s*)([^"]+?)\s*:/','$1"$3":',$data);
+    	$data = preg_replace('/(,)\s*}$/','}',$data);	// allow trailing comma
+		
+		return json_decode($data);
+	}
+	
+	/*******************/
+	/* Mutator Methods */
+	/*******************/
+	
+	/**
+	 * Eloquent mutator to encode the
+	 * content as JSON for the data field
+	 * 
+	 * @param	string	$data	raw unencoded data
+	 */
+	public function setDataAttribute($data)
+	{
+		$this->attributes['data'] = json_encode($data);
+	}
 	
 	/******************/
 	/* helper methods */

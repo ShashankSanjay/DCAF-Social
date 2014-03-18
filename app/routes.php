@@ -44,7 +44,7 @@ Route::get('/cron/run/test', function () {
     return $report;
 });
 
-Route::get('/cron/{job}/run', 'SocialRetrieverController@getAllUserData');
+Route::get('/jobs/{job}/run', 'SocialRetrieverController@getAllUserData');
 
 /*
 Route::get('/cron/run/test2', function() {
@@ -146,7 +146,7 @@ Route::post('user/reset/{token}', 'UserController@postReset');
 //:: User Account Routes ::
 Route::post('user/{user}/edit', 'UserController@postEdit');
 
-Route::get('user/login', 'UserController@getLogin');
+// Route::get('user/login', 'UserController@getLogin');
 Route::post('user/login', 'UserController@postLogin');
 
 Route::get('user/confirmation', 'UserController@getConfirmation');

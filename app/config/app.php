@@ -1,7 +1,7 @@
 <?php
 
 return array(
-
+	
 	/*
 	|--------------------------------------------------------------------------
 	| Application Debug Mode
@@ -12,9 +12,9 @@ return array(
 	| application. If disabled, a simple generic error page is shown.
 	|
 	*/
-
+	
 	'debug' => true,
-
+	
 	/*
 	|--------------------------------------------------------------------------
 	| Application URL
@@ -25,9 +25,9 @@ return array(
 	| your application so that it is used when running Artisan tasks.
 	|
 	*/
-
+	
 	'url' => '',
-
+	
 	/*
 	|--------------------------------------------------------------------------
 	| Application Timezone
@@ -38,9 +38,9 @@ return array(
 	| ahead and set this to a sensible default for you out of the box.
 	|
 	*/
-
+	
 	'timezone' => 'UTC',
-
+	
 	/*
 	|--------------------------------------------------------------------------
 	| Application Locale Configuration
@@ -51,9 +51,9 @@ return array(
 	| to any of the locales which will be supported by the application.
 	|
 	*/
-
+	
 	'locale' => 'en',
-
+	
 	/*
 	|--------------------------------------------------------------------------
 	| Encryption Key
@@ -64,9 +64,9 @@ return array(
 	| be safe. Make sure to change it before deploying any application!
 	|
 	*/
-
+	
 	'key' => 'YourSecretKey!!!',
-
+	
 	/*
 	|--------------------------------------------------------------------------
 	| Autoloaded Service Providers
@@ -77,7 +77,7 @@ return array(
 	| this array to grant expanded functionality to your applications.
 	|
 	*/
-
+	
     'providers' => array(
         /* Laravel Base Providers */
 		'Illuminate\Foundation\Providers\ArtisanServiceProvider',
@@ -121,18 +121,17 @@ return array(
         'Basset\BassetServiceProvider', // Better Asset Management
         'Robbo\Presenter\PresenterServiceProvider', // Presenter
         'Bllim\Datatables\DatatablesServiceProvider', // Datatables
-
+        
         /* Uncomment for use in development */
         'Way\Generators\GeneratorsServiceProvider', // Generators
         'Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider', // IDE Helpers
-
+        
         /* DCAF Stuff */
         'Thomaswelton\LaravelOauth\LaravelOauthServiceProvider',
         'Facebook\phpSDK\FacebookServiceProvider',
         'Liebig\Cron\CronServiceProvider',
-
     ),
-
+	
     /*
     |--------------------------------------------------------------------------
     | Service Provider Manifest
@@ -143,9 +142,9 @@ return array(
     | list of all of the services. Here, you may set its storage spot.
     |
     */
-
+    
     'manifest' => storage_path() . '/meta',
-
+    
     /*
     |--------------------------------------------------------------------------
     | Class Aliases
@@ -156,7 +155,7 @@ return array(
     | the aliases are "lazy" loaded so they don't hinder performance.
     |
     */
-
+    
     'aliases' => array(
         /* Laravel Base Aliases */
 		'App'             => 'Illuminate\Support\Facades\App',
@@ -196,7 +195,7 @@ return array(
 		'URL'             => 'Illuminate\Support\Facades\URL',
 		'Validator'       => 'Illuminate\Support\Facades\Validator',
 		'View'            => 'Illuminate\Support\Facades\View',
-
+		
         /* Additional Aliases */
         'Confide'         => 'Zizaco\Confide\ConfideFacade', // Confide Alias
         'Entrust'         => 'Zizaco\Entrust\EntrustFacade', // Entrust Alias
@@ -206,14 +205,13 @@ return array(
         'String'          => 'Andrew13\Helpers\String', // String
         'Carbon'          => 'Carbon\Carbon', // Carbon
         'Datatables'      => 'Bllim\Datatables\Datatables', // DataTables
-
+        
         /* DCAF Stuff */
         'OAuth'			=> 'Thomaswelton\LaravelOauth\Facades\OAuth', //Oauth
         //'AlchemyAPI'	=> 'AlchemyAPI\alchemyapi_php\alchemyapi',
         'Role'			=> 'DcafRole',
         'Facebook'		=> 'Facebook\phpSDK\FacebookFacade',
     ),
-
+	
     'available_language' => array('en', 'pt', 'es'),
-
 );

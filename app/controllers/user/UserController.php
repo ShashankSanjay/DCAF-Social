@@ -28,16 +28,16 @@ class UserController extends BaseController
 	 * 
 	 * @param DcafUser $user
 	 */
-	public function __construct(DcafUser $user)
+	public function __construct(DcafUser $user = null)
 	{
 		parent::__construct();
-		$this->user = $user;
+		$this->user = $user; // ?: Auth::user;
 	}
 	
 	/**
 	 * User Dashboard: Main page
 	 * 
-	 * requires authenticated user
+	 * requires an authenticated user
 	 * 
 	 * HTTP Request Method:	GET
 	 * Route URL:	/user/
@@ -455,7 +455,7 @@ class UserController extends BaseController
 	}
 	
 	/**
-	 * Attempt change the password of the user.
+	 * Attempt to change the password of the user.
 	 * 
 	 * HTTP Method:	GET
 	 * Route URL:	/user/confirmation
@@ -465,6 +465,12 @@ class UserController extends BaseController
 		return View::make('site.nonboard.confirmation');
 	}
 	
+	/**
+	 * Display Network Registration Page
+	 * 
+	 * HTTP Method:	GET
+	 * Route URL:	/user/registernetworks
+	 */
 	public function registerNetworks()
 	{
 		/*
@@ -504,13 +510,28 @@ class UserController extends BaseController
 				if (count(DB::select('select * from '. $db .' where access_token = ?', array($token->getAccessToken()))) == 0)
 				{
 					// Save into db
-
+					
 					$token = OAuth::token($network);
 					
+					echo '<pre>';
+					var_dump($token);
+					echo '</pre>';
+					
+					try {
+					
+					echo '<pre>';
+					var_dump(Auth::User());
+					echo '</pre>';
+					
 					DB::table($db)->insert(
-						array('access_token' => $token->getAccessToken(), 'user_id' => Auth::User()->id)
+						array('access_token' => $token->getAccessToken(), 'user_id' => $this->user->id)
 					);
 					
+					} catch (Exception $e) {
+						echo '<p>'.$e.'</p>';
+					}
+					
+					die();
 					
 					if ($network == 'facebook') {
 						$f = OAuth::consumer('facebook');
