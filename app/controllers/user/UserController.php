@@ -31,12 +31,7 @@ class UserController extends BaseController
 	public function __construct(DcafUser $user = null)
 	{
 		parent::__construct();
-		$this->user = $user ?: Auth::User();
-		
-		echo '<pre>';
-		print_r($this->user);
-		echo '/<pre>';
-		die();
+		$this->user = $user; // ?: Auth::User();
 	}
 	
 	/**
@@ -478,6 +473,8 @@ class UserController extends BaseController
 	 */
 	public function registerNetworks()
 	{
+		$this->user = Auth::user();
+		
 		/*
 		use data to show which networks are registered and which are not
 		$data = array();
@@ -522,26 +519,15 @@ class UserController extends BaseController
 					print_r($token);
 					echo '</pre>';
 					
-					try {
+					$t = DB::table($db)->where('user_id', $this->user->id);
 					
 					echo '<pre>';
-					echo '$this->user'."\n";
-					print_r($this->user);
-					echo "\n".'$this->user->id'."\n";
-					print_r($this->user->id);
-					echo "\n".'Auth::User()'."\n";
-					print_r(Auth::User());
-					echo '</pre>';
+					var_dump($t);
+					die('</pre>');
 					
 					DB::table($db)->insert(
-						array('access_token' => $token->getAccessToken(), 'user_id' => $this->user->id)
+						array('user_id' => $this->user->id, 'access_token' => $token->getAccessToken())
 					);
-					
-					} catch (Exception $e) {
-						echo '<p>'.$e.'</p>';
-					}
-					
-					die();
 					
 					if ($network == 'facebook') {
 						$f = OAuth::consumer('facebook');

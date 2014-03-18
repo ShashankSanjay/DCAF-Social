@@ -6,19 +6,19 @@ class RolesTableSeeder extends Seeder {
     {
         DB::table('DCAF_Roles')->delete();
 
-        $adminRole = new DcafRole;
-        $adminRole->role_name = 'admin';
+        $adminRole = new DcafRole();
+        $adminRole->role_name = 'Site Administrator';
         $adminRole->save();
 
-        $commentRole = new DcafRole;
-        $commentRole->role_name = 'comment';
-        $commentRole->save();
+        $managerRole = new DcafRole();
+        $managerRole->role_name = 'Team Manager';
+        $managerRole->save();
 
         /*$user = DcafUser::where('username','=','admin')->first();
-        $user->attachRole( $adminRole );*/
+        $user->attachRole($adminRole);*/
 
         $user = DcafUser::where('username','=','user')->first();
-        $user->attachRole( $commentRole );
+        $user->attachRole($managerRole);
     }
 
 }

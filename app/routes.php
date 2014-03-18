@@ -73,7 +73,7 @@ Route::get('/cron/run/test2', function() {
  *  Admin Routes
  *  ------------------------------------------
  */
-Route::group(array('prefix' => 'admin', 'before' => array('auth', 'admin'), function()
+Route::group(array('prefix' => 'admin', 'before' => array('auth', 'admin')), function()
 {
     # Comment Management
     Route::get('comments/{comment}/edit', 'AdminCommentsController@getEdit');
