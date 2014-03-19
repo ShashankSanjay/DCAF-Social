@@ -211,6 +211,7 @@ return array(
         //'AlchemyAPI'	=> 'AlchemyAPI\alchemyapi_php\alchemyapi',
         'Role'			=> 'DcafRole',
         'Facebook'		=> 'Facebook\phpSDK\FacebookFacade',
+        'GooglePlusUser'=> 'GoogleUser',
     ),
 	
     'available_language' => array('en', 'pt', 'es'),

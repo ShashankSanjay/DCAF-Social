@@ -47,7 +47,7 @@ class SocialRetrieverController extends BaseController
 		$networkTokens	= array();
 		
 		// get all pending jobs
-		$jobs = Job::all()->all();
+		$jobs = Job::where('type','SocialRetriever')->all();
 		
 		/*
 		echo '<pre>$jobs:'."\n";
@@ -61,7 +61,7 @@ class SocialRetrieverController extends BaseController
 			// process each job
 			
 			$job = $jobs[$j];
-			$token = DB::table($job->data->table)->find($job->data->id);
+			$token = DB::table($job->data->table)->find($job->data->uid);
 			if ($token) {
 				$networkTokens[$job->data->table][] = $token->access_token;
 			} else {
