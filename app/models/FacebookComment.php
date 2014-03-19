@@ -3,10 +3,10 @@
 //
 class FacebookComment extends Eloquent
 {
-	protected $table = 'FB_Comment';
+	protected $table = 'FB_Comments';
 
 	public function FBPost() {
-		return $this->hasOne('FacebookPost');
+		return $this->belongsTo('FacebookPost');
 	}
 
 	public function FacebookUser()

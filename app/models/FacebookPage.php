@@ -6,7 +6,7 @@
  * @author	Shashank Sanjay
  * @version	1.0
  */
-class FBPage extends Eloquent
+class FacebookPage extends Eloquent
 {
 	/**********************
 	 * Instance Variables *
@@ -24,7 +24,7 @@ class FBPage extends Eloquent
 	
 	public function FacebookUser()
 	{
-		return $this->belongstoMany('FacebookUsers');
+		return $this->belongstoMany('FacebookUser');
 	}
 
 	public function oauth_facebook()

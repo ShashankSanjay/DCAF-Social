@@ -11,7 +11,7 @@ class EntrustPermissions extends Migration {
     public function up()
     {
 
-        // Creates the permissions table
+        /* Creates the permissions table
         Schema::create('permissions', function($table)
         {
             $table->increments('id');
@@ -25,10 +25,10 @@ class EntrustPermissions extends Migration {
             $table->increments('id');
             $table->integer('permission_id')->unsigned()->index();
             $table->integer('role_id')->unsigned()->index();
-            $table->unique(array('permission_id','role_id'));
+            //$table->unique(array('permission_id','role_id'));
             $table->foreign('permission_id')->references('id')->on('permissions');
-            $table->foreign('role_id')->references('id')->on('roles');
-        });
+            $table->foreign('role_id')->references('role_id')->on('Dcaf_Roles');
+        });*/
     }
 
     /**
@@ -38,8 +38,8 @@ class EntrustPermissions extends Migration {
      */
     public function down()
     {
-        Schema::drop('permission_role');
-        Schema::drop('permissions');
+        //Schema::drop('permission_role');
+        //Schema::drop('permissions');
     }
 
 }

@@ -181,12 +181,12 @@ class FacebookUser extends Eloquent implements UserProfileInterface, UserInterfa
 
     public function hometown()
     {
-    	return $this->hasOne('Location');
+    	return $this->belongsTo('Location', 'id', 'hometown');
     }
 
     public function location()
     {
-    	return $this->hasOne('Location');
+    	return $this->belongsTo('Location', 'id', 'location');
     }
 	
 	/********************
