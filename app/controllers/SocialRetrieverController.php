@@ -44,10 +44,14 @@ class SocialRetrieverController extends BaseController
 		$googlePlusRetriever = new GooglePlusRetriever();
 		$tumblerRetriever	 = new TumblerRetriever();
 		
-		$networkTokens	= array();
+		// $networkTokens	= array();
+		$networkUsers	= array();
 		
 		// get all pending jobs
-		$jobs = Job::where('type','SocialRetriever')->all();
+		// $jobs = Job::all()->all();
+		
+		// get all pending SocialRetriever jobs
+		$jobs = Job::where('type','SocialRetriever')->get()->all();
 		
 		/*
 		echo '<pre>$jobs:'."\n";
@@ -61,30 +65,28 @@ class SocialRetrieverController extends BaseController
 			// process each job
 			
 			$job = $jobs[$j];
-			$token = DB::table($job->data->table)->find($job->data->uid);
+			// SO Q&A #2201335
+			$networkUser = ${!${''} = $job->data->type}::find($job->data->uid);
+			// $networkUser = DB::table($job->data->table)->find($job->data->uid);
+			$token = DB::table('oauth_'.$job->data->network)->find($job->data->oauth_id);
 			if ($token) {
-				$networkTokens[$job->data->table][] = $token->access_token;
+				$networkUser->access_token = $token->access_token;
+				${$job->data->table}[] = $networkUser;
 			} else {
 				Log::warning('unknown token for job "'.$job->name.'" (id: '.$job->id.')');
 				echo 'unknown token for job "'.$job->name.'" (id: '.$job->id.')';
 			}
 		}
 		
-		/*
-		echo '<pre>';
-		var_dump($networkTokens);
-		die('</pre>');
-		*/
-		
 		// Call FacebookRetriver to retrieve Facebook data
 		/* for ($facebookJobs as &$job) {
 			$oauth = DB::table('oauth_facebook')->where('name', 'John')->first();
 		} */
 		
-		foreach ($networkTokens['oauth_facebook'] as $token)
+		foreach ($FB_Users as $networkUser)
 		{
-			echo '$token: '.$token."\n";
-			$facebookRetriever->getAllUserData($token);
+			echo '$token: '.$networkUser->access_token."\n";
+			$facebookRetriever->getAllUserData($networkUser);
 		}
 		
 		// Call SocialRetriver to retrieve Google Plus data

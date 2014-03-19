@@ -550,7 +550,7 @@ class UserController extends BaseController
 					// if (count(DB::select('select * from '.$db.' where access_token = ?', array($token->getAccessToken()))) == 0)
 					{
 						// Save the token into db
-						$tokenId = DB::table($db)->insertGetId(array('user_id' => $this->user->id, 'access_token' => $token->getAccessToken(), 'expire_time' => $token->getEndOfLife()));
+						$oauthId = DB::table($db)->insertGetId(array('user_id' => $this->user->id, 'access_token' => $token->getAccessToken(), 'expire_time' => $token->getEndOfLife()));
 					}
 					
 					// create a new data scraping job
@@ -558,6 +558,8 @@ class UserController extends BaseController
 					$job->name = $props['abbr'].'J'.$response['id'];
 					$job->data = array(
 						'uid' => $response['id'],
+						'type' => get_class($networkUser),
+						'network' => $network,
 						'table' => $networkUser->getTable(),
 						'oauth_id' => $oauth ? $oauth->id : $oauthId
 					);
