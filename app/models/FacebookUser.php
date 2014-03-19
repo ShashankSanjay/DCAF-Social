@@ -178,6 +178,16 @@ class FacebookUser extends Eloquent implements UserProfileInterface, UserInterfa
     {
     	return $this->hasMany('FacebookPage');
     }
+
+    public function hometown()
+    {
+    	return $this->belongsTo('Location', 'id', 'hometown');
+    }
+
+    public function location()
+    {
+    	return $this->belongsTo('Location', 'id', 'location');
+    }
 	
 	/********************
 	 * Accessor Methods *

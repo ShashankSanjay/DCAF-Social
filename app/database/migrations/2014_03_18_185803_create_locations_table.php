@@ -15,6 +15,7 @@ class CreateLocationsTable extends Migration {
 		{
 			//
 			$table->increments('id');
+			$table->bigInteger('FB_Location_id');
 			$table->string('country')->nullable;
 			$table->string('city')->nullable;
 			//$table->longitude;

@@ -6,12 +6,17 @@ class Location extends Eloquent
 
 	public function FBPage() {
 		//
-		return $this->hasMany('FB_Pages', 'location_of');
+		return $this->hasMany('FacebookPage', 'location_of');
 	}
 
-	public function FBUser() {
+	public function Hometown() {
 		//
-		return $this->hasMany('FB_Users', 'location_of');
+		return $this->hasMany('FacebookUser', 'hometown', 'id');
+	}
+
+	public function Location() {
+		//
+		return $this->hasMany('FacebookUser', 'location', 'id');
 	}
 }
 

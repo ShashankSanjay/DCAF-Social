@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Migrations\Migration;
 
-class UpdateCronJobs extends Migration {
+class FBWhoDemographics extends Migration {
 
 	/**
 	 * Run the migrations.
@@ -11,11 +11,13 @@ class UpdateCronJobs extends Migration {
 	 */
 	public function up()
 	{
-		//
-		Schema::table('cron_job', function($table) {
-        	$table->string('type');
-        });
-    
+		// Store number of interactions
+		Schema::create('FB_Who_Demographics', function($table)
+		{
+			//
+			
+			$table->integer('placeholder');
+		});
 	}
 
 	/**
@@ -26,10 +28,7 @@ class UpdateCronJobs extends Migration {
 	public function down()
 	{
 		//
-		Schema::table('cron_job', function($table)
-		{
-			$table->dropColumn('type');
-		});
+		Schema::drop('FB_Who_Demographics');
 	}
 
 }

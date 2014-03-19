@@ -7,7 +7,7 @@
  * @author	Alexander Rosenberg
  * @version	1.0
  */
-class FBPost extends Eloquent
+class FacebookPost extends Eloquent
 {
 	/**********************
 	 * Instance Variables *
@@ -24,7 +24,12 @@ class FBPost extends Eloquent
 	
 	public function FBPage()
 	{
-		return $this->hasOne('FBPage');
+		return $this->hasOne('FacebookPage');
+	}
+
+	public function FBComment()
+	{
+		return $this->hasMany('FacebookComment');
 	}
 
 	/*public function FacebookUser()
