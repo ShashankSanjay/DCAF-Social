@@ -245,3 +245,7 @@ Stack trace:
 [19-Mar-2014 17:59:20 UTC] PHP Parse error:  syntax error, unexpected ')' in /home1/shashan2/socialapp/app/controllers/user/UserController.php on line 560
 [19-Mar-2014 17:59:22 UTC] PHP Parse error:  syntax error, unexpected ')' in /home1/shashan2/socialapp/app/controllers/user/UserController.php on line 560
 [19-Mar-2014 18:01:03 UTC] PHP Parse error:  syntax error, unexpected ')' in /home1/shashan2/socialapp/app/controllers/user/UserController.php on line 550
+[19-Mar-2014 19:31:37 UTC] PHP Fatal error:  Call to undefined method Illuminate\Database\Eloquent\Collection::where() in /home1/shashan2/socialapp/app/controllers/SocialRetrieverController.php on line 53
+[19-Mar-2014 19:38:47 UTC] PHP Parse error:  syntax error, unexpected '::' (T_PAAMAYIM_NEKUDOTAYIM) in /home1/shashan2/socialapp/app/controllers/SocialRetrieverController.php on line 67
+[19-Mar-2014 19:38:58 UTC] PHP Parse error:  syntax error, unexpected '{' in /home1/shashan2/socialapp/app/controllers/SocialRetrieverController.php on line 67
+[19-Mar-2014 20:29:47 UTC] PHP Parse error:  syntax error, unexpected '::' (T_PAAMAYIM_NEKUDOTAYIM) in /home1/shashan2/socialapp/app/controllers/SocialRetrieverController.php on line 67
