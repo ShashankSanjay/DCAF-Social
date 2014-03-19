@@ -564,10 +564,12 @@ class UserController extends BaseController
 						'type' => 'SocialRetriever'
 					));
 					
+					/*
 					echo '<pre>';
 					echo '$job:'."\n";
 					print_r($job);
 					die('</pre>');
+					*/
 					
 					$job->save();
 				}
