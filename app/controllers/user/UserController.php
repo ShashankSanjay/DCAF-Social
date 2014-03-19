@@ -522,7 +522,7 @@ class UserController extends BaseController
 				$networkUser = ucfirst($network).'User';
 				
 				// if we don't already have this network account in the database
-			//	if ($networkUser::find($response['id']) == null)
+				if ($networkUser::find($response['id']) == null)
 				{
 					// SO Q&A #2201335
 					// $networkUser = new ${!${''} = ucfirst($network).'User'}();
@@ -543,7 +543,7 @@ class UserController extends BaseController
 					die('</pre>');
 					*/
 					
-				//	$networkUser->save();
+					$networkUser->save();
 					
 					// if we don't already have an access token for this DCAF user on this network stored in the database
 					if (!($oauth = DB::table($db)->where('user_id', $this->user->id)->first()))
