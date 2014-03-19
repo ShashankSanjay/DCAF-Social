@@ -9,6 +9,8 @@ use OAuth\Common\Token\StdOAuth2Token;
 /**
  * Facebook Retriever
  * 
+ * https://www.facebook.com/apps/site_scraping_tos_terms.php
+ * 
  * @version	1.0
  */
 class FacebookRetriever implements SocialRetriever

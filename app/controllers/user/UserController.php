@@ -497,55 +497,79 @@ class UserController extends BaseController
 		
 		// Session::flash('lusitanian_oauth_token', null);
 		
-		$networks = array('facebook', 'twitter', 'google', 'instagram');
+		$networks = array(
+			'facebook'	=> array('abbr' => 'FB', 'accountEndpoint' => '/me'),
+			'twitter'	=> array('abbr' => 'TW', 'accountEndpoint' => 'account/settings.json'),
+			'google'	=> array('abbr' => 'GP', 'accountEndpoint' => ''),
+			'instagram'	=> array('abbr' => 'IG', 'accountEndpoint' => '')
+		);
 
-		foreach ($networks as $network)
+		foreach ($networks as $network => $props)
 		{
 			$db = 'oauth_'.$network;
 			
-			$s = ''.$network;
-
 			if (OAuth::hasToken($network))
 			{
 				$token = OAuth::token($network);
 				
-				if (count(DB::select('select * from '.$db.' where access_token = ?', array($token->getAccessToken()))) == 0)
+				// now that we have the access token, we need to make an API request
+				// to determine if we already have this user in our database
+				$consumer = OAuth::consumer($network);
+				$consumer->getStorage()->storeAccessToken(ucfirst($network), $token);
+				$response = $consumer->request($props['accountEndpoint']);
+				$response = json_decode($response, true);
+				
+				$networkUser = ucfirst($network).'User';
+				
+				// if we don't already have this network account in the database
+			//	if ($networkUser::find($response['id']) == null)
 				{
-					// Save into db
+					// SO Q&A #2201335
+					// $networkUser = new ${!${''} = ucfirst($network).'User'}();
 					
-					$token = OAuth::token($network);
+					$networkUser = new $networkUser();
 					
-					echo '<pre>$token'."\n";
-					print_r($token);
-					echo '</pre>';
+					$networkUser->{$networkUser->getKeyName()} = $response['id'];
+					foreach ($response as $key => $val) {
+						$networkUser->{$key} = $val;
+					}
 					
-					$t = DB::table($db)->where('user_id', $this->user->id);
+					/*
+					echo '<pre>';
+					echo '$response:'."\n";
+					print_r($response);
+					echo '$networkUser:'."\n";
+					print_r($networkUser);
+					die('</pre>');
+					*/
+					
+				//	$networkUser->save();
+					
+					// if we don't already have an access token for this DCAF user on this network stored in the database
+					if (!($oauth = DB::table($db)->where('user_id', $this->user->id)->first()))
+					// if (count(DB::select('select * from '.$db.' where access_token = ?', array($token->getAccessToken()))) == 0)
+					{
+						// Save the token into db
+						$tokenId = DB::table($db)->insertGetId(array('user_id' => $this->user->id, 'access_token' => $token->getAccessToken(), 'expire_time' => $token->getEndOfLife()));
+						// insertGetId
+					}
+					
+					// create a new data scraping job
+					$job = new Job(array(
+						'name' => $props['abbr'].'J'.$response['id'],
+						'data' => array(
+							'uid' => $response['id'],
+							'table' => $networkUser->getTable(),
+							'oauth_id' => $oauth ? $oauth->id : $oauthId),
+						'type' => 'SocialRetriever'
+					));
 					
 					echo '<pre>';
-					var_dump($t);
+					echo '$job:'."\n";
+					print_r($job);
 					die('</pre>');
 					
-					DB::table($db)->insert(
-						array('user_id' => $this->user->id, 'access_token' => $token->getAccessToken())
-					);
-					
-					if ($network == 'facebook') {
-						$f = OAuth::consumer('facebook');
-						$f->getStorage()->storeAccessToken("Facebook", $token);
-						$r = $f->request('/me');
-						$d = json_decode($r, true);
-						var_dump($d);
-					}
-					else if ($network == 'twitter') {
-						$t = OAuth::consumer('facebook');
-						$t->getStorage()->storeAccessToken("Twitter", $token);
-						$r = $t->request('account/settings.json');
-						$d = json_decode($r, true);
-						var_dump($d);
-					}
-					else if ($network == 'google') {
-						# code...
-					}
+					$job->save();
 				}
 			}
 		}

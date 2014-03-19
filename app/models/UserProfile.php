@@ -72,6 +72,10 @@ class UserProfile extends Eloquent implements UserProfileInterface, UserInterfac
 	 */
 	protected $fillable		= array('*');
 	
+	/**********************
+	 * Eloquent Relations *
+	 **********************/
+	
 	public function profile()
     {
         return $this->morphTo();

@@ -11,15 +11,50 @@ use Zizaco\Confide\ConfideEloquentRepository;
 use Zizaco\Entrust\HasRole;
 use Carbon\Carbon;
 
+/**
+ * DCAF User Model
+ * 
+ * @author	Alexander Rosenberg
+ * @author	Shashank Sanjay
+ * @version	1.0
+ */
 class DcafUser extends ConfideUser implements UserProfileInterface, UserInterface
 {
 	use HasRole;
 	
+	/**
+	 * The table associated with the model.
+	 * 
+	 * @var string
+	 */
 	protected $table = 'DCAF_Users';
 	
-	public $primaryKey	= 'id';			// defaults to 'id'
+	/**
+	 * The primary key for the model.
+	 * 
+	 * @var string
+	 */
+	protected $primaryKey	= 'id';			// defaults to 'id'
+	
+	/**
+	 * Indicates if the IDs are auto-incrementing.
+	 * 
+	 * @var bool
+	 */
 	public $incrementing = true;		// defaults to true; false disables auto-incrementing the primary key
+	
+	/**
+	 * Indicates if the model should be timestamped.
+	 * 
+	 * @var bool
+	 */
 	public $timestamps	= true;			// defaults to true to maintain 'updated_at' and 'created_at' columns
+	
+	/**
+	 * Indicates if the model should soft delete.
+	 * 
+	 * @var bool
+	 */
 	// protected $softDelete = true;		// defaults to false; true to set a timestamp in the deleted_at column
 	
 	public static $rules = array(
@@ -28,7 +63,7 @@ class DcafUser extends ConfideUser implements UserProfileInterface, UserInterfac
 		'password'	=> 'required|alpha_num|between:6,11|confirmed',
 		'password_confirmation' => 'required|alpha_num|between:6,11',
 	);
-		
+	
 	/**
 	 * defines which properties can be set through
 	 * the model's constructor (mass-assignable)
@@ -70,6 +105,20 @@ class DcafUser extends ConfideUser implements UserProfileInterface, UserInterfac
 	 */
 	protected $appends = array('is_admin');
 	
+	/**
+	 * The relations to eager load on every query.
+	 * 
+	 * @var array
+	 */
+	protected $with = array('userProfile', 'dcafRoles');
+	
+	/**
+	 * The relationships that touch this models or should be touched on save.
+	 * 
+	 * @var array
+	 */
+	protected $touches = array('userProfile');
+	
 	/**********************
 	 * Eloquent Relations *
 	 **********************/
@@ -77,7 +126,8 @@ class DcafUser extends ConfideUser implements UserProfileInterface, UserInterfac
 	public function userProfile()
     {
 		// Polymorphic Relation
-        return $this->morphMany('UserProfile', 'profile');
+		// morphMany($related, $name, $type = null, $id = null, $localKey = null)
+        return $this->morphMany('UserProfile', 'profile', 'type', 'id', 'local key');
     }
 	
 	public function networkUsers()	// works!
@@ -96,12 +146,12 @@ class DcafUser extends ConfideUser implements UserProfileInterface, UserInterfac
 		return $this->belongsToMany('ClientCompany', 'Client_User_Assoc', 'uid', 'company_id');
 	}
 
-	public function dcafRoles()	//works
+	public function dcafRoles()		// works
 	{
 		return $this->belongsToMany('DcafRole', 'assigned_roles', 'dcaf_user_id', 'id');
 	}
 
-	public function DcafTeam()
+	public function dcafTeam()
 	{
 		return $this->belongsToMany('DcafTeam', 'DCAF_team_user', 'dcaf_user_id', 'dcaf_team_id') ;
 	}
@@ -128,7 +178,7 @@ class DcafUser extends ConfideUser implements UserProfileInterface, UserInterfac
 	
 	/**
      * Get the date the user was created.
-     *
+     * 
      * @return string
      */
     public function joined()
@@ -138,6 +188,7 @@ class DcafUser extends ConfideUser implements UserProfileInterface, UserInterfac
 
     /**
      * Save roles inputted from multiselect
+     * 
      * @param $inputRoles
      */
     public function saveRoles($inputRoles)
@@ -151,15 +202,16 @@ class DcafUser extends ConfideUser implements UserProfileInterface, UserInterfac
     
     /**
      * Returns user's current role ids only.
+     * 
      * @return array|bool
      */
     public function currentRoleIds()
     {
         $roles = $this->roles;
         $roleIds = false;
-        if( !empty( $roles ) ) {
+        if(!empty($roles)) {
             $roleIds = array();
-            foreach( $roles as &$role )
+            foreach ($roles as &$role)
             {
                 $roleIds[] = $role->id;
             }
@@ -175,7 +227,7 @@ class DcafUser extends ConfideUser implements UserProfileInterface, UserInterfac
      * @param bool $ifValid
      * @return mixed
      */
-	public static function checkAuthAndRedirect($redirect, $ifValid=false)
+	public static function checkAuthAndRedirect($redirect, $ifValid = false)
     {
         // Get user information
         $user = Auth::user();
@@ -183,7 +235,7 @@ class DcafUser extends ConfideUser implements UserProfileInterface, UserInterfac
         $redirectTo = false;
 		
 		// Not logged in redirect, set session.
-        if (empty($user->id) && ! $ifValid)
+        if (empty($user->id) && !$ifValid)
         {
 			Session::put('loginRedirect', $redirect);
 			$redirectTo = Redirect::to('user/login')->with('notice', Lang::get('user/user.login_first'));
@@ -327,3 +379,5 @@ class DcafUser extends ConfideUser implements UserProfileInterface, UserInterfac
 		// {implementation code}
 	}
 }
+
+?>

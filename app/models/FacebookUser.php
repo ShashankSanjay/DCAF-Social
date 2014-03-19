@@ -28,7 +28,7 @@ class FacebookUser extends Eloquent implements UserProfileInterface, UserInterfa
 	 */
 	protected $table		= 'FB_Users';		// defaults to classname + 's'
 	
-	//protected $primaryKey	= 'FB_User_ID';		// defaults to 'id'
+	protected $primaryKey	= 'FB_User_ID';		// defaults to 'id'
 	public $incrementing	= false;			// defaults to true; false disables auto-incrementing the primary key
 	public $timestamps		= true;				// defaults to true to maintain 'updated_at' and 'created_at' columns
 	
@@ -63,13 +63,105 @@ class FacebookUser extends Eloquent implements UserProfileInterface, UserInterfa
 	 */
 	protected $appends = array();
 	
+	protected $renamedFields = array(
+		'id'	=> 'FB_User_ID',
+		'name'	=> 'full_name'
+	);
+	
+	public static function boot()
+	{
+		parent::boot();
+
+		/* setup event bindings */
+
+		// on saving a new model instance
+		static::creating(function($instance)
+		{
+			/*
+			ini_set('memory_limit', '8M');
+			ignore_user_abort(false); 
+			set_time_limit(4);
+			error_reporting(-1);	// show all errors
+			ini_set('display_errors', 1);
+			// handles the abortion of the script gracefully
+			set_exception_handler(function (Exception $e) {
+				// NOTE: throwing an exception within the exception handler will trigger a fatal error
+				echo "Uncaught exception: " , $e->getMessage(), "\n";
+			});
+			spl_autoload_register(function ($className) {
+				// include 'classes/' . $className . '.class.php';
+				die('autoload called for: '.$className."\n");
+			}, true, true);
+			register_shutdown_function(function () {
+				// $out = ob_get_clean();
+				// ob_implicit_flush(1);
+				echo '*** shutdown function called ***'."\n";
+
+				$err = error_get_last();
+				if ($err['type'] === E_ERROR) {
+					// fatal error has occured
+					print_r($err);
+				}
+
+				// print only first 2000 characters of output
+			//	print ''.substr($out, 0, 2000);
+				// If the error-handler function returns,
+				// then script execution will continue with the
+				// next statement after the one that caused an error.
+				die();
+			});
+			// ob_start();
+			// ob_implicit_flush(0);
+			
+			$arr = array(
+				'hello' => 'goodbye'
+			);
+			
+			// Calling die() will flush all buffers started by ob_start() to the default output.
+			// die();
+			
+			try {
+				if ($arr['hi']) {
+					echo "hi!\n";
+				} else {
+					echo "no hi!\n";
+				}
+			} catch (Exception $e) {
+				echo "\n".'Exception $e:'."\n";
+				print_r($e);
+				trigger_error("Caught an exception.", E_USER_ERROR);
+			}
+			die();
+			
+			echo "\n".'$instance->attributes:'."\n";
+			print_r($instance->attributes);
+			echo "\n".'$instance->renamedFields:'."\n";
+			print_r($instance->renamedFields);
+			*/
+			
+			foreach ($instance->attributes as $key => $val)
+			{
+				if (isset($instance->renamedFields[$key]))
+				{
+					// if destination field doesn't already exist
+					if (!isset($instance->attributes[$instance->renamedFields[$key]]))
+					{
+						$instance->attributes[$instance->renamedFields[$key]] = $val;
+					}
+					unset($instance->attributes[$key]);
+				}
+			}
+			return true;
+		});
+    }
+	
 	/**********************
 	 * Eloquent Relations *
 	 **********************/
 	
 	public function networkUser()
     {
-        return $this->hasOne('NetworkUser', 'profile_id');
+        return $this->hasOne('NetworkUser', 'id', 'profile_id');
     }
     
     public function userProfile()

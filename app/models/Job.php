@@ -14,8 +14,11 @@ class Job extends Eloquent
 	/**
 	 * permit all properties to be set through
 	 * the constructor (mass-assignable)
+	 * 
+	 * see Laravel issue #1548
 	 */
 	protected $fillable	= array('*');
+	protected $guarded	= array();
 	
 	/* Model Instance Variables */
 	
