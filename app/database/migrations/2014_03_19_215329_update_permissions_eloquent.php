@@ -11,11 +11,14 @@ class UpdatePermissionsEloquent extends Migration {
 	 */
 	public function up()
 	{
-		Schema::table('permissions', function($table)
+		if (!(Schema::hasColumn('permissions', 'created_at')))
 		{
-			$table->timestamp('created_at');
-			$table->timestamp('updated_at');
-		});
+			Schema::table('permissions', function($table)
+			{
+				$table->timestamp('created_at');
+				$table->timestamp('updated_at');
+			});
+		}
 	}
 
 	/**

@@ -12,11 +12,14 @@ class UpdateLocations extends Migration {
 	public function up()
 	{
 		//
-		Schema::table('Locations', function ($table)
+		if (!(Schema::hasColumn('Locations', 'location_of')))
 		{
-			//
-			$table->integer('location_of');
-		});
+			Schema::table('Locations', function ($table)
+			{
+				//
+				$table->integer('location_of');
+			});
+		}
 	}
 
 	/**

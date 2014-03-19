@@ -11,11 +11,14 @@ class UpdateLocationsEloquent extends Migration {
 	 */
 	public function up()
 	{
-		Schema::table('Locations', function($table)
+		if (!(Schema::hasColumn('Locations', 'created_at')))
 		{
-			$table->timestamp('created_at');
-			$table->timestamp('updated_at');
-		});
+			Schema::table('Locations', function($table)
+			{
+				$table->timestamp('created_at');
+				$table->timestamp('updated_at');
+			});
+		}
 	}
 
 	/**
