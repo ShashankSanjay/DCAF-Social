@@ -21,7 +21,7 @@ Network Registration
 		<div class="section-content section-content-dark signin-page">
 			<div class="container">
 				<div class="row">
-					<li></li>
+					<br></br>
 					<div class="col-lg-6 col-md-6 col-lg-offset-3 col-md-offset-3">
 					    @if ( Session::get('error') )
 					        <div class="alert alert-error alert-danger">{{{ Session::get('error') }}}</div>
