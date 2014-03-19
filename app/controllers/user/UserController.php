@@ -551,18 +551,17 @@ class UserController extends BaseController
 					{
 						// Save the token into db
 						$tokenId = DB::table($db)->insertGetId(array('user_id' => $this->user->id, 'access_token' => $token->getAccessToken(), 'expire_time' => $token->getEndOfLife()));
-						// insertGetId
 					}
 					
 					// create a new data scraping job
-					$job = new Job(array(
-						'name' => $props['abbr'].'J'.$response['id'],
-						'data' => array(
-							'uid' => $response['id'],
-							'table' => $networkUser->getTable(),
-							'oauth_id' => $oauth ? $oauth->id : $oauthId),
-						'type' => 'SocialRetriever'
-					));
+					$job = new Job();
+					$job->name = $props['abbr'].'J'.$response['id'];
+					$job->data = array(
+						'uid' => $response['id'],
+						'table' => $networkUser->getTable(),
+						'oauth_id' => $oauth ? $oauth->id : $oauthId
+					);
+					$job->type = 'SocialRetriever';
 					
 					/*
 					echo '<pre>';
