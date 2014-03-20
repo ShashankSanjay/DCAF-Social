@@ -2,9 +2,11 @@
 	Options -MultiViews
 	RewriteEngine On
 
+	# if is not a directory, then remove the trailing slash
 	RewriteCond %{REQUEST_FILENAME} !-d
 	RewriteRule ^(.+)/$ http://%{HTTP_HOST}/$1 [R=301,L]
 
+	# if not a regular file, then prepend index.php to the beginning
 	RewriteCond %{REQUEST_FILENAME} !-f
 	RewriteRule ^ index.php [L]
 </IfModule>
