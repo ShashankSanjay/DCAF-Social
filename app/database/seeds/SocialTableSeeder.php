@@ -38,7 +38,7 @@ class SocialTableSeeder extends Seeder {
 			)
 		);*/
 		
-		$fbHometown = new Location;
+		/*$fbHometown = new Location;
 		$fbHometown->FB_Location_ID = '110521052';
 		$fbHometown->city = 'Queens';
 		$fbHometown->state = 'New York';
@@ -53,26 +53,26 @@ class SocialTableSeeder extends Seeder {
 		$fbLocation->save();
 		$fbLocation = Location::find(109920975);
 		//$fblocation-> = ;
-		
+		*/
 
 		/**
 		*	Link locations appropriately
 		*/
-		$fbUser = FacebookUser::find(699492603);
+		/*$fbUser = FacebookUser::find(699492603);
 		
 		$fbUser->hometown()->associate($fbHometown);
 		$fbUser->location()->associate($fbLocation);
 		$fbUser->save();
-		
+		*/
 		/**
 		*	Save a facebook post entry
 		**/
 		$fbPost = FacebookPost::firstOrCreate(array(
 			'FB_Post_ID' => '3537132',
-			'User_ID' => '111077157538',
+			//'User_ID' => '111077157538',
 			//'Content' => ;
 			'created_time' => '2014-02-13T21:57:09+000',
-			'from_user_id' => '111077157538',
+			//'from_user_id' => '111077157538',
 			'message' => "Congrats to Jonathan El Kordi-Hubbard from Hofstra University for winning $500 for his pitch on his company DCAF Social as part of yesterday's FlashNotes live VC chat!",
 			)
 		);
@@ -111,9 +111,7 @@ class SocialTableSeeder extends Seeder {
 		
 		//$fbPost->FBComment()->save($fbComment);
 		$fbComment = FacebookComment::find(11261559);
-		
 		$FBPost = FacebookPost::find(3537132);
-		
 		$fbComment->FBPost()->associate($fbPost);
 		$fbComment->save();
 
