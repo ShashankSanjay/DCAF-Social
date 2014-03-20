@@ -44,9 +44,6 @@ class SocialTableSeeder extends Seeder {
 		$fbHometown->state = 'New York';
 		$fbHometown->save();
 		$fbHometown = Location::find(110521052);
-		if (is_null($fbHometown)) {
-			$fbHometown = Location::find(1);
-		}
 		//$fbHometown-> = ;
 
 		$fbLocation = new Location;
@@ -55,10 +52,6 @@ class SocialTableSeeder extends Seeder {
 		$fbLocation->state = 'Serbia';
 		$fbLocation->save();
 		$fbLocation = Location::find(109920975);
-		if (is_null($fbLocation)) {
-			echo "didn't work\n";
-			$fbLocation = Location::find(2);
-		}
 		//$fblocation-> = ;
 		
 
@@ -66,9 +59,7 @@ class SocialTableSeeder extends Seeder {
 		*	Link locations appropriately
 		*/
 		$fbUser = FacebookUser::find(699492603);
-		echo $fbHometown;
-		echo $fbUser;
-		echo $fbLocation;
+		
 		$fbUser->hometown()->associate($fbHometown);
 		$fbUser->location()->associate($fbLocation);
 		$fbUser->save();

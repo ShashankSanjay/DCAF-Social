@@ -6,6 +6,7 @@ class Location extends Eloquent
 
 	public $incrementing = false;
 
+	protected $primaryKey	= 'FB_Location_ID';
 
 	public function FBPage() {
 		//
