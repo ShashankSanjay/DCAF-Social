@@ -18,13 +18,16 @@ class UpdateFbusersRelations extends Migration {
 			Schema::table('FB_Posts', function(Blueprint $table)
 			{
 				$table->engine = 'INNODB';
-				$table->dropForeign('from_user_id');
-				$table->dropForeign('to_user_id');
+				$table->dropIndex('from_user_id');
+				$table->dropIndex('to_user_id');
 				$table->dropColumn('from_user_id');
 				$table->dropColumn('to_user_id');
-				$table->foreign('User_id')->references('FB_User_ID')->on('FB_Users');
 			});
 		}
+		Schema::table('FB_Posts', function(Blueprint $table)
+		{
+			$table->foreign('User_id')->references('FB_User_ID')->on('FB_Users');
+		});
 	}
 
 	/**
