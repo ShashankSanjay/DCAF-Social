@@ -69,3 +69,4 @@ Stack trace:
   thrown in phar:///home1/shashan2/socialapp/composer.phar/vendor/symfony/console/Symfony/Component/Console/Input/ArgvInput.php on line 57
 [19-Mar-2014 23:37:20 UTC] PHP Fatal error:  Class 'UpdatePermissionsEloquent' not found in /home1/shashan2/socialapp/vendor/laravel/framework/src/Illuminate/Database/Migrations/Migrator.php on line 297
 [19-Mar-2014 23:37:40 UTC] PHP Fatal error:  Class 'UpdateLocationsEloquent' not found in /home1/shashan2/socialapp/vendor/laravel/framework/src/Illuminate/Database/Migrations/Migrator.php on line 297
+[20-Mar-2014 05:59:39 UTC] PHP Fatal error:  Cannot redeclare class UpdateFbcommentsTable in /home1/shashan2/socialapp/app/database/migrations/2014_03_19_002742_update_fbcomments_table.bak.php on line 43
