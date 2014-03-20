@@ -20,6 +20,7 @@ class UpdateFbtablePerEloquent extends Migration {
 		{
 		    Schema::table('FB_Users', function(Blueprint $table)
 			{
+				$table->engine = 'INNODB';
 				$table->timestamp('created_at');
 			});
 		}
@@ -27,6 +28,7 @@ class UpdateFbtablePerEloquent extends Migration {
 		{
 		    Schema::table('FB_Pages', function(Blueprint $table)
 			{
+				$table->engine = 'INNODB';
 				$table->timestamp('created_at');
 			});
 		}
@@ -34,6 +36,7 @@ class UpdateFbtablePerEloquent extends Migration {
 		{
 		    Schema::table('FB_Posts', function(Blueprint $table)
 			{
+				$table->engine = 'INNODB';
 				$table->timestamp('created_at');
 			});
 		}
@@ -41,6 +44,7 @@ class UpdateFbtablePerEloquent extends Migration {
 		{
 		    Schema::table('FB_Comments', function(Blueprint $table)
 			{
+				$table->engine = 'INNODB';
 				$table->timestamp('created_at');
 			});
 		}
@@ -52,6 +56,7 @@ class UpdateFbtablePerEloquent extends Migration {
 		{
 		    Schema::table('FB_Users', function(Blueprint $table)
 			{
+				$table->engine = 'INNODB';
 				$table->timestamp('updated_at');
 			});
 		}
@@ -59,6 +64,7 @@ class UpdateFbtablePerEloquent extends Migration {
 		{
 		    Schema::table('FB_Pages', function(Blueprint $table)
 			{
+				$table->engine = 'INNODB';
 				$table->timestamp('updated_at');
 			});
 		}
@@ -66,6 +72,7 @@ class UpdateFbtablePerEloquent extends Migration {
 		{
 		    Schema::table('FB_Posts', function(Blueprint $table)
 			{
+				$table->engine = 'INNODB';
 				$table->timestamp('updated_at');
 			});
 		}
@@ -73,6 +80,7 @@ class UpdateFbtablePerEloquent extends Migration {
 		{
 		    Schema::table('FB_Comments', function(Blueprint $table)
 			{
+				$table->engine = 'INNODB';
 				$table->timestamp('updated_at');
 			});
 		}

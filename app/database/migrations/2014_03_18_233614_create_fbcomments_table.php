@@ -16,6 +16,7 @@ class CreateFbcommentsTable extends Migration {
 		//
 		Schema::create('FB_Comments', function(Blueprint $table)
 		{
+			$table->engine = 'INNODB';
 			$table->integer('id')->unique()->increments();
 			$table->bigInteger('FB_Comment_ID')->index()->primary();
 			$table->integer('attachment_id')->nullable();

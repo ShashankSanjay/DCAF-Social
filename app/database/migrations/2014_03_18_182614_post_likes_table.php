@@ -16,6 +16,7 @@ class PostLikesTable extends Migration {
 		//
 		Schema::create('Post_Likes', function(Blueprint $table)
         {
+        	$table->engine = 'INNODB';
             $table->increments('id');
             $table->bigInteger('likee')->unsigned()->index();
             $table->bigInteger('liker')->unsigned()->index();

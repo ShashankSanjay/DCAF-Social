@@ -18,7 +18,7 @@ class FBPostDemographics extends Migration {
 		*/
 		Schema::create('FB_Post_Demographics', function(Blueprint $table)
 		{
-			//
+			$table->engine = 'INNODB';
 			$table->integer('Who');
 			$table->integer('What');
 			$table->integer('Where');

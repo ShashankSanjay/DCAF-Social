@@ -17,6 +17,7 @@ class UpdatePermissionsEloquent extends Migration {
 		{
 			Schema::table('permissions', function(Blueprint $table)
 			{
+				$table->engine = 'INNODB';
 				$table->timestamp('created_at');
 				$table->timestamp('updated_at');
 			});
