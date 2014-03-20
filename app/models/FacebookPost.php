@@ -18,8 +18,7 @@ class FacebookPost extends Eloquent
 	public $incrementing = false;
 
 	protected $primaryKey	= 'FB_Post_ID';
-	
-	public $primaryKey	= 'FB_Post_ID';	
+		
 	
 	// protected $fillable	= array('*');
 	protected $guarded	= array();
