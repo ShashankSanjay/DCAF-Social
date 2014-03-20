@@ -16,7 +16,7 @@ class CreateFblikestable extends Migration {
 		Schema::create('FB_Likes', function(Blueprint $table)
 		{
 			$table->engine = 'INNODB';
-			$table->incrementing('id');
+			$table->increments('id');
 			$table->bigInteger('liker_id')->unsigned();
 			$table->bigInteger('liked_id');
 			$table->string('liked_type', 7);		// page or post
