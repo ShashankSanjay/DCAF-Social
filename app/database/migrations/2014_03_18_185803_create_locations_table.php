@@ -1,4 +1,6 @@
-<?php
+<?php 
+
+use Illuminate\Database\Schema\Blueprint;
 
 use Illuminate\Database\Migrations\Migration;
 
@@ -11,11 +13,11 @@ class CreateLocationsTable extends Migration {
 	 */
 	public function up()
 	{
-		Schema::create('Locations', function ($table)
+		Schema::create('Locations', function(Blueprint $table)
 		{
 			//
-			$table->increments('id');
-			$table->bigInteger('FB_Location_ID')->unsigned();
+			$table->integer('id')->unique()->increments();
+			$table->bigInteger('FB_Location_ID')->unsigned()->primary();
 			$table->string('country')->nullable;
 			$table->string('city')->nullable;
 			//$table->longitude;
@@ -25,6 +27,7 @@ class CreateLocationsTable extends Migration {
 			$table->string('street')->nullable;
 			$table->string('located_in')->nullable;
 		});
+
 	}
 
 	/**

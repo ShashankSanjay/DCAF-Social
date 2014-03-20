@@ -1,5 +1,7 @@
 <?php
 
+use Illuminate\Database\Schema\Blueprint;
+
 use Illuminate\Database\Migrations\Migration;
 
 class UpdatePermissionsEloquent extends Migration {
@@ -13,7 +15,7 @@ class UpdatePermissionsEloquent extends Migration {
 	{
 		if (!(Schema::hasColumn('permissions', 'created_at')))
 		{
-			Schema::table('permissions', function($table)
+			Schema::table('permissions', function(Blueprint $table)
 			{
 				$table->timestamp('created_at');
 				$table->timestamp('updated_at');

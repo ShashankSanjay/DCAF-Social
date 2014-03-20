@@ -1,4 +1,6 @@
-<?php
+<?php 
+
+use Illuminate\Database\Schema\Blueprint;
 
 use Illuminate\Database\Migrations\Migration;
 
@@ -12,9 +14,9 @@ class CreateFbcommentsTable extends Migration {
 	public function up()
 	{
 		//
-		Schema::create('FB_Comments', function($table)
+		Schema::create('FB_Comments', function(Blueprint $table)
 		{
-			//$table->increments('id');
+			$table->integer('id')->unique()->increments();
 			$table->bigInteger('FB_Comment_ID')->index()->primary();
 			$table->integer('attachment_id')->nullable();
 			$table->integer('comment_count');
@@ -27,6 +29,7 @@ class CreateFbcommentsTable extends Migration {
 			//$table->;
 			
 		});
+
 	}
 
 	/**

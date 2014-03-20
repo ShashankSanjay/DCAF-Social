@@ -1,4 +1,6 @@
-<?php
+<?php 
+
+use Illuminate\Database\Schema\Blueprint;
 
 use Illuminate\Database\Migrations\Migration;
 
@@ -14,7 +16,7 @@ class FBPostDemographics extends Migration {
 		/**
 		*	This table holds aggregate, or overview demographics for an object
 		*/
-		Schema::create('FB_Post_Demographics', function($table)
+		Schema::create('FB_Post_Demographics', function(Blueprint $table)
 		{
 			//
 			$table->integer('Who');

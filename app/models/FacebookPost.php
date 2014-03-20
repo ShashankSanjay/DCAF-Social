@@ -14,6 +14,10 @@ class FacebookPost extends Eloquent
 	 **********************/
 	
 	protected $table = 'FB_Posts';
+
+	public $incrementing = false;
+
+	protected $primaryKey	= 'FB_Post_ID';
 	
 	public $FB_Post_ID;
 	public $Content;

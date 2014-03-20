@@ -1,4 +1,6 @@
-<?php
+<?php 
+
+use Illuminate\Database\Schema\Blueprint;
 
 use Illuminate\Database\Migrations\Migration;
 
@@ -12,7 +14,7 @@ class PostLikesTable extends Migration {
 	public function up()
 	{
 		//
-		Schema::create('Post_Likes', function($table)
+		Schema::create('Post_Likes', function(Blueprint $table)
         {
             $table->increments('id');
             $table->bigInteger('likee')->unsigned()->index();

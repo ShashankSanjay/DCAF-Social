@@ -1,4 +1,6 @@
-<?php
+<?php 
+
+use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
 class EntrustSetupTables extends Migration {
@@ -11,7 +13,7 @@ class EntrustSetupTables extends Migration {
     public function up()
     {
         // Creates the roles table
-        Schema::create('roles', function($table)
+        Schema::create('roles', function(Blueprint $table)
         {
             $table->engine = 'InnoDB';
             $table->increments('id');
@@ -20,7 +22,7 @@ class EntrustSetupTables extends Migration {
         });
 
         // Creates the assigned_roles (Many-to-Many relation) table
-        Schema::create('assigned_roles', function($table)
+        Schema::create('assigned_roles', function(Blueprint $table)
         {
             $table->engine = 'InnoDB';
             $table->increments('id');

@@ -1,4 +1,6 @@
-<?php
+<?php 
+
+use Illuminate\Database\Schema\Blueprint;
 
 use Illuminate\Database\Migrations\Migration;
 
@@ -12,15 +14,15 @@ class UpdateFbcommentsTable extends Migration {
 	public function up()
 	{
 		//
-		Schema::table('FB_Comments', function($table)
+		Schema::table('FB_Comments', function(Blueprint $table)
 		{
 			$table->dropColumn('from');
-			$table->bigInteger('f_bpost_id')->unsigned()->index()->nullable();
+			$table->bigInteger('post_id')->unsigned()->nullable();
 		});
 
-		Schema::table('FB_Comments', function($table)
+		Schema::table('FB_Comments', function(Blueprint $table)
 		{
-			$table->foreign('f_bpost_id')->references('FB_Post_ID')->on('FB_Posts');
+			$table->foreign('post_id')->references('FB_Post_ID')->on('FB_Posts');
 		});
 	}
 
@@ -34,7 +36,7 @@ class UpdateFbcommentsTable extends Migration {
 		
 		Schema::table('FB_Comments', function($table)
 		{
-		    $table->dropForeign('fb_comments_f_bpost_id_foreign');
+		    $table->dropForeign('fb_comments_post_id_foreign');
 		});
 	}
 

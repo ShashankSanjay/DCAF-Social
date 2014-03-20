@@ -5,8 +5,13 @@ class FacebookComment extends Eloquent
 {
 	protected $table = 'FB_Comments';
 
+	public $incrementing = false;
+
+	protected $primaryKey	= 'FB_Comment_ID';
+
+
 	public function FBPost() {
-		return $this->belongsTo('FacebookPost');
+		return $this->belongsTo('FacebookPost', 'post_id', 'FB_Post_ID');
 	}
 
 	public function FacebookUser()

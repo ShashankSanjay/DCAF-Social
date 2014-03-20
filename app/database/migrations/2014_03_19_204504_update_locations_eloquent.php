@@ -1,5 +1,7 @@
 <?php
 
+use Illuminate\Database\Schema\Blueprint;
+
 use Illuminate\Database\Migrations\Migration;
 
 class UpdateLocationsEloquent extends Migration {
@@ -13,7 +15,7 @@ class UpdateLocationsEloquent extends Migration {
 	{
 		if (!(Schema::hasColumn('Locations', 'created_at')))
 		{
-			Schema::table('Locations', function($table)
+			Schema::table('Locations', function(Blueprint $table)
 			{
 				$table->timestamp('created_at');
 				$table->timestamp('updated_at');

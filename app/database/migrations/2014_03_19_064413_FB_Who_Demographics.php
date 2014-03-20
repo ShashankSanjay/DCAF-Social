@@ -1,4 +1,6 @@
-<?php
+<?php 
+
+use Illuminate\Database\Schema\Blueprint;
 
 use Illuminate\Database\Migrations\Migration;
 
@@ -12,7 +14,7 @@ class FBWhoDemographics extends Migration {
 	public function up()
 	{
 		// Store number of interactions
-		Schema::create('FB_Who_Demographics', function($table)
+		Schema::create('FB_Who_Demographics', function(Blueprint $table)
 		{
 			$table->integer('M_likes');
 			$table->integer('F_likes');
@@ -24,7 +26,7 @@ class FBWhoDemographics extends Migration {
 
 		});
 
-		Schema::table('FB_Who_Demographics', function($table)
+		Schema::table('FB_Who_Demographics', function(Blueprint $table)
 		{
 			
 			$table->foreign('fb_post_id')->references('FB_Post_ID')->on('FB_Posts');
