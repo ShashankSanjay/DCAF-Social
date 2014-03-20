@@ -16,10 +16,10 @@ class CreateFblikestable extends Migration {
 		Schema::create('FB_Likes', function(Blueprint $table)
 		{
 			$table->engine = 'INNODB';
-			$table->bigInteger('FB_Like_ID')->unsigned()->primary();
-			$table->bigInteger('object_id');
-			$table->bigInteger('user_id')->unsigned();
-			$table->string('type');		// page or post or commment
+			$table->incrementing('id');
+			$table->bigInteger('liker_id')->unsigned();
+			$table->bigInteger('liked_id');
+			$table->string('liked_type', 7);		// page or post
 			//$table-> ;
 			$table->timestamp('created_at');
 			$table->timestamp('updated_at');
@@ -27,7 +27,7 @@ class CreateFblikestable extends Migration {
 
 		Schema::table('FB_Likes', function(Blueprint $table)
 		{
-			$table->foreign('user_id')->references('FB_User_ID')->on('FB_Users');
+			$table->foreign('liker_id')->references('FB_User_ID')->on('FB_Users');
 		});
 	}
 
@@ -38,11 +38,20 @@ class CreateFblikestable extends Migration {
 	 */
 	public function down()
 	{
-		Schema::table('FB_Likes', function(Blueprint $table)
+		if (Schema::hasColumn('FB_Likes', 'user_id'))
 		{
-		    $table->dropForeign('fb_likes_user_id_foreign');
-		});
-
+			Schema::table('FB_Likes', function(Blueprint $table)
+			{
+			    $table->dropForeign('fb_likes_user_id_foreign');
+			});
+		}
+		if (Schema::hasColumn('FB_Likes', 'liker_id'))
+		{
+			Schema::table('FB_Likes', function(Blueprint $table)
+			{
+			    $table->dropForeign('fb_likes_liker_id_foreign');
+			});
+		}
 		Schema::drop('FB_Likes');
 	}
 
