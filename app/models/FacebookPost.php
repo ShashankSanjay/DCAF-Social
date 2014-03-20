@@ -40,11 +40,11 @@ class FacebookPost extends Eloquent
 		return $this->hasMany('FacebookComment');
 	}
 
-	/*public function FacebookUser()
+	public function FBUser()
 	{
-		return $this->hasOne('FacebookUser');
+		return $this->belongsTo('FacebookUser', 'User_id', 'FB_User_ID');
 	}
-	*/
+	
 	/*
 		All fields for post. From:https://developers.facebook.com/docs/reference/api/post/
 		
