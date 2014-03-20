@@ -39,7 +39,7 @@ class SocialTableSeeder extends Seeder {
 		);*/
 		
 		$fbHometown = new Location;
-		$fbHometown->FB_Location_id = '110521052';
+		$fbHometown->FB_Location_ID = '110521052';
 		$fbHometown->city = 'Queens';
 		$fbHometown->state = 'New York';
 		$fbHometown->save();
@@ -47,7 +47,7 @@ class SocialTableSeeder extends Seeder {
 		//$fbHometown-> = ;
 
 		$fbLocation = new Location;
-		$fbLocation->FB_Location_id = '109920975';
+		$fbLocation->FB_Location_ID = '109920975';
 		$fbLocation->city = 'Belgrade';
 		$fbLocation->state = 'Serbia';
 		$fbLocation->save();
