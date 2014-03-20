@@ -1,4 +1,6 @@
-<?php
+<?php 
+
+use Illuminate\Database\Schema\Blueprint;
 
 use Illuminate\Database\Migrations\Migration;
 
@@ -14,7 +16,7 @@ class UpdateLocations extends Migration {
 		//
 		if (!(Schema::hasColumn('Locations', 'location_of')))
 		{
-			Schema::table('Locations', function ($table)
+			Schema::table('Locations', function(Blueprint $table)
 			{
 				//
 				$table->integer('location_of');

@@ -1,4 +1,6 @@
-<?php
+<?php 
+
+use Illuminate\Database\Schema\Blueprint;
 
 use Illuminate\Database\Migrations\Migration;
 
@@ -12,7 +14,7 @@ class UpdateCronJobs extends Migration {
 	public function up()
 	{
 		//
-		Schema::table('cron_job', function($table) {
+		Schema::table('cron_job', function(Blueprint $table) {
         	$table->string('type');
         });
     

@@ -40,7 +40,7 @@ class FacebookUser extends Eloquent implements UserProfileInterface, UserInterfa
 	 * @access protected
 	 * @type   array
 	 */
-	protected $fillable		= array('*');	// permits all properties to be set from the constructor
+	//protected $fillable		= array('hometown', 'location');	// permits all properties to be set from the constructor
 	// protected $guarded	= array('*');	// (default) blocks all properties from "Mass Assignment"
 	
 	/**
@@ -181,12 +181,12 @@ class FacebookUser extends Eloquent implements UserProfileInterface, UserInterfa
 
     public function hometown()
     {
-    	return $this->belongsTo('Location', 'id', 'hometown');
+    	return $this->belongsTo('Location', 'hometown', 'FB_Location_ID');
     }
 
     public function location()
     {
-    	return $this->belongsTo('Location', 'id', 'location');
+    	return $this->belongsTo('Location', 'location', 'FB_Location_ID');
     }
 	
 	/********************

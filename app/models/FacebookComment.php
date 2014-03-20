@@ -4,14 +4,14 @@
 class FacebookComment extends Eloquent
 {
 	protected $table = 'FB_Comments';
-	
-	public $primaryKey	= 'FB_Comment_ID';	
-	
-	// protected $fillable	= array('*');
-	protected $guarded	= array();
-	
+
+	public $incrementing = false;
+
+	protected $primaryKey	= 'FB_Comment_ID';
+
+
 	public function FBPost() {
-		return $this->belongsTo('FacebookPost', 'FB_Post_ID', 'FB_Post_ID');
+		return $this->belongsTo('FacebookPost', 'post_id', 'FB_Post_ID');
 	}
 
 	public function FacebookUser()

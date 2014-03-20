@@ -5,6 +5,7 @@ class SocialTableSeeder extends Seeder {
 
 	public function run()
 	{
+		Eloquent::unguard();
 		/**
 		*	Save a new facebook user
 		*/
@@ -23,7 +24,7 @@ class SocialTableSeeder extends Seeder {
 		/**
 		*	Save user location
 		*/
-		$fbHometown = Location::firstOrCreate(array(
+		/*$fbHometown = Location::firstOrCreate(array(
 			'FB_Location_id' => '110521052305522',
 			'city' => 'Queens',
 			'state' => 'New York',
@@ -35,34 +36,48 @@ class SocialTableSeeder extends Seeder {
 			'city' => 'Belgrade',
 			'state' => 'Serbia',
 			)
-		);
-		/*
+		);*/
+		
 		$fbHometown = new Location;
-		$fbHometown->FB_Location_id = '110521052305522';
+		$fbHometown->FB_Location_id = '110521052';
 		$fbHometown->city = 'Queens';
 		$fbHometown->state = 'New York';
 		$fbHometown->save();
+		$fbHometown = Location::find(110521052);
+		if (is_null($fbHometown)) {
+			$fbHometown = Location::find(1);
+		}
 		//$fbHometown-> = ;
 
-		$fblocation = new Location;
-		$fblocation->FB_Location_id = '109920975697736';
-		$fblocation->city = 'Belgrade';
-		$fblocation->state = 'Serbia';
-		$fblocation->save();
+		$fbLocation = new Location;
+		$fbLocation->FB_Location_id = '109920975';
+		$fbLocation->city = 'Belgrade';
+		$fbLocation->state = 'Serbia';
+		$fbLocation->save();
+		$fbLocation = Location::find(109920975);
+		if (is_null($fbLocation)) {
+			echo "didn't work\n";
+			$fbLocation = Location::find(2);
+		}
 		//$fblocation-> = ;
-		*/
+		
 
 		/**
 		*	Link locations appropriately
 		*/
+		$fbUser = FacebookUser::find(699492603);
+		echo $fbHometown;
+		echo $fbUser;
+		echo $fbLocation;
 		$fbUser->hometown()->associate($fbHometown);
 		$fbUser->location()->associate($fbLocation);
-
+		$fbUser->save();
+		
 		/**
 		*	Save a facebook post entry
 		**/
 		$fbPost = FacebookPost::firstOrCreate(array(
-			'FB_Post_ID' => '310237279118288_353713218104027',	// page-id_post-id
+			'FB_Post_ID' => '3537132',
 			'User_ID' => '111077157538',
 			//'Content' => ;
 			'created_time' => '2014-02-13T21:57:09+000',
@@ -86,7 +101,7 @@ class SocialTableSeeder extends Seeder {
 		*	Save a facebook comment entry
 		**/
 		$fbComment = FacebookComment::firstOrCreate(array(
-			'FB_Comment_ID' => '755985524414550_112615594',
+			'FB_Comment_ID' => '11261559',
 			'created_time' => '2014-02-27T23:35:07+0000',
 			'like_count' => 0,
 			'message' => "heyo db seed",
@@ -104,6 +119,10 @@ class SocialTableSeeder extends Seeder {
 		$fbComment->save();*/
 		
 		//$fbPost->FBComment()->save($fbComment);
+		$fbComment = FacebookComment::find(11261559);
+		
+		$FBPost = FacebookPost::find(3537132);
+		
 		$fbComment->FBPost()->associate($fbPost);
 		$fbComment->save();
 
