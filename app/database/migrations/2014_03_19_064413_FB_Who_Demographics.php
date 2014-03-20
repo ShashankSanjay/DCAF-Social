@@ -16,6 +16,7 @@ class FBWhoDemographics extends Migration {
 		// Store number of interactions
 		Schema::create('FB_Who_Demographics', function(Blueprint $table)
 		{
+			$table->engine = 'INNODB';
 			$table->integer('M_likes');
 			$table->integer('F_likes');
 			$table->integer('M_shares');

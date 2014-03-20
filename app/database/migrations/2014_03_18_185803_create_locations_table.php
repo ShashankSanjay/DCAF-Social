@@ -15,7 +15,7 @@ class CreateLocationsTable extends Migration {
 	{
 		Schema::create('Locations', function(Blueprint $table)
 		{
-			//
+			$table->engine = 'INNODB';
 			$table->integer('id')->unique()->increments();
 			$table->bigInteger('FB_Location_ID')->unsigned()->primary();
 			$table->string('country')->nullable;

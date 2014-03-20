@@ -16,6 +16,7 @@ class PageLikesTable extends Migration {
 		//
 		Schema::create('Page_Likes', function(Blueprint $table)
         {
+        	$table->engine = 'INNODB';
             $table->increments('id');
             $table->bigInteger('likee')->unsigned()->index();
             $table->bigInteger('liker')->unsigned()->index();
