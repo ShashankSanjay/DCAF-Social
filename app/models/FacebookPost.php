@@ -19,8 +19,13 @@ class FacebookPost extends Eloquent
 
 	protected $primaryKey	= 'FB_Post_ID';
 	
-	public $FB_Post_ID;
-	public $Content;
+	public $primaryKey	= 'FB_Post_ID';	
+	
+	// protected $fillable	= array('*');
+	protected $guarded	= array();
+	
+	// public $FB_Post_ID;
+	// public $Content;
 	
 	/**********************
 	 * Eloquent Relations *

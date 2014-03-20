@@ -54,3 +54,18 @@ Stack trace:
 #4 /home1/shashan2/socialapp/composer.phar(14): require('phar:///home1/s...')
 #5 {main}
   thrown in phar:///home1/shashan2/socialapp/composer.phar/vendor/symfony/console/Symfony/Component/Console/Input/ArgvInput.php on line 57
+[19-Mar-2014 23:32:36 UTC] PHP Fatal error:  Class 'UpdatePermissionsEloquent' not found in /home1/shashan2/socialapp/vendor/laravel/framework/src/Illuminate/Database/Migrations/Migrator.php on line 297
+[19-Mar-2014 23:33:50 UTC] PHP Fatal error:  Class 'UpdatePermissionsEloquent' not found in /home1/shashan2/socialapp/vendor/laravel/framework/src/Illuminate/Database/Migrations/Migrator.php on line 297
+[19-Mar-2014 23:35:41 UTC] PHP Fatal error:  Class 'UpdatePermissionsEloquent' not found in /home1/shashan2/socialapp/vendor/laravel/framework/src/Illuminate/Database/Migrations/Migrator.php on line 297
+[19-Mar-2014 23:37:03 UTC] PHP Fatal error:  Class 'UpdatePermissionsEloquent' not found in /home1/shashan2/socialapp/vendor/laravel/framework/src/Illuminate/Database/Migrations/Migrator.php on line 297
+[19-Mar-2014 17:37:18 America/Denver] PHP Fatal error:  Uncaught exception 'ErrorException' with message 'Undefined index: argv' in phar:///home1/shashan2/socialapp/composer.phar/vendor/symfony/console/Symfony/Component/Console/Input/ArgvInput.php:57
+Stack trace:
+#0 phar:///home1/shashan2/socialapp/composer.phar/vendor/symfony/console/Symfony/Component/Console/Input/ArgvInput.php(57): Composer\Util\ErrorHandler::handle(8, 'Undefined index...', 'phar:///home1/s...', 57, Array)
+#1 phar:///home1/shashan2/socialapp/composer.phar/vendor/symfony/console/Symfony/Component/Console/Application.php(111): Symfony\Component\Console\Input\ArgvInput->__construct()
+#2 phar:///home1/shashan2/socialapp/composer.phar/src/Composer/Console/Application.php(83): Symfony\Component\Console\Application->run(NULL, Object(Symfony\Component\Console\Output\ConsoleOutput))
+#3 phar:///home1/shashan2/socialapp/composer.phar/bin/composer(43): Composer\Console\Application->run()
+#4 /home1/shashan2/socialapp/composer.phar(14): require('phar:///home1/s...')
+#5 {main}
+  thrown in phar:///home1/shashan2/socialapp/composer.phar/vendor/symfony/console/Symfony/Component/Console/Input/ArgvInput.php on line 57
+[19-Mar-2014 23:37:20 UTC] PHP Fatal error:  Class 'UpdatePermissionsEloquent' not found in /home1/shashan2/socialapp/vendor/laravel/framework/src/Illuminate/Database/Migrations/Migrator.php on line 297
+[19-Mar-2014 23:37:40 UTC] PHP Fatal error:  Class 'UpdateLocationsEloquent' not found in /home1/shashan2/socialapp/vendor/laravel/framework/src/Illuminate/Database/Migrations/Migrator.php on line 297

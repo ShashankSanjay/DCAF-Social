@@ -14,9 +14,9 @@ class FacebookPage extends Eloquent
 	
 	protected $table = 'FB_Pages';
 	
-	public $FB_Page_ID;
-	public $access_token;
-	public $name;
+	// public $FB_Page_ID;
+	// public $access_token;
+	// public $name;
 	
 	/**********************
 	 * Eloquent Relations *
