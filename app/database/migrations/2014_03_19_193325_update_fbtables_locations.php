@@ -22,10 +22,16 @@ class UpdateFbtablesLocations extends Migration {
 
 		Schema::table('FB_Users', function($table)
 		{
-			$table->integer('hometown');//->unsigned();//->index();
-			$table->integer('location');//->unsigned();//->index();
+			$table->bigInteger('hometown')->unsigned()->nullable();
+			$table->bigInteger('location')->unsigned()->nullable();
 			//$table->foreign('hometown')->references('id')->on('Locations');
             //$table->foreign('location')->references('id')->on('Locations');
+        });
+
+        Schema::table('FB_Users', function($table)
+		{
+			$table->foreign('hometown')->references('FB_Location_ID')->on('Locations');
+            $table->foreign('location')->references('FB_Location_ID')->on('Locations');
         });
 
 		//	Pages
@@ -39,8 +45,13 @@ class UpdateFbtablesLocations extends Migration {
 		}
 		Schema::table('FB_Pages', function($table)
 		{
-			$table->integer('location');//->unsigned();//->index();
+			$table->bigInteger('location')->unsigned()->nullable();
             //$table->foreign('location')->references('id')->on('Locations');
+		});
+
+		Schema::table('FB_Pages', function($table)
+		{
+			$table->foreign('location')->references('FB_Location_ID')->on('Locations');
 		});
 	}
 

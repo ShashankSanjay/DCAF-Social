@@ -14,8 +14,8 @@ class CreateFbcommentsTable extends Migration {
 		//
 		Schema::create('FB_Comments', function($table)
 		{
-			$table->increments('id');
-			$table->string('FB_Comment_ID');
+			//$table->increments('id');
+			$table->bigInteger('FB_Comment_ID')->index()->primary();
 			$table->integer('attachment_id')->nullable();
 			$table->integer('comment_count');
 			$table->timestamp('created_time');
