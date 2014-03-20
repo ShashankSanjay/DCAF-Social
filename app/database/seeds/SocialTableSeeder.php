@@ -62,7 +62,7 @@ class SocialTableSeeder extends Seeder {
 		*	Save a facebook post entry
 		**/
 		$fbPost = FacebookPost::firstOrCreate(array(
-			'FB_Post_ID' => '310237279118288_353713218104027',
+			'FB_Post_ID' => '310237279118288_353713218104027',	// page-id_post-id
 			'User_ID' => '111077157538',
 			//'Content' => ;
 			'created_time' => '2014-02-13T21:57:09+000',

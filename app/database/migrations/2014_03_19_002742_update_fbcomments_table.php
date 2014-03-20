@@ -30,7 +30,7 @@ class UpdateFbcommentsTable extends Migration {
 		
 		Schema::table('FB_Comments', function($table)
 		{
-		    $table->dropColumn('fb_comments_fb_post_id');
+		    //$table->dropColumn('fb_comments_fb_post_id');
 		});
 	}
 

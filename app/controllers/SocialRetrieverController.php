@@ -71,7 +71,7 @@ class SocialRetrieverController extends BaseController
 			$token = DB::table('oauth_'.$job->data->network)->find($job->data->oauth_id);
 			if ($token) {
 				$networkUser->access_token = $token->access_token;
-				${$job->data->table}[] = $networkUser;
+				$networkUsers[$job->data->network][] = $networkUser;
 			} else {
 				Log::warning('unknown token for job "'.$job->name.'" (id: '.$job->id.')');
 				echo 'unknown token for job "'.$job->name.'" (id: '.$job->id.')';
@@ -83,7 +83,7 @@ class SocialRetrieverController extends BaseController
 			$oauth = DB::table('oauth_facebook')->where('name', 'John')->first();
 		} */
 		
-		foreach ($FB_Users as $networkUser)
+		foreach ($networkUsers[$network] as $networkUser)
 		{
 			echo '$token: '.$networkUser->access_token."\n";
 			$facebookRetriever->getAllUserData($networkUser);
