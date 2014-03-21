@@ -44,6 +44,11 @@ class FacebookPost extends Eloquent
 	{
 		return $this->belongsTo('FacebookUser', 'User_id', 'FB_User_ID');
 	}
+
+	public function FBLike()
+	{
+		return $this->hasMany('FacebookLike');
+	}
 	
 	/*
 		All fields for post. From:https://developers.facebook.com/docs/reference/api/post/

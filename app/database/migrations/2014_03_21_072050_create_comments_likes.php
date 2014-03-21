@@ -4,7 +4,7 @@ use Illuminate\Database\Schema\Blueprint;
 
 use Illuminate\Database\Migrations\Migration;
 
-class PostLikesTable extends Migration {
+class CreateCommentsLikes extends Migration {
 
 	/**
 	 * Run the migrations.
@@ -13,19 +13,19 @@ class PostLikesTable extends Migration {
 	 */
 	public function up()
 	{
-		Schema::create('FB_Posts_Likes', function(Blueprint $table)
+		Schema::create('FB_Comments_Likes', function(Blueprint $table)
         {
         	$table->engine = 'INNODB';
             $table->increments('id');
             $table->bigInteger('liked')->unsigned();
             $table->bigInteger('liker')->unsigned();
             $table->timestamp('created_at');
-			$table->timestamp('updated_at');
+			$table->timestamp('updated_at');            
         });
 
-        Schema::table('FB_Posts_Likes', function(Blueprint $table)
+        Schema::table('FB_Comments_Likes', function(Blueprint $table)
 		{
-			$table->foreign('liked')->references('FB_Post_ID')->on('FB_Posts');
+			$table->foreign('liked')->references('FB_Comment_ID')->on('FB_Comments');
             $table->foreign('liker')->references('FB_User_ID')->on('FB_Users');
 		});
 	}
@@ -37,12 +37,12 @@ class PostLikesTable extends Migration {
 	 */
 	public function down()
 	{
-		/*Schema::table('Posts_Likes', function(Blueprint $table)
+		/*Schema::table('FB_Comments_Likes', function(Blueprint $table)
 		{
-			$table->dropForeign('post_likes_liked_foreign');
-            $table->dropForeign('post_likes_liker_foreign');
+			$table->dropForeign('comments_likes_liked_foreign');
+            $table->dropForeign('comments_likes_liker_foreign');
 		});*/
-		Schema::drop('FB_Posts_Likes');
+		Schema::drop('FB_Comments_Likes');
 	}
 
 }

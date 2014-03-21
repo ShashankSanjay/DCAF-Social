@@ -14,10 +14,15 @@ class CreateLocationsTable extends Migration {
 	public function up()
 	{
 		Schema::create('Locations', function(Blueprint $table)
+        {
+        	$table->engine = 'INNODB';
+            $table->increments('id')->unique();    
+		});
+
+		Schema::table('Locations', function(Blueprint $table)
 		{
-			$table->engine = 'INNODB';
-			$table->integer('id')->unique()->increments();
-			$table->bigInteger('FB_Location_ID')->unsigned()->primary();
+        	$table->dropPrimary('PRIMARY');
+			$table->bigInteger('FB_Location_ID')->unsigned()->primary();			
 			$table->string('country')->nullable;
 			$table->string('city')->nullable;
 			//$table->longitude;

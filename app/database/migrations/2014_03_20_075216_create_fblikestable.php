@@ -8,18 +8,18 @@ class CreateFblikestable extends Migration {
 
 	/**
 	 * Run the migrations.
-	 *
+	 *										Everything is commented out, just left it as migration in case
 	 * @return void
 	 */
 	public function up()
 	{
-		Schema::create('FB_Likes', function(Blueprint $table)
+		/*Schema::create('FB_Likes', function(Blueprint $table)
 		{
 			$table->engine = 'INNODB';
 			$table->increments('id');
 			$table->bigInteger('liker_id')->unsigned();
 			$table->bigInteger('liked_id');
-			$table->string('liked_type', 7);		// page or post
+			$table->string('liked_table', 11);		// page or post
 			//$table-> ;
 			$table->timestamp('created_at');
 			$table->timestamp('updated_at');
@@ -28,7 +28,7 @@ class CreateFblikestable extends Migration {
 		Schema::table('FB_Likes', function(Blueprint $table)
 		{
 			$table->foreign('liker_id')->references('FB_User_ID')->on('FB_Users');
-		});
+		});*/
 	}
 
 	/**
@@ -38,7 +38,7 @@ class CreateFblikestable extends Migration {
 	 */
 	public function down()
 	{
-		if (Schema::hasColumn('FB_Likes', 'user_id'))
+		/*if (Schema::hasColumn('FB_Likes', 'user_id'))
 		{
 			Schema::table('FB_Likes', function(Blueprint $table)
 			{
@@ -53,6 +53,7 @@ class CreateFblikestable extends Migration {
 			});
 		}
 		Schema::drop('FB_Likes');
+		*/
 	}
 
 }

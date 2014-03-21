@@ -13,12 +13,16 @@ class CreateFbcommentsTable extends Migration {
 	 */
 	public function up()
 	{
-		//
 		Schema::create('FB_Comments', function(Blueprint $table)
+        {
+        	$table->engine = 'INNODB';
+            $table->increments('id')->unique();
+		});
+
+		Schema::table('FB_Comments', function(Blueprint $table)
 		{
-			$table->engine = 'INNODB';
-			$table->integer('id')->unique()->increments();
-			$table->bigInteger('FB_Comment_ID')->index()->primary();
+        	$table->dropPrimary('PRIMARY');
+			$table->bigInteger('FB_Comment_ID')->unsigned()->primary();
 			$table->integer('attachment_id')->nullable();
 			$table->integer('comment_count');
 			$table->timestamp('created_time');
@@ -27,8 +31,6 @@ class CreateFbcommentsTable extends Migration {
 			$table->string('message');
 			$table->integer('message_tags');
 			$table->integer('parent')->nullable();
-			//$table->;
-			
 		});
 
 	}
