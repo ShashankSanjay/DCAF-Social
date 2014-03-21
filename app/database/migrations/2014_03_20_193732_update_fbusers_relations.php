@@ -22,6 +22,8 @@ class UpdateFbusersRelations extends Migration {
 				$table->dropIndex('to_user_id');
 				$table->dropColumn('from_user_id');
 				$table->dropColumn('to_user_id');
+				$table->dropColumn('User_id');
+				$table->bigInteger('User_id')->unsigned()->nullable();
 			});
 		}
 		Schema::table('FB_Posts', function(Blueprint $table)
