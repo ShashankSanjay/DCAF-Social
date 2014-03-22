@@ -50,7 +50,8 @@ Route::get('/cron/run/test', function () {
     return $report;
 });
 
-Route::get('/jobs/{job}/run', 'SocialRetrieverController@getAllUserData');
+// Route::get('/jobs/{job}/run', 'SocialRetrieverController@getAllUserData');
+Route::get('/jobs/run', 'SocialRetrieverController@getAllUserData');
 
 /*
 Route::get('/cron/run/test2', function() {
