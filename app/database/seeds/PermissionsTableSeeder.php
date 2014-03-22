@@ -6,9 +6,10 @@ class PermissionsTableSeeder extends Seeder {
     {
         //DB::table('permissions')->delete();
 
-        $manageBilling = new Permission::firstOrCreate(array(;
+        $manageBilling = Permission::firstOrCreate(array(
             'name' => 'manage_billing',
-            'display_name' => 'manage billing',
+            'display_name' => 'manage billing'
+            )
         );
         //$r->perms()->attach($manageBilling); //works
         

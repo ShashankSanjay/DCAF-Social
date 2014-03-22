@@ -91,6 +91,8 @@ class FacebookRetriever implements SocialRetriever
 			$fbpage->name = $page->name;
 			$fbpage->category = $page->category;
 			$fbpage->save();
+
+			$fbpage->FacebookUser()->attach($user);
 		}
 	}
 	

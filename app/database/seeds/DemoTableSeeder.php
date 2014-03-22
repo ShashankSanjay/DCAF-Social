@@ -33,7 +33,7 @@ class DemoTableSeeder extends Seeder {
 
 		// Create users for demo
 		$userAdmin = new DcafUser;
-		$userAdmin->id = 1;
+		//$userAdmin->id = 1;
 		$userAdmin->username = 'Site_Admin';
 		$userAdmin->email = 'site@admin.com';
 		$userAdmin->password = '123456';
@@ -42,7 +42,7 @@ class DemoTableSeeder extends Seeder {
 		$userAdmin->save();
 
 		$userManager = new DcafUser;
-		$userManager->id = 2;
+		//$userManager->id = 2;
 		$userManager->username = 'Manager';
 		$userManager->email = 'user@manager.com';
 		$userManager->password = '123456';
@@ -51,7 +51,7 @@ class DemoTableSeeder extends Seeder {
 		$userManager->save();
 
 		$userMember = new DcafUser;
-		$userMember->id = 3;
+		//$userMember->id = 3;
 		$userMember->username = 'Member';
 		$userMember->email = 'user@member.com';
 		$userMember->password = '123456';
@@ -61,17 +61,17 @@ class DemoTableSeeder extends Seeder {
 
 		// Roles
 		$siteAdmin = new DcafRole;
-		$siteAdmin->role_id = 1;
+		//$siteAdmin->role_id = 1;
 		$siteAdmin->role_name = 'Site Admin';
 		$siteAdmin->save();
 
         $teamManager = new DcafRole;
-		$teamManager->role_id = 2;
+		//$teamManager->role_id = 2;
         $teamManager->role_name = 'Team Manager';
         $teamManager->save();
 
         $teamMember = new DcafRole;
-		$teamMember->role_id = 3;
+		//$teamMember->role_id = 3;
         $teamMember->role_name = 'Team Member';
         $teamMember->save();
 		
