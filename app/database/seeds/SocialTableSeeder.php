@@ -10,7 +10,7 @@ class SocialTableSeeder extends Seeder {
 		*	Save a new facebook user
 		*/
 		$fbUser = FacebookUser::firstOrCreate(array(
-			'FB_User_ID' => '699492603',
+			'FB_User_ID' => '600492603',
 			'gender' => 'male',
 			'age_range_min' => '21',
 			//'hometown' => ,
