@@ -67,6 +67,8 @@ class SocialRetrieverController extends BaseController
 			$job = $jobs[$j];
 			// SO Q&A #2201335
 			$networkUser = ${!${''} = $job->data->type}::find($job->data->uid);
+			//var_dump($job);
+			//die();
 			// $networkUser = DB::table($job->data->table)->find($job->data->uid);
 			$token = DB::table('oauth_'.$job->data->network)->find($job->data->oauth_id);
 			if ($token) {
@@ -82,7 +84,7 @@ class SocialRetrieverController extends BaseController
 		/* for ($facebookJobs as &$job) {
 			$oauth = DB::table('oauth_facebook')->where('name', 'John')->first();
 		} */
-		
+		$network = 'facebook';
 		foreach ($networkUsers[$network] as $networkUser)
 		{
 			echo '$token: '.$networkUser->access_token."\n";

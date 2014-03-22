@@ -249,3 +249,8 @@ Stack trace:
 [19-Mar-2014 19:38:47 UTC] PHP Parse error:  syntax error, unexpected '::' (T_PAAMAYIM_NEKUDOTAYIM) in /home1/shashan2/socialapp/app/controllers/SocialRetrieverController.php on line 67
 [19-Mar-2014 19:38:58 UTC] PHP Parse error:  syntax error, unexpected '{' in /home1/shashan2/socialapp/app/controllers/SocialRetrieverController.php on line 67
 [19-Mar-2014 20:29:47 UTC] PHP Parse error:  syntax error, unexpected '::' (T_PAAMAYIM_NEKUDOTAYIM) in /home1/shashan2/socialapp/app/controllers/SocialRetrieverController.php on line 67
+[22-Mar-2014 06:11:10 UTC] PHP Fatal error:  Class 'OAuth\Common\Token\StdOAuth2Token' not found in /home1/shashan2/socialapp/app/models/FacebookRetriever.php on line 44
+[22-Mar-2014 06:14:18 UTC] PHP Fatal error:  Cannot use object of type stdClass as array in /home1/shashan2/socialapp/app/models/FacebookRetriever.php on line 83
+[22-Mar-2014 06:15:29 UTC] PHP Fatal error:  Cannot use object of type stdClass as array in /home1/shashan2/socialapp/app/models/FacebookRetriever.php on line 84
+[22-Mar-2014 06:18:01 UTC] PHP Fatal error:  Class 'FB_Page' not found in /home1/shashan2/socialapp/app/models/FacebookRetriever.php on line 87
+[22-Mar-2014 06:18:18 UTC] PHP Fatal error:  Class 'Facebook_Page' not found in /home1/shashan2/socialapp/app/models/FacebookRetriever.php on line 87

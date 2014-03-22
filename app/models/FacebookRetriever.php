@@ -4,7 +4,8 @@
 
 // \OAuth\Common\Token\TokenInterface
 // \Thomaswelton\LaravelOauth\Common\Storage\LaravelSession
-use OAuth\Common\Token\StdOAuth2Token;
+use OAuth\OAuth2\Token\StdOAuth2Token;
+
 
 /**
  * Facebook Retriever
@@ -64,26 +65,31 @@ class FacebookRetriever implements SocialRetriever
 	/**
 	 * @param	int  $id	FacebookUser id
 	 */
-	public function getAllUserData($id)
+	public function getAllUserData($user)
 	{
-		if (Config::get('app.debug')) { echo __METHOD__.'($access_token = "'.$access_token.'")'; }
+		//if (Config::get('app.debug')) { echo __METHOD__.'($access_token = "'.$access_token.'")'; }
 		
-		$this->setAccessToken($access_token);
+		//$this->setAccessToken($access_token);
 		
 		// $user = $this->getUser();
-		$user = FacebookUser::find($id);
-		
-		// $user = FacebookUser::
+
+		$this->setAccessToken($user->access_token);
+
+		// Make call to fb /me/accounts
+		$call = $this->consumer->request('/me/accounts');
+		$response = json_decode($call);
+
 		
 		// Parse data and save into correct DB tables
-		foreach ($user['data'] as $data)
+		foreach ($response->data as $page)
 		{
 			// move through and save page
-			$fbpage = new FB_Page();
-			$fbpage->FB_Page_ID = $data->id;
-			$fbpage->access_token = $data->access_token;
-			$fbpage->perms = $data->perms;
-			$fbpage->name = $data->name;
+			$fbpage = new FacebookPage();
+			$fbpage->FB_Page_ID = $page->id;
+			$fbpage->access_token = $page->access_token;
+			//$fbpage->perms = $page->perms;
+			$fbpage->name = $page->name;
+			$fbpage->category = $page->category;
 			$fbpage->save();
 		}
 	}

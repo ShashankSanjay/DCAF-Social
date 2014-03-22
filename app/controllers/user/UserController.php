@@ -521,20 +521,20 @@ class UserController extends BaseController
 				$response = json_decode($response, true);
 				
 				$networkUser = ucfirst($network).'User';
-				
+
 				// if we don't already have this network account in the database
 				if ($networkUser::find($response['id']) == null)
 				{
 					// SO Q&A #2201335
 					// $networkUser = new ${!${''} = ucfirst($network).'User'}();
 					
-					$networkUser = new $networkUser();
+					$networkUser = new $networkUser;
 					
 					$networkUser->{$networkUser->getKeyName()} = $response['id'];
 					foreach ($response as $key => $val) {
 						$networkUser->{$key} = $val;
 					}
-					
+
 					/*
 					echo '<pre>';
 					echo '$response:'."\n";
@@ -547,7 +547,7 @@ class UserController extends BaseController
 					$networkUser->save();
 					
 					// if we don't already have an access token for this DCAF user on this network stored in the database
-					if (!($oauth = DB::table($db)->where('user_id', $this->user->id)->first()))
+					if (is_null($oauth = DB::table($db)->where('user_id', $this->user->id)->first()))
 					// if (count(DB::select('select * from '.$db.' where access_token = ?', array($token->getAccessToken()))) == 0)
 					{
 						// Save the token into db
