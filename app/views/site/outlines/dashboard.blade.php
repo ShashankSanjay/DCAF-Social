@@ -48,103 +48,26 @@ Dashboard
                 <!-- begin MESSAGES/ALERTS/TASKS/USER ACTIONS DROPDOWNS -->
                 <ul class="nav navbar-right">
 
-                    <!-- begin MESSAGES DROPDOWN -->
+                    <!-- Social icons -->
                     <li class="dropdown">
-                        <a href="#" class="messages-link dropdown-toggle" data-toggle="dropdown">
-                            <i class="fa fa-envelope"></i>
-                            <span class="number">4</span> <i class="fa fa-caret-down"></i>
+                        <a class="btn btn-social-icon btn-facebook dcafsocial-facebook-link">
+                            <i class="fa fa-facebook dcaf">
+                            </i>
                         </a>
-                        <ul class="dropdown-menu dropdown-scroll dropdown-messages">
-
-                            <!-- Messages Dropdown Heading -->
-                            <li class="dropdown-header">
-                                <i class="fa fa-envelope"></i> 4 New Messages
-                            </li>
-
-                            <!-- Messages Dropdown Body - This is contained within a SlimScroll fixed height box. You can change the height using the SlimScroll jQuery features. -->
-                            <li id="messageScroll">
-                                <ul class="list-unstyled">
-                                    <li>
-                                        <a href="#">
-                                            <div class="row">
-                                                <div class="col-xs-2">
-                                                    <img class="img-circle" src="{{ URL::to('/') }}/assets/img/user-profile-1.jpg" alt="">
-                                                </div>
-                                                <div class="col-xs-10">
-                                                    <p>
-                                                        <strong>Jane Smith</strong>: Hi again! I wanted to let you know that the order...
-                                                    </p>
-                                                    <p class="small">
-                                                        <i class="fa fa-clock-o"></i> 12 minutes ago
-                                                    </p>
-                                                </div>
-                                            </div>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#">
-                                            <div class="row">
-                                                <div class="col-xs-2">
-                                                    <img class="img-circle" src="{{ URL::to('/') }}/assets/img/user-profile-2.jpg" alt="">
-                                                </div>
-                                                <div class="col-xs-10">
-                                                    <p>
-                                                        <strong>Roddy Austin</strong>: Thanks for the info, if you need anything from...
-                                                    </p>
-                                                    <p class="small">
-                                                        <i class="fa fa-clock-o"></i> 3:39 PM
-                                                    </p>
-                                                </div>
-                                            </div>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#">
-                                            <div class="row">
-                                                <div class="col-xs-2">
-                                                    <img class="img-circle" src="{{ URL::to('/') }}/assets/img/user-profile-3.jpg" alt="">
-                                                </div>
-                                                <div class="col-xs-10">
-                                                    <p>
-                                                        <strong>Stacy Gibson</strong>: Hey, what was the purchase order number for the...
-                                                    </p>
-                                                    <p class="small">
-                                                        <i class="fa fa-clock-o"></i> Yesterday at 10:23 AM
-                                                    </p>
-                                                </div>
-                                            </div>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#">
-                                            <div class="row">
-                                                <div class="col-xs-2">
-                                                    <img class="img-circle" src="{{ URL::to('/') }}/assets/img/user-profile-4.jpg" alt="">
-                                                </div>
-                                                <div class="col-xs-10">
-                                                    <p>
-                                                        <strong>Jeffrey Cortez</strong>: Check out this video I found the other day, it's...
-                                                    </p>
-                                                    <p class="small">
-                                                        <i class="fa fa-clock-o"></i> Tuesday at 12:23 PM
-                                                    </p>
-                                                </div>
-                                            </div>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </li>
-
-                            <!-- Messages Dropdown Footer -->
-                            <li class="dropdown-footer">
-                                <a href="mailbox.html">Read All Messages</a>
-                            </li>
-
-                        </ul>
-                        <!-- /.dropdown-menu -->
                     </li>
-                    <!-- /.dropdown -->
-                    <!-- end MESSAGES DROPDOWN -->
+                    <li class="dropdown">
+                        <a href={{ OAuth::getAuthorizeUrl('google') }} class="btn btn-social-icon btn-google-plus dcafsocial-google-plus-link">
+                            <i class="fa fa-google-plus dcaf">
+                            </i>
+                        </a>
+                    </li>
+                    <li class="dropdown">
+                        <a href={{ OAuth::getAuthorizeUrl('twitter') }} class="btn btn-social-icon btn-twitter dcafsocial-twitter-link">
+                            <i class="fa fa-twitter dcaf">
+                            </i>
+                        </a>
+                    </li>
+                    <!-- end Social icons -->
 
                     <!-- begin ALERTS DROPDOWN -->
                     <li class="dropdown">
