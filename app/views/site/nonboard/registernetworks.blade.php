@@ -22,13 +22,13 @@ Network Registration
 			<div class="container">
 				<div class="row">
 					<br></br>
-					<div class="col-lg-6 col-md-6 col-lg-offset-3 col-md-offset-3">
+					<div class="col-lg-8 col-md-8 col-lg-offset-2 col-md-offset-2">
 					    @if ( Session::get('error') )
-					        <div class="alert alert-error alert-danger">{{{ Session::get('error') }}}</div>
+					        <div class="alert alert-error alert-danger"> {{ Session::get('error') }} </div>
 					    @endif
 
 					    @if ( Session::get('notice') )
-					        <div class="alert alert-info">{{{ Session::get('notice') }}}</div>
+					    	<div class="alert alert-info">{{ Session::get('notice') }}</div>
 					    @endif
 						<style>
 							h3,
@@ -50,6 +50,11 @@ Network Registration
 						<h3 class="align-center">All done?<br /> You'll be able to add or remove networks later if you want to<h3>
 						<!--button class="btn btn-lg btn-primary btn-block" type="submit"> I'm all done</button-->
 						<a class="btn btn-lg btn-warning col-lg-4 col-lg-offset-4" href={{ URL::to('user/team') }}><strong> Next Step!</strong></a>
+						<br />
+						<br />
+						<br />
+						<br />
+						
 					</div>
 				</div>
 			</div> <!-- /container -->

@@ -143,25 +143,39 @@ class FacebookRetriever implements SocialRetriever
 		return $pages;
 	}
 	
-	public function getPage($id)
+	public function getPage($page)
 	{
 		// get page access-token from db
-		$db = FacebookPage::find($id);
-		$token = new StdOAuth2Token($db->access_token);
-		$this->consumer->getStorage()->storeAccessToken("Facebook", $token);
+		//$page = FacebookPage::find($user);
+		//$token = new StdOAuth2Token($page->access_token);
+		$this->consumer->setAccessToken($page->access_token);
 		
-		// Define scopes and fields
-		// $scope = "/posts.fields(likes)";
+		// Define query and fields. This is just pt. 1, still need media stuff, albums videos..
+		$query = "?fields=likes,posts.fields(likes,shares,comments)";
 		
 		try {
 			// specific field calls from Alex's email will not work with /me node, must use id?fields=...
-			$response = $consumer->request('/me/feed');
+			$response = $consumer->request($page->FB_Page_ID . $query);
 		} catch (FacebookApiException $e) {
 			// CHANGE: WRITE TO LOG FILE
 			var_dump($e);
+			die();
 		}
 		$response = json_decode($response, true);
 		
+		//	breakdown of response, in order they are received
+		$page_likes = $response->likes;
+		$posts = $response->posts;
+
+		foreach ($posts->data as $post) {
+			//	Need to write paging for: likes, comments, and shares
+			$post_shares = $post->shares;
+			$post_id = $post->id;
+			$post_time = $post->created_time;
+			$post_likes = $post->likes;
+			$post_comments = $post->comments;
+		}
+
 		// parse through, go through pagination
 		
 		/**

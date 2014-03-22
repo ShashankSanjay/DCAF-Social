@@ -79,7 +79,7 @@ class SocialRetrieverController extends BaseController
 				echo 'unknown token for job "'.$job->name.'" (id: '.$job->id.')';
 			}
 		}
-		
+
 		// Call FacebookRetriver to retrieve Facebook data
 		/* for ($facebookJobs as &$job) {
 			$oauth = DB::table('oauth_facebook')->where('name', 'John')->first();
@@ -89,8 +89,15 @@ class SocialRetrieverController extends BaseController
 		{
 			echo '$token: '.$networkUser->access_token."\n";
 			$facebookRetriever->getAllUserData($networkUser);
+
+			// By now, user is saved into db, and so have pages + basic info on them
+			//	So next, get page likes and posts
+			foreach ($networkUser->FacebookPage as $page) {
+				//$facebookRetriever->getPage($page);
+			}
+			
 		}
-		
+
 		// Call SocialRetriver to retrieve Google Plus data
 		
 		// Call SocialRetriver model to retrieve Twitter data
