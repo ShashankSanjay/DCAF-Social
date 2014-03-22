@@ -551,23 +551,9 @@ class UserController extends BaseController
 					// if (count(DB::select('select * from '.$db.' where access_token = ?', array($token->getAccessToken()))) == 0)
 					{
 						// Save the token into db
-						//$oauthId = DB::table($db)->insertGetId(array('user_id' => $this->user->id, 'access_token' => $token->getAccessToken(), 'expire_time' => $token->getEndOfLife()));
+						$oauthId = DB::table($db)->insertGetId(array('user_id' => $this->user->id, 'access_token' => $token->getAccessToken(), 'expire_time' => $token->getEndOfLife()));
 					}
 					
-					$extend_url = "https://graph.facebook.com/oauth/access_token?client_id=494865777271597&client_secret=55ad9a3e7e53fd0fd7727de6e6787da6&grant_type=fb_exchange_token&fb_exchange_token=" . $token;
-
-					$resp = file_get_contents($extend_url);
-
-					parse_str($resp,$output);
-
-					var_dump($output);
-
-					$token = $output['access_token'];
-					
-					//$this->setAccessToken($token);
-
-					$oauthId = DB::table('oauth_facebook')->insertGetId(array('user_id' => $this->user->id, 'access_token' => $token));//, 'expire_time' => $token->getEndOfLife()));
-					die();
 					// create a new data scraping job
 					$job = new Job();
 					$job->name = $props['abbr'].'J'.$response['id'];
