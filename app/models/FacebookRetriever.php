@@ -19,7 +19,16 @@ class FacebookRetriever implements SocialRetriever
 	const GET_USER_URI = '/me';
 	
 	public $consumer;
+
+	/**
+	*	Credentials
 	
+	public $credentials = array(
+        'key' => '494865777271597',
+        'secret' => '55ad9a3e7e53fd0fd7727de6e6787da6',
+        'scope' => 'email, read_stream, manage_pages, publish_actions'
+    );
+	*/
 	/**
 	 * Constructor
 	 */
@@ -33,6 +42,23 @@ class FacebookRetriever implements SocialRetriever
 	public function setAccessToken($access_token)
 	{
 		$this->consumer->getStorage()->storeAccessToken("Facebook", new StdOAuth2Token($access_token));
+	}
+
+	public function getLongAccessToken($short_token)
+	{
+		$extend_url = "https://graph.facebook.com/oauth/access_token?client_id=494865777271597&client_secret=55ad9a3e7e53fd0fd7727de6e6787da6&grant_type=fb_exchange_token&fb_exchange_token=" . $short_token;
+
+		$resp = file_get_contents($extend_url);
+
+		parse_str($resp,$output);
+
+		var_dump($output);
+
+		$token = $output['access_token'];
+		
+		//$this->setAccessToken($token);
+
+		$oauthId = DB::table('oauth_facebook')->insertGetId(array('user_id' => Auth::User()->id, 'access_token' => $token));//, 'expire_time' => $token->getEndOfLife()));
 	}
 	
 	/**
