@@ -500,7 +500,7 @@ class UserController extends BaseController
 		
 		$networks = array(
 			'facebook'	=> array('abbr' => 'FB', 'accountEndpoint' => '/me'),
-			'twitter'	=> array('abbr' => 'TW', 'accountEndpoint' => 'account/settings.json'),
+			'twitter'	=> array('abbr' => 'TW', 'accountEndpoint' => 'account/verify_credentials.json'),
 			'google'	=> array('abbr' => 'GP', 'accountEndpoint' => ''),
 			'instagram'	=> array('abbr' => 'IG', 'accountEndpoint' => '')
 		);
@@ -523,7 +523,7 @@ class UserController extends BaseController
 				$response = json_decode($response, true);
 				
 				$networkUser = ucfirst($network).'User';
-
+				
 				// if we don't already have this network account in the database
 				if ($networkUser::find($response['id']) == null)
 				{
@@ -531,12 +531,27 @@ class UserController extends BaseController
 					// $networkUser = new ${!${''} = ucfirst($network).'User'}();
 					
 					$networkUser = new $networkUser;
-					
-					$networkUser->{$networkUser->getKeyName()} = $response['id'];
-					foreach ($response as $key => $val) {
-						$networkUser->{$key} = $val;
-					}
 
+					$networkUser->{$networkUser->getKeyName()} = $response['id'];
+
+					if ($network == 'twitter') {
+						$columns = DB::connection()
+						  ->getDoctrineSchemaManager()
+						  ->listTableColumns($props['abbr'] . '_Users');
+						echo '<pre>';
+						foreach ($response as $key => $val) {
+							if (isset($columns[$key])) {
+								var_dump($key);
+								var_dump($val);
+								//$networkUser->{$key} = $val;
+							}
+						}
+					} else {
+						foreach ($response as $key => $val) {
+							$networkUser->{$key} = $val;
+							}
+					}
+					
 					/*
 					echo '<pre>';
 					echo '$response:'."\n";
@@ -545,7 +560,8 @@ class UserController extends BaseController
 					print_r($networkUser);
 					die('</pre>');
 					*/
-					
+					var_dump($networkUser);
+					die();
 					$networkUser->save();
 					
 					// if we don't already have an access token for this DCAF user on this network stored in the database

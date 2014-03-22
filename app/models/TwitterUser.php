@@ -64,7 +64,7 @@ class TwitterUser extends Eloquent implements UserProfileInterface, UserInterfac
 	protected $appends = array();
 	
 	protected $renamedFields = array(
-		'id_str'	=> 'TW_User_ID',
+		'id'	=> 'TW_User_ID',
 	);
 	
 	public static function boot()
