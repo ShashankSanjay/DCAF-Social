@@ -505,6 +505,8 @@ class UserController extends BaseController
 			'instagram'	=> array('abbr' => 'IG', 'accountEndpoint' => '')
 		);
 
+		$newProfileAdded = false;
+
 		foreach ($networks as $network => $props)
 		{
 			$db = 'oauth_'.$network;
@@ -574,11 +576,18 @@ class UserController extends BaseController
 					*/
 					
 					$job->save();
+
+					$newProfileAdded = true;
 				}
 			}
 		}
 		
-		return View::make('site.nonboard.registernetworks');
+		if ($newProfileAdded) {
+			Session::flash('notice', 'Your account was linked!');
+			return View::make('site.nonboard.registernetworks');
+		} else {
+			return View::make('site.nonboard.registernetworks');
+		}
 	}
 	
 	public function postNetworks()

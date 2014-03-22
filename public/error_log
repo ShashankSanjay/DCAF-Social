@@ -254,3 +254,4 @@ Stack trace:
 [22-Mar-2014 06:15:29 UTC] PHP Fatal error:  Cannot use object of type stdClass as array in /home1/shashan2/socialapp/app/models/FacebookRetriever.php on line 84
 [22-Mar-2014 06:18:01 UTC] PHP Fatal error:  Class 'FB_Page' not found in /home1/shashan2/socialapp/app/models/FacebookRetriever.php on line 87
 [22-Mar-2014 06:18:18 UTC] PHP Fatal error:  Class 'Facebook_Page' not found in /home1/shashan2/socialapp/app/models/FacebookRetriever.php on line 87
+[22-Mar-2014 08:26:17 UTC] PHP Parse error:  syntax error, unexpected ';' in /home1/shashan2/socialapp/app/controllers/user/UserController.php on line 588
