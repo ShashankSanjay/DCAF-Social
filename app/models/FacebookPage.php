@@ -13,6 +13,10 @@ class FacebookPage extends Eloquent
 	 **********************/
 	
 	protected $table = 'FB_Pages';
+
+	public $incrementing = false;
+
+	protected $primaryKey = 'FB_Page_ID';
 	
 	// public $FB_Page_ID;
 	// public $access_token;
