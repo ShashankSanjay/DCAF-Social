@@ -176,7 +176,7 @@ class FacebookUser extends Eloquent implements UserProfileInterface, UserInterfa
 
     public function FacebookPage()
     {
-    	return $this->hasMany('FacebookPage', 'FB_Page_User', 'FB_Page_ID', 'FB_Page_ID');
+    	return $this->hasMany('FacebookPage', 'FB_Page_User', 'FB_User_ID', 'FB_Page_ID');
     }
 
     public function FacebookPost()
