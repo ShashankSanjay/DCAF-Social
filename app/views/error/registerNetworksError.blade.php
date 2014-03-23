@@ -100,9 +100,7 @@
 	<div class="wrapper">
 		<div class="error-spacer"></div>
 		<div role="main" class="main">
-			
-			<h1><?php echo $messages[mt_rand(0, 2)]; ?></h1>
-
+			\
 			<h2>Registration Error</h2>
 
 			<hr>
