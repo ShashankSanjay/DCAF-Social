@@ -540,7 +540,7 @@ class UserController extends BaseController
 					$networkUser = new $networkUser;
 
 					$networkUser->{$networkUser->getKeyName()} = $response['id'];
-
+					
 					if ($network == 'twitter') {
 						$columns = DB::connection()
 						  ->getDoctrineSchemaManager()
@@ -554,10 +554,25 @@ class UserController extends BaseController
 						}
 					} else {
 						foreach ($response as $key => $val) {
-							$networkUser->{$key} = $val;
+							
+								//var_dump($key);
+								var_dump($key);
+							
+						}
+						foreach ($networkUser->dcaf_fields as $field) {
+							
+							try {
+								//var_dump($field);
+								$networkUser->{$field} = $response[$field];
+							} catch (Exception $e) {
+								Mail::later(5, 'site.dashboard.home', array('error' => $e), function($message)
+								{
+								    $message->to('ssanja1@pride.hofstra.edu', 'Admin')->subject('Error on linking');
+								});
 							}
+						}
 					}
-					
+
 					/*
 					echo '<pre>';
 					echo '$response:'."\n";

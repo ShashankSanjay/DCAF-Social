@@ -32,6 +32,20 @@ class FacebookUser extends Eloquent implements UserProfileInterface, UserInterfa
 	public $incrementing	= false;			// defaults to true; false disables auto-incrementing the primary key
 	public $timestamps		= true;				// defaults to true to maintain 'updated_at' and 'created_at' columns
 	
+	public $dcaf_fields = array(
+		'id',
+		'name',
+		'first_name',
+		'last_name',
+		'link',
+		'gender',
+		'email',
+		'timezone',
+		'username',
+		'locale',
+		//'',
+		);
+
 	/**
 	 * defines which properties can be set through
 	 * the model's constructor (mass-assignable)
@@ -176,7 +190,7 @@ class FacebookUser extends Eloquent implements UserProfileInterface, UserInterfa
 
     public function FacebookPage()
     {
-    	return $this->hasMany('FacebookPage', 'FB_Page_User', 'FB_User_ID', 'FB_Page_ID');
+    	return $this->belongsToMany('FacebookPage', 'FB_Page_User', 'FB_User_ID', 'FB_Page_ID');
     }
 
     public function FacebookPost()

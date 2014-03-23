@@ -268,3 +268,10 @@ Stack trace:
 [23-Mar-2014 01:32:33 UTC] PHP Parse error:  syntax error, unexpected ';' in /home1/shashan2/socialapp/vendor/zizaco/confide/src/Zizaco/Confide/ConfideUser.php on line 220
 [23-Mar-2014 01:55:08 UTC] PHP Parse error:  syntax error, unexpected ')' in /home1/shashan2/socialapp/app/controllers/user/UserController.php on line 345
 [23-Mar-2014 02:02:44 UTC] PHP Fatal error:  Call to a member function checkAuthAndRedirect() on a non-object in /home1/shashan2/socialapp/app/controllers/user/UserController.php on line 481
+[23-Mar-2014 04:45:03 UTC] PHP Parse error:  syntax error, unexpected 'Mail' (T_STRING), expecting '{' in /home1/shashan2/socialapp/app/controllers/user/UserController.php on line 561
+[23-Mar-2014 04:45:15 UTC] PHP Parse error:  syntax error, unexpected 'Mail' (T_STRING), expecting '{' in /home1/shashan2/socialapp/app/controllers/user/UserController.php on line 561
+[23-Mar-2014 04:45:53 UTC] PHP Parse error:  syntax error, unexpected 'Mail' (T_STRING), expecting '{' in /home1/shashan2/socialapp/app/controllers/user/UserController.php on line 561
+[23-Mar-2014 04:46:02 UTC] PHP Parse error:  syntax error, unexpected 'Mail' (T_STRING), expecting '{' in /home1/shashan2/socialapp/app/controllers/user/UserController.php on line 561
+[23-Mar-2014 04:46:04 UTC] PHP Parse error:  syntax error, unexpected 'public' (T_PUBLIC) in /home1/shashan2/socialapp/app/controllers/user/UserController.php on line 622
+[23-Mar-2014 04:55:57 UTC] PHP Parse error:  syntax error, unexpected '$field' (T_VARIABLE) in /home1/shashan2/socialapp/app/controllers/user/UserController.php on line 566
+[23-Mar-2014 04:56:02 UTC] PHP Parse error:  syntax error, unexpected '$field' (T_VARIABLE) in /home1/shashan2/socialapp/app/controllers/user/UserController.php on line 566
