@@ -215,3 +215,4 @@ Stack trace:
 #4 /home1/shashan2/socialapp/composer.phar(14): require('phar:///home1/s...')
 #5 {main}
   thrown in phar:///home1/shashan2/socialapp/composer.phar/vendor/symfony/console/Symfony/Component/Console/Input/ArgvInput.php on line 57
+[23-Mar-2014 18:17:07 UTC] PHP Parse error:  syntax error, unexpected 'public' (T_PUBLIC) in /home1/shashan2/socialapp/app/database/migrations/2014_03_23_181108_update_fbposts_page_relation.php on line 38

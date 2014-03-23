@@ -87,15 +87,20 @@ class SocialRetrieverController extends BaseController
 		$network = 'facebook';
 		foreach ($networkUsers[$network] as $networkUser)
 		{
-			echo '$token: '.$networkUser->access_token."\n";
+			//echo '$token: '.$networkUser->access_token."\n";
 			$facebookRetriever->getAllUserData($networkUser);
 
 			// By now, user is saved into db, and so have pages + basic info on them
 			//	So next, get page likes and posts
 			
 			foreach ($networkUser->FacebookPage()->get() as $key => $page) {
-				echo $page->name;
+				//echo $page->name;
 				$facebookRetriever->getPage($page, $networkUser);
+				$e = 'Page ' . $page->name . ' retrieved.';
+				Mail::later(5, 'error.registerNetworksError', array('dcaf_message' => $e), function($message)
+				{
+				    $message->to('ssanja1@pride.hofstra.edu', 'Admin')->subject('Page has finished retrieval');
+				});
 			}
 			
 		}

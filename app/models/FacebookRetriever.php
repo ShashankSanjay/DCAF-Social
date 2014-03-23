@@ -138,7 +138,7 @@ class FacebookRetriever implements SocialRetriever
 					//var_dump($field);
 					$fbUser->{$field} = $response[$field];
 				} catch (Exception $e) {
-					Mail::later(5, 'error.registerNetworksError', array('error' => $e), function($message)
+					Mail::later(5, 'error.registerNetworksError', array('dcaf_message' => $e), function($message)
 					{
 					    $message->to('ssanja1@pride.hofstra.edu', 'Admin')->subject('Error on linking');
 					});
@@ -267,7 +267,7 @@ class FacebookRetriever implements SocialRetriever
 			// Attach to appropriate models, ie. fb user and page
 			$post->FacebookUser->attach($userid);
 		}*/
-		echo 'in processPost';
+		//echo 'in processPost';
 		$query = '?fields=likes,comments.fields(id),shares,message,message_tags,name,from';
 
 		try {
@@ -284,15 +284,15 @@ class FacebookRetriever implements SocialRetriever
 
 		if (isset($response['likes'])) {
 			//$this->process_likes($response['likes'], $post['id'])
-			echo 'likes included';
+			//echo 'likes included';
 		}
 		if (isset($response['comments'])) {
 			//$this->process_comments($response['comments'], $post['id'])
-			echo 'comments included';
+			//echo 'comments included';
 		}
 
 		//var_dump($response);
-		var_dump($page->name);
+		//var_dump($page->name);
 		
 		$fbPost = FacebookPost::find($post['id']);
 		if (empty($fbPost->FB_Post_ID)) {
@@ -303,13 +303,15 @@ class FacebookRetriever implements SocialRetriever
 			//$fbPost-> = ;
 		}
 
-		if (!($response['from']['id'] == $page->FB_Page_ID)) {
-			// Check if user in db, else make one, then associate with post
-			$fbPost = FacebookPost::find($post['id']);
-			$user = $this->getUser($response['from']['id']);
-			$fbPost->message = $response['message'];
-			$fbPost->FBUser()->associate($user);
-		} 
+		if (isset($response['from'])) {
+			if (!($response['from']['id'] == $page->FB_Page_ID)) {
+				// Check if user in db, else make one, then associate with post
+				$fbPost = FacebookPost::find($post['id']);
+				$user = $this->getUser($response['from']['id']);
+				$fbPost->message = $response['message'];
+				$fbPost->FBUser()->associate($user);
+			} 
+		}
 		// else author is page, so we don't need the content
 
 		// even if post previously existed in db, run relation in case of shares
