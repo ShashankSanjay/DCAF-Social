@@ -92,7 +92,8 @@ class SocialRetrieverController extends BaseController
 
 			// By now, user is saved into db, and so have pages + basic info on them
 			//	So next, get page likes and posts
-			foreach ($networkUser->FacebookPage as $page) {
+			
+			foreach ($networkUser::with('FacebookPage')->get() as $page) {
 				//$facebookRetriever->getPage($page);
 			}
 			
