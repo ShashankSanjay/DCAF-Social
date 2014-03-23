@@ -343,7 +343,7 @@ class UserController extends BaseController
 	{
 		if (Confide::confirm($code))
 		{
-			return Redirect::to('user/firstTime')
+			return Redirect::to('user/registernetworks')
 				->with('notice', Lang::get('confide::confide.alerts.confirmation'));
 		}
 		else
@@ -621,7 +621,7 @@ class UserController extends BaseController
 
 			// New Company
 			// $companyName = Input::get('companyName');
-			$company = new ClientCompany;
+			/*$company = new ClientCompany;
 			$company->name = Input::get('companyName');
 			$company->industry = Input::get('industry');
 			$company->save();
@@ -631,7 +631,7 @@ class UserController extends BaseController
 			// Make new BillingAccount
 			$billing = new BillingAccount;
 			$billing->billing_name = Input::get('billingName');
-			$billing->billing_address = Input::get('billingAddress');
+			$billing->billing_address = Input::get('billingAddress');*/
 			// Make user billing contact
 
 			// Make new team, make user manager
@@ -639,15 +639,17 @@ class UserController extends BaseController
 		else	// Not the first user from their company
 		{
 			// get access code for company
-			$access = Input::get('accessCode');
+			/*$access = Input::get('accessCode');
 
 			if (true) {
 				// plug user into existing things
 			}
 			else {
 				// access code is incorrect as it does not exist
-			}
+			}*/
 		}
+
+
 	}
 	
 	public function team()
