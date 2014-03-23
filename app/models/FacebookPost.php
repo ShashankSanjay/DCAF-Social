@@ -32,7 +32,7 @@ class FacebookPost extends Eloquent
 	
 	public function FBPage()
 	{
-		return $this->hasOne('FacebookPage');
+		return $this->belongsTo('FacebookPage', 'Page_id', 'FB_Page_ID');
 	}
 
 	public function FBComment()

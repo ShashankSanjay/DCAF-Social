@@ -553,12 +553,6 @@ class UserController extends BaseController
 							}
 						}
 					} else {
-						foreach ($response as $key => $val) {
-							
-								//var_dump($key);
-								var_dump($key);
-							
-						}
 						foreach ($networkUser->dcaf_fields as $field) {
 							
 							try {

@@ -15,7 +15,7 @@ class CreatTWUsersTable extends Migration {
 	
 		Schema::create('TW_Users', function(Blueprint $table)
         {
-        	//$table->engine = 'INNODB';
+        	$table->engine = 'INNODB';
         	$table->increments('id')->unique();
         });
 

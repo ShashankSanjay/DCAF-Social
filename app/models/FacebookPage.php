@@ -31,6 +31,11 @@ class FacebookPage extends Eloquent
 		return $this->belongstoMany('FacebookUser', 'FB_Page_User', 'FB_Page_ID', 'FB_User_ID');
 	}
 
+	public function FacebookPost()
+	{
+		return $this->hasMany('FacebookPost');
+	}
+
 	public function oauth_facebook()
 	{
 		return $this->hasOne('oauth_facebook');
