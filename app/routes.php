@@ -200,5 +200,5 @@ Route::any('/', array('before' => 'auth','uses' => 'UserController@getIndex'));
 
 App::missing(function($exception)
 {
-    return Response::view('theme.404', array(), 404);
+    return Response::view('error.404', array(), 404);
 });
