@@ -76,7 +76,11 @@ class FacebookRetriever implements SocialRetriever
 		$this->setAccessToken($user->access_token);
 
 		// Make call to fb /me/accounts
-		$call = $this->consumer->request('/me/accounts');
+		try {
+			$call = $this->consumer->request('/me/accounts');
+		} catch (Exception $e) {
+			echo 'failed in getting user accounts';
+		}
 		$response = json_decode($call);
 
 		
@@ -105,13 +109,44 @@ class FacebookRetriever implements SocialRetriever
 	 */
 	public function getUser($id = null)
 	{
-		if (Config::get('app.debug')) { echo __METHOD__.'($id = "'.$id.'")'; }
+		//if (Config::get('app.debug')) { echo __METHOD__.'($id = "'.$id.'")'; }
 		
 		// Get user info
-		$call = $this->consumer->request($id ? $id : '/me');	// /me/data
-		$response = json_decode($call, true);
+		if (is_null($id)) {
+			$call = $this->consumer->request($id ? $id : '/me');	// /me/data
+			$response = json_decode($call, true);
+
+			$id = $response['id'];
+			
+		}
+
+		// Search for user in db
+		$fbUser = FacebookUser::find($id);
+
+		// If user not found, create one
+		if ($fbUser::find($response['id']) == null)
+		{
+			//$query = '?fields=';
+			$query = '/me';
+			$call = $this->consumer->request($id . $query);
+			$response = json_decode($call, true);
+
+			$fbUser = new FacebookUser;
+
+			foreach ($fbUser->dcaf_fields as $field) {
+				try {
+					//var_dump($field);
+					$fbUser->{$field} = $response[$field];
+				} catch (Exception $e) {
+					Mail::later(5, 'error.registerNetworksError', array('error' => $e), function($message)
+					{
+					    $message->to('ssanja1@pride.hofstra.edu', 'Admin')->subject('Error on linking');
+					});
+				}
+				$fbUser->save();
+			}
+		}
 		
-		$facebookUser = new FacebookUser();
 	}
 	
 	/**
@@ -150,35 +185,55 @@ class FacebookRetriever implements SocialRetriever
 		// get page access-token from db
 		//$page = FacebookPage::find($user);
 		//$token = new StdOAuth2Token($page->access_token);
-		$this->consumer->setAccessToken($page->access_token);
+		$this->setAccessToken($page->access_token);
 		
 		// Define query and fields. This is just pt. 1, still need media stuff, albums videos..
-		$query = "?fields=likes,posts.fields(likes,shares,comments)";
+		$query = '?fields=likes,posts.fields(id)';
 		
-		echo '<pre>';
 		try {
 			// specific field calls from Alex's email will not work with /me node, must use id?fields=...
-			$response = $consumer->request($page->FB_Page_ID . $query);
-		} catch (FacebookApiException $e) {
+			$response = $this->consumer->request($page->FB_Page_ID . $query);
+		} catch (Exception $e) {
 			// CHANGE: WRITE TO LOG FILE
-			var_dump($e);
+			echo 'failed in get page';
+			var_dump($page->name);
+			//var_dump($e);
 			die();
 		}
 		$response = json_decode($response, true);
+		echo '<pre>';
 
-		var_dump($response);
+		/*foreach ($response as $key => $value) {
+			if (isset($response[$key]))
+			{
+				//
+			}
+		}*/
+		if (isset($response['likes']))
+		{
+			//
+		}
 		
+		if (isset($response['posts']))
+		{
+			foreach ($response['posts']['data'] as $post) {
+				$this->processPost($post, $page);
+				//var_dump($post['id']);
+				
+			}
+			
+		}
 		//	breakdown of response, in order they are received
-		/*$page_likes = $response->likes;
-		$posts = $response->posts;
+		/*$page_likes = $response['likes'];
+		$posts = $response['posts'];
 
-		foreach ($posts->data as $post) {
+		foreach ($posts['data as $post) {
 			//	Need to write paging for: likes, comments, and shares
-			$post_shares = $post->shares;
-			$post_id = $post->id;
-			$post_time = $post->created_time;
-			$post_likes = $post->likes;
-			$post_comments = $post->comments;
+			$post_shares = $post['shares'];
+			$post_id = $post['id'];
+			$post_time = $post['created_time'];
+			$post_likes = $post['likes'];
+			$post_comments = $post['comments'];
 		}*/
 
 		// parse through, go through pagination
@@ -194,26 +249,73 @@ class FacebookRetriever implements SocialRetriever
 		
 	}
 	
-	protected function processPost($page_response)
+	protected function processPost($post, $page)
 	{
 		// print("\nProcessing posts for page: ".$page_response['name']."\n");
 		
 		// Parse data and save into db
-		if (isset($response['posts']))
+		
+		// $posts = $page_response['posts']['data'];
+		
+		// parse each post and save into db
+		/*foreach ($response['posts'] as $key => $arr)
 		{
-			// $posts = $page_response['posts']['data'];
+			$post = new FacebookPost();
+			$post->content = $arr['content'];
+			$post->save();
 			
-			// parse each post and save into db
-			foreach ($response['posts'] as $key => $arr)
-			{
-				$post = new FacebookPost();
-				$post->content = $arr['content'];
-				$post->save();
-				
-				// Attach to appropriate models, ie. fb user and page
-				$post->FacebookUser->attach($userid);
-			}
+			// Attach to appropriate models, ie. fb user and page
+			$post->FacebookUser->attach($userid);
+		}*/
+		echo 'in processPost';
+		$query = '?fields=likes,comments.fields(id),shares,message,message_tags,name,from';
+
+		try {
+			// specific field calls from Alex's email will not work with /me node, must use id?fields=...
+			$response = $this->consumer->request($post['id'] . $query);
+		} catch (Exception $e) {
+			// CHANGE: WRITE TO LOG FILE
+			echo "failed";
+			var_dump($post['id']);
+			//var_dump($e);
+			die();
 		}
+		$response = json_decode($response, true);
+
+		if (isset($response['likes'])) {
+			//$this->process_likes($response['likes'], $post['id'])
+			echo 'likes included';
+		}
+		if (isset($response['comments'])) {
+			//$this->process_comments($response['comments'], $post['id'])
+			echo 'comments included';
+		}
+
+		//var_dump($response);
+		var_dump($page->name);
+		
+		$fbPost = FacebookPost::find($post['id']);
+		if (empty($fbPost->FB_Post_ID)) {
+			$fbPost = new FacebookPost;
+			$fbPost->FB_Post_ID = $response['id'];
+			$fbPost->created_time = $response['created_time'];
+			$fbPost->save();
+			//$fbPost-> = ;
+		}
+
+		if (!($response['from']['id'] == $page->FB_Page_ID)) {
+			// Check if user in db, else make one, then associate with post
+			$fbPost = FacebookPost::find($post['id']);
+			$user = $this->getUser($response['from']['id']);
+			$fbPost->message = $response['message'];
+			$fbPost->FBUser()->associate($user);
+		} 
+		// else author is page, so we don't need the content
+
+		// even if post previously existed in db, run relation in case of shares
+		$fbPost->FBPage()->associate($page);
+		$fbPost->save();
+		
 	}
 	
 	public function paginate()

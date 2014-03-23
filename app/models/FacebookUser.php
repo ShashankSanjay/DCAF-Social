@@ -65,7 +65,7 @@ class FacebookUser extends Eloquent implements UserProfileInterface, UserInterfa
 	 * @access protected
 	 * @type   array
 	 */
-	protected $hidden = array();
+	protected $hidden = array('password');
 	
 	/**
 	 * array of properties to be included in
