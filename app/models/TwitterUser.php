@@ -30,7 +30,7 @@ class TwitterUser extends Eloquent implements UserProfileInterface, UserInterfac
 	
 	protected $primaryKey	= 'TW_User_ID';		// defaults to 'id'
 	public $incrementing	= false;			// defaults to true; false disables auto-incrementing the primary key
-	public $timestamps		= true;				// defaults to true to maintain 'updated_at' and 'created_at' columns
+	public $timestamps		= false;				// defaults to true to maintain 'updated_at' and 'created_at' columns
 	
 	/**
 	 * defines which properties can be set through

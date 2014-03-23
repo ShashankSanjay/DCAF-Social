@@ -88,6 +88,7 @@ class UserController extends BaseController
 						'2' => 'fa fa-google-plus-square',
 						'3' => 'fa fa-instagram'] */
 		];
+		$data = array('heyo' => 'heyo');
 		
 			
 		/* $brand = new Brand();
@@ -538,12 +539,11 @@ class UserController extends BaseController
 						$columns = DB::connection()
 						  ->getDoctrineSchemaManager()
 						  ->listTableColumns($props['abbr'] . '_Users');
-						echo '<pre>';
+						//echo '<pre>';
 						foreach ($response as $key => $val) {
 							if (isset($columns[$key])) {
-								var_dump($key);
-								var_dump($val);
-								//$networkUser->{$key} = $val;
+								//var_dump($key);
+								$networkUser->{$key} = $val;
 							}
 						}
 					} else {
@@ -560,8 +560,7 @@ class UserController extends BaseController
 					print_r($networkUser);
 					die('</pre>');
 					*/
-					var_dump($networkUser);
-					die();
+					
 					$networkUser->save();
 					
 					// if we don't already have an access token for this DCAF user on this network stored in the database
