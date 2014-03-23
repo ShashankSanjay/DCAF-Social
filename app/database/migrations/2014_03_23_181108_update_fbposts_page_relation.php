@@ -18,7 +18,7 @@ class UpdateFbpostsPageRelation extends Migration {
 			Schema::table('FB_Posts', function(Blueprint $table)
 			{
 				$table->engine = 'INNODB';
-				$table->bigInteger('Page_id')->unsigned();
+				$table->bigInteger('Page_id')->unsigned()->nullable();
 				
 			});
 		}
