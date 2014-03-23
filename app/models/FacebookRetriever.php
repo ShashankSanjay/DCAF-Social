@@ -155,6 +155,7 @@ class FacebookRetriever implements SocialRetriever
 		// Define query and fields. This is just pt. 1, still need media stuff, albums videos..
 		$query = "?fields=likes,posts.fields(likes,shares,comments)";
 		
+		echo '<pre>';
 		try {
 			// specific field calls from Alex's email will not work with /me node, must use id?fields=...
 			$response = $consumer->request($page->FB_Page_ID . $query);
@@ -164,9 +165,11 @@ class FacebookRetriever implements SocialRetriever
 			die();
 		}
 		$response = json_decode($response, true);
+
+		var_dump($response);
 		
 		//	breakdown of response, in order they are received
-		$page_likes = $response->likes;
+		/*$page_likes = $response->likes;
 		$posts = $response->posts;
 
 		foreach ($posts->data as $post) {
@@ -176,7 +179,7 @@ class FacebookRetriever implements SocialRetriever
 			$post_time = $post->created_time;
 			$post_likes = $post->likes;
 			$post_comments = $post->comments;
-		}
+		}*/
 
 		// parse through, go through pagination
 		
