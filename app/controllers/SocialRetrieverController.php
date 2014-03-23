@@ -85,6 +85,8 @@ class SocialRetrieverController extends BaseController
 			$oauth = DB::table('oauth_facebook')->where('name', 'John')->first();
 		} */
 		$network = 'facebook';
+		echo '<pre>';
+		$dcaf_message = array();
 		foreach ($networkUsers[$network] as $networkUser)
 		{
 			//echo '$token: '.$networkUser->access_token."\n";
@@ -95,14 +97,20 @@ class SocialRetrieverController extends BaseController
 			
 			foreach ($networkUser->FacebookPage()->get() as $key => $page) {
 				//echo $page->name;
+				
 				$facebookRetriever->getPage($page, $networkUser);
-				$e = 'Page ' . $page->name . ' retrieved.';
-				Mail::later(5, 'error.registerNetworksError', array('dcaf_message' => $e), function($message)
-				{
-				    $message->to('ssanja1@pride.hofstra.edu', 'Admin')->subject('Page has finished retrieval');
-				});
+				$dcaf_message[] = 'Page ' . $page->name . ' retrieved.';
+				
+				}
 			}
-			
+			try {
+				Mail::later(5, 'emails.dcaf.retriever.pagesRetrieved', array('dcaf_message' => $dcaf_message), function($message)
+				{
+					$message->to('ssanja1@pride.hofstra.edu', 'Admin')->subject('Page has finished retrieval');
+				});
+			} catch (Exception $e) {
+				var_dump($e);
+						
 		}
 
 		// Call SocialRetriver to retrieve Google Plus data

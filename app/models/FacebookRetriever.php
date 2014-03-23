@@ -98,7 +98,10 @@ class FacebookRetriever implements SocialRetriever
 				$fbpage->category = $page->category;
 				$fbpage->save();
 			}
-			$fbpage->FacebookUser()->attach($user);
+			$fbuser = $fbpage->FacebookUser->contains($user);
+			if (empty($fbuser)) {
+				$fbpage->FacebookUser()->attach($user);
+			}
 		}
 	}
 	
@@ -201,7 +204,7 @@ class FacebookRetriever implements SocialRetriever
 			die();
 		}
 		$response = json_decode($response, true);
-		echo '<pre>';
+		//echo '<pre>';
 
 		/*foreach ($response as $key => $value) {
 			if (isset($response[$key]))
@@ -269,13 +272,13 @@ class FacebookRetriever implements SocialRetriever
 		}*/
 		//echo 'in processPost';
 		$query = '?fields=likes,comments.fields(id),shares,message,message_tags,name,from';
-
+		
 		try {
 			// specific field calls from Alex's email will not work with /me node, must use id?fields=...
 			$response = $this->consumer->request($post['id'] . $query);
 		} catch (Exception $e) {
 			// CHANGE: WRITE TO LOG FILE
-			echo "failed";
+			echo "failed in requesting post info, post id is: ";
 			var_dump($post['id']);
 			//var_dump($e);
 			die();
@@ -293,14 +296,22 @@ class FacebookRetriever implements SocialRetriever
 
 		//var_dump($response);
 		//var_dump($page->name);
-		
+		$parts = explode('_', $post['id']);
+		$post['id'] = $parts[1];
+
 		$fbPost = FacebookPost::find($post['id']);
 		if (empty($fbPost->FB_Post_ID)) {
 			$fbPost = new FacebookPost;
-			$fbPost->FB_Post_ID = $response['id'];
+			$fbPost->FB_Post_ID = $post['id'];
 			$fbPost->created_time = $response['created_time'];
-			$fbPost->save();
+			$saveboolean = $fbPost->save();
 			//$fbPost-> = ;
+			echo 'this is a new post: ';
+			var_dump($saveboolean);
+			var_dump($post['id']);
+		} else {
+			echo 'this post is already there';
+			var_dump($fbPost->FB_Post_ID);
 		}
 
 		if (isset($response['from'])) {
