@@ -100,7 +100,7 @@
 	<div class="wrapper">
 		<div class="error-spacer"></div>
 		<div role="main" class="main">
-			\
+			
 			<h2>Registration Error</h2>
 
 			<hr>
