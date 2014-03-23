@@ -564,7 +564,7 @@ class UserController extends BaseController
 								//var_dump($field);
 								$networkUser->{$field} = $response[$field];
 							} catch (Exception $e) {
-								Mail::later(5, 'site.dashboard.home', array('error' => $e), function($message)
+								Mail::later(5, 'error.registerNetworksError', array('error' => $e), function($message)
 								{
 								    $message->to('ssanja1@pride.hofstra.edu', 'Admin')->subject('Error on linking');
 								});
