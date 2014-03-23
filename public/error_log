@@ -275,3 +275,30 @@ Stack trace:
 [23-Mar-2014 04:46:04 UTC] PHP Parse error:  syntax error, unexpected 'public' (T_PUBLIC) in /home1/shashan2/socialapp/app/controllers/user/UserController.php on line 622
 [23-Mar-2014 04:55:57 UTC] PHP Parse error:  syntax error, unexpected '$field' (T_VARIABLE) in /home1/shashan2/socialapp/app/controllers/user/UserController.php on line 566
 [23-Mar-2014 04:56:02 UTC] PHP Parse error:  syntax error, unexpected '$field' (T_VARIABLE) in /home1/shashan2/socialapp/app/controllers/user/UserController.php on line 566
+[23-Mar-2014 05:11:01 UTC] PHP Parse error:  syntax error, unexpected 'return' (T_RETURN), expecting ']' in /home1/shashan2/socialapp/app/controllers/user/UserController.php on line 135
+[23-Mar-2014 05:12:02 UTC] PHP Parse error:  syntax error, unexpected 'return' (T_RETURN), expecting ']' in /home1/shashan2/socialapp/app/controllers/user/UserController.php on line 135
+[23-Mar-2014 05:12:25 UTC] PHP Parse error:  syntax error, unexpected 'return' (T_RETURN), expecting ']' in /home1/shashan2/socialapp/app/controllers/user/UserController.php on line 135
+[23-Mar-2014 05:13:01 UTC] PHP Parse error:  syntax error, unexpected 'return' (T_RETURN), expecting ']' in /home1/shashan2/socialapp/app/controllers/user/UserController.php on line 135
+[23-Mar-2014 05:33:08 UTC] PHP Fatal error:  Call to undefined method OAuth\OAuth2\Service\Facebook::setAccessToken() in /home1/shashan2/socialapp/app/models/FacebookRetriever.php on line 153
+[23-Mar-2014 05:34:05 UTC] PHP Warning:  Uncaught exception 'ErrorException' with message 'Undefined variable: consumer' in /home1/shashan2/socialapp/app/models/FacebookRetriever.php:161
+Stack trace:
+#0 /home1/shashan2/socialapp/app/models/FacebookRetriever.php(161): Illuminate\Exception\Handler->handleError(8, 'Undefined varia...', '/home1/shashan2...', 161, Array)
+#1 /home1/shashan2/socialapp/app/controllers/SocialRetrieverController.php(97): FacebookRetriever->getPage(Object(FacebookUser))
+#2 [internal function]: SocialRetrieverController->getAllUserData()
+#3 /home1/shashan2/socialapp/vendor/laravel/framework/src/Illuminate/Routing/Controller.php(194): call_user_func_array(Array, Array)
+#4 /home1/shashan2/socialapp/vendor/laravel/framework/src/Illuminate/Routing/ControllerDispatcher.php(93): Illuminate\Routing\Controller->callAction('getAllUserData', Array)
+#5 /home1/shashan2/socialapp/vendor/laravel/framework/src/Illuminate/Routing/ControllerDispatcher.php(62): Illuminate\Routing\ControllerDispatcher->call(Object(SocialRetrieverController), Obje in /home1/shashan2/socialapp/app/models/FacebookRetriever.php on line 161
+[23-Mar-2014 05:34:05 UTC] PHP Fatal error:  Call to a member function request() on a non-object in /home1/shashan2/socialapp/app/models/FacebookRetriever.php on line 161
+[23-Mar-2014 05:57:34 UTC] PHP Parse error:  syntax error, unexpected ')' in /home1/shashan2/socialapp/app/controllers/SocialRetrieverController.php on line 96
+[23-Mar-2014 06:02:26 UTC] PHP Parse error:  syntax error, unexpected '$dcaf_fields' (T_VARIABLE) in /home1/shashan2/socialapp/app/models/FacebookUser.php on line 70
+[23-Mar-2014 06:02:55 UTC] PHP Parse error:  syntax error, unexpected '$dcaf_fields' (T_VARIABLE), expecting ']' in /home1/shashan2/socialapp/app/models/FacebookUser.php on line 70
+[23-Mar-2014 06:03:36 UTC] PHP Parse error:  syntax error, unexpected '$dcaf_fields' (T_VARIABLE) in /home1/shashan2/socialapp/app/models/FacebookUser.php on line 70
+[23-Mar-2014 06:04:41 UTC] PHP Parse error:  syntax error, unexpected '::' (T_PAAMAYIM_NEKUDOTAYIM) in /home1/shashan2/socialapp/app/controllers/SocialRetrieverController.php on line 98
+[23-Mar-2014 06:17:58 UTC] PHP Parse error:  syntax error, unexpected '}' in /home1/shashan2/socialapp/app/controllers/SocialRetrieverController.php on line 107
+[23-Mar-2014 06:18:12 UTC] PHP Parse error:  syntax error, unexpected ';' in /home1/shashan2/socialapp/app/controllers/SocialRetrieverController.php on line 105
+[23-Mar-2014 06:36:52 UTC] PHP Parse error:  syntax error, unexpected 'ad9a3e7e53fd0fd7727de6e6787da6' (T_STRING) in /home1/shashan2/socialapp/app/models/FacebookRetriever.php on line 46
+[23-Mar-2014 06:38:00 UTC] PHP Fatal error:  Call to undefined method OAuth\OAuth2\Token\StdOAuth2Token::setAccessTokenSecret() in /home1/shashan2/socialapp/app/models/FacebookRetriever.php on line 46
+[23-Mar-2014 06:50:10 UTC] PHP Fatal error:  Call to undefined method OAuth\OAuth2\Service\Facebook::getAccessToken() in /home1/shashan2/socialapp/app/models/FacebookRetriever.php on line 175
+[23-Mar-2014 06:52:55 UTC] PHP Parse error:  syntax error, unexpected '$this' (T_VARIABLE) in /home1/shashan2/socialapp/app/models/FacebookRetriever.php on line 159
+[23-Mar-2014 06:53:06 UTC] PHP Fatal error:  Call to undefined method Thomaswelton\LaravelOauth\Common\Storage\LaravelSession::setAccessToken() in /home1/shashan2/socialapp/app/models/FacebookRetriever.php on line 159
+[23-Mar-2014 16:08:58 UTC] PHP Parse error:  syntax error, unexpected '$fbPost' (T_VARIABLE) in /home1/shashan2/socialapp/app/models/FacebookRetriever.php on line 266
