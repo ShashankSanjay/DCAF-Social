@@ -232,9 +232,6 @@ class ConfideUser extends Ardent implements UserInterface {
                 static::$app['cache']->put('confirmation_email_'.$this->id, true, $signup_cache);
             }
         }
-        echo '<pre>';
-        var_dump($signup_cache);
-        die();
         return true;
     }
 

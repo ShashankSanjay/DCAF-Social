@@ -87,8 +87,7 @@ class UserController extends BaseController
 						'1' => 'fa fa-twitter-square',
 						'2' => 'fa fa-google-plus-square',
 						'3' => 'fa fa-instagram'] */
-		];	
-			
+
 		/* $brand = new Brand();
 		$brand->id = 1;
 		$brand->name = 'Cherry Coke';
@@ -342,7 +341,7 @@ class UserController extends BaseController
 		if (Confide::confirm($code))
 		{
 			return Redirect::to('user/registernetworks')
-				->with('notice', Lang::get('confide::confide.alerts.confirmation'));
+				->with('notice', 'Your account was confirmed!');
 		}
 		else
 		{
@@ -473,8 +472,16 @@ class UserController extends BaseController
 	 */
 	public function registerNetworks()
 	{
+		
+		list($user,$redirect) = $this->user->checkAuthAndRedirect('user/registernetworks');
+		if ($redirect) { return $redirect; }
+
 		$this->user = Auth::user();
 		
+		/*if (empty($this->user->id)) {
+			return View::make('site/nonboard/login');
+		}*/
+
 		/*
 		use data to show which networks are registered and which are not
 		$data = array();

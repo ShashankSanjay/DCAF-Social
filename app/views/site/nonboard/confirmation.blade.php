@@ -22,8 +22,10 @@ Confirmation
 				<div class="container">
 					<div class="row">
 						<div class="col-lg-offset-4">
-							<hr>
+							<br />
 							<h2>Check your email for our confirmation link!</h2>
+							<br />
+							<br />
 						</div>
 					</div>
 				</div>
