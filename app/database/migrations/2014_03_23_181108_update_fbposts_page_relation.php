@@ -27,7 +27,7 @@ class UpdateFbpostsPageRelation extends Migration {
 		{
 			$table->foreign('Page_id')->references('FB_Page_ID')->on('FB_Pages');
 		});
-		}
+		
 	}
 
 	/**
