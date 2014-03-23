@@ -25,8 +25,6 @@ class CreatTWUsersTable extends Migration {
         	$table->bigInteger('TW_User_ID')->unsigned()->primary();
         	$table->string('name');
         	$table->string('screen_name');
-        	$table->timestamp('created_at');
-			$table->timestamp('updated_at');
         	//$table->;
         });
 	
