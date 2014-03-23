@@ -87,9 +87,7 @@ class UserController extends BaseController
 						'1' => 'fa fa-twitter-square',
 						'2' => 'fa fa-google-plus-square',
 						'3' => 'fa fa-instagram'] */
-		];
-		$data = array('heyo' => 'heyo');
-		
+		];	
 			
 		/* $brand = new Brand();
 		$brand->id = 1;
