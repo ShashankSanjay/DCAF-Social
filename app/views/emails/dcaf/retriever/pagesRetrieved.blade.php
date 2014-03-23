@@ -72,15 +72,15 @@ body, td { font-family: Georgia, 'Times New Roman', Times, serif; }
 .header-content a { font-weight: bold; color: #b3dbdb; text-decoration: none; }
 #headline p { color: #71a3a3; font-family: HelveticaNeue, sans-serif; font-size: 36px; text-align: center; margin-top:0px; margin-bottom:30px; }
 #headline p a { color: #71a3a3; text-decoration: none; }
-.article-title { font-size: 18px; line-height:24px; color: #ffffff; font-weight:bold; margin-top:0px; margin-bottom:18px; font-family: Georgia, 'Times New Roman', Times, serif; }
+.article-title { font-size: 22px; line-height:24px; color: #ffffff; font-weight:bold; margin-top:0px; margin-bottom:18px; font-family: Georgia, 'Times New Roman', Times, serif; }
 .article-title a { color: #ffffff; text-decoration: none; }
 .article-title.with-meta {margin-bottom: 0;}
-.article-meta { font-size: 13px; line-height: 20px; color: #ccc; font-weight: bold; margin-top: 0;}
-.article-content { font-size: 13px; line-height: 18px; color: #ffffff; margin-top: 0px; margin-bottom: 18px; font-family: Georgia, 'Times New Roman', Times, serif; }
+.article-meta { font-size: 18px; line-height: 20px; color: #ccc; font-weight: bold; margin-top: 0;}
+.article-content { font-size: 18px; line-height: 18px; color: #ffffff; margin-top: 0px; margin-bottom: 18px; font-family: Georgia, 'Times New Roman', Times, serif; }
 .article-content a { color: #B3DBDB; font-weight:bold; text-decoration:none; }
 .article-content img { max-width: 100% }
 .article-content ol, .article-content ul { margin-top:0px; margin-bottom:18px; margin-left:19px; padding:0; }
-.article-content li { font-size: 13px; line-height: 18px; color: #ffffff; }
+.article-content li { font-size: 18px; line-height: 18px; color: #ffffff; }
 .article-content li a { color: #B3DBDB; text-decoration:underline; }
 .article-content p {margin-bottom: 15px;}
 .footer-content-left { font-size: 12px; line-height: 15px; color: #ffffff; margin-top: 0px; margin-bottom: 15px; }
@@ -183,11 +183,11 @@ body, td { font-family: Georgia, 'Times New Roman', Times, serif; }
                                 <td class="w580" width="580">
                                     <p align="left" class="article-title"><singleline label="Title">These pages were retrieved on the most recent job: </singleline></p>
                                     <div align="left" class="article-content">
-                                        <multiline label="Description">
-                                            @foreach ($dcaf_message as $page)
-                                                {{ $page }}
-                                            @endforeach
-                                        </multiline>
+                                        <!--multiline label="Description"-->
+                                        @foreach ($dcaf_message as $page)
+                                            <multiline label="Description"> {{ $page }} </multiline>
+                                        @endforeach
+                                        <!--/multiline-->
                                     </div>
                                 </td>
                             </tr>
