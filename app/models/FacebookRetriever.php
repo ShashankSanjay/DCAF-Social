@@ -84,14 +84,16 @@ class FacebookRetriever implements SocialRetriever
 		foreach ($response->data as $page)
 		{
 			// move through and save page
-			$fbpage = new FacebookPage();
-			$fbpage->FB_Page_ID = $page->id;
-			$fbpage->access_token = $page->access_token;
-			//$fbpage->perms = $page->perms;
-			$fbpage->name = $page->name;
-			$fbpage->category = $page->category;
-			$fbpage->save();
-
+			$fbpage = FacebookPage::find($page->id);
+			if (empty($fbpage->FB_Page_ID)) {
+				$fbpage = new FacebookPage();
+				$fbpage->FB_Page_ID = $page->id;
+				$fbpage->access_token = $page->access_token;
+				//$fbpage->perms = $page->perms;
+				$fbpage->name = $page->name;
+				$fbpage->category = $page->category;
+				$fbpage->save();
+			}
 			$fbpage->FacebookUser()->attach($user);
 		}
 	}
