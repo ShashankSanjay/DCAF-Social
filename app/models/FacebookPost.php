@@ -47,7 +47,7 @@ class FacebookPost extends Eloquent
 
 	public function FBLike()
 	{
-		return $this->hasMany('FacebookLike');
+		return $this->hasMany('FacebookLike', 'liked', 'FB_Post_ID');
 	}
 	
 	/*

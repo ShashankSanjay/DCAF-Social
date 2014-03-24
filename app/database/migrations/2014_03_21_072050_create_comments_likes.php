@@ -17,8 +17,8 @@ class CreateCommentsLikes extends Migration {
         {
         	$table->engine = 'INNODB';
             $table->increments('id');
-            $table->bigInteger('liked')->unsigned();
-            $table->bigInteger('liker')->unsigned();
+            $table->bigInteger('liked')->unsigned()->nullable();
+            $table->bigInteger('liker')->unsigned()->nullable();
             $table->timestamp('created_at');
 			$table->timestamp('updated_at');            
         });

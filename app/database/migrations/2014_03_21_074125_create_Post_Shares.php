@@ -17,8 +17,8 @@ class CreatePostShares extends Migration {
         {
         	$table->engine = 'INNODB';
             $table->increments('id');
-            $table->bigInteger('sharer')->unsigned();
-            $table->bigInteger('post_id')->unsigned();
+            $table->bigInteger('sharer')->unsigned()->nullable();
+            $table->bigInteger('post_id')->unsigned()->nullable();
             $table->timestamp('created_at');
 			$table->timestamp('updated_at');            
         });
