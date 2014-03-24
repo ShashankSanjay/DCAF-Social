@@ -7,12 +7,12 @@ class FBPostLike extends Eloquent
 
 	public function Liker()
 	{
-		return $this->belongsTo('FacebookUser', 'liker', 'FB_User_ID');
+		return $this->belongsTo('FacebookUser', 'liker_id', 'FB_User_ID');
 	}
 
 	public function Liked()
 	{
-		return $this->belongsTo('FacebookPost', 'liked', 'FB_Post_ID');
+		return $this->belongsTo('FacebookPost', 'liked_id', 'FB_Post_ID');
 	}
 
 }

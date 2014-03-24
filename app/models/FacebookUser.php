@@ -210,7 +210,7 @@ class FacebookUser extends Eloquent implements UserProfileInterface, UserInterfa
 
     public function FBPostLike()
     {
-    	return $this->hasMany('FBPostLike', 'liker', 'FB_User_ID');
+    	return $this->hasMany('FBPostLike', 'liker_id', 'FB_User_ID');
     }
 	
 	/********************
