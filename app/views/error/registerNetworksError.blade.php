@@ -110,9 +110,11 @@
 			<p>
 				Here is the admin message
 			</p>
-			<p>
-				{{{ $dcaf_message }}}
-			</p>
+			
+			@foreach ($dcaf_message as $errmsg) 
+				<p> {{{ $errmsg }}} </p>
+			@endforeach
+			
 			<p>
 				Perhaps you would like to go to our <a href="{{{ URL::to('/') }}}">home page</a>?
 			</p>
