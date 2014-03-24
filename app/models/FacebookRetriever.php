@@ -127,7 +127,7 @@ class FacebookRetriever implements SocialRetriever
 		//$fbUser = FacebookUser::find($id);
 
 		// If user not found, create one
-		dcaf_message = array();
+		$dcaf_message = array();
 		if (FacebookUser::find($id) == null)
 		{
 			$query = '?fields=id,first_name,last_name,full_name,email,link,gender,age_range_min,age_range_max,birthday,timezone,locale';
@@ -379,7 +379,7 @@ class FacebookRetriever implements SocialRetriever
 				var_dump($e);
 				
 			}
-		} */
+		}*/
 		
 	}
 
