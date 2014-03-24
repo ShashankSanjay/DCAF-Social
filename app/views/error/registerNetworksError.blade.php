@@ -105,14 +105,10 @@
 
 			<hr>
 
-			<h3>Details</h3>
-
-			<p>
-				Here is the admin message
-			</p>
-			
-			@foreach ($dcaf_message as $errmsg) 
-				<p> {{{ $errmsg }}} </p>
+			@foreach ($dcaf_message as $errmsg => $usr) 
+				<h3> {{{ $errmsg }}} </h3>
+				
+				<p> {{{ $usr }}} </p>
 			@endforeach
 			
 			<p>
