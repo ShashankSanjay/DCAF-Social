@@ -211,22 +211,25 @@ class FacebookRetriever implements SocialRetriever
 				//
 			}
 		}*/
+		
+		/**
+		*	FB does not give DCAF actual users, they only give total number of users
+		*/
+		/*
 		if (isset($response['likes']))
 		{
 			//$this->processPageLikes($response['likes'], $page);
-			foreach ($response['likes'] as $like) {
-				//$this->processPageLikes($like, $page);
-				var_dump($like);
-			}
+			//var_dump($response['likes']);
 		}
-		
-		/*if (isset($response['posts']))
+		*/
+
+		if (isset($response['posts']))
 		{
 			foreach ($response['posts']['data'] as $post) {
 				$this->processPost($post, $page);
 			}
 			
-		}*/
+		}
 		//	breakdown of response, in order they are received
 		/*$page_likes = $response['likes'];
 		$posts = $response['posts'];
@@ -284,21 +287,11 @@ class FacebookRetriever implements SocialRetriever
 			//var_dump($e);
 		}
 		$response = json_decode($response, true);
-
-		if (isset($response['likes'])) {
-			//$this->processPostLikes($response['likes'], $post)
-			/*foreach ($response['likes']['data'] as $like) {
-				$this->processPageLikes($like, $page);
-			}*/
-		}
-		if (isset($response['comments'])) {
-			//$this->process_comments($response['comments'], $post)
-			//echo 'comments included';
-		}
+		echo '<pre>';
 
 		//var_dump($response);
 		//var_dump($page->name);
-		$parts = explode('_', $post['id']);
+		/*$parts = explode('_', $post['id']);
 		$post['id'] = $parts[1];
 
 		$fbPost = FacebookPost::find($post['id']);
@@ -323,21 +316,67 @@ class FacebookRetriever implements SocialRetriever
 
 		// even if post previously existed in db, run relation in case of shares
 		$fbPost->FBPage()->associate($page);
-		$fbPost->save();
+		$fbPost->save();*/
+
+		if (isset($response['likes'])) {
+			$this->processPostLikes($response['likes'], $fbPost);
+		}
+
+		if (isset($response['comments'])) {
+			//$this->processComments($response['comments'], $fbPost)
+			//echo 'comments included';
+		}
+
+		
 		
 	}
 
 
 	public function processPostLikes($likes, $post) 
 	{
-		//$query = '';
-		$fbPostLike = FBPostLike::where('', '=', $);
+		//$likes is array
+		foreach ($likes['data'] as $like) {
+			try {
+				$fbLike = FBPostLike::where('liked', '=', $post->FB_Post_ID);
+				$fbLike = $fbLike->where('liker', '=', $like['id']);
+			} catch (Exception $e) {
+				$newLike = new FBPostLike;
+				//$newLike-> = ;
+				$newLike->save();
+				//$newLike->liked = $post->FB_Post_ID;
+				$newLike->Liked()->associate($post);
+
+				$fbUser = $this->getUser($like['id']);
+				$newLike->Liker()->associate($fbUser);
+				$newLike->save();
+			}
+		}
+
+		if (isset($response['likes']['paging']['next'])) {
+			//var_dump($page->name . 'has paging on post likes');
+			$query = $response['likes']['paging']['next'];
+			$pgresponse = $this->consumer->request($query);
+			$pgresponse = json_decode($response, true);
+			
+			try {
+				// Recurse
+				$this->processPostLikes($response['likes'], $post);
+			} catch (Exception $e) {
+				echo "failed in requesting next page";
+				var_dump($e);
+				var_dump($pgresponse);
+			}
+		}
 	}
 
-	public function processPageLikes($likes, $post) 
+
+	/**
+	*	We don't get user info for page likes, but facebook provides those insights anyway
+	*/
+	/*public function processPageLikes($likes, $post) 
 	{
 		//$query = '';
-	}
+	}*/
 	
 	public function paginate()
 	{
