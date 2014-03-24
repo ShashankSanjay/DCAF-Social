@@ -201,7 +201,6 @@ class FacebookRetriever implements SocialRetriever
 			echo 'failed in get page';
 			var_dump($page->name);
 			//var_dump($e);
-			die();
 		}
 		$response = json_decode($response, true);
 		//echo '<pre>';
@@ -281,7 +280,6 @@ class FacebookRetriever implements SocialRetriever
 			echo "failed in requesting post info, post id is: ";
 			var_dump($post['id']);
 			//var_dump($e);
-			die();
 		}
 		$response = json_decode($response, true);
 
@@ -306,13 +304,7 @@ class FacebookRetriever implements SocialRetriever
 			$fbPost->created_time = $response['created_time'];
 			$saveboolean = $fbPost->save();
 			//$fbPost-> = ;
-			echo 'this is a new post: ';
-			var_dump($saveboolean);
-			var_dump($post['id']);
-		} else {
-			echo 'this post is already there';
-			var_dump($fbPost->FB_Post_ID);
-		}
+		} 
 
 		if (isset($response['from'])) {
 			if (!($response['from']['id'] == $page->FB_Page_ID)) {

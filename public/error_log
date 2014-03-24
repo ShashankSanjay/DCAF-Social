@@ -305,3 +305,6 @@ Stack trace:
 [23-Mar-2014 19:02:38 UTC] PHP Fatal error:  Maximum execution time of 30 seconds exceeded in /home1/shashan2/socialapp/vendor/lusitanian/oauth/src/OAuth/Common/Http/Client/CurlClient.php on line 125
 [23-Mar-2014 19:13:44 UTC] PHP Parse error:  syntax error, unexpected '*' in /home1/shashan2/socialapp/app/controllers/SocialRetrieverController.php on line 104
 [23-Mar-2014 19:35:34 UTC] PHP Parse error:  syntax error, unexpected '$c' (T_VARIABLE), expecting ',' or ';' in /home1/shashan2/socialapp/app/models/FacebookRetriever.php on line 233
+[23-Mar-2014 22:00:03 UTC] PHP Parse error:  syntax error, unexpected 'try' (T_TRY), expecting function (T_FUNCTION) in /home1/shashan2/socialapp/app/controllers/SocialRetrieverController.php on line 108
+[23-Mar-2014 22:44:53 UTC] PHP Parse error:  syntax error, unexpected 'try' (T_TRY), expecting function (T_FUNCTION) in /home1/shashan2/socialapp/app/controllers/SocialRetrieverController.php on line 108
+[23-Mar-2014 22:46:06 UTC] PHP Parse error:  syntax error, unexpected 'Mail' (T_STRING), expecting function (T_FUNCTION) in /home1/shashan2/socialapp/app/controllers/SocialRetrieverController.php on line 109

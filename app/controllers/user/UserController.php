@@ -133,6 +133,8 @@ class UserController extends BaseController
     	// App::instance('facebook', $facebook);
 		
 		// return View::make('site.outlines.dashboard', compact('companies'));
+		
+		// delete posts
 		return View::make('site/dashboard/home', array($user, $companies));
 	}
 
