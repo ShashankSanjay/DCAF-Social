@@ -213,18 +213,20 @@ class FacebookRetriever implements SocialRetriever
 		}*/
 		if (isset($response['likes']))
 		{
-			//
+			//$this->processPageLikes($response['likes'], $page);
+			foreach ($response['likes'] as $like) {
+				//$this->processPageLikes($like, $page);
+				var_dump($like);
+			}
 		}
 		
-		if (isset($response['posts']))
+		/*if (isset($response['posts']))
 		{
 			foreach ($response['posts']['data'] as $post) {
 				$this->processPost($post, $page);
-				//var_dump($post['id']);
-				
 			}
 			
-		}
+		}*/
 		//	breakdown of response, in order they are received
 		/*$page_likes = $response['likes'];
 		$posts = $response['posts'];
@@ -284,11 +286,13 @@ class FacebookRetriever implements SocialRetriever
 		$response = json_decode($response, true);
 
 		if (isset($response['likes'])) {
-			//$this->process_likes($response['likes'], $post['id'])
-			//echo 'likes included';
+			//$this->processPostLikes($response['likes'], $post)
+			/*foreach ($response['likes']['data'] as $like) {
+				$this->processPageLikes($like, $page);
+			}*/
 		}
 		if (isset($response['comments'])) {
-			//$this->process_comments($response['comments'], $post['id'])
+			//$this->process_comments($response['comments'], $post)
 			//echo 'comments included';
 		}
 
@@ -321,6 +325,18 @@ class FacebookRetriever implements SocialRetriever
 		$fbPost->FBPage()->associate($page);
 		$fbPost->save();
 		
+	}
+
+
+	public function processPostLikes($likes, $post) 
+	{
+		//$query = '';
+		$fbPostLike = FBPostLike::where('', '=', $);
+	}
+
+	public function processPageLikes($likes, $post) 
+	{
+		//$query = '';
 	}
 	
 	public function paginate()
