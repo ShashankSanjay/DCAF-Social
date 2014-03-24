@@ -331,3 +331,19 @@ Stack trace:
 #5 /home1/shashan2/socialapp/vendor/laravel/framework/src/Illuminate/Routing/Controller.php(194): call_user_func_array(Array, Array)
 #6 /home1/shashan2/socialapp/vendor/laravel/framework/src/Illuminate/Routing/ControllerDispatcher.p in /home1/shashan2/socialapp/app/models/FacebookRetriever.php on line 348
 [24-Mar-2014 17:41:36 UTC] PHP Fatal error:  Call to a member function where() on a non-object in /home1/shashan2/socialapp/app/models/FacebookRetriever.php on line 348
+[24-Mar-2014 19:24:12 UTC] PHP Fatal error:  Can't use method return value in write context in /home1/shashan2/socialapp/app/models/FacebookRetriever.php on line 345
+[24-Mar-2014 19:24:13 UTC] PHP Fatal error:  Can't use method return value in write context in /home1/shashan2/socialapp/app/models/FacebookRetriever.php on line 345
+[24-Mar-2014 19:24:51 UTC] PHP Fatal error:  Can't use method return value in write context in /home1/shashan2/socialapp/app/models/FacebookRetriever.php on line 345
+[24-Mar-2014 19:24:51 UTC] PHP Fatal error:  Can't use method return value in write context in /home1/shashan2/socialapp/app/models/FacebookRetriever.php on line 345
+[24-Mar-2014 19:25:47 UTC] PHP Fatal error:  Can't use method return value in write context in /home1/shashan2/socialapp/app/models/FacebookRetriever.php on line 348
+[24-Mar-2014 19:25:48 UTC] PHP Fatal error:  Can't use method return value in write context in /home1/shashan2/socialapp/app/models/FacebookRetriever.php on line 348
+[24-Mar-2014 19:26:08 UTC] PHP Fatal error:  Can't use method return value in write context in /home1/shashan2/socialapp/app/models/FacebookRetriever.php on line 348
+[24-Mar-2014 19:26:09 UTC] PHP Fatal error:  Can't use method return value in write context in /home1/shashan2/socialapp/app/models/FacebookRetriever.php on line 348
+[24-Mar-2014 19:26:40 UTC] PHP Fatal error:  Can't use method return value in write context in /home1/shashan2/socialapp/app/models/FacebookRetriever.php on line 348
+[24-Mar-2014 19:26:41 UTC] PHP Fatal error:  Can't use method return value in write context in /home1/shashan2/socialapp/app/models/FacebookRetriever.php on line 348
+[24-Mar-2014 19:32:39 UTC] PHP Fatal error:  Class name must be a valid object or a string in /home1/shashan2/socialapp/app/models/FacebookRetriever.php on line 130
+[24-Mar-2014 21:30:32 UTC] PHP Fatal error:  Method FacebookPage::__toString() must not throw an exception in /home1/shashan2/socialapp/app/models/FacebookRetriever.php on line 0
+[24-Mar-2014 21:45:00 UTC] PHP Fatal error:  Method FacebookPage::__toString() must not throw an exception in /home1/shashan2/socialapp/app/models/FacebookRetriever.php on line 0
+[24-Mar-2014 21:47:35 UTC] PHP Fatal error:  Method FacebookPage::__toString() must not throw an exception in /home1/shashan2/socialapp/app/models/FacebookRetriever.php on line 0
+[24-Mar-2014 21:51:54 UTC] PHP Fatal error:  Method FacebookPage::__toString() must not throw an exception in /home1/shashan2/socialapp/app/models/FacebookRetriever.php on line 0
+[24-Mar-2014 21:52:04 UTC] PHP Fatal error:  Method FacebookPage::__toString() must not throw an exception in /home1/shashan2/socialapp/app/models/FacebookRetriever.php on line 0

@@ -124,29 +124,34 @@ class FacebookRetriever implements SocialRetriever
 		}
 
 		// Search for user in db
-		$fbUser = FacebookUser::find($id);
+		//$fbUser = FacebookUser::find($id);
 
 		// If user not found, create one
-		if ($fbUser::find($response['id']) == null)
+		dcaf_message = array();
+		if (FacebookUser::find($id) == null)
 		{
-			//$query = '?fields=';
-			$query = '/me';
-			$call = $this->consumer->request($id . $query);
+			$query = '?fields=id,first_name,last_name,full_name,email,link,gender,age_range_min,age_range_max,birthday,timezone,locale';
+			$call = $this->consumer->request($id);
 			$response = json_decode($call, true);
-
+			var_dump($response);
 			$fbUser = new FacebookUser;
 
+			$dcaf_message = array();
 			foreach ($fbUser->dcaf_fields as $field) {
 				try {
 					//var_dump($field);
 					$fbUser->{$field} = $response[$field];
 				} catch (Exception $e) {
-					Mail::later(5, 'error.registerNetworksError', array('dcaf_message' => $e), function($message)
-					{
-					    $message->to('ssanja1@pride.hofstra.edu', 'Admin')->subject('Error on linking');
-					});
+					$dcaf_message[] = 'User ' . $response['name'] . 'threw error in getUser()';
 				}
-				$fbUser->save();
+				
+			}
+			$fbUser->save();
+			if (!empty($dcaf_message)) {
+				Mail::later(5, 'error.registerNetworksError', array('dcaf_message' => $dcaf_message), function($message)
+				{
+				    $message->to('ssanja1@pride.hofstra.edu', 'Admin')->subject('Error on linking');
+				});
 			}
 		}
 		
@@ -287,11 +292,11 @@ class FacebookRetriever implements SocialRetriever
 			//var_dump($e);
 		}
 		$response = json_decode($response, true);
-		echo '<pre>';
+		//echo '<pre>';
 
 		//var_dump($response);
 		//var_dump($page->name);
-		/*$parts = explode('_', $post['id']);
+		$parts = explode('_', $post['id']);
 		$post['id'] = $parts[1];
 
 		$fbPost = FacebookPost::find($post['id']);
@@ -316,7 +321,7 @@ class FacebookRetriever implements SocialRetriever
 
 		// even if post previously existed in db, run relation in case of shares
 		$fbPost->FBPage()->associate($page);
-		$fbPost->save();*/
+		$fbPost->save();
 
 		if (isset($response['likes'])) {
 			$this->processPostLikes($response['likes'], $fbPost);
@@ -334,39 +339,48 @@ class FacebookRetriever implements SocialRetriever
 
 	public function processPostLikes($likes, $post) 
 	{
-		//$likes is array
 		foreach ($likes['data'] as $like) {
-			try {
-				$fbLike = FBPostLike::where('liked', '=', $post->FB_Post_ID);
-				$fbLike = $fbLike->where('liker', '=', $like['id']);
-			} catch (Exception $e) {
-				$newLike = new FBPostLike;
-				//$newLike-> = ;
-				$newLike->save();
-				//$newLike->liked = $post->FB_Post_ID;
-				$newLike->Liked()->associate($post);
+			
+				$fbLike = FBPostLike::where('liked_id', '=', $post->FB_Post_ID);
+				
+				$fbLike = $fbLike->where('liker_id', '=', $like['id'])->get();
+				
+				if (count($fbLike) == 0) {
 
-				$fbUser = $this->getUser($like['id']);
-				$newLike->Liker()->associate($fbUser);
-				$newLike->save();
-			}
+					$newLike = new FBPostLike;
+					//$newLike-> = ;
+					$newLike->save();
+					//$newLike->liked = $post->FB_Post_ID;
+					$newLike->Liked()->associate($post);
+					
+					$this->getUser($like['id']);
+					$fbUser = FacebookUser::find($like['id']);
+					if (is_null($fbUser)) {
+						echo 'user is null: ' . $like['id'];
+						die();
+					}
+					$newLike->Liker()->associate($fbUser);
+					$newLike->save();
+				}
 		}
 
-		if (isset($response['likes']['paging']['next'])) {
+		/*if (isset($likes['paging']['next'])) {
 			//var_dump($page->name . 'has paging on post likes');
-			$query = $response['likes']['paging']['next'];
-			$pgresponse = $this->consumer->request($query);
-			$pgresponse = json_decode($response, true);
+			//$query = '/likes?limit=100&after=' . $likes['paging']['cursors']['after'];
+			$call = $this->consumer->request($likes['paging']['next']);
+			$pgresponse = json_decode($call, true);
 			
 			try {
 				// Recurse
-				$this->processPostLikes($response['likes'], $post);
+				$this->processPostLikes($pgresponse['likes'], $post);
 			} catch (Exception $e) {
 				echo "failed in requesting next page";
+				var_dump($post->FBPage . $query);
 				var_dump($e);
-				var_dump($pgresponse);
+				
 			}
-		}
+		} */
+		
 	}
 
 

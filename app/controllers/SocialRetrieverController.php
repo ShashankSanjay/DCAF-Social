@@ -99,8 +99,7 @@ class SocialRetrieverController extends BaseController
 				//echo $page->name;
 				$facebookRetriever->getPage($page, $networkUser);
 				$dcaf_message[] = 'Page ' . $page->name . ' retrieved.';
-			}
-			die();				
+			}		
 		}
 		
 		Mail::later(5, 'emails.dcaf.retriever.pagesRetrieved', array('dcaf_message' => $dcaf_message), function($message)
