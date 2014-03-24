@@ -308,3 +308,26 @@ Stack trace:
 [23-Mar-2014 22:00:03 UTC] PHP Parse error:  syntax error, unexpected 'try' (T_TRY), expecting function (T_FUNCTION) in /home1/shashan2/socialapp/app/controllers/SocialRetrieverController.php on line 108
 [23-Mar-2014 22:44:53 UTC] PHP Parse error:  syntax error, unexpected 'try' (T_TRY), expecting function (T_FUNCTION) in /home1/shashan2/socialapp/app/controllers/SocialRetrieverController.php on line 108
 [23-Mar-2014 22:46:06 UTC] PHP Parse error:  syntax error, unexpected 'Mail' (T_STRING), expecting function (T_FUNCTION) in /home1/shashan2/socialapp/app/controllers/SocialRetrieverController.php on line 109
+[24-Mar-2014 16:43:51 UTC] PHP Parse error:  syntax error, unexpected ')', expecting variable (T_VARIABLE) or '$' in /home1/shashan2/socialapp/app/models/FacebookRetriever.php on line 334
+[24-Mar-2014 17:30:29 UTC] PHP Parse error:  syntax error, unexpected 'is' (T_STRING) in /home1/shashan2/socialapp/app/models/FacebookRetriever.php on line 334
+[24-Mar-2014 17:30:45 UTC] PHP Warning:  Uncaught exception 'ErrorException' with message 'Undefined variable: fbLike' in /home1/shashan2/socialapp/app/models/FacebookRetriever.php:345
+Stack trace:
+#0 /home1/shashan2/socialapp/app/models/FacebookRetriever.php(345): Illuminate\Exception\Handler->handleError(8, 'Undefined varia...', '/home1/shashan2...', 345, Array)
+#1 /home1/shashan2/socialapp/app/models/FacebookRetriever.php(293): FacebookRetriever->processPostLikes(Array, Array)
+#2 /home1/shashan2/socialapp/app/models/FacebookRetriever.php(229): FacebookRetriever->processPost(Array, Object(FacebookPage))
+#3 /home1/shashan2/socialapp/app/controllers/SocialRetrieverController.php(100): FacebookRetriever->getPage(Object(FacebookPage), Object(FacebookUser))
+#4 [internal function]: SocialRetrieverController->getAllUserData()
+#5 /home1/shashan2/socialapp/vendor/laravel/framework/src/Illuminate/Routing/Controller.php(194): call_user_func_array(Array, Array)
+#6 /home1/shashan2/socialapp/vendor/laravel/framework/src/Illuminate/Routing/ControllerDispatcher.p in /home1/shashan2/socialapp/app/models/FacebookRetriever.php on line 345
+[24-Mar-2014 17:30:45 UTC] PHP Fatal error:  Call to a member function where() on a non-object in /home1/shashan2/socialapp/app/models/FacebookRetriever.php on line 345
+[24-Mar-2014 17:39:03 UTC] PHP Parse error:  syntax error, unexpected '}', expecting catch (T_CATCH) in /home1/shashan2/socialapp/app/models/FacebookRetriever.php on line 349
+[24-Mar-2014 17:41:36 UTC] PHP Warning:  Uncaught exception 'ErrorException' with message 'Undefined variable: fbLike' in /home1/shashan2/socialapp/app/models/FacebookRetriever.php:348
+Stack trace:
+#0 /home1/shashan2/socialapp/app/models/FacebookRetriever.php(348): Illuminate\Exception\Handler->handleError(8, 'Undefined varia...', '/home1/shashan2...', 348, Array)
+#1 /home1/shashan2/socialapp/app/models/FacebookRetriever.php(293): FacebookRetriever->processPostLikes(Array, Array)
+#2 /home1/shashan2/socialapp/app/models/FacebookRetriever.php(229): FacebookRetriever->processPost(Array, Object(FacebookPage))
+#3 /home1/shashan2/socialapp/app/controllers/SocialRetrieverController.php(100): FacebookRetriever->getPage(Object(FacebookPage), Object(FacebookUser))
+#4 [internal function]: SocialRetrieverController->getAllUserData()
+#5 /home1/shashan2/socialapp/vendor/laravel/framework/src/Illuminate/Routing/Controller.php(194): call_user_func_array(Array, Array)
+#6 /home1/shashan2/socialapp/vendor/laravel/framework/src/Illuminate/Routing/ControllerDispatcher.p in /home1/shashan2/socialapp/app/models/FacebookRetriever.php on line 348
+[24-Mar-2014 17:41:36 UTC] PHP Fatal error:  Call to a member function where() on a non-object in /home1/shashan2/socialapp/app/models/FacebookRetriever.php on line 348
