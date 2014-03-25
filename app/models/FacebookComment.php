@@ -16,7 +16,7 @@ class FacebookComment extends Eloquent
 
 	public function FacebookUser()
 	{
-		return $this->hasOne('FacebookUser');
+		return $this->belongsTo('FacebookUser');
 	}
 
 	/* Fields: https://developers.facebook.com/docs/graph-api/reference/comment
