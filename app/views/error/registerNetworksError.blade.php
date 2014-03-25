@@ -106,7 +106,7 @@
 			<hr>
 
 			@foreach ($dcaf_message as $errmsg => $usr) 
-				<h3> {{{ $errmsg }}} </h3>
+				<!--h3> {{{ $errmsg }}} </h3-->
 				
 				<p> {{{ $usr }}} </p>
 			@endforeach

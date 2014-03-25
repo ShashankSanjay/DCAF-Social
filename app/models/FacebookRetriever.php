@@ -142,17 +142,18 @@ class FacebookRetriever implements SocialRetriever
 					//var_dump($field);
 					$fbUser->{$field} = $response[$field];
 				} catch (Exception $e) {
-					$dcaf_message[] = 'User ' . $response['name'] . 'threw error in getUser()';
+					$dcaf_message[] = 'Field ' . $field . ' threw error in getUser()';
 				}
-				
+				$fbUser->save();
 			}
-			$fbUser->save();
-			if (!empty($dcaf_message)) {
+			
+			/*if (!empty($dcaf_message)) {
+				echo 'supposed to send error linking email';
 				Mail::later(5, 'error.registerNetworksError', array('dcaf_message' => $dcaf_message), function($message)
 				{
 				    $message->to('ssanja1@pride.hofstra.edu', 'Admin')->subject('Error on linking');
 				});
-			}
+			}*/
 		}
 		
 	}
@@ -196,7 +197,7 @@ class FacebookRetriever implements SocialRetriever
 		$this->setAccessToken($page->access_token);
 		
 		// Define query and fields. This is just pt. 1, still need media stuff, albums videos..
-		$query = '?fields=likes,posts.fields(id)';
+		$query = '?fields=posts.fields(id)';
 		
 		try {
 			// specific field calls from Alex's email will not work with /me node, must use id?fields=...
@@ -208,15 +209,7 @@ class FacebookRetriever implements SocialRetriever
 			//var_dump($e);
 		}
 		$response = json_decode($response, true);
-		//echo '<pre>';
-
-		/*foreach ($response as $key => $value) {
-			if (isset($response[$key]))
-			{
-				//
-			}
-		}*/
-		
+				
 		/**
 		*	FB does not give DCAF actual users, they only give total number of users
 		*/
@@ -230,26 +223,26 @@ class FacebookRetriever implements SocialRetriever
 
 		if (isset($response['posts']))
 		{
-			foreach ($response['posts']['data'] as $post) {
+			$posts = $response['posts'];
+			foreach ($posts['data'] as $post) {
 				$this->processPost($post, $page);
-			}
-			
+			}	
 		}
-		//	breakdown of response, in order they are received
-		/*$page_likes = $response['likes'];
-		$posts = $response['posts'];
-
-		foreach ($posts['data as $post) {
-			//	Need to write paging for: likes, comments, and shares
-			$post_shares = $post['shares'];
-			$post_id = $post['id'];
-			$post_time = $post['created_time'];
-			$post_likes = $post['likes'];
-			$post_comments = $post['comments'];
+		// parse through, go through pagination
+		/*if (isset($posts['paging']['next'])) {
+			$call = $this->consumer->request($posts['paging']['next']);
+			$pgresponse = json_decode($call, true);
+			
+			try {
+				// Recurse
+				$this->getPage($pgresponse['likes'], $post);
+			} catch (Exception $e) {
+				echo "failed in requesting next page";
+				//var_dump($post->FBPage . $query);
+				var_dump($e);
+			}
 		}*/
 
-		// parse through, go through pagination
-		
 		/**
 		 * Accepts decoded fb json, returns unpaginated array of arrays
 		 * Secondary arrays are returned with name from fb, ie. post, likes
@@ -263,22 +256,6 @@ class FacebookRetriever implements SocialRetriever
 	
 	protected function processPost($post, $page)
 	{
-		// print("\nProcessing posts for page: ".$page_response['name']."\n");
-		
-		// Parse data and save into db
-		
-		// $posts = $page_response['posts']['data'];
-		
-		// parse each post and save into db
-		/*foreach ($response['posts'] as $key => $arr)
-		{
-			$post = new FacebookPost();
-			$post->content = $arr['content'];
-			$post->save();
-			
-			// Attach to appropriate models, ie. fb user and page
-			$post->FacebookUser->attach($userid);
-		}*/
 		//echo 'in processPost';
 		$query = '?fields=likes,comments.fields(id),shares,message,message_tags,name,from';
 		
@@ -292,10 +269,7 @@ class FacebookRetriever implements SocialRetriever
 			//var_dump($e);
 		}
 		$response = json_decode($response, true);
-		//echo '<pre>';
-
-		//var_dump($response);
-		//var_dump($page->name);
+		
 		$parts = explode('_', $post['id']);
 		$post['id'] = $parts[1];
 
@@ -323,13 +297,15 @@ class FacebookRetriever implements SocialRetriever
 		$fbPost->FBPage()->associate($page);
 		$fbPost->save();
 
+		/*
+		*	Need to figure out what data structure to send to these helper functions
+		*/
 		if (isset($response['likes'])) {
 			$this->processPostLikes($response['likes'], $fbPost);
 		}
-
-		if (isset($response['comments'])) {
-			//$this->processComments($response['comments'], $fbPost)
-			//echo 'comments included';
+		
+		if (isset($response['comments'])) {			
+			$this->processComments($response['comments'], $page);
 		}
 
 		
@@ -380,9 +356,105 @@ class FacebookRetriever implements SocialRetriever
 				
 			}
 		}*/
-		
 	}
 
+
+	//comments has 'data' and 'paging'
+	public function processComments($comments, $post)
+	{
+		echo '<pre>';
+
+		$query = '?fields=likes,message,message_tags,from';
+		
+		foreach ($comments['data'] as $comment) {
+			
+				$fbComment = FacebookComment::find($comment['id']);
+				
+				if (empty($fbComment)) {
+
+					try {
+						// specific field calls from Alex's email will not work with /me node, must use id?fields=...
+						$response = $this->consumer->request($comment['id'] . $query);
+					} catch (Exception $e) {
+						// CHANGE: WRITE TO LOG FILE
+						echo "failed in requesting comment info, comment id is: ";
+						var_dump($comment['id']);
+						//var_dump($e);
+					}
+
+					$response = json_decode($response, true);
+
+					if (isset($response['data'])) {
+						echo 'data is set on this comment';
+						var_dump($response);
+						die();
+					}
+
+					/*$parts = explode('_', $comment['data']['id']);
+					$comment['data']['id'] = $parts[1];
+
+					$fbComment = new FacebookComment;
+					$fbComment->message = $response['message'];
+					$fbComment->FB_Comment_ID = $response['id'];
+					//$fbComment-> = ;
+					$fbComment->save();
+
+					$fbComment->FBPost()->associate($post);
+					
+					$this->getUser($response['from']['id']);
+					$fbUser = FacebookUser::find($response['from']['id']);
+					if (is_null($fbUser)) {
+						echo 'user is null: ' . $comment['id'];
+						die();
+					}
+					$fbComment->FacebookUser()->associate($fbUser);
+					$fbComment->save();*/
+
+					$parts = explode('_', $comment['id']);
+					$comment['id'] = $parts[1];
+
+					$fbComment = new FacebookComment;
+					$fbComment->message = $response['message'];
+					$fbComment->FB_Comment_ID = $response['id'];
+					//$fbComment-> = ;
+					$fbComment->save();
+
+					$fbComment->FBPost()->associate($post);
+					
+					$this->getUser($response['from']['id']);
+					$fbUser = FacebookUser::find($response['from']['id']);
+					if (is_null($fbUser)) {
+						echo 'user is null: ' . $comment['id'];
+						die();
+					}
+					$fbComment->FacebookUser()->associate($fbUser);
+					$fbComment->save();
+				}
+
+				/*if (isset($response['likes'])) {
+					//$this->processCommentLikes($response['likes'], $fbComment);
+				}
+
+				if (isset($response['paging']['next'])) {
+					//var_dump($page->name . 'has paging on post likes');
+					//$query = '/likes?limit=100&after=' . $likes['paging']['cursors']['after'];
+					$call = $this->consumer->request($likes['paging']['next']);
+					$pgresponse = json_decode($call, true);
+					
+					try {
+						// Recurse
+						$this->processPostLikes($pgresponse['likes'], $post);
+					} catch (Exception $e) {
+						echo "failed in requesting next page";
+						var_dump($post->FBPage . $query);
+						var_dump($e);
+						
+					}
+				}*/
+		}
+		
+		
+	}
 
 	/**
 	*	We don't get user info for page likes, but facebook provides those insights anyway

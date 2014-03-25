@@ -349,3 +349,9 @@ Stack trace:
 [24-Mar-2014 21:52:04 UTC] PHP Fatal error:  Method FacebookPage::__toString() must not throw an exception in /home1/shashan2/socialapp/app/models/FacebookRetriever.php on line 0
 [24-Mar-2014 21:59:35 UTC] PHP Parse error:  syntax error, unexpected '=' in /home1/shashan2/socialapp/app/models/FacebookRetriever.php on line 130
 [24-Mar-2014 22:01:20 UTC] PHP Fatal error:  Method FacebookPage::__toString() must not throw an exception in /home1/shashan2/socialapp/app/models/FacebookRetriever.php on line 0
+[24-Mar-2014 22:25:07 UTC] PHP Fatal error:  Method FacebookPage::__toString() must not throw an exception in /home1/shashan2/socialapp/app/models/FacebookRetriever.php on line 0
+[25-Mar-2014 02:20:55 UTC] PHP Fatal error:  Method FacebookPage::__toString() must not throw an exception in /home1/shashan2/socialapp/app/models/FacebookRetriever.php on line 0
+[25-Mar-2014 02:23:29 UTC] PHP Fatal error:  Method FacebookPage::__toString() must not throw an exception in /home1/shashan2/socialapp/app/models/FacebookRetriever.php on line 0
+[25-Mar-2014 02:26:01 UTC] PHP Fatal error:  Method FacebookPage::__toString() must not throw an exception in /home1/shashan2/socialapp/app/models/FacebookRetriever.php on line 0
+[25-Mar-2014 02:43:20 UTC] PHP Parse error:  syntax error, unexpected '}' in /home1/shashan2/socialapp/app/models/FacebookRetriever.php on line 372
+[25-Mar-2014 02:50:37 UTC] PHP Parse error:  syntax error, unexpected '$fbComment' (T_VARIABLE) in /home1/shashan2/socialapp/app/models/FacebookRetriever.php on line 389
