@@ -137,7 +137,8 @@ Route::group(array('before' => 'auth'), function()
 
     Route::get('exampleBoard', function()
     {
-        return View::make('site.dashboard.exampleboard');
+        //return View::make('site.dashboard.exampleboard');
+        return View::make('site.onePage');
     });
     
     Route::get('demographics', 'UserDashboardController@getDemographics');
@@ -190,6 +191,11 @@ Route::get('contact-us', function()
 // Posts - Second to last set, match slug
 Route::get('{postSlug}', 'BlogController@getView');
 Route::post('{postSlug}', 'BlogController@postView');
+
+Route::get('user/test', function()
+{
+    return View::make('site.onePage');
+});
 
 // Index Page - Last route, no matches
 Route::any('/', array('before' => 'auth','uses' => 'UserController@getIndex'));
