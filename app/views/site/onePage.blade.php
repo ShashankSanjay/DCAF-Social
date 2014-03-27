@@ -50,12 +50,12 @@
       <div class="row">
         <div class="col-md-8 col-md-offset-2 text-center">
           <div class="login-banner text-center">
-            <h1>{{ HTML::image('favicon.ico', 'dcaf', array('width' => 70, 'height' => 70)) }} DCAF-Social</h1>
+            <h1>{{ HTML::image('favicon.ico', 'dcaf', array('width' => 70, 'height' => 70)) }} DCAF-Social </h1>
           </div>
           <!--div class="portlet portlet-green"-->
           <div class="tile light-gray text-center">
           	<style type="text/css">
-          		h4 {
+          		h4.dcaf {
           			color: #34495e !important;
           		}
           	</style>
@@ -70,13 +70,13 @@
             </div-->
             <!--div class="portlet-body"-->
             <hr>
-              <form accept-charset="UTF-8" role="form">
-				<div class="input-group">
-					<input type="text" class="form-control">
-					<span class="input-group-btn">
-					    <button class="btn btn-default" type="button">Go!</button>
-					</span>
-				</div>
+              <form accept-charset="UTF-8" role="form" action={{ URL::to('#') }}>
+        				<div class="input-group">
+        					<input type="text" class="form-control">
+        					<span class="input-group-btn">
+        					    <button class="btn btn-default" type="submit">Go!</button>
+        					</span>
+        				</div>
               </form>
 
                   <br>
@@ -95,7 +95,7 @@
 
                   </style>
 
-                  <a href={{ OAuth::getAuthorizeUrl('facebook') }} class="btn btn-social dcaftemp">
+                  <a href={{ OAuth::getAuthorizeUrl('facebook')->redirect(URL::current()) }} class="btn btn-social dcaftemp">
                     {{ HTML::image('assets/img/Social-Icons/facebook500.png', 'click here to link to fb', array('width' => 70, 'height' => 70)) }}
                     <!--span class="add-icon"> {{ HTML::image('assets/img/Social-Icons/addthis500.png', 'addme!', array('width' => 70, 'height' =>70)) }} </span-->
                   </a>
@@ -103,7 +103,7 @@
                     {{ HTML::image('assets/img/Social-Icons/twitter.png', 'click here to link to tw', array('width' => 70, 'height' => 70)) }}
                     <!--span class="add-icon"> {{ HTML::image('assets/img/Social-Icons/addthis500.png', 'addme!', array('width' => 70, 'height' =>70)) }} </span-->
                   </a>
-                  <a href={{ OAuth::getAuthorizeUrl('google') }} class="btn btn-social dcaftemp">
+                  <a href={{ OAuth::getAuthorizeUrl('google')->redirect(URL::current()) }} class="btn btn-social dcaftemp">
                     {{ HTML::image('assets/img/Social-Icons/googleplus-revised.png', 'click here to link to gp', array('width' => 70, 'height' => 70)) }}
                     <!--span class="add-icon"> {{ HTML::image('assets/img/Social-Icons/addthis500.png', 'addme!', array('width' => 70, 'height' =>70)) }} </span-->
                   </a>
@@ -142,5 +142,20 @@
 	
 	
 	</body>
+  <footer>
+  
+    <div style="position: absolute; bottom: 2.2em; left: 4em; color: #fff !important;">
+      <h5> Legal stuff:
+        <a style="color: #fff !important;" href="">
+        <strong> Privacy</strong>
+        </a>
+        , and 
+        <a style="color: #fff !important;" href="">
+        <strong> Terms of Use </strong>
+        </a>
+      </h5>
+    </div>
+  
+  </footer>
 </html>
 <!-- Localized -->

@@ -53,6 +53,8 @@ Route::get('/cron/run/test', function () {
 // Route::get('/jobs/{job}/run', 'SocialRetrieverController@getAllUserData');
 Route::get('/jobs/run', 'SocialRetrieverController@getAllUserData');
 
+Route::get('test', 'OnDemandController@index');
+
 /*
 Route::get('/cron/run/test2', function() {
     // dispatch the request to the method on the controller
@@ -137,8 +139,8 @@ Route::group(array('before' => 'auth'), function()
 
     Route::get('exampleBoard', function()
     {
-        //return View::make('site.dashboard.exampleboard');
-        return View::make('site.onePage');
+        return View::make('site.dashboard.exampleboard');
+        //return View::make('site.onePage');
     });
     
     Route::get('demographics', 'UserDashboardController@getDemographics');
@@ -191,11 +193,6 @@ Route::get('contact-us', function()
 // Posts - Second to last set, match slug
 Route::get('{postSlug}', 'BlogController@getView');
 Route::post('{postSlug}', 'BlogController@postView');
-
-Route::get('user/test', function()
-{
-    return View::make('site.onePage');
-});
 
 // Index Page - Last route, no matches
 Route::any('/', array('before' => 'auth','uses' => 'UserController@getIndex'));
