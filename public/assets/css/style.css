@@ -822,6 +822,14 @@ a:focus {
     background: #fff;
 }
 
+/*
+* dcaf
+*/
+.portlet-light-gray .portlet-body {
+    padding: 15px;
+    background-color: #bdc3c7;
+}
+
 .portlet .portlet-footer {
     padding: 10px 15px;
     background: #e0e7e8;

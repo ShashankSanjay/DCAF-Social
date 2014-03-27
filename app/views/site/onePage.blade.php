@@ -10,7 +10,7 @@
 
 		<title>
 			@section('title')
-			DCAF
+			DCAF-Social
 			@show
 		</title>
 
@@ -109,6 +109,7 @@
                   </a>
                 
                 <hr>
+                
                 <p class="small">
                   <a href="#">Forgot your password?</a>
                 </p>
@@ -146,12 +147,12 @@
   
     <div style="position: absolute; bottom: 2.2em; left: 4em; color: #fff !important;">
       <h5> Legal stuff:
-        <a style="color: #fff !important;" href="">
+        <a style="color: #fff !important;" href={{ URL::to('privacy') }} >
         <strong> Privacy</strong>
         </a>
-        , and 
-        <a style="color: #fff !important;" href="">
-        <strong> Terms of Use </strong>
+         and 
+        <a style="color: #fff !important;" href={{ URL::to('termsOfService') }} >
+        <strong>Terms of Service</strong>
         </a>
       </h5>
     </div>

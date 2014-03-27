@@ -55,6 +55,16 @@ Route::get('/jobs/run', 'SocialRetrieverController@getAllUserData');
 
 Route::get('test', 'OnDemandController@index');
 
+Route::get('privacy', function()
+{
+    return View::make('site.privacy');
+});
+
+Route::get('termsOfService', function()
+{
+    return View::make('site.termsOfService');
+});
+
 /*
 Route::get('/cron/run/test2', function() {
     // dispatch the request to the method on the controller
