@@ -79,7 +79,6 @@ class FacebookUser extends Eloquent implements UserProfileInterface, UserInterfa
 	
 	protected $renamedFields = array(
 		'id'	=> 'FB_User_ID',
-		'name'	=> 'full_name'
 	);
 	
 	public static function boot()

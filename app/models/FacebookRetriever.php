@@ -133,7 +133,7 @@ class FacebookRetriever implements SocialRetriever
 			$query = '?fields=id,first_name,last_name,full_name,email,link,gender,age_range_min,age_range_max,birthday,timezone,locale';
 			$call = $this->consumer->request($id);
 			$response = json_decode($call, true);
-			var_dump($response);
+			//var_dump($response);
 			$fbUser = new FacebookUser;
 
 			$dcaf_message = array();
@@ -229,19 +229,7 @@ class FacebookRetriever implements SocialRetriever
 			}	
 		}
 		// parse through, go through pagination
-		/*if (isset($posts['paging']['next'])) {
-			$call = $this->consumer->request($posts['paging']['next']);
-			$pgresponse = json_decode($call, true);
-			
-			try {
-				// Recurse
-				$this->getPage($pgresponse['likes'], $post);
-			} catch (Exception $e) {
-				echo "failed in requesting next page";
-				//var_dump($post->FBPage . $query);
-				var_dump($e);
-			}
-		}*/
+		$this->postPagination($response);
 
 		/**
 		 * Accepts decoded fb json, returns unpaginated array of arrays
@@ -250,8 +238,28 @@ class FacebookRetriever implements SocialRetriever
 		 * $response = self::paginate($response);
 		 * $responses[] = $response;
 		*/
-		
-		
+	}
+
+	public function postPagination($posts)
+	{
+		//paginate through posts
+		if (isset($posts['paging']['next'])) {
+			try {
+				$call = $this->consumer->request($posts['paging']['next']);
+				$pgresponse = json_decode($call, true);
+				
+			} catch (Exception $e) {
+				echo "failed in requesting next page";
+				//var_dump($post->FBPage . $query);
+				var_dump($e);
+			}
+
+			if (!isset($pgresponse['error']) && !empty($pgresponse)) {
+				// Recurse
+				$this->processPost($pgresponse, $post);
+				$this->postPagination($pgresponse);
+			} 
+		}
 	}
 	
 	protected function processPost($post, $page)
@@ -298,7 +306,7 @@ class FacebookRetriever implements SocialRetriever
 		$fbPost->save();
 
 		/*
-		*	Need to figure out what data structure to send to these helper functions
+		*	handle likes and comments for post
 		*/
 		if (isset($response['likes'])) {
 			$this->processPostLikes($response['likes'], $fbPost);
@@ -307,9 +315,6 @@ class FacebookRetriever implements SocialRetriever
 		if (isset($response['comments'])) {			
 			$this->processComments($response['comments'], $page);
 		}
-
-		
-		
 	}
 
 
@@ -340,22 +345,25 @@ class FacebookRetriever implements SocialRetriever
 				}
 		}
 
-		/*if (isset($likes['paging']['next'])) {
+		if (isset($likes['paging']['next'])) {
 			//var_dump($page->name . 'has paging on post likes');
 			//$query = '/likes?limit=100&after=' . $likes['paging']['cursors']['after'];
 			$call = $this->consumer->request($likes['paging']['next']);
 			$pgresponse = json_decode($call, true);
 			
 			try {
-				// Recurse
-				$this->processPostLikes($pgresponse['likes'], $post);
+				$call = $this->consumer->request($likes['paging']['next']);
+				$pgresponse = json_decode($call, true);
 			} catch (Exception $e) {
 				echo "failed in requesting next page";
 				var_dump($post->FBPage . $query);
 				var_dump($e);
-				
 			}
-		}*/
+			// Recurse
+			if (!isset($pgresponse['error']) && !empty($pgresponse)) {
+				$this->processPostLikes($pgresponse, $post);
+			}
+		}
 	}
 
 
@@ -431,26 +439,32 @@ class FacebookRetriever implements SocialRetriever
 					$fbComment->save();
 				}
 
-				/*if (isset($response['likes'])) {
+				if (isset($response['likes'])) {
 					//$this->processCommentLikes($response['likes'], $fbComment);
+					echo ' comment has likes ';
+					var_dump($response['likes']);
 				}
+		}
 
-				if (isset($response['paging']['next'])) {
-					//var_dump($page->name . 'has paging on post likes');
-					//$query = '/likes?limit=100&after=' . $likes['paging']['cursors']['after'];
-					$call = $this->consumer->request($likes['paging']['next']);
-					$pgresponse = json_decode($call, true);
-					
-					try {
-						// Recurse
-						$this->processPostLikes($pgresponse['likes'], $post);
-					} catch (Exception $e) {
-						echo "failed in requesting next page";
-						var_dump($post->FBPage . $query);
-						var_dump($e);
-						
-					}
-				}*/
+		if (isset($comments['paging']['next'])) {
+			echo 'in paging';
+			try {
+				$call = $this->consumer->request($comments['paging']['next']);
+				$pgresponse = json_decode($call, true);
+				
+			} catch (Exception $e) {
+				echo "failed in requesting next page";
+				var_dump($post->FBPage . $query);
+				var_dump($e);
+			}
+
+			if (!isset($pgresponse['error']) && !empty($pgresponse)) {
+				// Recurse
+				echo 'paged';
+				$this->processComments($pgresponse, $post);
+			}
+		} else {
+			var_dump($comments);
 		}
 		
 		
