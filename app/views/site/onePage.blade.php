@@ -81,37 +81,29 @@
 
                   <br>
                   <style type="text/css">
-                  	
-                  	a.dcaftemp {
-                  		position: relative;
-                  	}
-
-                  	a.dcaftemp:hover
-                  	a.dcaftemp:focus {
+                  	/*
+                      Alex - please figure out how to do get the 'addthis500' img to display when hovering over any of the icons.
+                      Also get this opacity to work, i would like both, the overlay and opacity. When a user is logged in to a certain
+                      network, show the img with borders. That can be done through css or just use imgs in the 'img/Social-Icons/bordered' 
+                      directory.
+                        -Shashank
+                    */
+                  	a:hover
+                  	a:focus {
                   		opacity: 0.5;
                   	}
 
-                  	a.dcaftemp span.add-icon {
-                  		position: absolute;
-                  		visibility: hidden;
-                  		
-                  	}
-
-                  	a.dcaftemp:hover span.add-icon {
-                  		visibility: visible;
-                  		//opacity: 0.7;
-                  	}
                   </style>
 
-                  <a href='' class="btn btn-social dcaftemp">
+                  <a href={{ OAuth::getAuthorizeUrl('facebook') }} class="btn btn-social dcaftemp">
                     {{ HTML::image('assets/img/Social-Icons/facebook500.png', 'click here to link to fb', array('width' => 70, 'height' => 70)) }}
                     <!--span class="add-icon"> {{ HTML::image('assets/img/Social-Icons/addthis500.png', 'addme!', array('width' => 70, 'height' =>70)) }} </span-->
                   </a>
-                  <a href='' class="btn btn-social dcaftemp">
+                  <a href={{ OAuth::getAuthorizeUrl('twitter') }} class="btn btn-social dcaftemp">
                     {{ HTML::image('assets/img/Social-Icons/twitter.png', 'click here to link to tw', array('width' => 70, 'height' => 70)) }}
                     <!--span class="add-icon"> {{ HTML::image('assets/img/Social-Icons/addthis500.png', 'addme!', array('width' => 70, 'height' =>70)) }} </span-->
                   </a>
-                  <a href='' class="btn btn-social dcaftemp">
+                  <a href={{ OAuth::getAuthorizeUrl('google') }} class="btn btn-social dcaftemp">
                     {{ HTML::image('assets/img/Social-Icons/googleplus-revised.png', 'click here to link to gp', array('width' => 70, 'height' => 70)) }}
                     <!--span class="add-icon"> {{ HTML::image('assets/img/Social-Icons/addthis500.png', 'addme!', array('width' => 70, 'height' =>70)) }} </span-->
                   </a>
@@ -136,56 +128,11 @@
     {{ HTML::script('assets/js/plugins/slimscroll/jquery.slimscroll.min.js') }}
     {{ HTML::script('assets/js/plugins/popupoverlay/jquery.popupoverlay.js') }}
     {{ HTML::script('assets/js/plugins/popupoverlay/defaults.js') }}
-    <!-- Logout Notification Box -->
-    <div id="logout">
-        <div class="logout-message">
-            <img class="img-circle img-logout" src="img/profile-pic.jpg" alt="">
-            <h3>
-                <i class="fa fa-sign-out text-green"></i> Ready to go?
-            </h3>
-            <p>Select "Logout" below if you are ready<br> to end your current session.</p>
-            <ul class="list-inline">
-                <li>
-                    <a href={{ URL::to('user/logout') }} class="btn btn-green">
-                        <strong>Logout</strong>
-                    </a>
-                </li>
-                <li>
-                    <button class="logout_close btn btn-green">Cancel</button>
-                </li>
-            </ul>
-        </div>
-    </div>
-    <!-- /#logout -->
-    <!-- Logout Notification jQuery -->
-    {{ HTML::script('assets/js/plugins/popupoverlay/logout.js') }}
+    
     <!-- HISRC Retina Images -->
     {{ HTML::script('assets/js/plugins/hisrc/hisrc.js') }}
 
     <!-- PAGE LEVEL PLUGIN SCRIPTS -->
-    <!-- HubSpot Messenger -->
-    {{ HTML::script('assets/js/plugins/messenger/messenger.min.js') }}
-    {{ HTML::script('assets/js/plugins/messenger/messenger-theme-flat.js') }}
-    <!-- Date Range Picker -->
-    {{ HTML::script('assets/js/plugins/daterangepicker/moment.js') }}
-    {{ HTML::script('assets/js/plugins/daterangepicker/daterangepicker.js') }}
-    <!-- Morris Charts -->
-    {{ HTML::script('assets/js/plugins/morris/raphael-2.1.0.min.js') }}
-    {{ HTML::script('assets/js/plugins/morris/morris.js') }}
-    <!-- Flot Charts -->
-    {{ HTML::script('assets/js/plugins/flot/jquery.flot.js') }}
-    {{ HTML::script('assets/js/plugins/flot/jquery.flot.resize.js') }}
-    <!-- Sparkline Charts -->
-    {{ HTML::script('assets/js/plugins/sparkline/jquery.sparkline.min.js') }}
-    <!-- Moment.js -->
-    {{ HTML::script('assets/js/plugins/moment/moment.min.js') }}
-    <!-- jQuery Vector Map -->
-    {{ HTML::script('assets/js/plugins/jvectormap/jquery-jvectormap-1.2.2.min.js') }}
-    {{ HTML::script('assets/js/plugins/jvectormap/maps/jquery-jvectormap-world-mill-en.js') }}
-    {{ HTML::script('assets/js/demo/map-demo-data.js') }}
-    <!-- Easy Pie Chart -->
-    {{ HTML::script('assets/js/plugins/easypiechart/jquery.easypiechart.min.js') }}
-    <!-- DataTables -->
     {{ HTML::script('assets/js/plugins/datatables/jquery.dataTables.js') }}
     {{ HTML::script('assets/js/plugins/datatables/datatables-bs3.js') }}
 
