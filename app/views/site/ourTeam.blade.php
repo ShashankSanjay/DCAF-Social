@@ -71,34 +71,34 @@
             <hr>
             <!--div class="dcafcolumn"-->
               <!-- Left Column -->
-                <div class="row dcaf-margin">
+                <div class="row dcaf-margin text-dark-blue">
                   <div class="col-xs-3 col-md-2-pull-3 text-center">
                     {{ HTML::image('assets/img/profile-pic.jpg', 'dcaf', array('width' => 100, 'height' => 100, 'class' => 'img-circle')) }}
                   </div>
                                   
-                  <div class="col-xs-9 col-md-6-pull-9">
+                  <div class="col-xs-9 col-md-6-pull-9" style="text-align: justify">
                     <p>Spent 2001-2008 working on Yugos in the government sector. Gifted in supervising the production of pubic lice in Ocean City, NJ. Spent 2001-2006 getting my feet wet with wooden horses for no pay. Set new standards for donating etch-a-sketches in Phoenix, AZ. Uniquely-equipped for consulting about love for the government. In 2009 I was short selling teddy bears in Libya.</p>
                   </div>
                 
                 </div>
                 <br>
-                <div class="row dcaf-margin">
+                <div class="row dcaf-margin text-dark-blue">
                   <div class="col-xs-3 col-md-2-pull-3 text-center">
                     {{ HTML::image('assets/img/profile-pic.jpg', 'dcaf', array('width' => 100, 'height' => 100, 'class' => 'img-circle')) }}
                   </div>
                                   
-                  <div class="col-xs-9 col-md-6-pull-9">
+                  <div class="col-xs-9 col-md-6-pull-9" style="text-align: justify">
                     What gets me going now is training chess sets in Cuba. At the moment I'm buying and selling wooden tops in Mexico. Spent several years creating marketing channels for bathtub gin in Gainesville, FL. Practiced in the art of exporting glucose with no outside help. Managed a small team analyzing karma in Nigeria. Set new standards for working with squirt guns in Fort Lauderdale, FL.
                   </div>
                 
                 </div>
                 <br>
-                <div class="row dcaf-margin">
+                <div class="row dcaf-margin text-dark-blue">
                   <div class="col-xs-3 col-md-2-pull-3 text-center">
                     {{ HTML::image('assets/img/profile-pic.jpg', 'dcaf', array('width' => 100, 'height' => 100, 'class' => 'img-circle')) }}
                   </div>
                                   
-                  <div class="col-xs-9 col-md-6-pull-9">
+                  <div class="col-xs-9 col-md-6-pull-9" style="text-align: justify">
                     Had some great experience working on dust in Africa. Spent several years researching crickets in Africa. Spent several years importing tar in New York, NY. Spent the 80's implementing frisbees in Gainesville, FL. Had moderate success analyzing cabbage in the UK. Spent the better part of the 90's building bongos in Libya.
                   </div>
                 

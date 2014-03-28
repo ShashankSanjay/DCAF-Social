@@ -170,7 +170,7 @@ class TwitterUser extends Eloquent implements UserProfileInterface, UserInterfac
 
     public function oauth_twitter()
     {
-    	return $this->hasOne('oauth_twitter');
+    	return $this->hasOne('Thomaswelton\LaravelOauth\Eloquent\Twitter');
     }
 
     /*public function FacebookPage()
