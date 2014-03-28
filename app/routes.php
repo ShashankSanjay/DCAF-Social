@@ -65,6 +65,11 @@ Route::get('termsOfService', function()
     return View::make('site.termsOfService');
 });
 
+Route::get('ourTeam', function()
+{
+    return View::make('site.ourTeam');
+});
+
 /*
 Route::get('/cron/run/test2', function() {
     // dispatch the request to the method on the controller

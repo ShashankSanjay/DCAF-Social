@@ -274,7 +274,11 @@ a:focus {
     font-size: 1.25em;
 }
 
-
+.dcafcolumn {
+    columns: 2;
+    -webkit-columns: 2; /* Safari and Chrome */
+    -moz-columns: 2; /* Firefox */
+}
 
 .navbar-top>.nav-top>.nav>li>a:hover,
 .navbar-top>.nav-top>.nav>li>a:focus {

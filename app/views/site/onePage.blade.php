@@ -50,7 +50,11 @@
       <div class="row">
         <div class="col-md-8 col-md-offset-2 text-center">
           <div class="login-banner text-center">
-            <h1>{{ HTML::image('favicon.ico', 'dcaf', array('width' => 70, 'height' => 70)) }} DCAF-Social </h1>
+            <h1>
+              <a href={{ URL::to('/') }} style="color: #fff !important;">
+              {{ HTML::image('favicon.ico', 'dcaf', array('width' => 70, 'height' => 70)) }}DCAF-Social 
+              </a>
+            </h1>
           </div>
           <!--div class="portlet portlet-green"-->
           <div class="tile light-gray text-center">
@@ -72,7 +76,7 @@
             <hr>
               <form accept-charset="UTF-8" role="form" action={{ URL::to('#') }}>
         				<div class="input-group">
-        					<input type="text" class="form-control">
+        					<input type="text" class="form-control" placeholder="http://www.social-network.com/post-id">
         					<span class="input-group-btn">
         					    <button class="btn btn-default" type="submit">Go!</button>
         					</span>
@@ -110,9 +114,7 @@
                 
                 <hr>
                 
-                <p class="small">
-                  <a href="#">Forgot your password?</a>
-                </p>
+                
             <!--/div-->
           </div>
         </div>
@@ -144,18 +146,26 @@
 	
 	</body>
   <footer>
-  
-    <div style="position: absolute; bottom: 2.2em; left: 4em; color: #fff !important;">
-      <h5> Legal stuff:
-        <a style="color: #fff !important;" href={{ URL::to('privacy') }} >
-        <strong> Privacy</strong>
+    
+    <div style="col-md-4 col-md-offset-2">
+      <h5 class="text-center" style="color: #fff !important;">
+        
+        <a style="color: #fff !important;" href={{ URL::to('ourTeam') }} > <strong>Our Team</strong>
         </a>
-         and 
-        <a style="color: #fff !important;" href={{ URL::to('termsOfService') }} >
-        <strong>Terms of Service</strong>
+        
+      </h5>
+    </div>
+    <div style="col-md-4 col-md-offset-2">
+      <h5 class="text-center" style="color: #fff !important; padding-bottom: 15px;">
+        Legal stuff:
+        <a style="color: #fff !important;" href={{ URL::to('privacy') }} > <strong>Privacy</strong>
+        </a>
+        and
+        <a style="color: #fff !important;" href={{ URL::to('termsOfService') }} > <strong>Terms of Service</strong>
         </a>
       </h5>
     </div>
+    
   
   </footer>
 </html>
