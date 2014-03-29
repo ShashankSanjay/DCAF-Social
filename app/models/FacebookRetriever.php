@@ -77,7 +77,7 @@ class FacebookRetriever implements SocialRetriever
 
 		// Make call to fb /me/accounts
 		try {
-			$call = $this->consumer->request('/me/accounts');
+			$call = $this->consumer->request('/me/accounts?fields=id,website,link,category,name,access_token,perms');
 		} catch (Exception $e) {
 			echo 'failed in getting user accounts';
 		}
@@ -93,6 +93,7 @@ class FacebookRetriever implements SocialRetriever
 				$fbpage = new FacebookPage();
 				$fbpage->FB_Page_ID = $page->id;
 				$fbpage->access_token = $page->access_token;
+				$fbpage->link = $page->link;
 				//$fbpage->perms = $page->perms;
 				$fbpage->name = $page->name;
 				$fbpage->category = $page->category;
