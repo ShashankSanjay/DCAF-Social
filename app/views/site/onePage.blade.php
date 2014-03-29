@@ -74,9 +74,9 @@
             </div-->
             <!--div class="portlet-body"-->
             <hr>
-              <form accept-charset="UTF-8" role="form" action={{ URL::to('#') }}>
+              <form accept-charset="UTF-8" role="form" action={{ URL::to('lookUp') }}>
         				<div class="input-group">
-        					<input type="text" class="form-control" placeholder="http://www.social-network.com/post-id">
+        					<input type="text" class="form-control" name="url" id="url" placeholder="http://www.social-network.com/post-id">
         					<span class="input-group-btn">
         					    <button class="btn btn-default" type="submit">Go!</button>
         					</span>

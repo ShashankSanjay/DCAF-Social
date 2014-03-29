@@ -70,6 +70,8 @@ Route::get('ourTeam', function()
     return View::make('site.ourTeam');
 });
 
+Route::any('lookUp', 'OnDemandController@lookUp');
+
 /*
 Route::get('/cron/run/test2', function() {
     // dispatch the request to the method on the controller

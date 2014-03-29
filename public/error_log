@@ -360,3 +360,6 @@ Stack trace:
 [25-Mar-2014 03:24:08 UTC] PHP Fatal error:  Method FacebookPage::__toString() must not throw an exception in /home1/shashan2/socialapp/app/models/FacebookRetriever.php on line 0
 [27-Mar-2014 06:16:13 UTC] PHP Parse error:  syntax error, unexpected 'Route' (T_STRING) in /home1/shashan2/socialapp/app/routes.php on line 82
 [27-Mar-2014 06:42:51 UTC] PHP Parse error:  syntax error, unexpected '$fbConsumer' (T_VARIABLE), expecting function (T_FUNCTION) in /home1/shashan2/socialapp/app/controllers/OnDemandController.php on line 5
+[28-Mar-2014 22:18:51 UTC] PHP Fatal error:  Call to a member function first() on a non-object in /home1/shashan2/socialapp/app/controllers/OnDemandController.php on line 89
+[28-Mar-2014 23:08:01 UTC] PHP Parse error:  syntax error, unexpected 'functino' (T_STRING), expecting variable (T_VARIABLE) in /home1/shashan2/socialapp/app/controllers/OnDemandController.php on line 136
+[29-Mar-2014 03:35:34 UTC] PHP Fatal error:  Class 'StdOAuth2Token' not found in /home1/shashan2/socialapp/app/controllers/OnDemandController.php on line 171

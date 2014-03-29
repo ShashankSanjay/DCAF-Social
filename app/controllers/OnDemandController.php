@@ -1,5 +1,8 @@
 <?php
 
+use OAuth\OAuth2\Token\StdOAuth2Token;
+
+
 class OnDemandController extends BaseController {
 
 	public $fbConsumer;
@@ -61,18 +64,19 @@ class OnDemandController extends BaseController {
 							}
 						}
 					} else {
+						$dcaf_message = array();
 						foreach ($networkUser->dcaf_fields as $field) {
-							
 							try {
 								//var_dump($field);
 								$networkUser->{$field} = $response[$field];
 							} catch (Exception $e) {
-								Mail::later(5, 'error.registerNetworksError', array('error' => $e), function($message)
-								{
-								    $message->to('ssanja1@pride.hofstra.edu', 'Admin')->subject('Error on linking');
-								});
+								$dcaf_message[] = $field;
 							}
 						}
+						Mail::later(5, 'error.registerNetworksError', array('dcaf_message' => $dcaf_message), function($message)
+						{
+						    $message->to('ssanja1@pride.hofstra.edu', 'Admin')->subject('Error on linking');
+						});
 					}
 
 					/*
@@ -85,15 +89,38 @@ class OnDemandController extends BaseController {
 					*/
 					
 					$networkUser->save();
-
+					//var_dump();
 					if (is_null($oauth = DB::table($db)->where('access_token', $token->getAccessToken())->first()))
 					// if (count(DB::select('select * from '.$db.' where access_token = ?', array($token->getAccessToken()))) == 0)
 					{
 						// Save the token into db
 						$oauthId = DB::table($db)->insertGetId(array('user_id' => $response['id'], 'access_token' => $token->getAccessToken(), 'expire_time' => $token->getEndOfLife()));
 					}
+
+					$facebookRetriever = new FacebookRetriever();
+
+					$dcaf_message = array();
+					
+					//echo '$token: '.$networkUser->access_token."\n";
+					$facebookRetriever->getAllUserData($networkUser);
+
+					// By now, user is saved into db, and so have pages + basic info on them
+					//	So next, get page likes and posts
+					
+					foreach ($networkUser->FacebookPage()->get() as $key => $page) {
+						//echo $page->name;
+						$facebookRetriever->getPage($page, $networkUser);
+						$dcaf_message[] = 'Page ' . $page->name . ' retrieved.';
+					}
+					/*
+					Mail::later(5, 'emails.dcaf.retriever.pagesRetrieved', array('dcaf_message' => $dcaf_message), function($message)
+					{
+						$message->to('ssanja1@pride.hofstra.edu', 'Admin')->subject('Page has finished retrieval');
+					});
+					*/
+					$newProfileAdded = true;
 				}
-			}
+			} 
 		}
 
 		if ($newProfileAdded) {
@@ -104,20 +131,61 @@ class OnDemandController extends BaseController {
 		}
 	}
 
-	public function fblookUp($url)
+	public function lookUp()
 	{
+		$url = Input::get('url');
+		if (empty($url)) {
+			var_dump('oops, looks like you did not input a url');
+		}
+		$purl = parse_url($url);
+
+		if (isset($purl['host']))
+			$host = explode('.', $purl['host']);
+
+		if (count($host) > 2) {
+			// this means their url included www
+			$network = $host[1];
+		} else {
+			//they didn't include www, just sn.com
+			$network = $host[0];
+		}
+
+		// dispatch to correct lookup
+		self::$network($purl['host'], $purl['path']);
+
+		/*
 		$call = $fbConsumer->request($url);
 		$response = json_decode($call);
-
+		*/
 		//	Get demo's for $response
 	}
 
-	public function twlookUp()
+	public function facebook($host, $path)
+	{
+		// Format page/type-of-interaction/id
+		$arrpath = explode('/', $path);
+		
+		// Find page
+		$fbPage = FacebookPage::where('link', '=', $host . '/' . $arrpath[1])->first();
+		var_dump($arrpath[1]);
+		//die();
+		if (empty($fbPage)) {
+			var_dump($host . '/' . $arrpath[1]);
+			die();
+		}
+
+		$consumer = OAuth::consumer('facebook');
+		$consumer->getStorage()->storeAccessToken("Facebook", new StdOAuth2Token($fbPage->access_token));
+
+		var_dump($arrpath);
+	}
+
+	public function twitter()
 	{
 		//
 	}
 
-	public function gplookUp()
+	public function google()
 	{
 		//
 	}
