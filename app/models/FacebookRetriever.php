@@ -263,7 +263,7 @@ class FacebookRetriever implements SocialRetriever
 		}
 	}
 	
-	protected function processPost($post, $page)
+	public function processPost($post, $page)
 	{
 		//echo 'in processPost';
 		$query = '?fields=likes,comments.fields(id),shares,message,message_tags,name,from';
@@ -371,7 +371,7 @@ class FacebookRetriever implements SocialRetriever
 	//comments has 'data' and 'paging'
 	public function processComments($comments, $post)
 	{
-		echo '<pre>';
+		//echo '<pre>';
 
 		$query = '?fields=likes,message,message_tags,from';
 		
