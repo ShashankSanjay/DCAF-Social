@@ -151,7 +151,7 @@ class OnDemandController extends BaseController {
 		}
 
 		// dispatch to correct lookup
-		self::$network($purl['host'], $purl['path']);
+		self::$network($purl, $purl['path']);
 
 		/*
 		$call = $fbConsumer->request($url);
@@ -160,24 +160,31 @@ class OnDemandController extends BaseController {
 		//	Get demo's for $response
 	}
 
-	public function facebook($host, $path)
+	public function facebook($purl, $path)
 	{
 		// Format page/type-of-interaction/id
 		$arrpath = explode('/', $path);
 		
 		// Find page
-		$fbPage = FacebookPage::where('link', '=', $host . '/' . $arrpath[1])->first();
+		$fbPage = FacebookPage::where('link', '=', $purl['scheme'] . '://' . $purl['host'] . '/' . $arrpath[1])->first();
 		var_dump($arrpath[1]);
 		//die();
 		if (empty($fbPage)) {
-			var_dump($host . '/' . $arrpath[1]);
+			var_dump($purl['scheme'] . '://' . $purl['host'] . '/' . $arrpath[1]);
 			die();
 		}
 
 		$consumer = OAuth::consumer('facebook');
 		$consumer->getStorage()->storeAccessToken("Facebook", new StdOAuth2Token($fbPage->access_token));
 
-		var_dump($arrpath);
+		$post['id'] = $arrpath[3];
+		$facebookRetriever = new FacebookRetriever();
+		$facebookRetriever->processPost($post, $fbPage);
+		/*$query = '?fields=likes,comments.fields(id),shares,message,message_tags,name,from';
+		$call = $consumer->request($arrpath[3] . $query);
+		$response = json_decode($call);
+		*/
+		var_dump();
 	}
 
 	public function twitter()

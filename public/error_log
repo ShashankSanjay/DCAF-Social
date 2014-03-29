@@ -363,3 +363,5 @@ Stack trace:
 [28-Mar-2014 22:18:51 UTC] PHP Fatal error:  Call to a member function first() on a non-object in /home1/shashan2/socialapp/app/controllers/OnDemandController.php on line 89
 [28-Mar-2014 23:08:01 UTC] PHP Parse error:  syntax error, unexpected 'functino' (T_STRING), expecting variable (T_VARIABLE) in /home1/shashan2/socialapp/app/controllers/OnDemandController.php on line 136
 [29-Mar-2014 03:35:34 UTC] PHP Fatal error:  Class 'StdOAuth2Token' not found in /home1/shashan2/socialapp/app/controllers/OnDemandController.php on line 171
+[29-Mar-2014 20:01:38 UTC] PHP Parse error:  syntax error, unexpected ';' in /home1/shashan2/socialapp/app/controllers/OnDemandController.php on line 180
+[29-Mar-2014 20:04:10 UTC] PHP Fatal error:  Call to protected method FacebookRetriever::processPost() from context 'OnDemandController' in /home1/shashan2/socialapp/app/controllers/OnDemandController.php on line 182
