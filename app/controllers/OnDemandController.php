@@ -1,7 +1,8 @@
 <?php
 
 use OAuth\OAuth2\Token\StdOAuth2Token;
-
+require_once('../../vendor/alchemyapi_php/alchemyapi.php');
+	
 
 class OnDemandController extends BaseController {
 
@@ -261,7 +262,7 @@ class OnDemandController extends BaseController {
 			var_dump($props);
 			echo '</pre>';
 			
-			die();
+			//die();
 			
 			if (isset($urlParts['host']))
 				$host = explode('.', $urlParts['host']);
@@ -308,7 +309,22 @@ class OnDemandController extends BaseController {
 		$facebookRetriever->processPost($post, $fbPage, $fbPage->access_token);
 		$fbPost = FacebookPost::find($post['id']);
 		
-		var_dump($fbPost->message);
+		$test_text = $fbPost->message;
+		$alchemyapi = new AlchemyAPI();
+
+		echo '<pre>';
+		//Keywords
+		echo 'Checking keywords . . . ';
+		$response = $alchemyapi->keywords('text', $test_text, null);
+		var_dump($response);
+		//Sentiment
+		echo 'Checking sentiment . . . ';
+		$response = $alchemyapi->sentiment('text', $test_text, null);
+		var_dump($response);
+		//Sentiment Targeted
+		echo 'Checking targeted sentiment . . . ';
+		$response = $alchemyapi->sentiment_targeted('text', $test_text, 'heart', null);
+		var_dump($response);
 		/*$query = '?fields=likes,comments.fields(id),shares,message,message_tags,name,from';
 		$call = $consumer->request($arrpath[3] . $query);
 		$response = json_decode($call);

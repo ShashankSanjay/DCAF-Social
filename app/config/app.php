@@ -210,7 +210,7 @@ return array(
         'OAuth'			=> 'Thomaswelton\LaravelOauth\Facades\OAuth', //Oauth
         //'AlchemyAPI'	=> 'AlchemyAPI\alchemyapi_php\alchemyapi',
         'Role'			=> 'DcafRole',
-        'Facebook'		=> 'Facebook\phpSDK\FacebookFacade',
+        //'Facebook'		=> 'Facebook\phpSDK\FacebookFacade',
         'GooglePlusUser'=> 'GoogleUser',
     ),
 	
