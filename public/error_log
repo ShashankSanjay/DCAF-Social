@@ -404,3 +404,16 @@ Stack trace:
 #6 /home1/shashan2/socialapp/vendor/laravel/framework/src/Illuminate/Container/Container.php(476): ReflectionClass->__construct('OnDemandControl...')
 #7 /home1/shashan2/so in /home1/shashan2/socialapp/app/controllers/OnDemandController.php on line 4
 [30-Mar-2014 20:34:55 UTC] PHP Fatal error:  main(): Failed opening required 'alchemyapi_php/alchemyapi.php' (include_path='/home1/shashan2/socialapp/vendor/phpseclib/phpseclib/phpseclib:.:/usr/php/54/usr/lib64:/usr/php/54/usr/share/pear') in /home1/shashan2/socialapp/app/controllers/OnDemandController.php on line 4
+[30-Mar-2014 20:43:28 UTC] PHP Warning:  Uncaught exception 'ErrorException' with message 'require_once(alchemyapi_php/alchemyapi.php): failed to open stream: No such file or directory' in /home1/shashan2/socialapp/app/controllers/OnDemandController.php:4
+Stack trace:
+#0 /home1/shashan2/socialapp/app/controllers/OnDemandController.php(4): Illuminate\Exception\Handler->handleError(2, 'require_once(al...', '/home1/shashan2...', 4, Array)
+#1 /home1/shashan2/socialapp/app/controllers/OnDemandController.php(4): require_once()
+#2 /home1/shashan2/socialapp/vendor/composer/ClassLoader.php(363): include('/home1/shashan2...')
+#3 /home1/shashan2/socialapp/vendor/composer/ClassLoader.php(269): Composer\Autoload\includeFile('/home1/shashan2...')
+#4 [internal function]: Composer\Autoload\ClassLoader->loadClass('OnDemandControl...')
+#5 [internal function]: spl_autoload_call('OnDemandControl...')
+#6 /home1/shashan2/socialapp/vendor/laravel/framework/src/Illuminate/Container/Container.php(476): ReflectionClass->__construct('OnDemandControl...')
+#7 /home1/shashan2/so in /home1/shashan2/socialapp/app/controllers/OnDemandController.php on line 4
+[30-Mar-2014 20:43:28 UTC] PHP Fatal error:  main(): Failed opening required 'alchemyapi_php/alchemyapi.php' (include_path='/home1/shashan2/socialapp/vendor/phpseclib/phpseclib/phpseclib:.:/usr/php/54/usr/lib64:/usr/php/54/usr/share/pear') in /home1/shashan2/socialapp/app/controllers/OnDemandController.php on line 4
+[30-Mar-2014 20:58:14 UTC] PHP Fatal error:  Class Thomaswelton\LaravelOauth\Common\Storage\LaravelSession contains 5 abstract methods and must therefore be declared abstract or implement the remaining methods (OAuth\Common\Storage\TokenStorageInterface::storeAuthorizationState, OAuth\Common\Storage\TokenStorageInterface::hasAuthorizationState, OAuth\Common\Storage\TokenStorageInterface::retrieveAuthorizationState, ...) in /home1/shashan2/socialapp/vendor/thomaswelton/laravel-oauth/src/Thomaswelton/LaravelOauth/Common/Storage/LaravelSession.php on line 111
+[30-Mar-2014 21:00:41 UTC] PHP Fatal error:  Class Thomaswelton\LaravelOauth\Common\Storage\LaravelSession contains 5 abstract methods and must therefore be declared abstract or implement the remaining methods (OAuth\Common\Storage\TokenStorageInterface::storeAuthorizationState, OAuth\Common\Storage\TokenStorageInterface::hasAuthorizationState, OAuth\Common\Storage\TokenStorageInterface::retrieveAuthorizationState, ...) in /home1/shashan2/socialapp/vendor/thomaswelton/laravel-oauth/src/Thomaswelton/LaravelOauth/Common/Storage/LaravelSession.php on line 111
