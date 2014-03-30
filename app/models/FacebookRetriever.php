@@ -20,7 +20,16 @@ class FacebookRetriever implements SocialRetriever
 	const GET_USER_URI = '/me';
 	
 	/**
-	 * @var	\OAuth\Common\Service\ServiceInterface
+	 * Service provided by lusitanian
+	 * 
+	 * <<abstract>>                                         <<interface>>
+	 * \OAuth\Common\Service\AbstractService - - - - - - -> \OAuth\Common\Service\ServiceInterface
+	 *                 ^                      implements                    ^
+	 * <<abstract>>    |                                    <<interface>>   |
+	 * \OAuth\OAuth2\Service\AbstractService - - - - - - -> \OAuth\OAuth2\Service\ServiceInterface
+	 *                 ^                      implements
+	 *                 |
+	 * @var	\OAuth\OAuth1\Service\Facebook
 	 */
 	public $service;
 	
