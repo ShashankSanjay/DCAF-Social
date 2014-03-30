@@ -98,7 +98,9 @@
                   	}
 
                   </style>
-
+                  @if ( Session::get('notice') )
+                    <div class="alert alert-info">{{ Session::get('notice') }}</div>
+                  @endif
                   <a href={{ OAuth::getAuthorizeUrl('facebook')->redirect(URL::current()) }} class="btn btn-social dcaftemp">
                     {{ HTML::image('assets/img/Social-Icons/facebook500.png', 'click here to link to fb', array('width' => 70, 'height' => 70)) }}
                     <!--span class="add-icon"> {{ HTML::image('assets/img/Social-Icons/addthis500.png', 'addme!', array('width' => 70, 'height' =>70)) }} </span-->

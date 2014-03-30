@@ -365,3 +365,9 @@ Stack trace:
 [29-Mar-2014 03:35:34 UTC] PHP Fatal error:  Class 'StdOAuth2Token' not found in /home1/shashan2/socialapp/app/controllers/OnDemandController.php on line 171
 [29-Mar-2014 20:01:38 UTC] PHP Parse error:  syntax error, unexpected ';' in /home1/shashan2/socialapp/app/controllers/OnDemandController.php on line 180
 [29-Mar-2014 20:04:10 UTC] PHP Fatal error:  Call to protected method FacebookRetriever::processPost() from context 'OnDemandController' in /home1/shashan2/socialapp/app/controllers/OnDemandController.php on line 182
+[29-Mar-2014 20:26:39 UTC] PHP Parse error:  syntax error, unexpected '''' (T_CONSTANT_ENCAPSED_STRING) in /home1/shashan2/socialapp/app/controllers/OnDemandController.php on line 105
+[29-Mar-2014 21:11:12 UTC] PHP Parse error:  syntax error, unexpected ')', expecting identifier (T_STRING) or variable (T_VARIABLE) or '{' or '$' in /home1/shashan2/socialapp/app/controllers/OnDemandController.php on line 197
+[29-Mar-2014 22:33:42 UTC] PHP Parse error:  syntax error, unexpected 'if' (T_IF) in /home1/shashan2/socialapp/app/models/FacebookRetriever.php on line 134
+[29-Mar-2014 23:17:30 UTC] PHP Fatal error:  Call-time pass-by-reference has been removed in /home1/shashan2/socialapp/app/controllers/OnDemandController.php on line 163
+[29-Mar-2014 23:25:56 UTC] PHP Parse error:  syntax error, unexpected '}' in /home1/shashan2/socialapp/app/controllers/OnDemandController.php on line 177
+[30-Mar-2014 00:02:48 UTC] PHP Parse error:  syntax error, unexpected '{' in /home1/shashan2/socialapp/app/controllers/OnDemandController.php on line 191

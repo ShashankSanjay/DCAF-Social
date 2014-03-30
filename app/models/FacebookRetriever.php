@@ -20,16 +20,17 @@ class FacebookRetriever implements SocialRetriever
 	const GET_USER_URI = '/me';
 	
 	public $consumer;
-
-	/**
-	*	Credentials
 	
+	/**
+	 * Credentials
+	 *
 	public $credentials = array(
         'key' => '494865777271597',
         'secret' => '55ad9a3e7e53fd0fd7727de6e6787da6',
         'scope' => 'email, read_stream, manage_pages, publish_actions'
     );
 	*/
+	
 	/**
 	 * Constructor
 	 */
@@ -44,21 +45,21 @@ class FacebookRetriever implements SocialRetriever
 	{
 		$this->consumer->getStorage()->storeAccessToken("Facebook", new StdOAuth2Token($access_token));
 	}
-
+	
 	public function getLongAccessToken($short_token)
 	{
-		$extend_url = "https://graph.facebook.com/oauth/access_token?client_id=494865777271597&client_secret=55ad9a3e7e53fd0fd7727de6e6787da6&grant_type=fb_exchange_token&fb_exchange_token=" . $short_token;
-
+		$extend_url = "https://graph.facebook.com/oauth/access_token?client_id=494865777271597&client_secret=55ad9a3e7e53fd0fd7727de6e6787da6&grant_type=fb_exchange_token&fb_exchange_token=".$short_token;
+		
 		$resp = file_get_contents($extend_url);
-
+		
 		parse_str($resp,$output);
-
+		
 		var_dump($output);
-
+		
 		$token = $output['access_token'];
 		
 		//$this->setAccessToken($token);
-
+		
 		$oauthId = DB::table('oauth_facebook')->insertGetId(array('user_id' => Auth::User()->id, 'access_token' => $token));//, 'expire_time' => $token->getEndOfLife()));
 	}
 	
@@ -89,16 +90,17 @@ class FacebookRetriever implements SocialRetriever
 		{
 			// move through and save page
 			$fbpage = FacebookPage::find($page->id);
-			if (empty($fbpage->FB_Page_ID)) {
+			if (empty($fbpage->FB_Page_ID)) 
 				$fbpage = new FacebookPage();
-				$fbpage->FB_Page_ID = $page->id;
-				$fbpage->access_token = $page->access_token;
-				$fbpage->link = $page->link;
-				//$fbpage->perms = $page->perms;
-				$fbpage->name = $page->name;
-				$fbpage->category = $page->category;
-				$fbpage->save();
-			}
+			//update
+			$fbpage->FB_Page_ID = $page->id;
+			$fbpage->access_token = $page->access_token;
+			$fbpage->link = $page->link;
+			//$fbpage->perms = $page->perms;
+			$fbpage->name = $page->name;
+			$fbpage->category = $page->category;
+			$fbpage->save();
+			
 			$fbuser = $fbpage->FacebookUser->contains($user);
 			if (empty($fbuser)) {
 				$fbpage->FacebookUser()->attach($user);
@@ -129,34 +131,26 @@ class FacebookRetriever implements SocialRetriever
 
 		// If user not found, create one
 		$dcaf_message = array();
-		if (FacebookUser::find($id) == null)
-		{
-			$query = '?fields=id,first_name,last_name,full_name,email,link,gender,age_range_min,age_range_max,birthday,timezone,locale';
-			$call = $this->consumer->request($id);
-			$response = json_decode($call, true);
-			//var_dump($response);
+		$fbUser = FacebookUser::find($id);
+		if (is_null($fbUser->FB_User_ID))
 			$fbUser = new FacebookUser;
-
-			$dcaf_message = array();
-			foreach ($fbUser->dcaf_fields as $field) {
-				try {
-					//var_dump($field);
-					$fbUser->{$field} = $response[$field];
-				} catch (Exception $e) {
-					$dcaf_message[] = 'Field ' . $field . ' threw error in getUser()';
-				}
-				$fbUser->save();
-			}
-			
-			/*if (!empty($dcaf_message)) {
-				echo 'supposed to send error linking email';
-				Mail::later(5, 'error.registerNetworksError', array('dcaf_message' => $dcaf_message), function($message)
-				{
-				    $message->to('ssanja1@pride.hofstra.edu', 'Admin')->subject('Error on linking');
-				});
-			}*/
-		}
 		
+		$query = '?fields=id,first_name,last_name,full_name,email,link,gender,age_range_min,age_range_max,birthday,timezone,locale';
+		$call = $this->consumer->request($id);
+		$response = json_decode($call, true);
+		//var_dump($response);
+
+		$dcaf_message = array();
+		foreach ($fbUser->dcaf_fields as $field) {
+			try {
+				//var_dump($field);
+				$fbUser->{$field} = $response[$field];
+			} catch (Exception $e) {
+				$dcaf_message[] = 'Field ' . $field . ' threw error in getUser()';
+			}
+			$fbUser->save();
+		}
+		// maybe mail here
 	}
 	
 	/**
@@ -221,7 +215,7 @@ class FacebookRetriever implements SocialRetriever
 			//var_dump($response['likes']);
 		}
 		*/
-
+		
 		if (isset($response['posts']))
 		{
 			$posts = $response['posts'];
@@ -230,7 +224,7 @@ class FacebookRetriever implements SocialRetriever
 			}	
 		}
 		// parse through, go through pagination
-		$this->postPagination($response);
+		$this->postPagination($response, $page);
 
 		/**
 		 * Accepts decoded fb json, returns unpaginated array of arrays
@@ -241,7 +235,7 @@ class FacebookRetriever implements SocialRetriever
 		*/
 	}
 
-	public function postPagination($posts)
+	public function postPagination($posts, $page)
 	{
 		//paginate through posts
 		if (isset($posts['paging']['next'])) {
@@ -257,17 +251,29 @@ class FacebookRetriever implements SocialRetriever
 
 			if (!isset($pgresponse['error']) && !empty($pgresponse)) {
 				// Recurse
-				$this->processPost($pgresponse, $post);
+				$this->processPost($pgresponse, $page);
 				$this->postPagination($pgresponse);
 			} 
 		}
 	}
 	
-	public function processPost($post, $page)
+	public function processPost($post, $page, $token = null)
 	{
 		//echo 'in processPost';
-		$query = '?fields=likes,comments.fields(id),shares,message,message_tags,name,from';
+		$query = '?fields=likes,comments.fields(id),sharedposts,message,from';
 		
+		if (!is_null($token)) {
+			
+			$this->setAccessToken($token);
+			
+		}
+		$parts = explode('_', $post['id']);
+		
+		if (count($parts) > 1) {
+			$post['id'] = $parts[1];
+		} else {
+			$post['id'] = $parts[0];
+		}
 		try {
 			// specific field calls from Alex's email will not work with /me node, must use id?fields=...
 			$response = $this->consumer->request($post['id'] . $query);
@@ -275,23 +281,34 @@ class FacebookRetriever implements SocialRetriever
 			// CHANGE: WRITE TO LOG FILE
 			echo "failed in requesting post info, post id is: ";
 			var_dump($post['id']);
-			//var_dump($e);
+			// var_dump($e);
 		}
+		
 		$response = json_decode($response, true);
 		
-		$parts = explode('_', $post['id']);
-		$post['id'] = $parts[1];
-
+		if (isset($response['error']))
+		{
+			var_dump($response);
+			var_dump($page->FB_Page_ID . '_' . $post['id'] . $query);
+			die();
+		}
+		
 		$fbPost = FacebookPost::find($post['id']);
-		if (empty($fbPost->FB_Post_ID)) {
-			$fbPost = new FacebookPost;
-			$fbPost->FB_Post_ID = $post['id'];
-			$fbPost->created_time = $response['created_time'];
-			$saveboolean = $fbPost->save();
-			//$fbPost-> = ;
-		} 
+		
+		if (empty($fbPost->FB_Post_ID))
+			$fbPost = new FacebookPost();
 
-		if (isset($response['from'])) {
+		$fbPost->FB_Post_ID = $post['id'];
+		// $fbPost->created_time = $response['created_time'];
+		if (isset($response['message'])) {
+			$fbPost->message = $response['message'];
+		}
+		
+		$saveboolean = $fbPost->save();
+		// $fbPost-> = ;
+		
+		if (isset($response['from']))
+		{
 			if (!($response['from']['id'] == $page->FB_Page_ID)) {
 				// Check if user in db, else make one, then associate with post
 				$fbPost = FacebookPost::find($post['id']);
@@ -301,11 +318,11 @@ class FacebookRetriever implements SocialRetriever
 			} 
 		}
 		// else author is page, so we don't need the content
-
+		
 		// even if post previously existed in db, run relation in case of shares
 		$fbPost->FBPage()->associate($page);
 		$fbPost->save();
-
+		
 		/*
 		*	handle likes and comments for post
 		*/

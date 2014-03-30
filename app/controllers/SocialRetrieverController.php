@@ -29,6 +29,8 @@ class SocialRetrieverController extends BaseController
 	
 	/**
 	 * Cron job function to be called
+	 * 
+	 * processes SocialRetriever jobs in the job queue
 	 */
 	public function getAllUserData()
 	{

@@ -11,6 +11,8 @@ class TwitterRetriever implements SocialRetriever
 	
 	const GET_USER_URI = '/statuses/user_timeline.json';
 	
+	public $consumer;
+	
 	/**
 	 * Constructor
 	 */
@@ -18,6 +20,15 @@ class TwitterRetriever implements SocialRetriever
 	{
 		if ($consumer == null) $consumer = OAuth::consumer('twitter');
 		$this->consumer = $consumer;
+	}
+	
+	/**
+	 * Stores the access_token, so it can be sent in
+	 * the Authorization header for subsequent API calls.
+	 */
+	public function setAccessToken($access_token)
+	{
+		$this->consumer->getStorage()->storeAccessToken("Twitter", new StdOAuth2Token($access_token));
 	}
 	
 	/**
