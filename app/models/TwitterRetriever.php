@@ -11,15 +11,18 @@ class TwitterRetriever implements SocialRetriever
 	
 	const GET_USER_URI = '/statuses/user_timeline.json';
 	
-	public $consumer;
+	/**
+	 * @var	\OAuth\Common\Service\ServiceInterface
+	 */
+	public $service;
 	
 	/**
 	 * Constructor
 	 */
-	public function __construct($consumer = null)
+	public function __construct($service = null)
 	{
-		if ($consumer == null) $consumer = OAuth::consumer('twitter');
-		$this->consumer = $consumer;
+		if ($service == null) $service = OAuth::consumer('twitter');
+		$this->service = $service;
 	}
 	
 	/**
@@ -28,7 +31,9 @@ class TwitterRetriever implements SocialRetriever
 	 */
 	public function setAccessToken($access_token)
 	{
-		$this->consumer->getStorage()->storeAccessToken("Twitter", new StdOAuth2Token($access_token));
+		// getStorage() returns an instance of \Thomaswelton\LaravelOauth\Common\Storage\LaravelSession, which implements TokenStorageInterface
+		// see also: \OAuth\Common\Token\TokenInterface
+		$this->service->getStorage()->storeAccessToken("Twitter", new StdOAuth2Token($access_token));
 	}
 	
 	/**
@@ -38,7 +43,7 @@ class TwitterRetriever implements SocialRetriever
 	{
 		// Get user info
 		
-		$response = $consumer->request('/statuses/user_timeline.json');
+		$response = $service->request('/statuses/user_timeline.json');
 		$data = json_decode($response, true);
 	}
 	
@@ -54,7 +59,7 @@ class TwitterRetriever implements SocialRetriever
 	{
 		$q = 'search/tweets.json?q=from:' . $username;
 
-		$response = $consumer->request($q);
+		$response = $service->request($q);
 		$r = json_decode($response, true);
 
 		var_dump($r);

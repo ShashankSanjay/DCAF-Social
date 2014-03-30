@@ -371,3 +371,36 @@ Stack trace:
 [29-Mar-2014 23:17:30 UTC] PHP Fatal error:  Call-time pass-by-reference has been removed in /home1/shashan2/socialapp/app/controllers/OnDemandController.php on line 163
 [29-Mar-2014 23:25:56 UTC] PHP Parse error:  syntax error, unexpected '}' in /home1/shashan2/socialapp/app/controllers/OnDemandController.php on line 177
 [30-Mar-2014 00:02:48 UTC] PHP Parse error:  syntax error, unexpected '{' in /home1/shashan2/socialapp/app/controllers/OnDemandController.php on line 191
+[30-Mar-2014 20:30:48 UTC] PHP Warning:  Uncaught exception 'ErrorException' with message 'require_once(../../vendor/alchemyapi_php/alchemyapi.php): failed to open stream: No such file or directory' in /home1/shashan2/socialapp/app/controllers/OnDemandController.php:4
+Stack trace:
+#0 /home1/shashan2/socialapp/app/controllers/OnDemandController.php(4): Illuminate\Exception\Handler->handleError(2, 'require_once(.....', '/home1/shashan2...', 4, Array)
+#1 /home1/shashan2/socialapp/app/controllers/OnDemandController.php(4): require_once()
+#2 /home1/shashan2/socialapp/vendor/composer/ClassLoader.php(363): include('/home1/shashan2...')
+#3 /home1/shashan2/socialapp/vendor/composer/ClassLoader.php(269): Composer\Autoload\includeFile('/home1/shashan2...')
+#4 [internal function]: Composer\Autoload\ClassLoader->loadClass('OnDemandControl...')
+#5 [internal function]: spl_autoload_call('OnDemandControl...')
+#6 /home1/shashan2/socialapp/vendor/laravel/framework/src/Illuminate/Container/Container.php(476): ReflectionClass->__construct('OnDemandControl...')
+#7 /home in /home1/shashan2/socialapp/app/controllers/OnDemandController.php on line 4
+[30-Mar-2014 20:30:48 UTC] PHP Fatal error:  main(): Failed opening required '../../vendor/alchemyapi_php/alchemyapi.php' (include_path='/home1/shashan2/socialapp/vendor/phpseclib/phpseclib/phpseclib:.:/usr/php/54/usr/lib64:/usr/php/54/usr/share/pear') in /home1/shashan2/socialapp/app/controllers/OnDemandController.php on line 4
+[30-Mar-2014 20:34:25 UTC] PHP Warning:  Uncaught exception 'ErrorException' with message 'require_once(alchemyapi_php/alchemyapi.php): failed to open stream: No such file or directory' in /home1/shashan2/socialapp/app/controllers/OnDemandController.php:4
+Stack trace:
+#0 /home1/shashan2/socialapp/app/controllers/OnDemandController.php(4): Illuminate\Exception\Handler->handleError(2, 'require_once(al...', '/home1/shashan2...', 4, Array)
+#1 /home1/shashan2/socialapp/app/controllers/OnDemandController.php(4): require_once()
+#2 /home1/shashan2/socialapp/vendor/composer/ClassLoader.php(363): include('/home1/shashan2...')
+#3 /home1/shashan2/socialapp/vendor/composer/ClassLoader.php(269): Composer\Autoload\includeFile('/home1/shashan2...')
+#4 [internal function]: Composer\Autoload\ClassLoader->loadClass('OnDemandControl...')
+#5 [internal function]: spl_autoload_call('OnDemandControl...')
+#6 /home1/shashan2/socialapp/vendor/laravel/framework/src/Illuminate/Container/Container.php(476): ReflectionClass->__construct('OnDemandControl...')
+#7 /home1/shashan2/so in /home1/shashan2/socialapp/app/controllers/OnDemandController.php on line 4
+[30-Mar-2014 20:34:25 UTC] PHP Fatal error:  main(): Failed opening required 'alchemyapi_php/alchemyapi.php' (include_path='/home1/shashan2/socialapp/vendor/phpseclib/phpseclib/phpseclib:.:/usr/php/54/usr/lib64:/usr/php/54/usr/share/pear') in /home1/shashan2/socialapp/app/controllers/OnDemandController.php on line 4
+[30-Mar-2014 20:34:55 UTC] PHP Warning:  Uncaught exception 'ErrorException' with message 'require_once(alchemyapi_php/alchemyapi.php): failed to open stream: No such file or directory' in /home1/shashan2/socialapp/app/controllers/OnDemandController.php:4
+Stack trace:
+#0 /home1/shashan2/socialapp/app/controllers/OnDemandController.php(4): Illuminate\Exception\Handler->handleError(2, 'require_once(al...', '/home1/shashan2...', 4, Array)
+#1 /home1/shashan2/socialapp/app/controllers/OnDemandController.php(4): require_once()
+#2 /home1/shashan2/socialapp/vendor/composer/ClassLoader.php(363): include('/home1/shashan2...')
+#3 /home1/shashan2/socialapp/vendor/composer/ClassLoader.php(269): Composer\Autoload\includeFile('/home1/shashan2...')
+#4 [internal function]: Composer\Autoload\ClassLoader->loadClass('OnDemandControl...')
+#5 [internal function]: spl_autoload_call('OnDemandControl...')
+#6 /home1/shashan2/socialapp/vendor/laravel/framework/src/Illuminate/Container/Container.php(476): ReflectionClass->__construct('OnDemandControl...')
+#7 /home1/shashan2/so in /home1/shashan2/socialapp/app/controllers/OnDemandController.php on line 4
+[30-Mar-2014 20:34:55 UTC] PHP Fatal error:  main(): Failed opening required 'alchemyapi_php/alchemyapi.php' (include_path='/home1/shashan2/socialapp/vendor/phpseclib/phpseclib/phpseclib:.:/usr/php/54/usr/lib64:/usr/php/54/usr/share/pear') in /home1/shashan2/socialapp/app/controllers/OnDemandController.php on line 4

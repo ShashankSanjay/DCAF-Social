@@ -1,7 +1,7 @@
 <?php
 
 use OAuth\OAuth2\Token\StdOAuth2Token;
-require_once('../../vendor/alchemyapi_php/alchemyapi.php');
+require_once('alchemyapi_php/alchemyapi.php');
 	
 
 class OnDemandController extends BaseController {
