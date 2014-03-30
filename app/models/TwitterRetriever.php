@@ -12,7 +12,11 @@ class TwitterRetriever implements SocialRetriever
 	const GET_USER_URI = '/statuses/user_timeline.json';
 	
 	/**
-	 * @var	\OAuth\Common\Service\ServiceInterface
+	 * \OAuth\Common\Service\AbstractService
+	 * \OAuth\Common\Service\ServiceInterface
+	 * \OAuth\OAuth1\Service\ServiceInterface
+	 * \OAuth\OAuth1\Service\AbstractService
+	 * @var \OAuth\OAuth1\Service\Twitter
 	 */
 	public $service;
 	

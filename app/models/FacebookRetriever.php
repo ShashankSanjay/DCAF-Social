@@ -19,7 +19,10 @@ class FacebookRetriever implements SocialRetriever
 	const USER_CLASS = "FacebookUser";
 	const GET_USER_URI = '/me';
 	
-	public $consumer;
+	/**
+	 * @var	\OAuth\Common\Service\ServiceInterface
+	 */
+	public $service;
 	
 	/**
 	 * Credentials
@@ -34,16 +37,16 @@ class FacebookRetriever implements SocialRetriever
 	/**
 	 * Constructor
 	 */
-	public function __construct($consumer = null)
+	public function __construct($service = null)
 	{
-		// parent::__construct(($consumer == null) ? OAuth:consumer('facebook') : $consumer);
-		if ($consumer == null) $consumer = OAuth::consumer('facebook');
-		$this->consumer = $consumer;
+		// parent::__construct(($service == null) ? OAuth:consumer('facebook') : $service);
+		if ($service == null) $service = OAuth::consumer('facebook');
+		$this->service = $service;
 	}
 	
 	public function setAccessToken($access_token)
 	{
-		$this->consumer->getStorage()->storeAccessToken("Facebook", new StdOAuth2Token($access_token));
+		$this->service->getStorage()->storeAccessToken("Facebook", new StdOAuth2Token($access_token));
 	}
 	
 	public function getLongAccessToken($short_token)
@@ -78,7 +81,7 @@ class FacebookRetriever implements SocialRetriever
 
 		// Make call to fb /me/accounts
 		try {
-			$call = $this->consumer->request('/me/accounts?fields=id,website,link,category,name,access_token,perms');
+			$call = $this->service->request('/me/accounts?fields=id,website,link,category,name,access_token,perms');
 		} catch (Exception $e) {
 			echo 'failed in getting user accounts';
 		}
@@ -119,7 +122,7 @@ class FacebookRetriever implements SocialRetriever
 		
 		// Get user info
 		if (is_null($id)) {
-			$call = $this->consumer->request($id ? $id : '/me');	// /me/data
+			$call = $this->service->request($id ? $id : '/me');	// /me/data
 			$response = json_decode($call, true);
 
 			$id = $response['id'];
@@ -136,7 +139,7 @@ class FacebookRetriever implements SocialRetriever
 			$fbUser = new FacebookUser;
 		
 		$query = '?fields=id,first_name,last_name,full_name,email,link,gender,age_range_min,age_range_max,birthday,timezone,locale';
-		$call = $this->consumer->request($id);
+		$call = $this->service->request($id);
 		$response = json_decode($call, true);
 		//var_dump($response);
 
@@ -196,7 +199,7 @@ class FacebookRetriever implements SocialRetriever
 		
 		try {
 			// specific field calls from Alex's email will not work with /me node, must use id?fields=...
-			$response = $this->consumer->request($page->FB_Page_ID . $query);
+			$response = $this->service->request($page->FB_Page_ID . $query);
 		} catch (Exception $e) {
 			// CHANGE: WRITE TO LOG FILE
 			echo 'failed in get page';
@@ -240,7 +243,7 @@ class FacebookRetriever implements SocialRetriever
 		//paginate through posts
 		if (isset($posts['paging']['next'])) {
 			try {
-				$call = $this->consumer->request($posts['paging']['next']);
+				$call = $this->service->request($posts['paging']['next']);
 				$pgresponse = json_decode($call, true);
 				
 			} catch (Exception $e) {
@@ -276,7 +279,7 @@ class FacebookRetriever implements SocialRetriever
 		}
 		try {
 			// specific field calls from Alex's email will not work with /me node, must use id?fields=...
-			$response = $this->consumer->request($post['id'] . $query);
+			$response = $this->service->request($post['id'] . $query);
 		} catch (Exception $e) {
 			// CHANGE: WRITE TO LOG FILE
 			echo "failed in requesting post info, post id is: ";
@@ -366,11 +369,11 @@ class FacebookRetriever implements SocialRetriever
 		if (isset($likes['paging']['next'])) {
 			//var_dump($page->name . 'has paging on post likes');
 			//$query = '/likes?limit=100&after=' . $likes['paging']['cursors']['after'];
-			$call = $this->consumer->request($likes['paging']['next']);
+			$call = $this->service->request($likes['paging']['next']);
 			$pgresponse = json_decode($call, true);
 			
 			try {
-				$call = $this->consumer->request($likes['paging']['next']);
+				$call = $this->service->request($likes['paging']['next']);
 				$pgresponse = json_decode($call, true);
 			} catch (Exception $e) {
 				echo "failed in requesting next page";
@@ -400,7 +403,7 @@ class FacebookRetriever implements SocialRetriever
 
 					try {
 						// specific field calls from Alex's email will not work with /me node, must use id?fields=...
-						$response = $this->consumer->request($comment['id'] . $query);
+						$response = $this->service->request($comment['id'] . $query);
 					} catch (Exception $e) {
 						// CHANGE: WRITE TO LOG FILE
 						echo "failed in requesting comment info, comment id is: ";
@@ -467,7 +470,7 @@ class FacebookRetriever implements SocialRetriever
 		if (isset($comments['paging']['next'])) {
 			echo 'in paging';
 			try {
-				$call = $this->consumer->request($comments['paging']['next']);
+				$call = $this->service->request($comments['paging']['next']);
 				$pgresponse = json_decode($call, true);
 				
 			} catch (Exception $e) {
