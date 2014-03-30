@@ -1024,18 +1024,6 @@
         ]
     },
     {
-        "name": "AlchemyAPI/alchemyapi_php",
-        "version": "dev-master",
-        "version_normalized": "9999999-dev",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/AlchemyAPI/alchemyapi_php",
-            "reference": "origin/master"
-        },
-        "type": "library",
-        "installation-source": "source"
-    },
-    {
         "name": "laravelbook/ardent",
         "version": "v2.4.2",
         "version_normalized": "2.4.2.0",
@@ -3502,5 +3490,17 @@
             "cronmanager",
             "laravel"
         ]
+    },
+    {
+        "name": "AlchemyAPI/alchemyapi_php",
+        "version": "dev-master",
+        "version_normalized": "9999999-dev",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/AlchemyAPI/alchemyapi_php",
+            "reference": "origin/master"
+        },
+        "type": "library",
+        "installation-source": "source"
     }
 ]

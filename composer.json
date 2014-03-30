@@ -47,7 +47,8 @@
 		"bllim/datatables": "*",
 		"thomaswelton/laravel-oauth": "0.1.0.*@dev",
 		"facebook/php-sdk" : "*@stable",
-		"liebig/cron": "dev-master"
+		"liebig/cron": "dev-master",
+		"AlchemyApi/alchemyapi_php": "dev-master"
 	},
 	"require-dev": {
 		"way/generators": "dev-master",

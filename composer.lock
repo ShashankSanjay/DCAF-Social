@@ -3,7 +3,7 @@
         "This file locks the dependencies of your project to a known state",
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "42e1173ecdefea5c321ee6e0cf4c4c2e",
+    "hash": "9e5740eeb4361d3f4c173aa7ed4c9f7e",
     "packages": [
         {
             "name": "AlchemyAPI/alchemyapi_php",
@@ -14,7 +14,7 @@
                 "reference": "origin/master"
             },
             "type": "library",
-            "time": "2014-03-15 17:09:59"
+            "time": "2014-03-25 21:41:03"
         },
         {
             "name": "bllim/datatables",
