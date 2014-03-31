@@ -61,7 +61,7 @@ class SocialRetrieverController extends BaseController
 		die('</pre>');
 		*/
 		
-		for ($j=0,$n=count($jobs); $j<$n; $j++)
+		for ($j=1,$n=count($jobs); $j<$n; $j++)
 		// for ($j=0; ($job = $jobs[$j]); $j++)
 		{
 			// process each job

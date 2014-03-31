@@ -4,11 +4,19 @@ use OAuth\OAuth2\Token\StdOAuth2Token;
 //require_once('alchemyapi_php/alchemyapi.php');
 	
 
-class OnDemandController extends BaseController {
-
+class OnDemandController extends BaseController
+{
 	public $fbConsumer;
 	public $twConsumer;
 	public $gpConsumer;
+	
+	public $networks = array(
+		'facebook'	=> array('abbr' => 'FB', 'accountEndpoint' => '/me'),
+		'twitter'	=> array('abbr' => 'TW', 'accountEndpoint' => 'account/verify_credentials.json'),
+		'google'	=> array('abbr' => 'GP', 'accountEndpoint' => ''),
+		'instagram'	=> array('abbr' => 'IG', 'accountEndpoint' => '')
+	);
+	
 	/**
 	 * Display the search and social logins
 	 *
@@ -18,16 +26,9 @@ class OnDemandController extends BaseController {
 	 */
 	public function index()
 	{
-		$networks = array(
-			'facebook'	=> array('abbr' => 'FB', 'accountEndpoint' => '/me'),
-			'twitter'	=> array('abbr' => 'TW', 'accountEndpoint' => 'account/verify_credentials.json'),
-			'google'	=> array('abbr' => 'GP', 'accountEndpoint' => ''),
-			'instagram'	=> array('abbr' => 'IG', 'accountEndpoint' => '')
-		);
-
 		$newProfileAdded = false;
 
-		foreach ($networks as $network => $props)
+		foreach ($this->networks as $network => $props)
 		{
 			$db = 'oauth_'.$network;
 			
@@ -149,134 +150,57 @@ class OnDemandController extends BaseController {
 		
 		if (empty($url))
 		{
-			die('oops, looks like you did not input a url');
+			Session::flash('notice', 'oops, looks like you did not input a url');
+			return View::make('site.onePage');
 		}
 		else
 		{
 			$urlParts = parse_url($url);
-			$props = array();
 			$host = null;
 			
-			if (isset($urlParts['host']))
+			if (!isset($urlParts['host']))
 			{
-				$domainParts = explode('.', $urlParts['host']);
-				
-				if (count($domainParts) == 3) {
-					// url included www
-					$network = $domainParts[1];
-				} else {
-					// url didn't include www
-					$network = $domainParts[0];
-				}
+				Session::flash('notice', 'oops, we couldn\'t recognize that url');
+				return View::make('site.onePage');
 			}
 			
-			$path = mb_strtolower(substr($urlParts['path'],1));
-			$pathParts = pathinfo($path);
-			$pathPart = $pathParts['dirname'];
-			$gparentDir = dirname($pathPart);
-			$parentDir = basename($pathPart);
-			$filePart = $pathParts['basename'];
+			$domainParts = explode('.', $urlParts['host']);
 			
-			echo '<pre>';
-			var_dump($urlParts);
-			var_dump($pathParts);
-			echo '$path:       '.$path."\n";
-			echo '$gparentDir: '.$gparentDir."\n";
-			echo '$pathPart:   '.$pathPart."\n";
-			echo '$filePart:   '.$filePart."\n";
-			echo '$parentDir:  '.$parentDir."\n";
-			echo '</pre>';
+			if (count($domainParts) == 3) {
+				// url included www
+				$network = $domainParts[1];
+			} else {
+				// url didn't include www
+				$network = $domainParts[0];
+			}
 			
-			if ($pathPart == '.' && ctype_digit($filePart))
+			if (!isset($this->networks[$network]))
 			{
-				$props['post_id'] = $filePart;
+				$networks = '';
+				foreach ($this->networks as $network => $props) { $networks .= ', '.$network; }
+				Session::flash('sorry, we only support '.substr($networks, 2));
+				return View::make('site.onePage');
 			}
-			else if ($gparentDir == 'pages' && ctype_digit($filePart))
-			{
-				$props['page_name'] = $parentDir;
-				$props['post_id'] = $filePart;
-			}
-			else if (isset($urlParts['query']))
-			{
-				parse_str($urlParts['query'], $queryFields);
-				
-				if ($path == 'permalink.php')
-				{
-					if (isset($queryFields['id']) && ctype_digit($queryFields['id']))
-					{
-						$props['page_id'] = $queryFields['id'];
-					}
-					
-					if (isset($queryFields['story_fbid']) && ctype_digit($queryFields['story_fbid']))
-					{
-						$props['post_id'] = $queryFields['story_fbid'];
-					}
-				}
-				else if ($path == 'photo.php')
-				{
-					// facebook wall (timeline) id
-					if (isset($queryFields['fbid']) && ctype_digit($queryFields['fbid']))
-					{
-						$props['photo_id'] = $queryFields['fbid'];
-					}
-					
-					if (isset($queryFields['set']))
-					{
-						$ids = explode('.', $queryFields['set']);
-						
-						if ($ids[0] == 'a')
-						{
-							$props['wall_id'] = $ids[1];
-							$props['album_id'] = $ids[2];
-							$props['page_id'] = $ids[3];
-						}
-						else if ($ids[0] == 'p')
-						{
-							$props['photo_id'] = $ids[1];
-						}
-					}
-				}
-				else if ($path == 'album.php')
-				{
-					// facebook wall (timeline) id
-					if (isset($queryFields['fbid']) && ctype_digit($queryFields['fbid']))
-					{
-						$props['wall_id'] = $queryFields['fbid'];
-					}
-					
-					// page id
-					if (isset($queryFields['id']) && ctype_digit($queryFields['id']))
-					{
-						$props['page_id'] = $queryFields['id'];
-					}
-					
-					// album id
-					if (isset($queryFields['aid']) && ctype_digit($queryFields['aid']))
-					{
-						$props['album_id'] = $queryFields['aid'];
-					}
-				}
-			}
+			
+			$network = ucfirst($network);
+			
+			$urlParts['path']		= mb_strtolower(substr($urlParts['path'],1));
+			// $pathParts	=  $urlParts['pathParts']	= pathinfo($urlParts['path']);
+			$urlParts['pathPart']	= dirname($urlParts['path']);	// $pathParts['dirname'];
+			$urlParts['gparentDir']	= dirname($urlParts['pathPart']);
+			$urlParts['parentDir']	= basename($urlParts['pathPart']);
+			$urlParts['filePart']	= basename($urlParts['path']);	// $pathParts['basename'];
+			
+			// dispatch to correct lookup
+			$props = $network::parseURL($urlParts);
 			
 			echo '<pre>';
+			// var_dump($urlParts);
 			var_dump($props);
 			echo '</pre>';
 			
-			//die();
-			
-			if (isset($urlParts['host']))
-				$host = explode('.', $urlParts['host']);
-			
-			if (count($host) > 2) {
-				// this means their url included www
-				$network = $host[1];
-			} else {
-				//they didn't include www, just sn.com
-				$network = $host[0];
-			}
-			
 			// dispatch to correct lookup
-			self::$network($urlParts, $urlParts['path']);
+			// self::$network($urlParts, $urlParts['path']);
 			
 			/*
 			$call = $fbConsumer->request($url);
@@ -336,7 +260,6 @@ class OnDemandController extends BaseController {
 	        echo 'sentiment: ', $response['docSentiment']['type'], PHP_EOL;
     		echo 'relevance: ', $response['docSentiment']['score'], PHP_EOL;
 			var_dump($response);
-
 		}
 		/*$query = '?fields=likes,comments.fields(id),shares,message,message_tags,name,from';
 		$call = $consumer->request($arrpath[3] . $query);

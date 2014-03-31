@@ -29,7 +29,7 @@ class FacebookRetriever implements SocialRetriever
 	 * \OAuth\OAuth2\Service\AbstractService - - - - - - -> \OAuth\OAuth2\Service\ServiceInterface
 	 *                 ^                      implements
 	 *                 |
-	 * @var	\OAuth\OAuth1\Service\Facebook
+	 * @var	\OAuth\OAuth2\Service\Facebook
 	 */
 	public $service;
 	
@@ -201,7 +201,8 @@ class FacebookRetriever implements SocialRetriever
 		// get page access-token from db
 		//$page = FacebookPage::find($user);
 		//$token = new StdOAuth2Token($page->access_token);
-		$this->setAccessToken($page->access_token);
+		if (!is_null($page->access_token))
+			$this->setAccessToken($page->access_token);
 		
 		// Define query and fields. This is just pt. 1, still need media stuff, albums videos..
 		$query = '?fields=posts.fields(id)';
@@ -213,8 +214,10 @@ class FacebookRetriever implements SocialRetriever
 			// CHANGE: WRITE TO LOG FILE
 			echo 'failed in get page';
 			var_dump($page->name);
+			var_dump($page->access_token);
 			//var_dump($e);
 		}
+		
 		$response = json_decode($response, true);
 				
 		/**
@@ -272,7 +275,7 @@ class FacebookRetriever implements SocialRetriever
 	public function processPost($post, $page, $token = null)
 	{
 		//echo 'in processPost';
-		$query = '?fields=likes,comments.fields(id),sharedposts,message,from';
+		$query = '?fields=likes';//,comments.fields(id),sharedposts,message,from';
 		
 		if (!is_null($token)) {
 			
@@ -302,6 +305,8 @@ class FacebookRetriever implements SocialRetriever
 		{
 			var_dump($response);
 			var_dump($page->FB_Page_ID . '_' . $post['id'] . $query);
+			var_dump($page->name);
+			var_dump($page->access_token);
 			die();
 		}
 		
