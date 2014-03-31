@@ -315,16 +315,29 @@ class OnDemandController extends BaseController {
 		echo '<pre>';
 		//Keywords
 		echo 'Checking keywords . . . ';
-		$response = $alchemyapi->keywords('text', $test_text, null);
-		var_dump($response);
+		$keywords = $alchemyapi->keywords('text', $test_text, null);
+		var_dump($keywords);
+		foreach ($keywords['keywords'] as $keyword) {
+	        echo 'keyword: ', $keyword['text'], PHP_EOL;
+	        echo 'relevance: ', $keyword['relevance'], PHP_EOL;
+	        echo 'sentiment: ', $keyword['sentiment']['type'], PHP_EOL;
+	    }
 		//Sentiment
 		echo 'Checking sentiment . . . ';
-		$response = $alchemyapi->sentiment('text', $test_text, null);
-		var_dump($response);
+		$overallSentiment = $alchemyapi->sentiment('text', $test_text, null);
+		var_dump($overallSentiment);
+		echo 'sentiment: ', $overallSentiment['docSentiment']['type'], PHP_EOL;
+    	echo 'score: ', $overallSentiment['docSentiment']['score'], PHP_EOL;
 		//Sentiment Targeted
 		echo 'Checking targeted sentiment . . . ';
-		$response = $alchemyapi->sentiment_targeted('text', $test_text, 'heart', null);
-		var_dump($response);
+		foreach ($keywords['keywords'] as $keyword) {
+	        echo 'keyword: ', $keyword['text'], PHP_EOL;
+	        $response = $alchemyapi->sentiment_targeted('text', $test_text, $keyword, null);
+	        echo 'sentiment: ', $response['docSentiment']['type'], PHP_EOL;
+    		echo 'relevance: ', $response['docSentiment']['score'], PHP_EOL;
+			var_dump($response);
+
+		}
 		/*$query = '?fields=likes,comments.fields(id),shares,message,message_tags,name,from';
 		$call = $consumer->request($arrpath[3] . $query);
 		$response = json_decode($call);
