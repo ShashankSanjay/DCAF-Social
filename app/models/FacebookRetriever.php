@@ -101,6 +101,7 @@ class FacebookRetriever implements SocialRetriever
 			echo 'attempting to get user data in FacebookRetriever....';
 			var_dump($user->access_token);
 			var_dump($response->error);
+			echo "</pre>";
 			return;
 		}
 		// Parse data and save into correct DB tables

@@ -190,7 +190,7 @@ class OnDemandController extends BaseController
 			
 			$network = ucfirst($network);
 			
-			$urlParts['path']		= mb_strtolower(substr($urlParts['path'],1));
+			/*$urlParts['path']		= mb_strtolower(substr($urlParts['path'],1));
 			// $pathParts	=  $urlParts['pathParts']	= pathinfo($urlParts['path']);
 			$urlParts['pathPart']	= dirname($urlParts['path']);	// $pathParts['dirname'];
 			$urlParts['gparentDir']	= dirname($urlParts['pathPart']);
@@ -210,77 +210,105 @@ class OnDemandController extends BaseController
 				Session::flash('notice', 'oops, we couldn\'t recognize that url');
 				return View::make('site.onePage');
 			}
-			
-			// dispatch to correct lookup
-			self::$network($props['post_id']);
+			*/
+			// dispatch to correct lookup and save requested obj in db, and return it's id
+			//self::$network($props['post_id']);
+			$post['id'] = self::$network($urlParts);
 			
 			/*
 			$call = $fbConsumer->request($url);
 			$response = json_decode($call);
 			*/
 			//	Get demo's for $response
+			$fbPost = FacebookPost::find($post['id']);
+
+			$results = self::what($fbPost->message);
+
+			return View::make('site.onePage', array('results' => $results));
 		}
 	}
 	
-	public function facebook($post_id)
-	// public function facebook($purl, $path)
+	//public function facebook($post_id)
+	public function facebook($purl)
 	{
-		/*
 		// Format page/type-of-interaction/id
-		$arrpath = explode('/', $path);
+		$arrpath = explode('/', $purl['path']);
 		
 		// Find page
 		$fbPage = FacebookPage::where('link', '=', $purl['scheme'] . '://' . $purl['host'] . '/' . $arrpath[1])->first();
-		var_dump($arrpath[1]);
+		//var_dump($arrpath[1]);
 		//die();
 		if (empty($fbPage)) {
 			var_dump($purl['scheme'] . '://' . $purl['host'] . '/' . $arrpath[1]);
 			die();
 		}
-		*/
+		
 		
 		$consumer = OAuth::consumer('facebook');
 		$consumer->getStorage()->storeAccessToken("Facebook", new StdOAuth2Token($fbPage->access_token));
 
-		$post['id'] = $post_id;
+		//$post['id'] = $post_id;
+		$post['id'] = $arrpath[3];
 		$facebookRetriever = new FacebookRetriever();
 		
 		$facebookRetriever->processPost($post, $fbPage, $fbPage->access_token);
-		$fbPost = FacebookPost::find($post['id']);
 		
-		$test_text = $fbPost->message;
-		$alchemyapi = new AlchemyAPI();
-
-		echo '<pre>';
-		//Keywords
-		echo 'Checking keywords . . . ';
-		$keywords = $alchemyapi->keywords('text', $test_text, null);
-		var_dump($keywords);
-		foreach ($keywords['keywords'] as $keyword) {
-	        echo 'keyword: ', $keyword['text'], PHP_EOL;
-	        echo 'relevance: ', $keyword['relevance'], PHP_EOL;
-	        echo 'sentiment: ', $keyword['sentiment']['type'], PHP_EOL;
-	    }
-		//Sentiment
-		echo 'Checking sentiment . . . ';
-		$overallSentiment = $alchemyapi->sentiment('text', $test_text, null);
-		var_dump($overallSentiment);
-		echo 'sentiment: ', $overallSentiment['docSentiment']['type'], PHP_EOL;
-    	echo 'score: ', $overallSentiment['docSentiment']['score'], PHP_EOL;
-		//Sentiment Targeted
-		echo 'Checking targeted sentiment . . . ';
-		foreach ($keywords['keywords'] as $keyword) {
-	        echo 'keyword: ', $keyword['text'], PHP_EOL;
-	        $response = $alchemyapi->sentiment_targeted('text', $test_text, $keyword, null);
-	        echo 'sentiment: ', $response['docSentiment']['type'], PHP_EOL;
-    		echo 'relevance: ', $response['docSentiment']['score'], PHP_EOL;
-			var_dump($response);
-		}
 		/*$query = '?fields=likes,comments.fields(id),shares,message,message_tags,name,from';
 		$call = $consumer->request($arrpath[3] . $query);
 		$response = json_decode($call);
 		*/
 		
+		return ($post['id']);
+	}
+
+	public function what($text)
+	{
+		$alchemyapi = new AlchemyAPI();
+
+		//echo '<pre>';
+
+		//Keywords
+		//echo 'Checking keywords . . . ', PHP_EOL;
+		// alchemyapi returns array ordered by relevance, so only handle first 3
+		$keywordsalch = $alchemyapi->keywords('text', $text, null);
+		$keywords = array();
+		//var_dump($keywords);
+		for ($i=0; $i<3; $i++) {
+	        //echo 'keyword: ', $keywordsalch['keywords'][$i]['text'], PHP_EOL;
+	        //echo 'relevance: ', $keywordsalch['keywords'][$i]['relevance'], PHP_EOL;
+	        $keywords['words'][] = ['text' => $keywordsalch['keywords'][$i]['text'], 'relevance' => $keywordsalch['keywords'][$i]['relevance'], 'sentiment' => '0'];
+	        //echo 'sentiment: ', $keyword['sentiment']['type'], PHP_EOL;
+	    }
+
+		//Sentiment
+		//echo 'Checking sentiment of the overall message. . . ', PHP_EOL;
+		$overallSentiment = $alchemyapi->sentiment('text', $text, null);
+		//var_dump($overallSentiment);
+		//echo 'sentiment: ', $overallSentiment['docSentiment']['type'], PHP_EOL;
+		$keywords['overallSentiment']['type'] = $overallSentiment['docSentiment']['type'];
+		$keywords['overallSentiment']['score'] = $overallSentiment['docSentiment']['score'];
+    	//echo 'score: ', $overallSentiment['docSentiment']['score'], PHP_EOL;
+		//Sentiment Targeted
+		//echo 'Checking targeted sentiment towards top three keywords/phrases. . . ', PHP_EOL;
+		foreach ($keywords['words'] as $key => $keyword) {
+			try {
+		        //echo 'keyword: ', $keyword['text'], PHP_EOL;
+		        $response = $alchemyapi->sentiment_targeted('text', $text, $keyword['text'], null);
+		        //echo 'sentiment: ', $response['docSentiment']['type'], PHP_EOL;
+		        //echo 'relevance: ', $response['docSentiment']['score'], PHP_EOL;
+		        $keywords['words'][$key]['sentiment'] = ['score' => $response['docSentiment']['score'], 'type' => $response['docSentiment']['type']];
+			} catch (Exception $e) {
+				//var_dump($response);
+				echo '<pre>';
+				echo 'this had a problem ';
+				var_dump($keyword);
+				echo '</pre>';
+			}
+		}
+		//echo '</pre>';
+
+		//return results
+		return $keywords;
 	}
 
 	public function twitter()

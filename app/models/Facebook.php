@@ -42,15 +42,16 @@ class Facebook extends SocialNetwork implements SocialNetworkInterface
 	
 	public static function parseURL($urlParts)
 	{
+		echo 'in fb::parseURL';
 		$props = array();
 		
 		$host		= $urlParts['host'];
 		$path		= $urlParts['path'];
 		// $pathParts	= $urlParts['pathParts'];
 		$pathPart	= $urlParts['pathPart'];
-		$gparentDir	= $urlParts['gparentDir'];
-		$parentDir	= $urlParts['parentDir'];
-		$filePart	= $urlParts['filePart'];
+		$gparentDir	= $urlParts['gparentDir']; // ex. hofstra4congo
+		$parentDir	= $urlParts['parentDir']; // ex. posts
+		$filePart	= $urlParts['filePart']; // ex. 567994109915373
 		
 		if ($pathPart == '.' && ctype_digit($filePart))
 		{

@@ -115,7 +115,51 @@
                   </a>
                 
                 <hr>
-                
+
+                <?php if (isset($results)): ?>
+                <div class="portlet portlet-orange">
+                    <div class="portlet-heading">
+                        <div class="portlet-title">
+                            <h4> Your top 3 keywords or phrases </h4>
+                        </div>
+                        <div class="portlet-widgets">
+                            <span class="badge dark-blue">What</span>
+                            <span class="divider"></span>
+                            <a data-toggle="collapse" data-parent="#accordion" href="#orangePortlet" class=""><i class="fa fa-chevron-down"></i></a>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div id="orangePortlet" class="panel-collapse in" style="height: auto;">
+                      <div class="portlet-body">
+                          <div class="table-responsive">
+                              <table class="table table-hover text-dark-blue text-left">
+                                  <thead>
+                                      <tr>
+                                          <th>#</th>
+                                          <th>Keyword/Phrase </th>
+                                          <th>Relevence </th>
+                                          <th>Sentiment </th>
+                                      </tr>
+                                  </thead>
+                                  <tbody>
+                                    <?php foreach ($results['words'] as $key => $result): ?> 
+                                      <tr>
+                                          <td><?php echo $key+1; ?></td>
+                                          <td><?php echo $result['text']; ?></td>
+                                          <td><?php echo $result['relevance']; ?></td>
+                                          <td><?php echo ucfirst($result['sentiment']['type']); ?></td>
+                                      </tr>
+                                    <?php endforeach; ?>
+                                  </tbody>
+                              </table>
+                          </div>
+                      </div>
+                    </div>
+                    <div class="portlet-footer text-dark-blue">
+                      <h5> The overall sentiment in this post is: <strong class=<?php echo $results['overallSentiment']['score']>0 ? "text-success" : "text-danger"; ?>><i> <?php echo strtoupper($results['overallSentiment']['type']); ?> </i></strong></h5>
+                    </div>
+                </div>
+                <?php endif; ?>
                 
             <!--/div-->
           </div>

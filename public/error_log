@@ -441,3 +441,7 @@ Stack trace:
 [31-Mar-2014 18:34:57 UTC] PHP Fatal error:  Call to a member function getAccessToken() on a non-object in /home1/shashan2/socialapp/app/controllers/OnDemandController.php on line 38
 [31-Mar-2014 18:36:14 UTC] PHP Fatal error:  Class Facebook contains 1 abstract method and must therefore be declared abstract or implement the remaining methods (SocialNetworkInterface::getNetworkURL) in /home1/shashan2/socialapp/app/models/Facebook.php on line 149
 [31-Mar-2014 23:47:36 UTC] PHP Parse error:  syntax error, unexpected '$reflectionObj' (T_VARIABLE), expecting function (T_FUNCTION) in /home1/shashan2/socialapp/app/models/SocialNetwork.php on line 8
+[06-Apr-2014 01:11:50 UTC] PHP Parse error:  syntax error, unexpected '$reflectionObj' (T_VARIABLE), expecting function (T_FUNCTION) in /home1/shashan2/socialapp/app/models/SocialNetwork.php on line 8
+[06-Apr-2014 01:13:22 UTC] PHP Parse error:  syntax error, unexpected 'new' (T_NEW) in /home1/shashan2/socialapp/app/models/SocialNetwork.php on line 8
+[06-Apr-2014 02:18:17 UTC] PHP Parse error:  syntax error, unexpected ';' in /home1/shashan2/socialapp/app/controllers/OnDemandController.php on line 274
+[06-Apr-2014 02:36:55 UTC] PHP Parse error:  syntax error, unexpected '=>' (T_DOUBLE_ARROW) in /home1/shashan2/socialapp/app/controllers/OnDemandController.php on line 227

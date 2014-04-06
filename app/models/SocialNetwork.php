@@ -5,7 +5,7 @@
  */
 class SocialNetwork
 {
-	$reflectionObj = new ReflectionClass("Foo");
+	//$reflectionObj = new ReflectionClass("Foo");
 	
 	public function getNetworkName()
 	{
