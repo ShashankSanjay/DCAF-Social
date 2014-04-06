@@ -52,6 +52,7 @@ class OnDemandController extends BaseController
 						// SO Q&A #2201335
 						// $networkUser = new ${!${''} = ucfirst($network).'User'}();
 						$props['newAccount'] = true;
+						$networkUser = ucfirst($network).'User';
 						$networkUser = new $networkUser;
 						$networkUser->FB_User_ID = $response['id'];
 					}
@@ -221,10 +222,15 @@ class OnDemandController extends BaseController
 			*/
 			//	Get demo's for $response
 			$fbPost = FacebookPost::find($post['id']);
-
-			$results = self::what($fbPost->message);
-
-			return View::make('site.onePage', array('results' => $results));
+			
+			if (!is_null($fbPost)) {
+				$results = self::what($fbPost->message);
+				return View::make('site.onePage', array('results' => $results));
+			} else {
+				if (!Session::get('danger'))
+					Session::flash('danger', 'Whoops, something went wrong with the url you inputted');
+				return View::make('site.onePage');
+			}
 		}
 	}
 	
@@ -239,8 +245,8 @@ class OnDemandController extends BaseController
 		//var_dump($arrpath[1]);
 		//die();
 		if (empty($fbPage)) {
-			var_dump($purl['scheme'] . '://' . $purl['host'] . '/' . $arrpath[1]);
-			die();
+			Session::flash('danger', 'Whoops, there seems to be an error with that url. Either we do not support it, or you may not have admin rights to this page');
+			return View::make('site.onePage');
 		}
 		
 		
@@ -296,7 +302,7 @@ class OnDemandController extends BaseController
 		        $response = $alchemyapi->sentiment_targeted('text', $text, $keyword['text'], null);
 		        //echo 'sentiment: ', $response['docSentiment']['type'], PHP_EOL;
 		        //echo 'relevance: ', $response['docSentiment']['score'], PHP_EOL;
-		        $keywords['words'][$key]['sentiment'] = ['score' => $response['docSentiment']['score'], 'type' => $response['docSentiment']['type']];
+		        $keywords['words'][$key]['sentiment'] = ['score' => isset($response['docSentiment']['score']) ? $response['docSentiment']['score'] : 0, 'type' => $response['docSentiment']['type']];
 			} catch (Exception $e) {
 				//var_dump($response);
 				echo '<pre>';

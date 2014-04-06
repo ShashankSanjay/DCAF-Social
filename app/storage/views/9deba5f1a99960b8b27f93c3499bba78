@@ -101,6 +101,9 @@
                   <?php if ( Session::get('notice') ): ?>
                     <div class="alert alert-info"><?php echo Session::get('notice'); ?></div>
                   <?php endif; ?>
+                  <?php if ( Session::get('danger') ): ?>
+                    <div class="alert alert-danger"><?php echo Session::get('danger'); ?></div>
+                  <?php endif; ?>
                   <a href=<?php echo OAuth::getAuthorizeUrl('facebook')->redirect(URL::current()); ?> class="btn btn-social dcaftemp">
                     <?php echo HTML::image('assets/img/Social-Icons/facebook500.png', 'click here to link to fb', array('width' => 70, 'height' => 70)); ?>
                     <!--span class="add-icon"> <?php echo HTML::image('assets/img/Social-Icons/addthis500.png', 'addme!', array('width' => 70, 'height' =>70)); ?> </span-->
