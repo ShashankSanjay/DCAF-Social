@@ -33,7 +33,6 @@ class FacebookUser extends Eloquent implements UserProfileInterface, UserInterfa
 	public $timestamps		= true;				// defaults to true to maintain 'updated_at' and 'created_at' columns
 	
 	public $dcaf_fields = array(
-		'id',
 		'name',
 		'first_name',
 		'last_name',

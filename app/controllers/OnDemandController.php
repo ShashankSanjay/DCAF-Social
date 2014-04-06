@@ -11,10 +11,10 @@ class OnDemandController extends BaseController
 	public $gpConsumer;
 	
 	public $networks = array(
-		'facebook'	=> array('abbr' => 'FB', 'accountEndpoint' => '/me'),
-		'twitter'	=> array('abbr' => 'TW', 'accountEndpoint' => 'account/verify_credentials.json'),
-		'google'	=> array('abbr' => 'GP', 'accountEndpoint' => ''),
-		'instagram'	=> array('abbr' => 'IG', 'accountEndpoint' => '')
+		'facebook'	=> array('abbr' => 'FB', 'accountEndpoint' => '/me', 'newAccount' => false, 'updatedAccount' => false),
+		'twitter'	=> array('abbr' => 'TW', 'accountEndpoint' => 'account/verify_credentials.json', 'newAccount' => false, 'updatedAccount' => false),
+		'google'	=> array('abbr' => 'GP', 'accountEndpoint' => '', 'newAccount' => false, 'updatedAccount' => false),
+		'instagram'	=> array('abbr' => 'IG', 'accountEndpoint' => '', 'newAccount' => false, 'updatedAccount' => false)
 	);
 	
 	/**
@@ -26,32 +26,35 @@ class OnDemandController extends BaseController
 	 */
 	public function index()
 	{
-		$newProfileAdded = false;
+		//$newProfileAdded = false;
 
 		foreach ($this->networks as $network => $props)
 		{
 			$db = 'oauth_'.$network;
-			
-			if (OAuth::hasToken($network))
-			{
+			if (OAuth::hasToken($network)) {
 				$token = OAuth::token($network);
-				
-				// now that we have the access token, we need to make an API request
-				// to determine if we already have this user in our database
-				$consumer = OAuth::consumer($network);
-				$consumer->getStorage()->storeAccessToken(ucfirst($network), $token);
-				$response = $consumer->request($props['accountEndpoint']);
-				$response = json_decode($response, true);
-				
-				$networkUser = ucfirst($network).'User';
-				
-				if ($networkUser::find($response['id']) == null)
+				if ($network == 'twitter') 
+					$token = null;
+				if (!is_null($token))
 				{
-					// SO Q&A #2201335
-					// $networkUser = new ${!${''} = ucfirst($network).'User'}();
+					// now that we have the access token, we need to make an API request
+					// to determine if we already have this user in our database
+					$consumer = OAuth::consumer($network);
 					
-					$networkUser = new $networkUser;
-
+					$consumer->getStorage()->storeAccessToken(ucfirst($network), $token);
+					$response = $consumer->request($props['accountEndpoint']);
+					$response = json_decode($response, true);
+					
+					$networkUser = ucfirst($network).'User';
+					
+					if (is_null($networkUser = $networkUser::find($response['id'])))
+					{
+						// SO Q&A #2201335
+						// $networkUser = new ${!${''} = ucfirst($network).'User'}();
+						$props['newAccount'] = true;
+						$networkUser = new $networkUser;
+						$networkUser->FB_User_ID = $response['id'];
+					}
 					$networkUser->{$networkUser->getKeyName()} = $response['id'];
 					
 					if ($network == 'twitter') {
@@ -91,6 +94,7 @@ class OnDemandController extends BaseController
 					*/
 					
 					$networkUser->save();
+					$props['updatedAccount'] = true;
 					//var_dump();
 					if (is_null($oauth = DB::table($db)->where('access_token', $token->getAccessToken())->first()))
 					// if (count(DB::select('select * from '.$db.' where access_token = ?', array($token->getAccessToken()))) == 0)
@@ -113,35 +117,37 @@ class OnDemandController extends BaseController
 					$dcaf_message = array();
 					
 					//echo '$token: '.$networkUser->access_token."\n";
+					$networkUser->access_token = $token->getAccessToken();
 					$facebookRetriever->getAllUserData($networkUser);
 
 					// By now, user is saved into db, and so have pages + basic info on them
 					//	So next, get page likes and posts
-					
+					/*
 					foreach ($networkUser->FacebookPage()->get() as $key => $page) {
 						//echo $page->name;
 						$facebookRetriever->getPage($page, $networkUser);
 						$dcaf_message[] = 'Page ' . $page->name . ' retrieved.';
-					}
+					}*/
 					/*
 					Mail::later(5, 'emails.dcaf.retriever.pagesRetrieved', array('dcaf_message' => $dcaf_message), function($message)
 					{
 						$message->to('ssanja1@pride.hofstra.edu', 'Admin')->subject('Page has finished retrieval');
 					});
 					*/
-					$newProfileAdded = true;
-				} else {
-					Session::flash('notice', 'Your current account is already linked!');
+					
 				}
-			} 
+			}
 		}
 
-		if ($newProfileAdded) {
-			Session::flash('notice', 'Your account was linked!');
-			return View::make('site.onePage');
-		} else {
-			return View::make('site.onePage');
+		foreach ($this->networks as $network => $props) {
+			if ($props['newAccount'])
+				Session::flash('notice', 'Your ' . $network . ' account was linked!');
+			if ($props['updatedAccount'])
+				Session::flash('notice', 'Your ' . $network . ' account has been updated');
 		}
+		
+		return View::make('site.onePage');
+		
 	}
 	
 	public function lookUp()
@@ -195,12 +201,18 @@ class OnDemandController extends BaseController
 			$props = $network::parseURL($urlParts);
 			
 			echo '<pre>';
-			// var_dump($urlParts);
+			var_dump($urlParts);
 			var_dump($props);
 			echo '</pre>';
 			
+			if (!isset($props['post_id']))
+			{
+				Session::flash('notice', 'oops, we couldn\'t recognize that url');
+				return View::make('site.onePage');
+			}
+			
 			// dispatch to correct lookup
-			// self::$network($urlParts, $urlParts['path']);
+			self::$network($props['post_id']);
 			
 			/*
 			$call = $fbConsumer->request($url);
@@ -209,9 +221,11 @@ class OnDemandController extends BaseController
 			//	Get demo's for $response
 		}
 	}
-
-	public function facebook($purl, $path)
+	
+	public function facebook($post_id)
+	// public function facebook($purl, $path)
 	{
+		/*
 		// Format page/type-of-interaction/id
 		$arrpath = explode('/', $path);
 		
@@ -223,11 +237,12 @@ class OnDemandController extends BaseController
 			var_dump($purl['scheme'] . '://' . $purl['host'] . '/' . $arrpath[1]);
 			die();
 		}
-
+		*/
+		
 		$consumer = OAuth::consumer('facebook');
 		$consumer->getStorage()->storeAccessToken("Facebook", new StdOAuth2Token($fbPage->access_token));
 
-		$post['id'] = $arrpath[3];
+		$post['id'] = $post_id;
 		$facebookRetriever = new FacebookRetriever();
 		
 		$facebookRetriever->processPost($post, $fbPage, $fbPage->access_token);

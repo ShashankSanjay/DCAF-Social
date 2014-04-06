@@ -423,3 +423,21 @@ Stack trace:
 [30-Mar-2014 23:31:21 UTC] PHP Fatal error:  Class Facebook contains 3 abstract methods and must therefore be declared abstract or implement the remaining methods (SocialNetworkInterface::getUser, SocialNetworkInterface::getPage, SocialNetworkInterface::getContent) in /home1/shashan2/socialapp/app/models/Facebook.php on line 147
 [31-Mar-2014 00:13:30 UTC] PHP Parse error:  syntax error, unexpected '{' in /home1/shashan2/socialapp/app/controllers/OnDemandController.php on line 178
 [31-Mar-2014 00:14:09 UTC] PHP Parse error:  syntax error, unexpected ')' in /home1/shashan2/socialapp/app/controllers/OnDemandController.php on line 180
+[31-Mar-2014 16:42:21 UTC] PHP Fatal error:  Cannot use object of type stdClass as array in /home1/shashan2/socialapp/app/models/FacebookRetriever.php on line 99
+[31-Mar-2014 17:42:01 UTC] PHP Fatal error:  Call to undefined method Thomaswelton\LaravelOauth\OAuth::getSession() in /home1/shashan2/socialapp/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php on line 205
+[31-Mar-2014 17:43:31 UTC] PHP Fatal error:  Class 'Thomaswelton\LaravelOauth\Common\Storage' not found in /home1/shashan2/socialapp/app/controllers/OnDemandController.php on line 36
+[31-Mar-2014 17:43:35 UTC] PHP Fatal error:  Class 'Thomaswelton\LaravelOauth\Common\Storage' not found in /home1/shashan2/socialapp/app/controllers/OnDemandController.php on line 36
+[31-Mar-2014 17:45:12 UTC] PHP Fatal error:  Call to undefined method Thomaswelton\LaravelOauth\OAuth::hasAccessToken() in /home1/shashan2/socialapp/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php on line 208
+[31-Mar-2014 17:48:33 UTC] PHP Warning:  Uncaught exception 'ErrorException' with message 'Undefined variable: token' in /home1/shashan2/socialapp/app/controllers/OnDemandController.php:42
+Stack trace:
+#0 /home1/shashan2/socialapp/app/controllers/OnDemandController.php(42): Illuminate\Exception\Handler->handleError(8, 'Undefined varia...', '/home1/shashan2...', 42, Array)
+#1 [internal function]: OnDemandController->index()
+#2 /home1/shashan2/socialapp/vendor/laravel/framework/src/Illuminate/Routing/Controller.php(194): call_user_func_array(Array, Array)
+#3 /home1/shashan2/socialapp/vendor/laravel/framework/src/Illuminate/Routing/ControllerDispatcher.php(93): Illuminate\Routing\Controller->callAction('index', Array)
+#4 /home1/shashan2/socialapp/vendor/laravel/framework/src/Illuminate/Routing/ControllerDispatcher.php(62): Illuminate\Routing\ControllerDispatcher->call(Object(OnDemandController), Object(Illuminate\Routing\Route), 'index')
+#5 /home1/shashan2/socialapp/vendor/laravel/framework/src/Illuminate/Routing/Router.php(905): Illuminate\Routing\Con in /home1/shashan2/socialapp/app/controllers/OnDemandController.php on line 42
+[31-Mar-2014 17:48:33 UTC] PHP Fatal error:  Call to a member function getAccessToken() on a non-object in /home1/shashan2/socialapp/app/controllers/OnDemandController.php on line 42
+[31-Mar-2014 17:57:23 UTC] PHP Parse error:  syntax error, unexpected 'public' (T_PUBLIC) in /home1/shashan2/socialapp/app/controllers/OnDemandController.php on line 156
+[31-Mar-2014 18:34:57 UTC] PHP Fatal error:  Call to a member function getAccessToken() on a non-object in /home1/shashan2/socialapp/app/controllers/OnDemandController.php on line 38
+[31-Mar-2014 18:36:14 UTC] PHP Fatal error:  Class Facebook contains 1 abstract method and must therefore be declared abstract or implement the remaining methods (SocialNetworkInterface::getNetworkURL) in /home1/shashan2/socialapp/app/models/Facebook.php on line 149
+[31-Mar-2014 23:47:36 UTC] PHP Parse error:  syntax error, unexpected '$reflectionObj' (T_VARIABLE), expecting function (T_FUNCTION) in /home1/shashan2/socialapp/app/models/SocialNetwork.php on line 8

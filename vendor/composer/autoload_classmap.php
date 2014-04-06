@@ -192,6 +192,7 @@ return array(
     'Thomaswelton\\LaravelOauth\\ServiceNotSupportedException' => $vendorDir . '/thomaswelton/laravel-oauth/src/Thomaswelton/LaravelOauth/Exceptions.php',
     'Thomaswelton\\LaravelOauth\\UserDeniedException' => $vendorDir . '/thomaswelton/laravel-oauth/src/Thomaswelton/LaravelOauth/Exceptions.php',
     'TumblerRetriever' => $baseDir . '/app/models/TumblerRetriever.php',
+    'Twitter' => $baseDir . '/app/models/Twitter.php',
     'TwitterRetriever' => $baseDir . '/app/models/TwitterRetriever.php',
     'TwitterUser' => $baseDir . '/app/models/TwitterUser.php',
     'UpdateCronJobs' => $baseDir . '/app/database/migrations/2014_03_15_165027_update_cron_jobs.php',

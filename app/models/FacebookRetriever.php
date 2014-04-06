@@ -96,7 +96,13 @@ class FacebookRetriever implements SocialRetriever
 		}
 		$response = json_decode($call);
 
-		
+		if (isset($response->error)) {
+			echo '<pre>';
+			echo 'attempting to get user data in FacebookRetriever....';
+			var_dump($user->access_token);
+			var_dump($response->error);
+			return;
+		}
 		// Parse data and save into correct DB tables
 		foreach ($response->data as $page)
 		{
@@ -135,7 +141,6 @@ class FacebookRetriever implements SocialRetriever
 			$response = json_decode($call, true);
 
 			$id = $response['id'];
-			
 		}
 
 		// Search for user in db
@@ -144,8 +149,10 @@ class FacebookRetriever implements SocialRetriever
 		// If user not found, create one
 		$dcaf_message = array();
 		$fbUser = FacebookUser::find($id);
-		if (is_null($fbUser->FB_User_ID))
+		if (is_null($fbUser->FB_User_ID)) {
 			$fbUser = new FacebookUser;
+			$fbUser->FB_User_ID = $id;
+		}
 		
 		$query = '?fields=id,first_name,last_name,full_name,email,link,gender,age_range_min,age_range_max,birthday,timezone,locale';
 		$call = $this->service->request($id);
@@ -307,7 +314,7 @@ class FacebookRetriever implements SocialRetriever
 			var_dump($page->FB_Page_ID . '_' . $post['id'] . $query);
 			var_dump($page->name);
 			var_dump($page->access_token);
-			die();
+			//die();
 		}
 		
 		$fbPost = FacebookPost::find($post['id']);

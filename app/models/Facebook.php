@@ -19,6 +19,7 @@ class Facebook extends SocialNetwork implements SocialNetworkInterface
 	const GET_USER_URI = '/me';
 	// const ACCOUNT_ENDPOINT = '/me';
 	const SERVICE_CLASS = '\OAuth\OAuth2\Service\Facebook';
+	const NETWORK_URL = 'http://www.facebook.com/';
 	const API_ENDPOINT_BASE = 'https://graph.facebook.com/';
 	
 	/**
