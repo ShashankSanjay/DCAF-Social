@@ -290,13 +290,15 @@ class FacebookRetriever implements SocialRetriever
 			$this->setAccessToken($token);
 			
 		}
-		$parts = explode('_', $post['id']);
-		
-		if (count($parts) > 1) {
-			$post['id'] = $parts[1];
-		} else {
-			$post['id'] = $parts[0];
+		if (strstr($post['id'], '_')) {
+			$parts = explode('_', $post['id']);
+			if (count($parts) > 1) {
+				$post['id'] = $parts[1];
+			} else {
+				$post['id'] = $parts[0];
+			}
 		}
+		
 		try {
 			// specific field calls from Alex's email will not work with /me node, must use id?fields=...
 			$response = $this->service->request($post['id'] . $query);
@@ -304,6 +306,7 @@ class FacebookRetriever implements SocialRetriever
 			// CHANGE: WRITE TO LOG FILE
 			echo "failed in requesting post info, post id is: ";
 			var_dump($post['id']);
+			die();
 			// var_dump($e);
 		}
 		
@@ -511,6 +514,12 @@ class FacebookRetriever implements SocialRetriever
 		}
 		
 		
+	}
+
+	// Photos
+	public function processPhotos()
+	{
+		//
 	}
 
 	/**

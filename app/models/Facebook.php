@@ -1,5 +1,7 @@
 <?php
 
+use OAuth\OAuth2\Token\StdOAuth2Token;
+
 /**
  * Facebook Model
  * 
@@ -42,7 +44,7 @@ class Facebook extends SocialNetwork implements SocialNetworkInterface
 	
 	public static function parseURL($urlParts)
 	{
-		echo 'in fb::parseURL';
+		//echo 'in fb::parseURL';
 		$props = array();
 		
 		$host		= $urlParts['host'];
@@ -101,6 +103,10 @@ class Facebook extends SocialNetwork implements SocialNetworkInterface
 						$props['photo_id'] = $ids[1];
 					}
 				}
+
+				$props['entity'] = 'FacebookPhoto';
+				$props['entityLookUp'] = 'lookUpPhoto';
+
 			}
 			else if ($path == 'album.php')
 			{
@@ -122,11 +128,58 @@ class Facebook extends SocialNetwork implements SocialNetworkInterface
 					$props['album_id'] = $queryFields['aid'];
 				}
 			}
+			elseif ($parentDir == 'posts') {				
+				// Find page, this should be made more efficient by going to through pages linked to user, then checking those url's
+				$fbPage = FacebookPage::where('link', '=', $urlParts['scheme'] . '://' . $host . '/' . $gparentDir)->first();
+				
+				if (empty($fbPage)) {
+					Session::flash('danger', 'Whoops, there seems to be an error with that url. Either we do not support it, or you may not have admin rights to this page');
+					return View::make('site.onePage');
+				}
+
+				$props['page_id'] = $fbPage->FB_Page_ID;
+				
+				//set post id
+				$props['post_id'] = $filePart;
+
+				$props['entity'] = 'FacebookPost';
+				$props['entityLookUp'] = 'lookUpPost';
+			}
 		}
 		
 		return $props;	
 	}
 	
+	public static function lookUpPhoto($props)
+	{
+		$fbPage = FacebookPage::find($props['page_id']);
+
+		$consumer = OAuth::consumer('facebook');
+		$consumer->getStorage()->storeAccessToken("Facebook", new StdOAuth2Token($fbPage->access_token));
+
+		$facebookRetriever = new FacebookRetriever();
+		
+		//$facebookRetriever->processPost($props['photo_id'], $props['page_id']);
+
+		$call = $consumer->request($props['photo_id']);
+		$response = json_decode($call);
+	}
+
+	public static function lookUpPost($props)
+	{
+		$fbPage = FacebookPage::find($props['page_id']);
+		$consumer = OAuth::consumer('facebook');
+		$consumer->getStorage()->storeAccessToken("Facebook", new StdOAuth2Token($fbPage->access_token));
+
+		//$post['id'] = $post_id;
+		$post['id'] = $props['post_id'];
+		$facebookRetriever = new FacebookRetriever();
+
+		$facebookRetriever->processPost($post, $fbPage, $fbPage->access_token);
+
+		return $post['id'];
+	}
+
 	/**********************
 	 * Eloquent Relations *
 	 **********************/

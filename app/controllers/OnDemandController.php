@@ -191,7 +191,7 @@ class OnDemandController extends BaseController
 			
 			$network = ucfirst($network);
 			
-			/*$urlParts['path']		= mb_strtolower(substr($urlParts['path'],1));
+			$urlParts['path']		= mb_strtolower(substr($urlParts['path'],1));
 			// $pathParts	=  $urlParts['pathParts']	= pathinfo($urlParts['path']);
 			$urlParts['pathPart']	= dirname($urlParts['path']);	// $pathParts['dirname'];
 			$urlParts['gparentDir']	= dirname($urlParts['pathPart']);
@@ -201,27 +201,51 @@ class OnDemandController extends BaseController
 			// dispatch to correct lookup
 			$props = $network::parseURL($urlParts);
 			
-			echo '<pre>';
+			/*echo '<pre>';
 			var_dump($urlParts);
 			var_dump($props);
-			echo '</pre>';
-			
-			if (!isset($props['post_id']))
-			{
-				Session::flash('notice', 'oops, we couldn\'t recognize that url');
+			echo '</pre>';*/
+					
+			if (isset($props['entity'])) {
+				//
+				$obj['id'] = $network::$props['entityLookUp']($props);
+			} else {
+				Session::flash('danger', 'oops, we couldn\'t recognize that url');
 				return View::make('site.onePage');
 			}
-			*/
+
+			
+			$socialobj = $props['entity']::find($obj['id']);
+			/*} catch (Exception $e) {
+				// probably means the class was not found
+				Session::flash('danger', 'oops, we aren\t tracking that type of interaction just yet, but we\re working on it!');
+				return View::make('site.onePage');
+			}*/
+
+			//	Get demo's for $response
+			
+			if (!is_null($socialobj)) {
+				$results = self::what($socialobj->message);
+				return View::make('site.onePage', array('results' => $results));
+			} else {
+				if (!Session::get('danger'))
+					Session::flash('danger', 'Whoops, something went wrong with the url you inputted');
+				return View::make('site.onePage');
+			}
+
+
+
+
 			// dispatch to correct lookup and save requested obj in db, and return it's id
 			//self::$network($props['post_id']);
-			$post['id'] = self::$network($urlParts);
+			//$post['id'] = self::$network($urlParts);
 			
 			/*
 			$call = $fbConsumer->request($url);
 			$response = json_decode($call);
 			*/
 			//	Get demo's for $response
-			$fbPost = FacebookPost::find($post['id']);
+			/*$fbPost = FacebookPost::find($post['id']);
 			
 			if (!is_null($fbPost)) {
 				$results = self::what($fbPost->message);
@@ -230,25 +254,37 @@ class OnDemandController extends BaseController
 				if (!Session::get('danger'))
 					Session::flash('danger', 'Whoops, something went wrong with the url you inputted');
 				return View::make('site.onePage');
-			}
+			}*/
 		}
 	}
 	
-	//public function facebook($post_id)
-	public function facebook($purl)
+	public function facebook($post_id)
+	//public function facebook($purl)
 	{
 		// Format page/type-of-interaction/id
-		$arrpath = explode('/', $purl['path']);
+		/*$arrpath = explode('/', $purl['path']);
+		echo '<pre>';
+		var_dump($purl);
 		
+		if (strstr($purl['query'], "fbid")) {
+			$e = explode('&', $purl['query']);
+			$f = explode('=', $e[0]);
+			$fbid = $f[1];
+			echo 'found it';
+		} else {
+			var_dump($purl['query']);
+			echo "didn't find it";
+		}
+		echo '</pre>';
+		*/
 		// Find page
-		$fbPage = FacebookPage::where('link', '=', $purl['scheme'] . '://' . $purl['host'] . '/' . $arrpath[1])->first();
+		/*$fbPage = FacebookPage::where('link', '=', $purl['scheme'] . '://' . $purl['host'] . '/' . $arrpath[1])->first();
 		//var_dump($arrpath[1]);
 		//die();
 		if (empty($fbPage)) {
 			Session::flash('danger', 'Whoops, there seems to be an error with that url. Either we do not support it, or you may not have admin rights to this page');
 			return View::make('site.onePage');
-		}
-		
+		}*/
 		
 		$consumer = OAuth::consumer('facebook');
 		$consumer->getStorage()->storeAccessToken("Facebook", new StdOAuth2Token($fbPage->access_token));

@@ -49,6 +49,18 @@ Log::useDailyFiles(storage_path().'/logs/'.$logFile);
 |
 */
 
+App::fatal(function($exception)
+{
+    if (Request::path() == 'lookUp') {
+        Session::flash('danger', 'oops, we aren\'t tracking that type of interaction just yet, but we\'re working on it!');
+        return View::make('site.onePage');
+    }
+    if (Config::get('app.debug')) {
+        return;
+    }
+    Log::error("I don't know what happened, $exception");
+});
+
 App::error(function(Exception $exception, $code)
 {
     $pathInfo = Request::getPathInfo();
