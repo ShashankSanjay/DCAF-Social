@@ -176,8 +176,8 @@
     <!-- GLOBAL SCRIPTS -->
 
     <!-- Bootstrap core JavaScript -->
-    {{ HTML::script('assets/js/plugins/bootstrap/bootstrap.min.js?v=3.0.2') }}
     {{ HTML::script('assets/ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js') }}
+    {{ HTML::script('assets/js/plugins/bootstrap/bootstrap.min.js?v=3.0.2') }}
     {{ HTML::script('assets/js/plugins/bootstrap/bootstrap.min.js') }}
     {{ HTML::script('assets/js/plugins/slimscroll/jquery.slimscroll.min.js') }}
     {{ HTML::script('assets/js/plugins/popupoverlay/jquery.popupoverlay.js') }}
@@ -192,7 +192,7 @@
 
     <!-- THEME SCRIPTS -->
     {{ HTML::script('assets/js/flex.js') }}
-    {{ HTML::script('assets/js/demo/dashboard-demo.js') }}
+    {{-- HTML::script('assets/js/demo/dashboard-demo.js') --}}
 	
 	
 	</body>
