@@ -37,7 +37,7 @@ class FacebookPost extends Eloquent
 
 	public function FBComment()
 	{
-		return $this->hasMany('FacebookComment');
+		return $this->hasMany('FacebookComment', 'post_id');
 	}
 
 	public function FBUser()

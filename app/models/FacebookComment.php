@@ -9,6 +9,7 @@ class FacebookComment extends Eloquent
 
 	protected $primaryKey	= 'FB_Comment_ID';
 
+	protected $hidden = '';
 
 	public function FBPost() {
 		return $this->belongsTo('FacebookPost', 'post_id', 'FB_Post_ID');

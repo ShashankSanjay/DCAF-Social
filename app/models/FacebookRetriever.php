@@ -283,7 +283,7 @@ class FacebookRetriever implements SocialRetriever
 	public function processPost($post, $page, $token = null)
 	{
 		//echo 'in processPost';
-		$query = '?fields=likes';//,comments.fields(id),sharedposts,message,from';
+		$query = '?fields=likes,comments.fields(id),sharedposts,message,from';
 		
 		if (!is_null($token)) {
 			
@@ -311,7 +311,12 @@ class FacebookRetriever implements SocialRetriever
 		}
 		
 		$response = json_decode($response, true);
-		
+		echo '<pre>';
+		var_dump($response);
+		foreach ($response as $key => $value) {
+			var_dump($key);
+		}
+		die();
 		if (isset($response['error']))
 		{
 			var_dump($response);
@@ -359,8 +364,8 @@ class FacebookRetriever implements SocialRetriever
 		}
 		
 		if (isset($response['comments'])) {			
-			$this->processComments($response['comments'], $page);
-		}
+			$this->processComments($response['comments'], $fbPost);
+		} 
 	}
 
 
@@ -416,15 +421,24 @@ class FacebookRetriever implements SocialRetriever
 	//comments has 'data' and 'paging'
 	public function processComments($comments, $post)
 	{
-		//echo '<pre>';
-
+		/*echo '<pre>';
+		var_dump($comments);
+		var_dump($post);
+		echo '</pre>';*/
 		$query = '?fields=likes,message,message_tags,from';
-		
-		foreach ($comments['data'] as $comment) {
-			
-				$fbComment = FacebookComment::find($comment['id']);
 				
-				if (empty($fbComment)) {
+		foreach ($comments['data'] as $comment) {
+				
+				if (strstr($comment['id'], '_')) {
+					$parts = explode('_', $comment['id']);
+					$comment['id'] = $parts[1];
+				} else {
+					$comment['id'] = $response['id'];
+				}
+
+				$fbComment = FacebookComment::find($comment['id']);
+				//var_dump($comment['id']);
+				if (empty($fbComment->FB_Comment_ID)) {
 
 					try {
 						// specific field calls from Alex's email will not work with /me node, must use id?fields=...
@@ -463,28 +477,26 @@ class FacebookRetriever implements SocialRetriever
 					}
 					$fbComment->FacebookUser()->associate($fbUser);
 					$fbComment->save();*/
-
-					$parts = explode('_', $comment['id']);
-					$comment['id'] = $parts[1];
-
+					
 					$fbComment = new FacebookComment;
 					$fbComment->message = $response['message'];
-					$fbComment->FB_Comment_ID = $response['id'];
+					$fbComment->FB_Comment_ID = $comment['id'];
 					//$fbComment-> = ;
 					$fbComment->save();
 
-					$fbComment->FBPost()->associate($post);
-					
 					$this->getUser($response['from']['id']);
 					$fbUser = FacebookUser::find($response['from']['id']);
 					if (is_null($fbUser)) {
 						echo 'user is null: ' . $comment['id'];
-						die();
+						
 					}
 					$fbComment->FacebookUser()->associate($fbUser);
-					$fbComment->save();
 				}
-
+				
+				$fbComment->FBPost()->associate($post);
+								
+				$fbComment->save();
+				
 				if (isset($response['likes'])) {
 					//$this->processCommentLikes($response['likes'], $fbComment);
 					echo ' comment has likes ';
@@ -509,11 +521,7 @@ class FacebookRetriever implements SocialRetriever
 				echo 'paged';
 				$this->processComments($pgresponse, $post);
 			}
-		} else {
-			var_dump($comments);
-		}
-		
-		
+		} 		
 	}
 
 	// Photos

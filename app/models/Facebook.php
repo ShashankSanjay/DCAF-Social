@@ -163,6 +163,13 @@ class Facebook extends SocialNetwork implements SocialNetworkInterface
 
 		$call = $consumer->request($props['photo_id']);
 		$response = json_decode($call);
+
+		echo '<pre>';
+		var_dump($response);
+		foreach ($response as $key => $value) {
+			var_dump($key);
+		}
+		die();
 	}
 
 	public static function lookUpPost($props)

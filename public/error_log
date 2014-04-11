@@ -472,3 +472,11 @@ Stack trace:
 [07-Apr-2014 04:34:26 UTC] PHP Fatal error:  Class 'FacebookPhoto' not found in /home1/shashan2/socialapp/app/controllers/OnDemandController.php on line 218
 [07-Apr-2014 04:36:07 UTC] PHP Fatal error:  Class 'FacebookPhoto' not found in /home1/shashan2/socialapp/app/controllers/OnDemandController.php on line 218
 [07-Apr-2014 04:36:24 UTC] PHP Fatal error:  Class 'FacebookPhoto' not found in /home1/shashan2/socialapp/app/controllers/OnDemandController.php on line 218
+[09-Apr-2014 00:13:56 UTC] PHP Fatal error:  Call to a member function contains() on a non-object in /home1/shashan2/socialapp/app/models/FacebookRetriever.php on line 477
+[09-Apr-2014 00:16:06 UTC] PHP Fatal error:  Call to a member function contains() on a non-object in /home1/shashan2/socialapp/app/models/FacebookRetriever.php on line 477
+[09-Apr-2014 00:18:56 UTC] PHP Fatal error:  Call to a member function contains() on a non-object in /home1/shashan2/socialapp/app/models/FacebookRetriever.php on line 477
+[09-Apr-2014 00:37:06 UTC] PHP Parse error:  syntax error, unexpected '(', expecting identifier (T_STRING) or variable (T_VARIABLE) or '{' or '$' in /home1/shashan2/socialapp/app/controllers/OnDemandController.php on line 320
+[09-Apr-2014 00:40:47 UTC] PHP Parse error:  syntax error, unexpected '(' in /home1/shashan2/socialapp/app/models/FacebookComment.php on line 12
+[09-Apr-2014 18:39:22 UTC] PHP Fatal error:  Class 'FacebookPhoto' not found in /home1/shashan2/socialapp/app/controllers/OnDemandController.php on line 220
+[09-Apr-2014 18:47:13 UTC] PHP Fatal error:  Class 'FacebookPhoto' not found in /home1/shashan2/socialapp/app/controllers/OnDemandController.php on line 220
+[09-Apr-2014 18:50:55 UTC] PHP Fatal error:  Call to undefined method stdClass::toArray() in /home1/shashan2/socialapp/app/models/Facebook.php on line 169

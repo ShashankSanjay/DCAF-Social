@@ -79,10 +79,12 @@ class OnDemandController extends BaseController
 								$dcaf_message[] = $field;
 							}
 						}
-						Mail::later(5, 'error.registerNetworksError', array('dcaf_message' => $dcaf_message), function($message)
-						{
-						    $message->to('ssanja1@pride.hofstra.edu', 'Admin')->subject('Error on linking');
-						});
+						if (count($dcaf_message) > 1) {
+							Mail::later(5, 'error.registerNetworksError', array('dcaf_message' => $dcaf_message), function($message)
+							{
+							    $message->to('ssanja1@pride.hofstra.edu', 'Admin')->subject('Error on linking');
+							});
+						}
 					}
 					
 					/*
@@ -222,6 +224,26 @@ class OnDemandController extends BaseController
 				return View::make('site.onePage');
 			}*/
 
+			// Check comments
+			//echo '<pre>';
+			//var_dump($socialobj->FBComment()->get());
+			//echo '</pre>';
+			$comments = $socialobj->FBComment()->get();
+			if (!is_null($comments)) {
+				foreach ($comments as $fbComment) {
+					$cr[] = self::what($fbComment->message);
+				}
+			}
+
+			// Comments aggregator
+			if (count($cr) > 0) {
+				foreach ($cr as $commentWhat) {
+					echo '<pre>';
+					var_dump($commentWhat);
+					echo '</pre>';
+				}
+			}
+
 			//	Get demo's for $response
 			
 			if (!is_null($socialobj)) {
@@ -232,9 +254,6 @@ class OnDemandController extends BaseController
 					Session::flash('danger', 'Whoops, something went wrong with the url you inputted');
 				return View::make('site.onePage');
 			}
-
-
-
 
 			// dispatch to correct lookup and save requested obj in db, and return it's id
 			//self::$network($props['post_id']);
@@ -305,6 +324,11 @@ class OnDemandController extends BaseController
 
 	public function what($text)
 	{
+		if ($text == null) {
+			Log::error('error in OnDemandController::what()');
+			return;
+		}
+		
 		$alchemyapi = new AlchemyAPI();
 
 		//echo '<pre>';
