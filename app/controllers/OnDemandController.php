@@ -235,14 +235,14 @@ class OnDemandController extends BaseController
 				}
 			}
 
-			// Comments aggregator
+			/* Comments aggregator
 			if (count($cr) > 0) {
 				foreach ($cr as $commentWhat) {
 					echo '<pre>';
 					var_dump($commentWhat);
 					echo '</pre>';
 				}
-			}
+			}*/
 
 			//	Get demo's for $response
 			

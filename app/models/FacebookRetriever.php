@@ -311,12 +311,12 @@ class FacebookRetriever implements SocialRetriever
 		}
 		
 		$response = json_decode($response, true);
-		echo '<pre>';
-		var_dump($response);
-		foreach ($response as $key => $value) {
+		//echo '<pre>';
+		//var_dump($response);
+		/*foreach ($response as $key => $value) {
 			var_dump($key);
-		}
-		die();
+		}*/
+		//die();
 		if (isset($response['error']))
 		{
 			var_dump($response);

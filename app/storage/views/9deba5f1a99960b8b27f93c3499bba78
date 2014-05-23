@@ -176,8 +176,8 @@
     <!-- GLOBAL SCRIPTS -->
 
     <!-- Bootstrap core JavaScript -->
-    <?php echo HTML::script('assets/js/plugins/bootstrap/bootstrap.min.js?v=3.0.2'); ?>
     <?php echo HTML::script('assets/ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js'); ?>
+    <?php echo HTML::script('assets/js/plugins/bootstrap/bootstrap.min.js?v=3.0.2'); ?>
     <?php echo HTML::script('assets/js/plugins/bootstrap/bootstrap.min.js'); ?>
     <?php echo HTML::script('assets/js/plugins/slimscroll/jquery.slimscroll.min.js'); ?>
     <?php echo HTML::script('assets/js/plugins/popupoverlay/jquery.popupoverlay.js'); ?>
@@ -192,7 +192,7 @@
 
     <!-- THEME SCRIPTS -->
     <?php echo HTML::script('assets/js/flex.js'); ?>
-    <?php echo HTML::script('assets/js/demo/dashboard-demo.js'); ?>
+    <?php /* HTML::script('assets/js/demo/dashboard-demo.js') */ ?>
 	
 	
 	</body>
