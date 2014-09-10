@@ -7,12 +7,24 @@
  */
 class SocialRetrieverController extends BaseController
 {
+	public static $debug;
+	
 	/**********************
 	 * Instance Variables *
 	 **********************/
 	
 	public $consumer;	// OAuth::Consumer instance
 	public $pages;
+	
+	/**
+	 * Initializes static class variables
+	 * SO Q&A #693691
+	 */
+	static function init()
+	{
+		// /vendor/laravel/framework/src/Illuminate/Config/Repository.php
+		self::$debug = Config::get('app.debug');
+	}
 	
 	/**
 	 * Pass each call a OAuth::Consumer object
@@ -41,10 +53,12 @@ class SocialRetrieverController extends BaseController
 		$tumbler  = OAuth::consumer('tumbler');
 		*/
 		
-		$facebookRetriever	 = new FacebookRetriever();
-		$TwitterRetriever	 = new TwitterRetriever();
-		$googlePlusRetriever = new GooglePlusRetriever();
-		$tumblerRetriever	 = new TumblerRetriever();
+		$retrievers = array(
+			'facebook'	=> new FacebookRetriever(),
+			'twitter'	=> new TwitterRetriever(),
+			'google'	=> new GooglePlusRetriever(),
+			'tumbler'	=> new TumblerRetriever()
+		);
 		
 		// $networkTokens	= array();
 		$networkUsers	= array();
@@ -54,6 +68,8 @@ class SocialRetrieverController extends BaseController
 		
 		// get all pending SocialRetriever jobs
 		$jobs = Job::where('type','SocialRetriever')->get()->all();
+		
+		if (self::$debug) echo '<pre>'.count($jobs).' pending jobs</pre>';
 		
 		/*
 		echo '<pre>$jobs:'."\n";
@@ -65,12 +81,12 @@ class SocialRetrieverController extends BaseController
 		// for ($j=0; ($job = $jobs[$j]); $j++)
 		{
 			// process each job
-			
 			$job = $jobs[$j];
+			
+			if (self::$debug) echo '<pre>processing job #'.$j.': "'.$job->name.'" (id: '.$job->id.')</pre>';
+			
 			// SO Q&A #2201335
 			$networkUser = ${!${''} = $job->data->type}::find($job->data->uid);
-			//var_dump($job);
-			//die();
 			// $networkUser = DB::table($job->data->table)->find($job->data->uid);
 			$token = DB::table('oauth_'.$job->data->network)->find($job->data->oauth_id);
 			if ($token) {
@@ -91,15 +107,50 @@ class SocialRetrieverController extends BaseController
 		$dcaf_message = array();
 		foreach ($networkUsers[$network] as $networkUser)
 		{
-			//echo '$token: '.$networkUser->access_token."\n";
-			$facebookRetriever->getAllUserData($networkUser);
+			$retriever = $retrievers[$network];
+			
+			if (self::$debug)
+			{
+				echo '<pre>retrieving user data for:'
+					."\n[".get_class($networkUser)."]\n{\n"
+					."\tFB_User_ID: ".$networkUser->FB_User_ID.",\n"
+					."\tusername: \"".$networkUser->username."\",\n"
+					."\tname: \"".$networkUser->name."\",\n"
+					."\tfirst_name: \"".$networkUser->first_name."\",\n"
+					."\tlast_name: \"".$networkUser->last_name."\",\n"
+					."\tgender: \"".$networkUser->gender."\",\n"
+					."\temail: \"".$networkUser->email."\",\n"
+					."\taccess_token: \"".$networkUser->access_token."\"\n"
+					."}</pre>";
+			}
+			
+			$retriever->getAllUserData($networkUser);
 
 			// By now, user is saved into db, and so have pages + basic info on them
 			//	So next, get page likes and posts
 			
-			foreach ($networkUser->FacebookPage()->get() as $key => $page) {
-				//echo $page->name;
-				$facebookRetriever->getPage($page, $networkUser);
+			if (self::$debug)
+			{
+				echo '<pre>retrieving likes and posts for:'
+					."\n[".get_class($networkUser)."]\n{\n"
+					."\tFB_User_ID: ".$networkUser->FB_User_ID.",\n"
+					."\tusername: \"".$networkUser->username."\",\n"
+					."\t...\n"
+					."}</pre>";
+			}
+			
+			foreach ($networkUser->FacebookPage()->get() as $key => $page)
+			{
+				if (self::$debug)
+				{
+					echo '<pre>retrieving page:'
+						."\n[".get_class($page)."]\n{\n"
+						."\tFB_Page_ID: ".$page->FB_Page_ID.",\n"
+						."\tname: \"".$page->name."\"\n"
+						."}</pre>";
+				}
+				
+				$retriever->getPage($page, $networkUser);
 				$dcaf_message[] = 'Page ' . $page->name . ' retrieved.';
 			}		
 		}
@@ -117,5 +168,6 @@ class SocialRetrieverController extends BaseController
 		// Call SocialRetriver model to retrieve Instagram/Tumblr data
 	}
 }
+SocialRetrieverController::init();
 
 ?>

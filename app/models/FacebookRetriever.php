@@ -33,6 +33,9 @@ class FacebookRetriever implements SocialRetriever
 	 */
 	public $service;
 	
+	public $debug = false;
+	public $verbose = false;
+	
 	/**
 	 * Credentials
 	 *
@@ -51,6 +54,7 @@ class FacebookRetriever implements SocialRetriever
 		// parent::__construct(($service == null) ? OAuth:consumer('facebook') : $service);
 		if ($service == null) $service = OAuth::consumer('facebook');
 		$this->service = $service;
+		$this->debug = $this->debug || Config::get('app.debug');
 	}
 	
 	public function setAccessToken($access_token)
@@ -206,6 +210,8 @@ class FacebookRetriever implements SocialRetriever
 	
 	public function getPage($page)
 	{
+		if ($this->verbose) echo '<pre>[FacebookRetriever]->getPage(['.get_class($page).'])</pre>';
+		
 		// get page access-token from db
 		//$page = FacebookPage::find($user);
 		//$token = new StdOAuth2Token($page->access_token);
@@ -218,12 +224,17 @@ class FacebookRetriever implements SocialRetriever
 		try {
 			// specific field calls from Alex's email will not work with /me node, must use id?fields=...
 			$response = $this->service->request($page->FB_Page_ID . $query);
+			if ($this->verbose) echo "<pre>response:\n".$response.'</pre>';
 		} catch (Exception $e) {
 			// CHANGE: WRITE TO LOG FILE
 			echo 'failed in get page';
-			var_dump($page->name);
-			var_dump($page->access_token);
-			//var_dump($e);
+			
+			if ($this->debug)
+			{
+				var_dump($page->name);
+				var_dump($page->access_token);
+				//var_dump($e);
+			}
 		}
 		
 		$response = json_decode($response, true);
@@ -265,14 +276,40 @@ class FacebookRetriever implements SocialRetriever
 			try {
 				$call = $this->service->request($posts['paging']['next']);
 				$pgresponse = json_decode($call, true);
-				
 			} catch (Exception $e) {
+				$connectErr = $e;
+			}
+			
+			if (isset($connectErr) || isset($pgresponse['error']))
+			{
+				// CHANGE: WRITE TO LOG FILE
 				echo "failed in requesting next page";
 				//var_dump($post->FBPage . $query);
-				var_dump($e);
+				
+				if ($this->debug)
+				{
+					echo '<pre>';
+					if (isset($connectErr)) {
+						echo $connectErr."\n";
+					} else {
+						if (isset($pgresponse['error'])) {
+							echo $pgresponse['error']['type'].': '
+								.$pgresponse['error']['message']."\n";
+						} else {
+							echo "response:\n";
+							var_dump($pgresponse);
+						}
+					}
+					echo 'page name:    '.$page->name."\n";
+					echo 'function:     postPagination($posts, $page)'."\n";
+					echo 'API endpoint: '.$posts['paging']['next']."\n";
+					echo 'access_token: '.$page->access_token;
+					echo '</pre>';
+				}
+				
+				//die();
 			}
-
-			if (!isset($pgresponse['error']) && !empty($pgresponse)) {
+			else if (!empty($pgresponse)) {
 				// Recurse
 				$this->processPost($pgresponse, $page);
 				$this->postPagination($pgresponse);
@@ -282,14 +319,14 @@ class FacebookRetriever implements SocialRetriever
 	
 	public function processPost($post, $page, $token = null)
 	{
-		//echo 'in processPost';
+		if ($this->verbose) echo '<pre>[FacebookRetriever]->processPost({id: "'.$post['id'].'"}, ['.get_class($page).']'.($token == null ? '' : ', $token').')</pre>';
+		
 		$query = '?fields=likes,comments.fields(id),sharedposts,message,from';
 		
 		if (!is_null($token)) {
-			
 			$this->setAccessToken($token);
-			
 		}
+		
 		if (strstr($post['id'], '_')) {
 			$parts = explode('_', $post['id']);
 			if (count($parts) > 1) {
@@ -301,28 +338,48 @@ class FacebookRetriever implements SocialRetriever
 		
 		try {
 			// specific field calls from Alex's email will not work with /me node, must use id?fields=...
-			$response = $this->service->request($post['id'] . $query);
+			$response = $this->service->request($page->FB_Page_ID.'_'.$post['id'] . $query);
+			if ($this->verbose) echo "<pre>response:\n".$response.'</pre>';
 		} catch (Exception $e) {
-			// CHANGE: WRITE TO LOG FILE
-			echo "failed in requesting post info, post id is: ";
-			var_dump($post['id']);
-			die();
-			// var_dump($e);
+			$connectErr = $e;
 		}
 		
-		$response = json_decode($response, true);
+		if (!isset($connectErr)) $response = json_decode($response, true);
+		
 		//echo '<pre>';
 		//var_dump($response);
 		/*foreach ($response as $key => $value) {
 			var_dump($key);
 		}*/
 		//die();
-		if (isset($response['error']))
+		
+		if (isset($connectErr) || isset($response['error']))
 		{
-			var_dump($response);
-			var_dump($page->FB_Page_ID . '_' . $post['id'] . $query);
-			var_dump($page->name);
-			var_dump($page->access_token);
+			// CHANGE: WRITE TO LOG FILE
+			echo "failed to retrieve post ".$post['id'];
+			
+			if ($this->debug)
+			{
+				echo '<pre>';
+				if (isset($connectErr)) {
+					echo $connectErr."\n";
+				} else {
+					if (isset($response['error'])) {
+						echo $response['error']['type'].': '
+							.$response['error']['message']."\n";
+					} else {
+						echo "response:\n";
+						var_dump($response);
+					}
+				}
+				echo 'post id:      '.$post['id']."\n";
+				echo 'page name:    '.$page->name."\n";
+				echo 'function:     processPost($post, $page)'."\n";
+				echo 'API endpoint: '.$page->FB_Page_ID.'_'.$post['id'].$query."\n";
+				echo 'access_token: '.$page->access_token;
+				echo '</pre>';
+			}
+			
 			//die();
 		}
 		
@@ -333,6 +390,7 @@ class FacebookRetriever implements SocialRetriever
 
 		$fbPost->FB_Post_ID = $post['id'];
 		// $fbPost->created_time = $response['created_time'];
+		
 		if (isset($response['message'])) {
 			$fbPost->message = $response['message'];
 		}
@@ -421,10 +479,14 @@ class FacebookRetriever implements SocialRetriever
 	//comments has 'data' and 'paging'
 	public function processComments($comments, $post)
 	{
-		/*echo '<pre>';
-		var_dump($comments);
-		var_dump($post);
-		echo '</pre>';*/
+		if ($this->verbose)
+		{
+			echo '<pre>';
+			var_dump($comments);
+			var_dump($post);
+			echo '</pre>';
+		}
+		
 		$query = '?fields=likes,message,message_tags,from';
 				
 		foreach ($comments['data'] as $comment) {
@@ -444,14 +506,40 @@ class FacebookRetriever implements SocialRetriever
 						// specific field calls from Alex's email will not work with /me node, must use id?fields=...
 						$response = $this->service->request($comment['id'] . $query);
 					} catch (Exception $e) {
-						// CHANGE: WRITE TO LOG FILE
-						echo "failed in requesting comment info, comment id is: ";
-						var_dump($comment['id']);
-						//var_dump($e);
+						$connectErr = $e;
 					}
 
-					$response = json_decode($response, true);
+					if (!isset($connectErr)) $response = json_decode($response, true);
 
+					if (isset($connectErr) || isset($response['error']))
+					{
+						// CHANGE: WRITE TO LOG FILE
+						echo "failed to retrieve comment ".$comment['id'];
+						
+						if ($this->debug)
+						{
+							echo '<pre>';
+							if (isset($connectErr)) {
+								echo $connectErr."\n";
+							} else {
+								if (isset($response['error'])) {
+									echo $response['error']['type'].': '
+										.$response['error']['message']."\n";
+								} else {
+									echo "response:\n";
+									var_dump($response);
+								}
+							}
+							echo 'comment id:   '.$comment['id']."\n";
+							echo 'post id:      '.$post['id']."\n";
+							echo 'function:     processComments($comments, $post)'."\n";
+							echo 'API endpoint: '.$comment['id'] . $query."\n";
+							echo '</pre>';
+						}
+						
+						//die();
+					}
+					
 					if (isset($response['data'])) {
 						echo 'data is set on this comment';
 						var_dump($response);
@@ -477,6 +565,8 @@ class FacebookRetriever implements SocialRetriever
 					}
 					$fbComment->FacebookUser()->associate($fbUser);
 					$fbComment->save();*/
+					
+					die($response);
 					
 					$fbComment = new FacebookComment;
 					$fbComment->message = $response['message'];

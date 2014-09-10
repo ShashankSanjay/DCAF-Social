@@ -480,3 +480,11 @@ Stack trace:
 [09-Apr-2014 18:39:22 UTC] PHP Fatal error:  Class 'FacebookPhoto' not found in /home1/shashan2/socialapp/app/controllers/OnDemandController.php on line 220
 [09-Apr-2014 18:47:13 UTC] PHP Fatal error:  Class 'FacebookPhoto' not found in /home1/shashan2/socialapp/app/controllers/OnDemandController.php on line 220
 [09-Apr-2014 18:50:55 UTC] PHP Fatal error:  Call to undefined method stdClass::toArray() in /home1/shashan2/socialapp/app/models/Facebook.php on line 169
+[05-Jun-2014 17:36:51 UTC] PHP Fatal error:  Undefined class constant 'debug' in /home1/shashan2/socialapp/app/controllers/SocialRetrieverController.php on line 37
+[05-Jun-2014 17:39:04 UTC] PHP Parse error:  syntax error, unexpected '?' in /home1/shashan2/socialapp/app/controllers/SocialRetrieverController.php on line 37
+[05-Jun-2014 18:12:19 UTC] PHP Parse error:  syntax error, unexpected 'debug' (T_STRING), expecting variable (T_VARIABLE) in /home1/shashan2/socialapp/app/controllers/SocialRetrieverController.php on line 11
+[05-Jun-2014 18:12:55 UTC] PHP Parse error:  syntax error, unexpected '(', expecting ',' or ';' in /home1/shashan2/socialapp/app/controllers/SocialRetrieverController.php on line 11
+[05-Jun-2014 18:29:23 UTC] PHP Fatal error:  Undefined class constant 'debug' in /home1/shashan2/socialapp/app/controllers/SocialRetrieverController.php on line 70
+[05-Jun-2014 18:47:38 UTC] PHP Parse error:  syntax error, unexpected 'array' (T_ARRAY) in /home1/shashan2/socialapp/app/controllers/SocialRetrieverController.php on line 56
+[05-Jun-2014 19:31:04 UTC] PHP Parse error:  syntax error, unexpected '(', expecting ',' or ';' in /home1/shashan2/socialapp/app/models/FacebookRetriever.php on line 36
+[05-Jun-2014 20:34:09 UTC] PHP Parse error:  syntax error, unexpected '||' (T_BOOLEAN_OR) in /home1/shashan2/socialapp/app/models/FacebookRetriever.php on line 329
