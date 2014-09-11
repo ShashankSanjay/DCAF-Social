@@ -1,7 +1,7 @@
 <?php
 
 use OAuth\OAuth2\Token\StdOAuth2Token;
-//require_once('alchemyapi_php/alchemyapi.php');
+// require_once('alchemyapi_php/alchemyapi.php');
 	
 
 class OnDemandController extends BaseController
@@ -11,65 +11,65 @@ class OnDemandController extends BaseController
 	public $gpConsumer;
 	
 	public $networks = array(
-		'facebook'	=> array('abbr' => 'FB', 'accountEndpoint' => '/me', 'newAccount' => false, 'updatedAccount' => false),
-		'twitter'	=> array('abbr' => 'TW', 'accountEndpoint' => 'account/verify_credentials.json', 'newAccount' => false, 'updatedAccount' => false),
-		'google'	=> array('abbr' => 'GP', 'accountEndpoint' => '', 'newAccount' => false, 'updatedAccount' => false),
-		'instagram'	=> array('abbr' => 'IG', 'accountEndpoint' => '', 'newAccount' => false, 'updatedAccount' => false)
+		'facebook'	=> array('abbr' => 'FB', 'accountEndpoint' => '/me'),
+		'twitter'	=> array('abbr' => 'TW', 'accountEndpoint' => 'account/verify_credentials.json'),
+		'google'	=> array('abbr' => 'GP', 'accountEndpoint' => ''),
+		'instagram'	=> array('abbr' => 'IG', 'accountEndpoint' => '')
 	);
 	
 	/**
 	 * Display the search and social logins
-	 *
-	 *	Save oauth in db, and pull fb, gp accounts, and save page oauth's.
+	 * 
+	 * Save oauth in db, and pull fb, gp accounts, and save page oauth's.
 	 *
 	 * @return View
 	 */
 	public function index()
 	{
-		//$newProfileAdded = false;
-
+		$newProfileAdded = false;
+		
+		// for each network
 		foreach ($this->networks as $network => $props)
 		{
 			$db = 'oauth_'.$network;
-			if (OAuth::hasToken($network)) {
+			
+			if (OAuth::hasToken($network))
+			{
 				$token = OAuth::token($network);
-				if ($network == 'twitter') 
-					$token = null;
-				if (!is_null($token))
+				
+				// now that we have the access token, we need to make an API request
+				// to determine if we already have this user in our database
+				$consumer = OAuth::consumer($network);
+				$consumer->getStorage()->storeAccessToken(ucfirst($network), $token);
+				$response = $consumer->request($props['accountEndpoint']);
+				$response = json_decode($response, true);
+				
+				$networkUser = ucfirst($network).'User';
+				
+				if ($networkUser::find($response['id']) == null)
 				{
-					// now that we have the access token, we need to make an API request
-					// to determine if we already have this user in our database
-					$consumer = OAuth::consumer($network);
+					// SO Q&A #2201335
+					// $networkUser = new ${!${''} = ucfirst($network).'User'}();
 					
-					$consumer->getStorage()->storeAccessToken(ucfirst($network), $token);
-					$response = $consumer->request($props['accountEndpoint']);
-					$response = json_decode($response, true);
-					
-					$networkUser = ucfirst($network).'User';
-					
-					if (is_null($networkUser = $networkUser::find($response['id'])))
-					{
-						// SO Q&A #2201335
-						// $networkUser = new ${!${''} = ucfirst($network).'User'}();
-						$props['newAccount'] = true;
-						$networkUser = ucfirst($network).'User';
-						$networkUser = new $networkUser;
-						$networkUser->FB_User_ID = $response['id'];
-					}
+					$networkUser = new $networkUser;
+
 					$networkUser->{$networkUser->getKeyName()} = $response['id'];
 					
-					if ($network == 'twitter') {
+					if ($network == 'twitter')
+					{
 						$columns = DB::connection()
 						  ->getDoctrineSchemaManager()
 						  ->listTableColumns($props['abbr'] . '_Users');
-						//echo '<pre>';
+						// echo '<pre>';
 						foreach ($response as $key => $val) {
 							if (isset($columns[$key])) {
 								//var_dump($key);
 								$networkUser->{$key} = $val;
 							}
 						}
-					} else {
+					}
+					else
+					{
 						$dcaf_message = array();
 						foreach ($networkUser->dcaf_fields as $field) {
 							try {
@@ -79,12 +79,10 @@ class OnDemandController extends BaseController
 								$dcaf_message[] = $field;
 							}
 						}
-						if (count($dcaf_message) > 1) {
-							Mail::later(5, 'error.registerNetworksError', array('dcaf_message' => $dcaf_message), function($message)
-							{
-							    $message->to('ssanja1@pride.hofstra.edu', 'Admin')->subject('Error on linking');
-							});
-						}
+						Mail::later(5, 'error.registerNetworksError', array('dcaf_message' => $dcaf_message), function($message)
+						{
+						    $message->to('ssanja1@pride.hofstra.edu', 'Admin')->subject('Error on linking');
+						});
 					}
 					
 					/*
@@ -97,7 +95,6 @@ class OnDemandController extends BaseController
 					*/
 					
 					$networkUser->save();
-					$props['updatedAccount'] = true;
 					//var_dump();
 					if (is_null($oauth = DB::table($db)->where('access_token', $token->getAccessToken())->first()))
 					// if (count(DB::select('select * from '.$db.' where access_token = ?', array($token->getAccessToken()))) == 0)
@@ -120,37 +117,35 @@ class OnDemandController extends BaseController
 					$dcaf_message = array();
 					
 					//echo '$token: '.$networkUser->access_token."\n";
-					$networkUser->access_token = $token->getAccessToken();
 					$facebookRetriever->getAllUserData($networkUser);
 
 					// By now, user is saved into db, and so have pages + basic info on them
 					//	So next, get page likes and posts
-					/*
+					
 					foreach ($networkUser->FacebookPage()->get() as $key => $page) {
 						//echo $page->name;
 						$facebookRetriever->getPage($page, $networkUser);
 						$dcaf_message[] = 'Page ' . $page->name . ' retrieved.';
-					}*/
+					}
 					/*
 					Mail::later(5, 'emails.dcaf.retriever.pagesRetrieved', array('dcaf_message' => $dcaf_message), function($message)
 					{
 						$message->to('ssanja1@pride.hofstra.edu', 'Admin')->subject('Page has finished retrieval');
 					});
 					*/
-					
+					$newProfileAdded = true;
+				} else {
+					Session::flash('notice', 'Your current account is already linked!');
 				}
-			}
-		}
-
-		foreach ($this->networks as $network => $props) {
-			if ($props['newAccount'])
-				Session::flash('notice', 'Your ' . $network . ' account was linked!');
-			if ($props['updatedAccount'])
-				Session::flash('notice', 'Your ' . $network . ' account has been updated');
+			} 
 		}
 		
-		return View::make('site.onePage');
-		
+		if ($newProfileAdded) {
+			Session::flash('notice', 'Your account was linked!');
+			return View::make('site.onePage');
+		} else {
+			return View::make('site.onePage');
+		}
 	}
 	
 	public function lookUp()
@@ -200,181 +195,99 @@ class OnDemandController extends BaseController
 			$urlParts['parentDir']	= basename($urlParts['pathPart']);
 			$urlParts['filePart']	= basename($urlParts['path']);	// $pathParts['basename'];
 			
-			// dispatch to correct lookup
+			// dispatch to the appropiate parse method
 			$props = $network::parseURL($urlParts);
 			
-			/*echo '<pre>';
+			echo '<pre>';
 			var_dump($urlParts);
 			var_dump($props);
-			echo '</pre>';*/
-					
-			if (isset($props['entity'])) {
-				//
-				$obj['id'] = $network::$props['entityLookUp']($props);
-			} else {
-				Session::flash('danger', 'oops, we couldn\'t recognize that url');
-				return View::make('site.onePage');
-			}
-
+			echo '</pre>';
 			
-			$socialobj = $props['entity']::find($obj['id']);
-			/*} catch (Exception $e) {
-				// probably means the class was not found
-				Session::flash('danger', 'oops, we aren\t tracking that type of interaction just yet, but we\re working on it!');
-				return View::make('site.onePage');
-			}*/
-
-			// Check comments
-			//echo '<pre>';
-			//var_dump($socialobj->FBComment()->get());
-			//echo '</pre>';
-			$comments = $socialobj->FBComment()->get();
-			if (!is_null($comments)) {
-				foreach ($comments as $fbComment) {
-					$cr[] = self::what($fbComment->message);
-				}
-			}
-
-			/* Comments aggregator
-			if (count($cr) > 0) {
-				foreach ($cr as $commentWhat) {
-					echo '<pre>';
-					var_dump($commentWhat);
-					echo '</pre>';
-				}
-			}*/
-
-			//	Get demo's for $response
+			// dispatch to the appropiate lookup method and
+			// get the id of the item saved to the database
 			
-			if (!is_null($socialobj)) {
-				$results = self::what($socialobj->message);
-				return View::make('site.onePage', array('results' => $results));
-			} else {
-				if (!Session::get('danger'))
-					Session::flash('danger', 'Whoops, something went wrong with the url you inputted');
-				return View::make('site.onePage');
-			}
-
-			// dispatch to correct lookup and save requested obj in db, and return it's id
-			//self::$network($props['post_id']);
-			//$post['id'] = self::$network($urlParts);
+			// self::$network($urlParts, $urlParts['path']);
+			// self::$network($props['post_id']);
+			$item_id = self::$network($urlParts);
 			
 			/*
 			$call = $fbConsumer->request($url);
 			$response = json_decode($call);
 			*/
-			//	Get demo's for $response
-			/*$fbPost = FacebookPost::find($post['id']);
 			
-			if (!is_null($fbPost)) {
+			if ($network == "facebook")
+			{
+				$fbPost = FacebookPost::find($item_id);
+				
 				$results = self::what($fbPost->message);
+				
 				return View::make('site.onePage', array('results' => $results));
-			} else {
-				if (!Session::get('danger'))
-					Session::flash('danger', 'Whoops, something went wrong with the url you inputted');
-				return View::make('site.onePage');
-			}*/
+			}
 		}
 	}
-	
-	public function facebook($post_id)
-	//public function facebook($purl)
+
+	public function facebook($purl, $path)
 	{
 		// Format page/type-of-interaction/id
-		/*$arrpath = explode('/', $purl['path']);
-		echo '<pre>';
-		var_dump($purl);
+		$arrpath = explode('/', $path);
 		
-		if (strstr($purl['query'], "fbid")) {
-			$e = explode('&', $purl['query']);
-			$f = explode('=', $e[0]);
-			$fbid = $f[1];
-			echo 'found it';
-		} else {
-			var_dump($purl['query']);
-			echo "didn't find it";
-		}
-		echo '</pre>';
-		*/
 		// Find page
-		/*$fbPage = FacebookPage::where('link', '=', $purl['scheme'] . '://' . $purl['host'] . '/' . $arrpath[1])->first();
-		//var_dump($arrpath[1]);
-		//die();
-		if (empty($fbPage)) {
-			Session::flash('danger', 'Whoops, there seems to be an error with that url. Either we do not support it, or you may not have admin rights to this page');
-			return View::make('site.onePage');
-		}*/
+		$fbPage = FacebookPage::where('link', '=', $purl['scheme'] . '://' . $purl['host'] . '/' . $arrpath[1])->first();
+		var_dump($arrpath[1]);
+		// die();
 		
+		if (empty($fbPage)) {
+			var_dump($purl['scheme'] . '://' . $purl['host'] . '/' . $arrpath[1]);
+			die();
+		}
+
 		$consumer = OAuth::consumer('facebook');
 		$consumer->getStorage()->storeAccessToken("Facebook", new StdOAuth2Token($fbPage->access_token));
 
-		//$post['id'] = $post_id;
 		$post['id'] = $arrpath[3];
 		$facebookRetriever = new FacebookRetriever();
 		
 		$facebookRetriever->processPost($post, $fbPage, $fbPage->access_token);
+		$fbPost = FacebookPost::find($post['id']);
 		
-		/*$query = '?fields=likes,comments.fields(id),shares,message,message_tags,name,from';
+		$test_text = $fbPost->message;
+		$alchemyapi = new AlchemyAPI();
+
+		echo '<pre>';
+		// Keywords
+		echo 'Checking keywords . . . ';
+		$response = $alchemyapi->keywords('text', $test_text, null);
+		var_dump($response);
+		// Sentiment
+		echo 'Checking sentiment . . . ';
+		$response = $alchemyapi->sentiment('text', $test_text, null);
+		var_dump($response);
+		// Sentiment Targeted
+		echo 'Checking targeted sentiment . . . ';
+		$response = $alchemyapi->sentiment_targeted('text', $test_text, 'heart', null);
+		var_dump($response);
+
+		if ($response['status'] == 'OK')
+		{
+			echo '## Response Object ##', PHP_EOL;
+			echo 'this is analysis for: ' . $fbPost->message; 
+			echo print_r($response);
+
+			echo '## Document Sentiment ##', PHP_EOL;
+			echo 'sentiment: ', $response['docSentiment']['type'], PHP_EOL;
+			
+			if (array_key_exists('score', $response['docSentiment'])) {
+				echo 'score: ', $response['docSentiment']['score'], PHP_EOL;
+			}
+		} else {
+			echo 'Error in the sentiment analysis call: ', $response['statusInfo'];
+		}
+		
+		/*
+		$query = '?fields=likes,comments.fields(id),shares,message,message_tags,name,from';
 		$call = $consumer->request($arrpath[3] . $query);
 		$response = json_decode($call);
 		*/
-		
-		return ($post['id']);
-	}
-
-	public function what($text)
-	{
-		if ($text == null) {
-			Log::error('error in OnDemandController::what()');
-			return;
-		}
-		
-		$alchemyapi = new AlchemyAPI();
-
-		//echo '<pre>';
-
-		//Keywords
-		//echo 'Checking keywords . . . ', PHP_EOL;
-		// alchemyapi returns array ordered by relevance, so only handle first 3
-		$keywordsalch = $alchemyapi->keywords('text', $text, null);
-		$keywords = array();
-		//var_dump($keywords);
-		for ($i=0; $i<3; $i++) {
-	        //echo 'keyword: ', $keywordsalch['keywords'][$i]['text'], PHP_EOL;
-	        //echo 'relevance: ', $keywordsalch['keywords'][$i]['relevance'], PHP_EOL;
-	        $keywords['words'][] = ['text' => $keywordsalch['keywords'][$i]['text'], 'relevance' => $keywordsalch['keywords'][$i]['relevance'], 'sentiment' => '0'];
-	        //echo 'sentiment: ', $keyword['sentiment']['type'], PHP_EOL;
-	    }
-
-		//Sentiment
-		//echo 'Checking sentiment of the overall message. . . ', PHP_EOL;
-		$overallSentiment = $alchemyapi->sentiment('text', $text, null);
-		//var_dump($overallSentiment);
-		//echo 'sentiment: ', $overallSentiment['docSentiment']['type'], PHP_EOL;
-		$keywords['overallSentiment']['type'] = $overallSentiment['docSentiment']['type'];
-		$keywords['overallSentiment']['score'] = $overallSentiment['docSentiment']['score'];
-    	//echo 'score: ', $overallSentiment['docSentiment']['score'], PHP_EOL;
-		//Sentiment Targeted
-		//echo 'Checking targeted sentiment towards top three keywords/phrases. . . ', PHP_EOL;
-		foreach ($keywords['words'] as $key => $keyword) {
-			try {
-		        //echo 'keyword: ', $keyword['text'], PHP_EOL;
-		        $response = $alchemyapi->sentiment_targeted('text', $text, $keyword['text'], null);
-		        //echo 'sentiment: ', $response['docSentiment']['type'], PHP_EOL;
-		        //echo 'relevance: ', $response['docSentiment']['score'], PHP_EOL;
-		        $keywords['words'][$key]['sentiment'] = ['score' => isset($response['docSentiment']['score']) ? $response['docSentiment']['score'] : 0, 'type' => $response['docSentiment']['type']];
-			} catch (Exception $e) {
-				//var_dump($response);
-				echo '<pre>';
-				echo 'this had a problem ';
-				var_dump($keyword);
-				echo '</pre>';
-			}
-		}
-		//echo '</pre>';
-
-		//return results
-		return $keywords;
 	}
 
 	public function twitter()

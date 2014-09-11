@@ -161,6 +161,12 @@ Route::group(array('before' => 'auth'), function()
     });
     
     Route::get('demographics', 'UserDashboardController@getDemographics');
+    
+    /*
+    Route::get('rawr', function() {
+        return View::make('site.outlines.dashboard');
+    });
+    */
 });
 
 // Route::get('user', 'UserController@getIndex');
@@ -200,10 +206,8 @@ Route::controller('user', 'UserController');
 // Filter for detect language
 Route::when('contact-us', 'detectLang');
 
-// Contact Us Static Page
-Route::get('contact-us', function()
-{
-    // Return about us page
+// Contact us static Page
+Route::get('contact-us', function() {
     return View::make('site/contact-us');
 });
 
