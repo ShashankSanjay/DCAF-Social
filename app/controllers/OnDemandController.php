@@ -37,6 +37,9 @@ class OnDemandController extends BaseController
 			{
 				$token = OAuth::token($network);
 				
+				if (!is_null($token))
+				{
+				
 				// now that we have the access token, we need to make an API request
 				// to determine if we already have this user in our database
 				$consumer = OAuth::consumer($network);
@@ -50,9 +53,11 @@ class OnDemandController extends BaseController
 				{
 					// SO Q&A #2201335
 					// $networkUser = new ${!${''} = ucfirst($network).'User'}();
-					
+					$props['newAccount'] = true;
+					Session::flash('notice', 'Your '.$network.' account is now linked.');
 					$networkUser = new $networkUser;
-
+					$networkUser->FB_User_ID = $response['id'];
+				}
 					$networkUser->{$networkUser->getKeyName()} = $response['id'];
 					
 					if ($network == 'twitter')
@@ -63,7 +68,7 @@ class OnDemandController extends BaseController
 						// echo '<pre>';
 						foreach ($response as $key => $val) {
 							if (isset($columns[$key])) {
-								//var_dump($key);
+								// var_dump($key);
 								$networkUser->{$key} = $val;
 							}
 						}
@@ -71,18 +76,24 @@ class OnDemandController extends BaseController
 					else
 					{
 						$dcaf_message = array();
-						foreach ($networkUser->dcaf_fields as $field) {
+						foreach ($networkUser->dcaf_fields as $field)
+						{
 							try {
-								//var_dump($field);
+								// var_dump($field);
 								$networkUser->{$field} = $response[$field];
 							} catch (Exception $e) {
 								$dcaf_message[] = $field;
 							}
 						}
-						Mail::later(5, 'error.registerNetworksError', array('dcaf_message' => $dcaf_message), function($message)
-						{
-						    $message->to('ssanja1@pride.hofstra.edu', 'Admin')->subject('Error on linking');
-						});
+						
+						if (count($dcaf_message) > 1)
+						{	
+							Mail::later(5, 'error.registerNetworksError', array('dcaf_message' => $dcaf_message), function($message)
+							{
+								// $message->to('ssanja1@pride.hofstra.edu', 'Admin')->subject('Error on linking');
+								$message->to('arosen66@pride.hofstra.edu', 'Admin')->subject('Error on linking');
+							});
+						}
 					}
 					
 					/*
@@ -95,7 +106,9 @@ class OnDemandController extends BaseController
 					*/
 					
 					$networkUser->save();
-					//var_dump();
+					$props['updatedAccount'] = true;
+					Session::flash('notice', 'Your '.$network.' account has been updated.');
+					
 					if (is_null($oauth = DB::table($db)->where('access_token', $token->getAccessToken())->first()))
 					// if (count(DB::select('select * from '.$db.' where access_token = ?', array($token->getAccessToken()))) == 0)
 					{
@@ -116,24 +129,28 @@ class OnDemandController extends BaseController
 
 					$dcaf_message = array();
 					
-					//echo '$token: '.$networkUser->access_token."\n";
+					// echo '$token: '.$networkUser->access_token."\n";
+					$networkUser->access_token = $token->getAccessToken();
 					$facebookRetriever->getAllUserData($networkUser);
 
-					// By now, user is saved into db, and so have pages + basic info on them
-					//	So next, get page likes and posts
+					// By now, the user's pages and basic info are saved in the database.
+					// We next get page likes and posts...
 					
-					foreach ($networkUser->FacebookPage()->get() as $key => $page) {
-						//echo $page->name;
+					foreach ($networkUser->FacebookPage()->get() as $key => $page)
+					{
+						// echo $page->name;
 						$facebookRetriever->getPage($page, $networkUser);
 						$dcaf_message[] = 'Page ' . $page->name . ' retrieved.';
 					}
+					
 					/*
 					Mail::later(5, 'emails.dcaf.retriever.pagesRetrieved', array('dcaf_message' => $dcaf_message), function($message)
 					{
 						$message->to('ssanja1@pride.hofstra.edu', 'Admin')->subject('Page has finished retrieval');
 					});
 					*/
-					$newProfileAdded = true;
+					
+					// $newProfileAdded = true;
 				} else {
 					Session::flash('notice', 'Your current account is already linked!');
 				}
@@ -232,19 +249,20 @@ class OnDemandController extends BaseController
 		$arrpath = explode('/', $path);
 		
 		// Find page
-		$fbPage = FacebookPage::where('link', '=', $purl['scheme'] . '://' . $purl['host'] . '/' . $arrpath[1])->first();
+		$fbPage = FacebookPage::where('link', '=', $purl['scheme'].'://'.$purl['host'].'/'.$arrpath[1])->first();
 		var_dump($arrpath[1]);
-		// die();
 		
 		if (empty($fbPage)) {
-			var_dump($purl['scheme'] . '://' . $purl['host'] . '/' . $arrpath[1]);
+			var_dump($purl['scheme'].'://'.$purl['host'].'/'.$arrpath[1]);
 			die();
 		}
 
 		$consumer = OAuth::consumer('facebook');
 		$consumer->getStorage()->storeAccessToken("Facebook", new StdOAuth2Token($fbPage->access_token));
 
-		$post['id'] = $arrpath[3];
+		// $post['id'] = $arrpath[3];
+		$post['id'] = $post_id;
+		
 		$facebookRetriever = new FacebookRetriever();
 		
 		$facebookRetriever->processPost($post, $fbPage, $fbPage->access_token);
@@ -254,16 +272,19 @@ class OnDemandController extends BaseController
 		$alchemyapi = new AlchemyAPI();
 
 		echo '<pre>';
+		
 		// Keywords
-		echo 'Checking keywords . . . ';
+		echo 'Checking keywords...';
 		$response = $alchemyapi->keywords('text', $test_text, null);
 		var_dump($response);
+		
 		// Sentiment
-		echo 'Checking sentiment . . . ';
+		echo 'Checking sentiment...';
 		$response = $alchemyapi->sentiment('text', $test_text, null);
 		var_dump($response);
-		// Sentiment Targeted
-		echo 'Checking targeted sentiment . . . ';
+		
+		// Targeted Sentiment
+		echo 'Checking targeted sentiment...';
 		$response = $alchemyapi->sentiment_targeted('text', $test_text, 'heart', null);
 		var_dump($response);
 
@@ -279,15 +300,20 @@ class OnDemandController extends BaseController
 			if (array_key_exists('score', $response['docSentiment'])) {
 				echo 'score: ', $response['docSentiment']['score'], PHP_EOL;
 			}
-		} else {
+		}
+		else {
 			echo 'Error in the sentiment analysis call: ', $response['statusInfo'];
 		}
+		
+		echo '</pre>';
 		
 		/*
 		$query = '?fields=likes,comments.fields(id),shares,message,message_tags,name,from';
 		$call = $consumer->request($arrpath[3] . $query);
 		$response = json_decode($call);
 		*/
+		
+		// return ($post['id']);
 	}
 
 	public function twitter()
